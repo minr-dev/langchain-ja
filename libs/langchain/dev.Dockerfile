@@ -41,4 +41,20 @@ COPY libs/langchain/pyproject.toml libs/langchain/poetry.toml ./
 COPY libs/langchain/ libs/langchain/
 
 # Install the Poetry dependencies (this layer will be cached as long as the dependencies don't change)
-RUN poetry install --no-interaction --no-ansi --with dev,test,docs
+# RUN poetry install --no-interaction --no-ansi --with dev,test,docs
+
+# install the nodejs
+RUN sudo apt update \
+    && sudo apt upgrade -y \
+    && sudo apt install -y nodejs npm \
+    && sudo npm install -g n \
+    && sudo n stable \
+    && sudo apt purge -y nodejs npm \
+    && sudo apt autoremove -y \
+    && sudo apt clean \
+    && sudo rm -rf /var/lib/apt/lists/*
+
+# install the quarto
+RUN curl -L -o quarto-1.3.450-linux-amd64.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb \
+    && sudo apt install ./quarto-1.3.450-linux-amd64.deb \
+    && rm quarto-1.3.450-linux-amd64.deb
