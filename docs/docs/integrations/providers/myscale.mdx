@@ -1,66 +1,111 @@
-# MyScale
+# MyScale | MyScale
 
-This page covers how to use MyScale vector database within LangChain.
-It is broken into two parts: installation and setup, and then references to specific MyScale wrappers.
+このページでは、LangChain内でMyScaleベクトルデータベースを使用する方法について説明しています。それはインストールとセットアップ、そして特定のMyScaleラッパーへの参照という2つの部分に分けられています。
 
-With MyScale, you can manage both structured and unstructured (vectorized) data, and perform joint queries and analytics on both types of data using SQL. Plus, MyScale's cloud-native OLAP architecture, built on top of ClickHouse, enables lightning-fast data processing even on massive datasets.
+> This page covers how to use MyScale vector database within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific MyScale wrappers.
 
-## Introduction
+MyScaleを使用すると、構造化データと非構造化（ベクトル化）データの両方を管理し、SQLを使用して両方のタイプのデータに対して結合クエリと分析を行うことができます。さらに、ClickHouseを基盤としたMyScaleのクラウドネイティブOLAPアーキテクチャは、大規模なデータセットでも、驚くほどの高速データ処理を可能にします。
 
-[Overview to MyScale and High performance vector search](https://docs.myscale.com/en/overview/)
+> With MyScale, you can manage both structured and unstructured (vectorized) data, and perform joint queries and analytics on both types of data using SQL. Plus, MyScale's cloud-native OLAP architecture, built on top of ClickHouse, enables lightning-fast data processing even on massive datasets.
 
-You can now register on our SaaS and [start a cluster now!](https://docs.myscale.com/en/quickstart/)
+## Introduction | はじめに
 
-If you are also interested in how we managed to integrate SQL and vector, please refer to [this document](https://docs.myscale.com/en/vector-reference/) for further syntax reference.
+[MyScaleと高性能ベクトル検索についての概要](https://docs.myscale.com/en/overview/)
 
-We also deliver with live demo on huggingface! Please checkout our [huggingface space](https://huggingface.co/myscale)! They search millions of vector within a blink!
+> [Overview to MyScale and High performance vector search](https://docs.myscale.com/en/overview/)
 
-## Installation and Setup
-- Install the Python SDK with `pip install clickhouse-connect`
+これで、私たちのSaaSに登録して[すぐにクラスタを起動できます！](https://docs.myscale.com/en/quickstart/)
 
-### Setting up environments
+> You can now register on our SaaS and [start a cluster now!](https://docs.myscale.com/en/quickstart/)
 
-There are two ways to set up parameters for myscale index.
+SQLとベクターをどのように統合したかについても興味がある場合は、詳しい構文の参照には[このドキュメント](https://docs.myscale.com/en/vector-reference/)をご覧ください。
 
-1. Environment Variables
+> If you are also interested in how we managed to integrate SQL and vector, please refer to [this document](https://docs.myscale.com/en/vector-reference/) for further syntax reference.
 
-    Before you run the app, please set the environment variable with `export`:
-    `export MYSCALE_HOST='<your-endpoints-url>' MYSCALE_PORT=<your-endpoints-port> MYSCALE_USERNAME=<your-username> MYSCALE_PASSWORD=<your-password> ...`
+私たちはhuggingfaceでライブデモも提供しています！ぜひ私たちの[huggingface space](https://huggingface.co/myscale)をチェックしてください！一瞬のうちに何百万ものベクトルを検索できます！
 
-    You can easily find your account, password and other info on our SaaS. For details please refer to [this document](https://docs.myscale.com/en/cluster-management/)
-    Every attributes under `MyScaleSettings` can be set with prefix `MYSCALE_` and is case insensitive.
+> We also deliver with live demo on huggingface! Please checkout our [huggingface space](https://huggingface.co/myscale)! They search millions of vector within a blink!
 
-2. Create `MyScaleSettings` object with parameters
+## Installation and Setup | インストールとセットアップ
 
+* `pip install clickhouse-connect`でPython SDKをインストールしてください
+  > Install the Python SDK with `pip install clickhouse-connect`
 
-    ```python
-    from langchain.vectorstores import MyScale, MyScaleSettings
-    config = MyScaleSetting(host="<your-backend-url>", port=8443, ...)
-    index = MyScale(embedding_function, config)
-    index.add_documents(...)
-    ```
-  
-## Wrappers
-supported functions:
-- `add_texts`
-- `add_documents`
-- `from_texts`
-- `from_documents`
-- `similarity_search`
-- `asimilarity_search`
-- `similarity_search_by_vector`
-- `asimilarity_search_by_vector`
-- `similarity_search_with_relevance_scores`
-- `delete`
+### Setting up environments | 環境設定
 
-### VectorStore
+myscaleインデックスのパラメータを設定する方法は2つあります。
 
-There exists a wrapper around MyScale database, allowing you to use it as a vectorstore,
-whether for semantic search or similar example retrieval.
+> There are two ways to set up parameters for myscale index.
 
-To import this vectorstore:
+1. 環境変数
+
+   > Environment Variables
+
+   アプリを実行する前に、`export`を使って環境変数を設定してください：
+   `export MYSCALE_HOST='<your-endpoints-url>' MYSCALE_PORT=<your-endpoints-port> MYSCALE_USERNAME=<your-username> MYSCALE_PASSWORD=<your-password> ...`
+
+   > Before you run the app, please set the environment variable with `export`:
+   > `export MYSCALE_HOST='<your-endpoints-url>' MYSCALE_PORT=<your-endpoints-port> MYSCALE_USERNAME=<your-username> MYSCALE_PASSWORD=<your-password> ...`
+
+   当社のSaaSでは、アカウント、パスワード、その他の情報を簡単に見つけることができます。詳細については、[このドキュメント](https://docs.myscale.com/en/cluster-management/)を参照してください。`MyScaleSettings`の下にあるすべての属性は、プレフィックス`MYSCALE_`を付けて設定でき、大文字小文字は区別されません。
+
+   > You can easily find your account, password and other info on our SaaS. For details please refer to [this document](https://docs.myscale.com/en/cluster-management/)
+   > Every attributes under `MyScaleSettings` can be set with prefix `MYSCALE_` and is case insensitive.
+
+2. `MyScaleSettings` オブジェクトをパラメーターを指定して作成します
+
+   > Create `MyScaleSettings` object with parameters
+
+   ```python
+   from langchain.vectorstores import MyScale, MyScaleSettings
+   config = MyScaleSetting(host="<your-backend-url>", port=8443, ...)
+   index = MyScale(embedding_function, config)
+   index.add_documents(...)
+   ```
+
+## Wrappers | ラッパー
+
+サポートされている機能：
+
+> supported functions:
+
+* `add_texts`
+  > `add_texts`
+* `add_documents`
+  > `add_documents`
+* `from_texts`
+  > `from_texts`
+* `from_documents`
+  > `from_documents`
+* `similarity_search`
+  > `similarity_search`
+* `asimilarity_search`
+  > `asimilarity_search`
+* `similarity_search_by_vector`
+  > `similarity_search_by_vector`
+* `asimilarity_search_by_vector`
+  > `asimilarity_search_by_vector`
+* `similarity_search_with_relevance_scores`を用いた類似性検索
+  > `similarity_search_with_relevance_scores`
+* `delete`
+  > `delete`
+
+### VectorStore | VectorStore
+
+MyScaleデータベースの周りにはラッパーが存在し、それによってベクトルストアとして使用することができます。これはセマンティック検索や類似例の取得に利用可能です。
+
+> There exists a wrapper around MyScale database, allowing you to use it as a vectorstore,
+> whether for semantic search or similar example retrieval.
+
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
+
 ```python
 from langchain.vectorstores import MyScale
 ```
 
-For a more detailed walkthrough of the MyScale wrapper, see [this notebook](/docs/integrations/vectorstores/myscale)
+MyScaleラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/myscale)をご覧ください。
+
+> For a more detailed walkthrough of the MyScale wrapper, see [this notebook](/docs/integrations/vectorstores/myscale)

@@ -1,31 +1,46 @@
-# SerpAPI
+# SerpAPI | SerpAPI
 
-This page covers how to use the SerpAPI search APIs within LangChain.
-It is broken into two parts: installation and setup, and then references to the specific SerpAPI wrapper.
+このページでは、LangChain内でSerpAPI検索APIを使用する方法について説明しています。
+2つのパートに分けられており、インストールとセットアップ、そして特定のSerpAPIラッパーに関する参照が含まれています。
 
-## Installation and Setup
-- Install requirements with `pip install google-search-results`
-- Get a SerpAPI api key and either set it as an environment variable (`SERPAPI_API_KEY`)
+> This page covers how to use the SerpAPI search APIs within LangChain.
+> It is broken into two parts: installation and setup, and then references to the specific SerpAPI wrapper.
 
-## Wrappers
+## Installation and Setup | インストールとセットアップ
 
-### Utility
+* `pip install google-search-results` コマンドで必要なパッケージをインストールしてください。
+  > Install requirements with `pip install google-search-results`
+* SerpAPIのAPIキーを取得し、環境変数（`SERPAPI_API_KEY`）として設定してください
+  > Get a SerpAPI api key and either set it as an environment variable (`SERPAPI_API_KEY`)
 
-There exists a SerpAPI utility which wraps this API. To import this utility:
+## Wrappers | ラッパー
+
+### Utility | ユーティリティ
+
+このAPIをラップするSerpAPIユーティリティが存在します。このユーティリティをインポートするには：
+
+> There exists a SerpAPI utility which wraps this API. To import this utility:
 
 ```python
 from langchain.utilities import SerpAPIWrapper
 ```
 
-For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/serpapi).
+このラッパーのより詳細な使い方については、[このノートブック](/docs/integrations/tools/serpapi)をご覧ください。
 
-### Tool
+> For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/serpapi).
 
-You can also easily load this wrapper as a Tool (to use with an Agent).
-You can do this with:
+### Tool | ツール
+
+このラッパーは、ツールとしても簡単に読み込むことができます（エージェントと一緒に使用するため）。これを行う方法は以下の通りです：
+
+> You can also easily load this wrapper as a Tool (to use with an Agent).
+> You can do this with:
+
 ```python
 from langchain.agents import load_tools
 tools = load_tools(["serpapi"])
 ```
 
-For more information on this, see [this page](/docs/modules/agents/tools)
+これに関する詳細は、[このページ](/docs/modules/agents/tools)をご覧ください。
+
+> For more information on this, see [this page](/docs/modules/agents/tools)

@@ -1,22 +1,30 @@
-# Zilliz
+# Zilliz | Zilliz
 
->[Zilliz Cloud](https://zilliz.com/doc/quick_start) is a fully managed service on cloud for `LF AI Milvus®`,
+> [Zilliz Cloud](https://zilliz.com/doc/quick_start)は、`LF AI Milvus®`のための完全に管理されたクラウドサービスです。
+>
+> > [Zilliz Cloud](https://zilliz.com/doc/quick_start) is a fully managed service on cloud for `LF AI Milvus®`,
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+Python SDKをインストールする：
 
-Install the Python SDK:
+> Install the Python SDK:
+
 ```bash
 pip install pymilvus
 ```
 
-## Vectorstore
+## Vectorstore | ベクターストア
 
-A wrapper around Zilliz indexes allows you to use it as a vectorstore,
-whether for semantic search or example selection.
+Zillizインデックスをベクトルストアとして使用できるようにするラッパーがあり、セマンティック検索や例示選択に利用することができます。
+
+> A wrapper around Zilliz indexes allows you to use it as a vectorstore,
+> whether for semantic search or example selection.
 
 ```python
 from langchain.vectorstores import Milvus
 ```
 
-For a more detailed walkthrough of the Miluvs wrapper, see [this notebook](/docs/integrations/vectorstores/zilliz)
+Milvusラッパーのより詳細なウォークスルーを見るには、[このノートブック](/docs/integrations/vectorstores/zilliz)を参照してください。
+
+> For a more detailed walkthrough of the Miluvs wrapper, see [this notebook](/docs/integrations/vectorstores/zilliz)

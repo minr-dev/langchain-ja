@@ -1,23 +1,39 @@
-# Quickstart
+# Quickstart | クイックスタート
 
-In this quickstart we'll show you how to:
-- Get setup with LangChain, LangSmith and LangServe
-- Use the most basic and common components of LangChain: prompt templates, models, and output parsers
-- Use LangChain Expression Language, the protocol that LangChain is built on and which facilitates component chaining
-- Build a simple application with LangChain
-- Trace your application with LangSmith
-- Serve your application with LangServe
+このクイックスタートガイドでは、以下の方法をご紹介します：
 
-That's a fair amount to cover! Let's dive in.
+> In this quickstart we'll show you how to:
 
-## Setup
-### Installation
+* LangChain、LangSmith、LangServeのセットアップ方法
+  > Get setup with LangChain, LangSmith and LangServe
+* LangChainの最も基本的でありながら共通のコンポーネントを使用する：プロンプトテンプレート、モデル、出力パーサー
+  > Use the most basic and common components of LangChain: prompt templates, models, and output parsers
+* LangChain Expression Languageを活用しましょう。これはLangChainが構築されたプロトコルであり、コンポーネントの連携を容易にするものです。
+  > Use LangChain Expression Language, the protocol that LangChain is built on and which facilitates component chaining
+* LangChainを用いたシンプルなアプリケーションの構築
+  > Build a simple application with LangChain
+* LangSmithを用いてアプリケーションのトレースを行う
+  > Trace your application with LangSmith
+* LangServeを活用してアプリケーションを提供する
+  > Serve your application with LangServe
 
-To install LangChain run:
+それでは、かなりの範囲にわたる内容を取り扱いますので、早速始めましょう。
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CodeBlock from "@theme/CodeBlock";
+> That's a fair amount to cover! Let's dive in.
+
+## Setup | セットアップ
+
+### Installation | インストール方法
+
+LangChainをインストールするためには、次のコマンドを実行してください：
+
+> To install LangChain run:
+
+'@theme/Tabs'からTabsをインポートし、'@theme/TabItem'からTabItemをインポートし、'@theme/CodeBlock'からCodeBlockをインポートします。
+
+> import Tabs from '@theme/Tabs';
+> import TabItem from '@theme/TabItem';
+> import CodeBlock from "@theme/CodeBlock";
 
 <Tabs>
   <TabItem value="pip" label="Pip" default>
@@ -28,26 +44,35 @@ import CodeBlock from "@theme/CodeBlock";
   </TabItem>
 </Tabs>
 
+詳細は、私たちの[インストールガイド](/docs/get_started/installation)をご覧ください。
 
-For more details, see our [Installation guide](/docs/get_started/installation).
+> For more details, see our [Installation guide](/docs/get_started/installation).
 
-### Environment
+### Environment | 環境設定
 
-Using LangChain will usually require integrations with one or more model providers, data stores, APIs, etc. For this example, we'll use OpenAI's model APIs.
+LangChainを利用する際には、通常、モデルプロバイダーやデータストア、APIなど、一つ以上の外部サービスとの統合が必要です。この例では、OpenAIのモデルAPIを使用することにします。
 
-First we'll need to install their Python package:
+> Using LangChain will usually require integrations with one or more model providers, data stores, APIs, etc. For this example, we'll use OpenAI's model APIs.
+
+まず、Pythonパッケージをインストールする必要があります：
+
+> First we'll need to install their Python package:
 
 ```bash
 pip install openai
 ```
 
-Accessing the API requires an API key, which you can get by creating an account and heading [here](https://platform.openai.com/account/api-keys). Once we have a key we'll want to set it as an environment variable by running:
+APIにアクセスするためにはAPIキーが必要で、アカウントを作成し[こちら](https://platform.openai.com/account/api-keys)にアクセスして取得できます。キーを取得したら、以下のコマンドを実行して環境変数として設定しましょう：
+
+> Accessing the API requires an API key, which you can get by creating an account and heading [here](https://platform.openai.com/account/api-keys). Once we have a key we'll want to set it as an environment variable by running:
 
 ```bash
 export OPENAI_API_KEY="..."
 ```
 
-If you'd prefer not to set an environment variable you can pass the key in directly via the `openai_api_key` named parameter when initiating the OpenAI LLM class:
+環境変数を設定したくない場合は、OpenAI LLMクラスを初期化する際に、`openai_api_key`という名前のパラメータを通じてAPIキーを直接渡すこともできます。
+
+> If you'd prefer not to set an environment variable you can pass the key in directly via the `openai_api_key` named parameter when initiating the OpenAI LLM class:
 
 ```python
 from langchain.chat_models import ChatOpenAI
@@ -55,77 +80,123 @@ from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(openai_api_key="...")
 ```
 
-### LangSmith
+### LangSmith | ### LangSmithについて
 
-Many of the applications you build with LangChain will contain multiple steps with multiple invocations of LLM calls.
-As these applications get more and more complex, it becomes crucial to be able to inspect what exactly is going on inside your chain or agent.
-The best way to do this is with [LangSmith](https://smith.langchain.com).
+LangChainを用いて構築するアプリケーションは、多くの場合、複数のステップとLLMの複数回の呼び出しが含まれます。これらのアプリケーションがより複雑になるにつれ、チェーンやエージェント内部で正確に何が起きているのかを把握することが極めて重要になります。このためには、[LangSmith](https://smith.langchain.com)の使用が最適です。
 
-Note that LangSmith is not needed, but it is helpful.
-If you do want to use LangSmith, after you sign up at the link above, make sure to set your environment variables to start logging traces:
+> Many of the applications you build with LangChain will contain multiple steps with multiple invocations of LLM calls.
+> As these applications get more and more complex, it becomes crucial to be able to inspect what exactly is going on inside your chain or agent.
+> The best way to do this is with [LangSmith](https://smith.langchain.com).
+
+LangSmithは必須ではありませんが、役立つツールです。LangSmithを使用する場合は、上記のリンクでサインアップした後、トレースログを記録するために環境変数を設定してください：
+
+> Note that LangSmith is not needed, but it is helpful.
+> If you do want to use LangSmith, after you sign up at the link above, make sure to set your environment variables to start logging traces:
 
 ```shell
 export LANGCHAIN_TRACING_V2="true"
 export LANGCHAIN_API_KEY="..."
 ```
 
-### LangServe
+### LangServe | ### LangServeについて
 
-LangServe helps developers deploy LangChain chains as a REST API. You do not need to use LangServe to use LangChain, but in this guide we'll show how you can deploy your app with LangServe.
+LangServeは開発者がLangChainチェーンをREST APIとして展開するのを支援します。LangChainを利用するためにLangServeが必須ではありませんが、このガイドではLangServeを使用してあなたのアプリをデプロイする方法をご紹介します。
 
-Install with:
+> LangServe helps developers deploy LangChain chains as a REST API. You do not need to use LangServe to use LangChain, but in this guide we'll show how you can deploy your app with LangServe.
+
+以下のコマンドでインストールしてください：
+
+> Install with:
+
 ```bash
 pip install "langserve[all]"
 ```
 
-## Building with LangChain
+## Building with LangChain | LangChainを使った構築
 
-LangChain provides many modules that can be used to build language model applications.
-Modules can be used as standalones in simple applications and they can be composed for more complex use cases.
-Composition is powered by **LangChain Expression Language** (LCEL), which defines a unified `Runnable` interface that many modules implement, making it possible to seamlessly chain components.
+LangChainは、言語モデルアプリケーションを構築するために利用できる多数のモジュールを提供しています。これらのモジュールは、シンプルなアプリケーションでは単体で使用できるほか、より複雑なユースケースのために組み合わせて使用することも可能です。この組み合わせは**LangChain Expression Language**（LCEL）によって支えられており、LCELは多くのモジュールが実装する統一された`Runnable`インターフェースを定義しています。これにより、コンポーネントをシームレスに連携させることができます。
 
-The simplest and most common chain contains three things:
-- LLM/Chat Model: The language model is the core reasoning engine here. In order to work with LangChain, you need to understand the different types of language models and how to work with them.
-- Prompt Template: This provides instructions to the language model. This controls what the language model outputs, so understanding how to construct prompts and different prompting strategies is crucial.
-- Output Parser: These translate the raw response from the language model to a more workable format, making it easy to use the output downstream.
+> LangChain provides many modules that can be used to build language model applications.
+> Modules can be used as standalones in simple applications and they can be composed for more complex use cases.
+> Composition is powered by **LangChain Expression Language** (LCEL), which defines a unified `Runnable` interface that many modules implement, making it possible to seamlessly chain components.
 
-In this guide we'll cover those three components individually, and then go over how to combine them.
-Understanding these concepts will set you up well for being able to use and customize LangChain applications.
-Most LangChain applications allow you to configure the model and/or the prompt, so knowing how to take advantage of this will be a big enabler.
+最もシンプルで一般的なチェーンは、三つの要素を含んでいます：
 
-### LLM / Chat Model
+> The simplest and most common chain contains three things:
 
-There are two types of language models:
+* LLM/Chat Model: 言語モデルはここでの核となる推論エンジンです。LangChainを効果的に使用するためには、異なるタイプの言語モデルとそれらの使い方を理解することが必要です。
+  > LLM/Chat Model: The language model is the core reasoning engine here. In order to work with LangChain, you need to understand the different types of language models and how to work with them.
+* プロンプトテンプレート：これは言語モデルに指示を与えます。このテンプレートが言語モデルの出力内容を決定するため、プロンプトの作成方法や異なるプロンプティング戦略を理解することが非常に重要です。
+  > Prompt Template: This provides instructions to the language model. This controls what the language model outputs, so understanding how to construct prompts and different prompting strategies is crucial.
+* 出力パーサー：これらは言語モデルからの生の応答をより扱いやすい形式に変換し、下流の処理で出力を容易に利用できるようにします。
+  > Output Parser: These translate the raw response from the language model to a more workable format, making it easy to use the output downstream.
 
-- `LLM`: underlying model takes a string as input and returns a string
-- `ChatModel`: underlying model takes a list of messages as input and returns a message
+このガイドでは、それぞれの3つのコンポーネントを個別に解説し、その後それらをどのように組み合わせるかをご紹介します。これらの概念を理解することは、LangChainアプリケーションを効果的に使用し、カスタマイズするための良い基盤となります。多くのLangChainアプリケーションでは、モデルやプロンプトの設定が可能ですので、これらの機能を活用する方法を知ることが、大きな促進力となるでしょう。
 
-Strings are simple, but what exactly are messages? The base message interface is defined by `BaseMessage`, which has two required attributes:
+> In this guide we'll cover those three components individually, and then go over how to combine them.
+> Understanding these concepts will set you up well for being able to use and customize LangChain applications.
+> Most LangChain applications allow you to configure the model and/or the prompt, so knowing how to take advantage of this will be a big enabler.
 
-- `content`: The content of the message. Usually a string.
-- `role`: The entity from which the `BaseMessage` is coming.
+### LLM / Chat Model | LLM／チャットモデル
 
-LangChain provides several objects to easily distinguish between different roles:
+言語モデルには二つのタイプがあります：
 
-- `HumanMessage`: A `BaseMessage` coming from a human/user.
-- `AIMessage`: A `BaseMessage` coming from an AI/assistant.
-- `SystemMessage`: A `BaseMessage` coming from the system.
-- `FunctionMessage` / `ToolMessage`: A `BaseMessage` containing the output of a function or tool call.
+> There are two types of language models:
 
-If none of those roles sound right, there is also a `ChatMessage` class where you can specify the role manually.
+* `LLM`：この基盤となるモデルは、文字列を入力として受け取り、文字列を出力として返します
+  > `LLM`: underlying model takes a string as input and returns a string
+* `ChatModel`：このモデルは、メッセージのリストを入力として受け取り、メッセージを返します。
+  > `ChatModel`: underlying model takes a list of messages as input and returns a message
 
-LangChain provides a common interface that's shared by both `LLM`s and `ChatModel`s.
-However it's useful to understand the difference in order to most effectively construct prompts for a given language model.
+文字列はシンプルですが、具体的に「メッセージ」とは何でしょうか？基本メッセージインターフェースは`BaseMessage`によって定義され、2つの必須属性を持っています：
 
-The simplest way to call an `LLM` or `ChatModel` is using `.invoke()`, the universal synchronous call method for all LangChain Expression Language (LCEL) objects:
-- `LLM.invoke`: Takes in a string, returns a string.
-- `ChatModel.invoke`: Takes in a list of `BaseMessage`, returns a `BaseMessage`.
+> Strings are simple, but what exactly are messages? The base message interface is defined by `BaseMessage`, which has two required attributes:
 
-The input types for these methods are actually more general than this, but for simplicity here we can assume LLMs only take strings and Chat models only takes lists of messages.
-Check out the "Go deeper" section below to learn more about model invocation.
+* `content`: メッセージの内容。通常は文字列です。
+  > `content`: The content of the message. Usually a string.
+* `role`：`BaseMessage`が発信されるエンティティ。
+  > `role`: The entity from which the `BaseMessage` is coming.
 
-Let's see how to work with these different types of models and these different types of inputs.
-First, let's import an LLM and a ChatModel.
+LangChainは、異なる役割を簡単に区別するためのいくつかのオブジェクトを提供しています：
+
+> LangChain provides several objects to easily distinguish between different roles:
+
+* `HumanMessage`: 人間やユーザーから送られる`BaseMessage`。
+  > `HumanMessage`: A `BaseMessage` coming from a human/user.
+* `AIMessage`: AI/アシスタントから発信される`BaseMessage`。
+  > `AIMessage`: A `BaseMessage` coming from an AI/assistant.
+* `SystemMessage`: システムから発信される`BaseMessage`。
+  > `SystemMessage`: A `BaseMessage` coming from the system.
+* `FunctionMessage` / `ToolMessage`: 関数またはツールの呼び出しの出力を含む`BaseMessage`。
+  > `FunctionMessage` / `ToolMessage`: A `BaseMessage` containing the output of a function or tool call.
+
+これらの役割に当てはまらない場合、役割を手動で指定できる`ChatMessage`クラスも用意されています。
+
+> If none of those roles sound right, there is also a `ChatMessage` class where you can specify the role manually.
+
+LangChainは、`LLM`と`ChatModel`の両方に共通のインターフェイスを提供しています。しかし、特定の言語モデルに最も効果的にプロンプトを構築するためには、両者の違いを理解することが役立ちます。
+
+> LangChain provides a common interface that's shared by both `LLM`s and `ChatModel`s.
+> However it's useful to understand the difference in order to most effectively construct prompts for a given language model.
+
+`LLM`や`ChatModel`を呼び出す最もシンプルな方法は、LangChain Expression Language (LCEL)オブジェクト全てに共通する同期呼び出しメソッド`.invoke()`を使用することです。
+
+> The simplest way to call an `LLM` or `ChatModel` is using `.invoke()`, the universal synchronous call method for all LangChain Expression Language (LCEL) objects:
+
+* `LLM.invoke`: 文字列を入力として受け取り、文字列を出力として返します。
+  > `LLM.invoke`: Takes in a string, returns a string.
+* `ChatModel.invoke`: `BaseMessage`のリストを入力として受け取り、`BaseMessage`を返します。
+  > `ChatModel.invoke`: Takes in a list of `BaseMessage`, returns a `BaseMessage`.
+
+これらのメソッドに対する入力タイプは実際にはもっと汎用的ですが、ここでは簡略化のためにLLMは文字列のみを、Chatモデルはメッセージのリストのみを受け取ると仮定します。モデル呼び出しの詳細については、下記の「Go deeper」セクションをご覧ください。
+
+> The input types for these methods are actually more general than this, but for simplicity here we can assume LLMs only take strings and Chat models only takes lists of messages.
+> Check out the "Go deeper" section below to learn more about model invocation.
+
+さまざまなタイプのモデルと入力方法を使って作業する方法を見てみましょう。まず、LLMとChatModelをインポートするところから始めましょう。
+
+> Let's see how to work with these different types of models and these different types of inputs.
+> First, let's import an LLM and a ChatModel.
 
 ```python
 from langchain.llms import OpenAI
@@ -135,8 +206,10 @@ llm = OpenAI()
 chat_model = ChatOpenAI()
 ```
 
-`LLM` and `ChatModel` objects are effectively configuration objects.
-You can initialize them with parameters like `temperature` and others, and pass them around.
+`LLM`と`ChatModel`オブジェクトは、実質的には設定用のオブジェクトです。これらは`temperature`などのパラメータで初期化でき、その後、引き渡すことが可能です。
+
+> `LLM` and `ChatModel` objects are effectively configuration objects.
+> You can initialize them with parameters like `temperature` and others, and pass them around.
 
 ```python
 from langchain.schema import HumanMessage
@@ -153,24 +226,32 @@ chat_model.invoke(messages)
 
 <details> <summary>Go deeper</summary>
 
-`LLM.invoke` and `ChatModel.invoke` actually both support as input any of `Union[str, List[BaseMessage], PromptValue]`.
-`PromptValue` is an object that defines its own custom logic for returning its inputs either as a string or as messages.
-`LLM`s have logic for coercing any of these into a string, and `ChatModel`s have logic for coercing any of these to messages.
-The fact that `LLM` and `ChatModel` accept the same inputs means that you can directly swap them for one another in most chains without breaking anything,
-though it's of course important to think about how inputs are being coerced and how that may affect model performance.
-To dive deeper on models head to the [Language models](/docs/modules/model_io/models) section.
+`LLM.invoke`と`ChatModel.invoke`は、実際には`Union[str, List[BaseMessage], PromptValue]`のいずれかを入力として受け付けます。`PromptValue`は、入力を文字列またはメッセージとして返すための独自のカスタムロジックを定義したオブジェクトです。`LLM`はこれらの入力を文字列に変換するロジックを持ち、`ChatModel`はそれらをメッセージに変換するロジックを持っています。`LLM`と`ChatModel`が同じ種類の入力を受け入れるということは、ほとんどの場合、チェーン内で互いに直接置き換えても問題が生じないことを意味しています。ただし、入力がどのように変換されるか、そしてそれがモデルのパフォーマンスにどのように影響するかを考慮することはもちろん重要です。モデルについてさらに詳しく知りたい場合は、[言語モデル](/docs/modules/model_io/models)セクションを参照してください。
+
+> `LLM.invoke` and `ChatModel.invoke` actually both support as input any of `Union[str, List[BaseMessage], PromptValue]`.
+> `PromptValue` is an object that defines its own custom logic for returning its inputs either as a string or as messages.
+> `LLM`s have logic for coercing any of these into a string, and `ChatModel`s have logic for coercing any of these to messages.
+> The fact that `LLM` and `ChatModel` accept the same inputs means that you can directly swap them for one another in most chains without breaking anything,
+> though it's of course important to think about how inputs are being coerced and how that may affect model performance.
+> To dive deeper on models head to the [Language models](/docs/modules/model_io/models) section.
 
 </details>
 
-### Prompt templates
+### Prompt templates | プロンプトテンプレート
 
-Most LLM applications do not pass user input directly into an LLM. Usually they will add the user input to a larger piece of text, called a prompt template, that provides additional context on the specific task at hand.
+ほとんどのLLMアプリケーションは、ユーザーの入力を直接LLMに渡すことはありません。通常、ユーザーの入力を特定のタスクに関する追加の文脈を提供する「プロンプトテンプレート」と呼ばれる、より大きなテキストに組み込むのが一般的です。
 
-In the previous example, the text we passed to the model contained instructions to generate a company name. For our application, it would be great if the user only had to provide the description of a company/product without worrying about giving the model instructions.
+> Most LLM applications do not pass user input directly into an LLM. Usually they will add the user input to a larger piece of text, called a prompt template, that provides additional context on the specific task at hand.
 
-PromptTemplates help with exactly this!
-They bundle up all the logic for going from user input into a fully formatted prompt.
-This can start off very simple - for example, a prompt to produce the above string would just be:
+前の例で、私たちがモデルに渡したテキストには、会社名を生成するための指示が含まれていました。私たちのアプリケーションでは、ユーザーがモデルへの指示を気にせずに、会社や製品の説明だけを提供できれば理想的です。
+
+> In the previous example, the text we passed to the model contained instructions to generate a company name. For our application, it would be great if the user only had to provide the description of a company/product without worrying about giving the model instructions.
+
+プロンプトテンプレートはまさにこれを支援します！ユーザーの入力から完全にフォーマットされたプロンプトへと変換する全てのロジックを一括して処理します。これは非常にシンプルなものから始めることができ、例えば、上記の文字列を生成するプロンプトは単に次のようになります：
+
+> PromptTemplates help with exactly this!
+> They bundle up all the logic for going from user input into a fully formatted prompt.
+> This can start off very simple - for example, a prompt to produce the above string would just be:
 
 ```python
 from langchain.prompts import PromptTemplate
@@ -183,16 +264,20 @@ prompt.format(product="colorful socks")
 What is a good name for a company that makes colorful socks?
 ```
 
-However, the advantages of using these over raw string formatting are several.
-You can "partial" out variables - e.g. you can format only some of the variables at a time.
-You can compose them together, easily combining different templates into a single prompt.
-For explanations of these functionalities, see the [section on prompts](/docs/modules/model_io/prompts) for more detail.
+しかし、生の文字列フォーマットに比べて、これらを使用する利点はいくつかあります。変数を「部分的に」指定できるのです。例えば、一度にいくつかの変数だけをフォーマットすることが可能です。さらに、異なるテンプレートを組み合わせて、簡単に一つのプロンプトを作成することができます。これらの機能についての詳細は、[プロンプトに関するセクション](/docs/modules/model_io/prompts)で更に詳しく説明されています。
 
-`PromptTemplate`s can also be used to produce a list of messages.
-In this case, the prompt not only contains information about the content, but also each message (its role, its position in the list, etc.).
-Here, what happens most often is a `ChatPromptTemplate` is a list of `ChatMessageTemplates`.
-Each `ChatMessageTemplate` contains instructions for how to format that `ChatMessage` - its role, and then also its content.
-Let's take a look at this below:
+> However, the advantages of using these over raw string formatting are several.
+> You can "partial" out variables - e.g. you can format only some of the variables at a time.
+> You can compose them together, easily combining different templates into a single prompt.
+> For explanations of these functionalities, see the [section on prompts](/docs/modules/model_io/prompts) for more detail.
+
+`PromptTemplate`はメッセージのリストを作成するのにも使えます。この場合、プロンプトにはコンテンツの情報だけでなく、各メッセージ（その役割やリスト内での順序など）に関する情報も含まれます。ここでよくあるのは、`ChatPromptTemplate`が`ChatMessageTemplates`のリストとして機能することです。各`ChatMessageTemplate`には、その`ChatMessage`のフォーマット方法に関する指示が含まれており、メッセージの役割と内容を定義します。以下にその例を見てみましょう：
+
+> `PromptTemplate`s can also be used to produce a list of messages.
+> In this case, the prompt not only contains information about the content, but also each message (its role, its position in the list, etc.).
+> Here, what happens most often is a `ChatPromptTemplate` is a list of `ChatMessageTemplates`.
+> Each `ChatMessageTemplate` contains instructions for how to format that `ChatMessage` - its role, and then also its content.
+> Let's take a look at this below:
 
 ```python
 from langchain.prompts.chat import ChatPromptTemplate
@@ -215,21 +300,31 @@ chat_prompt.format_messages(input_language="English", output_language="French", 
 ]
 ```
 
+ChatPromptTemplateは他の方法でも作成可能です - 詳細は[promptsに関するセクション](/docs/modules/model_io/prompts)を参照してください。
 
-ChatPromptTemplates can also be constructed in other ways - see the [section on prompts](/docs/modules/model_io/prompts) for more detail.
+> ChatPromptTemplates can also be constructed in other ways - see the [section on prompts](/docs/modules/model_io/prompts) for more detail.
 
-### Output parsers
+### Output parsers | 出力パーサ
 
-`OutputParser`s convert the raw output of a language model into a format that can be used downstream.
-There are a few main types of `OutputParser`s, including:
+`OutputParser`は、言語モデルの生の出力を下流で使用できる形式に変換するものです。`OutputParser`には、以下のようないくつかの主要なタイプがあります：
 
-- Convert text from `LLM` into structured information (e.g. JSON)
-- Convert a `ChatMessage` into just a string
-- Convert the extra information returned from a call besides the message (like OpenAI function invocation) into a string.
+> `OutputParser`s convert the raw output of a language model into a format that can be used downstream.
+> There are a few main types of `OutputParser`s, including:
 
-For full information on this, see the [section on output parsers](/docs/modules/model_io/output_parsers).
+* `LLM`からのテキストを構造化情報（例えばJSON）に変換する
+  > Convert text from `LLM` into structured information (e.g. JSON)
+* `ChatMessage`を単なる文字列に変換する
+  > Convert a `ChatMessage` into just a string
+* メッセージだけでなく、呼び出しから返される追加情報（例えばOpenAI関数の呼び出し時のような）を文字列に変換します。
+  > Convert the extra information returned from a call besides the message (like OpenAI function invocation) into a string.
 
-In this getting started guide, we will write our own output parser - one that converts a comma separated list into a list.
+この機能に関する完全な情報は、[出力パーサーのセクション](/docs/modules/model_io/output_parsers)でご確認ください。
+
+> For full information on this, see the [section on output parsers](/docs/modules/model_io/output_parsers).
+
+この入門ガイドでは、カンマ区切りのリストを通常のリストに変換する自作の出力パーサーを書くことにします。
+
+> In this getting started guide, we will write our own output parser - one that converts a comma separated list into a list.
 
 ```python
 from langchain.schema import BaseOutputParser
@@ -246,12 +341,14 @@ CommaSeparatedListOutputParser().parse("hi, bye")
 # >> ['hi', 'bye']
 ```
 
-### Composing with LCEL
+### Composing with LCEL | LCELを使った構成
 
-We can now combine all these into one chain.
-This chain will take input variables, pass those to a prompt template to create a prompt, pass the prompt to a language model, and then pass the output through an (optional) output parser.
-This is a convenient way to bundle up a modular piece of logic.
-Let's see it in action!
+これで、全てを一つのチェーンに組み合わせることが可能です。このチェーンは入力変数を取り、それをプロンプトテンプレートに渡してプロンプトを生成し、そのプロンプトを言語モデルに渡した後、出力を（オプションで）アウトプットパーサーを通じて処理します。これは、モジュラーなロジックを一まとめにする便利な方法です。さあ、実際に動作する様子を見てみましょう！
+
+> We can now combine all these into one chain.
+> This chain will take input variables, pass those to a prompt template to create a prompt, pass the prompt to a language model, and then pass the output through an (optional) output parser.
+> This is a convenient way to bundle up a modular piece of logic.
+> Let's see it in action!
 
 ```python
 from typing import List
@@ -282,32 +379,51 @@ chain.invoke({"text": "colors"})
 # >> ['red', 'blue', 'green', 'yellow', 'orange']
 ```
 
-Note that we are using the `|` syntax to join these components together.
-This `|` syntax is powered by the LangChain Expression Language (LCEL) and relies on the universal `Runnable` interface that all of these objects implement.
-To learn more about LCEL, read the documentation [here](/docs/expression_language).
+これらのコンポーネントを結合するために `|` 構文を使用していることに注目してください。この `|` 構文はLangChain Expression Language (LCEL) によってサポートされており、これらのオブジェクト全てに実装されている普遍的な `Runnable` インターフェースに基づいています。LCELについてさらに学ぶには、[こちら](/docs/expression_language)のドキュメントをご覧ください。
 
-## Tracing with LangSmith
+> Note that we are using the `|` syntax to join these components together.
+> This `|` syntax is powered by the LangChain Expression Language (LCEL) and relies on the universal `Runnable` interface that all of these objects implement.
+> To learn more about LCEL, read the documentation [here](/docs/expression_language).
 
-Assuming we've set our environment variables as shown in the beginning, all of the model and chain calls we've been making will have been automatically logged to LangSmith.
-Once there, we can use LangSmith to debug and annotate our application traces, then turn them into datasets for evaluating future iterations of the application.
+## Tracing with LangSmith | LangSmithを用いたトレース
 
-Check out what the trace for the above chain would look like:
+冒頭で示したように環境変数を設定していると仮定した場合、これまでに行われたすべてのモデルやチェーンの呼び出しは、自動的にLangSmithに記録されています。記録されたデータをLangSmithで利用することで、アプリケーションのトレースをデバッグし、注釈を加えた後、それらをデータセットに変換し、アプリケーションの今後のバージョンの評価に役立てることができます。
+
+> Assuming we've set our environment variables as shown in the beginning, all of the model and chain calls we've been making will have been automatically logged to LangSmith.
+> Once there, we can use LangSmith to debug and annotate our application traces, then turn them into datasets for evaluating future iterations of the application.
+
+上記のチェーンに対するトレースがどのようなものか、こちらで確認できます：
 https://smith.langchain.com/public/09370280-4330-4eb4-a7e8-c91817f6aa13/r
 
-For more on LangSmith [head here](/docs/langsmith/).
+> Check out what the trace for the above chain would look like:
+> https://smith.langchain.com/public/09370280-4330-4eb4-a7e8-c91817f6aa13/r
 
-## Serving with LangServe
+LangSmithの詳細情報は[こちら](/docs/langsmith/)からご覧いただけます。
 
-Now that we've built an application, we need to serve it. That's where LangServe comes in.
-LangServe helps developers deploy LCEL chains as a REST API.
-The library is integrated with FastAPI and uses pydantic for data validation.
+> For more on LangSmith [head here](/docs/langsmith/).
 
-### Server
+## Serving with LangServe | LangServeによるサービス提供
 
-To create a server for our application we'll make a `serve.py` file with three things:
-1. The definition of our chain (same as above)
-2. Our FastAPI app
-3. A definition of a route from which to serve the chain, which is done with `langserve.add_routes`
+アプリケーションを構築したので、次にそれを提供する必要があります。そこでLangServeが役立ちます。
+LangServeは、開発者がLCELチェーンをREST APIとして展開するのを支援します。
+このライブラリはFastAPIに統合されており、データ検証にはpydanticを利用しています。
+
+> Now that we've built an application, we need to serve it. That's where LangServe comes in.
+> LangServe helps developers deploy LCEL chains as a REST API.
+> The library is integrated with FastAPI and uses pydantic for data validation.
+
+### Server | サーバ
+
+アプリケーションのサーバーを構築するために、3つの要素を含む`serve.py`ファイルを作成します：
+
+> To create a server for our application we'll make a `serve.py` file with three things:
+
+1. 私たちのチェーンの定義（上記と同様）
+   > The definition of our chain (same as above)
+2. 私たちのFastAPIアプリ
+   > Our FastAPI app
+3. `langserve.add_routes`を用いてチェーンを提供するためのルートを定義する
+   > A definition of a route from which to serve the chain, which is done with `langserve.add_routes`
 
 ```python
 #!/usr/bin/env python
@@ -360,21 +476,31 @@ if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)
 ```
 
-And that's it! If we execute this file:
+それでおしまいです！このファイルを実行すれば：
+
+> And that's it! If we execute this file:
+
 ```bash
 python serve.py
 ```
-we should see our chain being served at localhost:8000.
 
-### Playground
+このファイルを実行すれば、localhost:8000で私たちのチェーンが動作しているのを確認できるはずです。
 
-Every LangServe service comes with a simple built-in UI for configuring and invoking the application with streaming output and visibility into intermediate steps.
-Head to http://localhost:8000/category_chain/playground/ to try it out!
+> we should see our chain being served at localhost:8000.
 
-### Client
+### Playground | プレイグラウンド
 
-Now let's set up a client for programmatically interacting with our service. We can easily do this with the `langserve.RemoteRunnable`.
-Using this, we can interact with the served chain as if it were running client-side.
+LangServeサービスには、アプリケーションを設定し、ストリーミング出力と中間ステップの可視化を伴って起動するためのシンプルな組み込みUIが付属しています。http://localhost:8000/category\_chain/playground/ にアクセスして、実際に試してみましょう！
+
+> Every LangServe service comes with a simple built-in UI for configuring and invoking the application with streaming output and visibility into intermediate steps.
+> Head to http://localhost:8000/category\_chain/playground/ to try it out!
+
+### Client | クライアント
+
+それでは、プログラムを介して私たちのサービスと対話するクライアントを設定しましょう。`langserve.RemoteRunnable` を利用すれば、これを簡単に実現できます。この機能を使えば、サーバー側で提供されているチェーンと、まるでクライアント側で動作しているかのようにやり取りすることが可能です。
+
+> Now let's set up a client for programmatically interacting with our service. We can easily do this with the `langserve.RemoteRunnable`.
+> Using this, we can interact with the served chain as if it were running client-side.
 
 ```python
 from langserve import RemoteRunnable
@@ -384,16 +510,25 @@ remote_chain.invoke({"text": "colors"})
 # >> ['red', 'blue', 'green', 'yellow', 'orange']
 ```
 
-To learn more about the many other features of LangServe [head here](/docs/langserve).
+LangServeのその他の多くの機能についてさらに詳しく知りたい方は、[こちら](/docs/langserve)をご覧ください。
 
-## Next steps
+> To learn more about the many other features of LangServe [head here](/docs/langserve).
 
-We've touched on how to build an application with LangChain, how to trace it with LangSmith, and how to serve it with LangServe.
-There are a lot more features in all three of these than we can cover here.
-To continue on your journey:
+## Next steps | 次のステップ
 
-- Read up on [LangChain Expression Language (LCEL)](/docs/expression_language) to learn how to chain these components together
-- [Dive deeper](/docs/modules/model_io) into LLMs, prompts, and output parsers and learn the other [key components](/docs/modules)
-- Explore common [end-to-end use cases](/docs/use_cases/qa_structured/sql) and [template applications](/docs/templates)
-- [Read up on LangSmith](/docs/langsmith/), the platform for debugging, testing, monitoring and more
-- Learn more about serving your applications with [LangServe](/docs/langserve)
+LangChainを用いたアプリケーションの構築方法、LangSmithによる追跡方法、そしてLangServeを使った提供方法について触れてきました。ここで紹介できる範囲を超えるほど、これら3つのツールにはさらに多くの機能が存在します。あなたの探求を続けるために：
+
+> We've touched on how to build an application with LangChain, how to trace it with LangSmith, and how to serve it with LangServe.
+> There are a lot more features in all three of these than we can cover here.
+> To continue on your journey:
+
+* [LangChain Expression Language (LCEL)](/docs/expression_language)について学び、これらのコンポーネントをどのように連携させるかを理解しましょう。
+  > Read up on [LangChain Expression Language (LCEL)](/docs/expression_language) to learn how to chain these components together
+* LLM（大規模言語モデル）、プロンプト、出力パーサーに更に深く潜り込み、その他の[重要なコンポーネント](/docs/modules)を学びましょう。
+  > [Dive deeper](/docs/modules/model_io) into LLMs, prompts, and output parsers and learn the other [key components](/docs/modules)
+* 一般的なエンドツーエンドのユースケースやテンプレートアプリケーションを探索する
+  > Explore common [end-to-end use cases](/docs/use_cases/qa_structured/sql) and [template applications](/docs/templates)
+* [LangSmithについて詳しく読む](/docs/langsmith/)、デバッグ、テスト、モニタリングなどの機能を備えたプラットフォームです
+  > [Read up on LangSmith](/docs/langsmith/), the platform for debugging, testing, monitoring and more
+* [LangServe](/docs/langserve)を用いてアプリケーションを運用する詳細について学びましょう。
+  > Learn more about serving your applications with [LangServe](/docs/langserve)

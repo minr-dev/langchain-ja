@@ -1,6 +1,8 @@
-# List parser
+# List parser | リストパーサー
 
-This output parser can be used when you want to return a list of comma-separated items.
+この出力パーサーは、カンマ区切りのアイテムリストを返したい場合に使用できます。
+
+> This output parser can be used when you want to return a list of comma-separated items.
 
 ```python
 from langchain.output_parsers import CommaSeparatedListOutputParser
@@ -24,7 +26,9 @@ output = model(_input)
 output_parser.parse(output)
 ```
 
-The resulting output will be:
+結果として出力されるものは以下の通りです：
+
+> The resulting output will be:
 
 <CodeOutputBlock lang="python">
 

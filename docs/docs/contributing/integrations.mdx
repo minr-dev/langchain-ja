@@ -1,24 +1,39 @@
 ---
 sidebar_position: 5
 ---
-# Contribute Integrations
 
-To begin, make sure you have all the dependencies outlined in guide on [Contributing Code](./code).
+# Contribute Integrations | 統合機能のコントリビューション
 
-There are a few different places you can contribute integrations for LangChain:
+まず初めに、[コードへの貢献](./code)ガイドに記載されている全ての依存関係が整っていることを確認してください。
 
-- **Community**: For lighter-weight integrations that are primarily maintained by LangChain and the Open Source Community.
-- **Partner Packages**: For independent packages that are co-maintained by LangChain and a partner.
+> To begin, make sure you have all the dependencies outlined in guide on [Contributing Code](./code).
 
-For the most part, new integrations should be added to the Community package. Partner packages require more maintenance as separate packages, so please confirm with the LangChain team before creating a new partner package.
+LangChainに統合を提供するためのいくつかの異なる場所があります：
 
-In the following sections, we'll walk through how to contribute to each of these packages from a fake company, `Parrot Link AI`.
+> There are a few different places you can contribute integrations for LangChain:
 
-## Community Package
+* **コミュニティ**: LangChainとオープンソースコミュニティが主に保守する、軽量な統合機能のためのものです。
+  > **Community**: For lighter-weight integrations that are primarily maintained by LangChain and the Open Source Community.
+* **パートナーパッケージ**: LangChainとパートナーが共同で保守管理する独立したパッケージのためのものです。
+  > **Partner Packages**: For independent packages that are co-maintained by LangChain and a partner.
 
-The `langchain-community` package is in `libs/community` and contains most integrations.
+ほとんどの場合、新しい統合機能はコミュニティパッケージに追加されるべきです。パートナーパッケージは、独立したパッケージとしてより多くのメンテナンスが必要になるため、新しいパートナーパッケージを作成する前に、LangChainチームに確認を取ってください。
 
-It is installed by users with `pip install langchain-community`, and exported members can be imported with code like 
+> For the most part, new integrations should be added to the Community package. Partner packages require more maintenance as separate packages, so please confirm with the LangChain team before creating a new partner package.
+
+次のセクションでは、架空の企業「Parrot Link AI」を例にして、それぞれのパッケージへの貢献方法を順に説明します。
+
+> In the following sections, we'll walk through how to contribute to each of these packages from a fake company, `Parrot Link AI`.
+
+## Community Package | コミュニティパッケージ
+
+`langchain-community`パッケージは`libs/community`ディレクトリにあり、大部分の統合機能を含んでいます。
+
+> The `langchain-community` package is in `libs/community` and contains most integrations.
+
+ユーザーは `pip install langchain-community` コマンドでインストールを行い、次のようなコードを使用してエクスポートされたメンバーをインポートできます
+
+> It is installed by users with `pip install langchain-community`, and exported members can be imported with code like
 
 ```python
 from langchain_community.chat_models import ParrotLinkLLM
@@ -26,9 +41,13 @@ from langchain_community.llms import ChatParrotLink
 from langchain_community.vectorstores import ParrotLinkVectorStore
 ```
 
-The community package relies on manually-installed dependent packages, so you will see errors if you try to import a package that is not installed. In our fake example, if you tried to import `ParrotLinkLLM` without installing `parrot-link-sdk`, you will see an `ImportError` telling you to install it when trying to use it.
+コミュニティパッケージは手動でインストールする必要がある依存パッケージに基づいていますので、インストールされていないパッケージをインポートしようとした場合、エラーが表示されます。例えば、架空の例で`parrot-link-sdk`をインストールせずに`ParrotLinkLLM`をインポートしようとした場合、使用しようとする際に`ImportError`が発生し、インストールを促すメッセージが表示されるでしょう。
 
-Let's say we wanted to implement a chat model for Parrot Link AI. We would create a new file in `libs/community/langchain_community/chat_models/parrot_link.py` with the following code:
+> The community package relies on manually-installed dependent packages, so you will see errors if you try to import a package that is not installed. In our fake example, if you tried to import `ParrotLinkLLM` without installing `parrot-link-sdk`, you will see an `ImportError` telling you to install it when trying to use it.
+
+例えば、Parrot Link AI用のチャットモデルを実装したいとします。その場合、`libs/community/langchain_community/chat_models/parrot_link.py`に新しいファイルを作成し、次のコードを記述することになります：
+
+> Let's say we wanted to implement a chat model for Parrot Link AI. We would create a new file in `libs/community/langchain_community/chat_models/parrot_link.py` with the following code:
 
 ```python
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -47,34 +66,54 @@ class ChatParrotLink(BaseChatModel):
     ...
 ```
 
-And we would write tests in:
+そして、以下の場所でテストを記述します：
 
-- Unit tests: `libs/community/tests/unit_tests/chat_models/test_parrot_link.py`
-- Integration tests: `libs/community/tests/integration_tests/chat_models/test_parrot_link.py`
+> And we would write tests in:
 
-And add documentation to:
-- `docs/docs/integrations/chat/parrot_link.ipynb`
+* ユニットテスト：`libs/community/tests/unit_tests/chat_models/test_parrot_link.py`
+  > Unit tests: `libs/community/tests/unit_tests/chat_models/test_parrot_link.py`
+* 統合テスト：`libs/community/tests/integration_tests/chat_models/test_parrot_link.py`
+  > Integration tests: `libs/community/tests/integration_tests/chat_models/test_parrot_link.py`
 
-- `docs/docs/
-## Partner Packages
+そして、以下のドキュメントに追加してください：
 
-Partner packages are in `libs/partners/*` and are installed by users with `pip install langchain-{partner}`, and exported members can be imported with code like 
+> And add documentation to:
+
+* `docs/docs/integrations/chat/parrot_link.ipynb`
+
+  このファイルには、Parrot Link AIのチャットモデル統合に関するドキュメントが含まれています。
+  > `docs/docs/integrations/chat/parrot_link.ipynb`
+
+* `docs/docs/` の後に続く文書は、ここで途切れています。この部分だけを見ると、文脈が不明で、何を意味しているのか解釈することが困難です。もし、この部分が文書の一部であれば、完全な文脈が必要です。それによって、適切な日本語訳を提供することが可能になります。
+  > \`docs/docs/
+
+## Partner Packages | パートナーパッケージ
+
+パートナーパッケージは `libs/partners/*` にあり、ユーザーは `pip install langchain-{partner}` を使用してインストールします。エクスポートされたメンバーは、以下のようなコードでインポートすることができます：
+
+> Partner packages are in `libs/partners/*` and are installed by users with `pip install langchain-{partner}`, and exported members can be imported with code like
 
 ```python
 from langchain_{partner} import X
 ```
 
-### Set up a new package
+### Set up a new package | 新しいパッケージを設定する
 
-To set up a new partner package, use the latest version of the LangChain CLI. You can install or update it with:
+新しいパートナーパッケージをセットアップするには、最新バージョンのLangChain CLIを使用してください。以下のコマンドでインストールまたは更新することができます：
+
+> To set up a new partner package, use the latest version of the LangChain CLI. You can install or update it with:
 
 ```bash
 pip install -U langchain-cli
 ```
 
-Let's say you want to create a new partner package working for a company called Parrot Link AI.
+例えば、Parrot Link AIという会社の新しいパートナーパッケージを作成したい場合を想定しましょう。
 
-Then, run the following command to create a new partner package:
+> Let's say you want to create a new partner package working for a company called Parrot Link AI.
+
+次に、新しいパートナーパッケージを作成するための以下のコマンドを実行してください：
+
+> Then, run the following command to create a new partner package:
 
 ```bash
 cd libs/partners
@@ -83,7 +122,9 @@ langchain-cli integration new
 > Name of integration in PascalCase [ParrotLink]: ParrotLink
 ```
 
-This will create a new package in `libs/partners/parrot-link` with the following structure:
+これにより、`libs/partners/parrot-link` に以下の構造を持つ新しいパッケージが作成されます：
+
+> This will create a new package in `libs/partners/parrot-link` with the following structure:
 
 ```
 libs/partners/parrot-link/
@@ -103,43 +144,66 @@ libs/partners/parrot-link/
   .gitignore
 ```
 
-### Implement your package
+### Implement your package | パッケージを実装する
 
-First, add any dependencies your package needs, such as your company's SDK:
+まず、パッケージに必要な依存関係を追加してください。例えば、あなたの会社のSDKのようなものです：
+
+> First, add any dependencies your package needs, such as your company's SDK:
 
 ```bash
 poetry add parrot-link-sdk
 ```
 
-If you need separate dependencies for type checking, you can add them to the `typing` group with:
+型チェック用の別の依存関係が必要な場合、それらを`typing`グループに追加することができます：
+
+> If you need separate dependencies for type checking, you can add them to the `typing` group with:
 
 ```bash
 poetry add --group typing types-parrot-link-sdk
 ```
 
-Then, implement your package in `libs/partners/parrot-link/langchain_parrot_link`.
+次に、`libs/partners/parrot-link/langchain_parrot_link`ディレクトリ内でパッケージを実装してください。
 
-By default, this will include stubs for a Chat Model, an LLM, and/or a Vector Store. You should delete any of the files you won't use and remove them from `__init__.py`.
+> Then, implement your package in `libs/partners/parrot-link/langchain_parrot_link`.
 
-### Write Unit and Integration Tests
+デフォルトでは、Chat Model、LLM、Vector Storeのためのスタブが含まれています。使用しないファイルは削除し、`__init__.py`からもそれらを取り除いてください。
 
-Some basic tests are generated in the tests/ directory. You should add more tests to cover your package's functionality.
+> By default, this will include stubs for a Chat Model, an LLM, and/or a Vector Store. You should delete any of the files you won't use and remove them from `__init__.py`.
 
-For information on running and implementing tests, see the [Testing guide](./testing).
+### Write Unit and Integration Tests | ユニットテストとインテグレーションテストを記述する
 
-### Write documentation
+基本的なテストはtests/ディレクトリで生成されます。パッケージの機能を網羅するために、追加のテストを加えるべきです。
 
-Documentation is generated from Jupyter notebooks in the `docs/` directory. You should move the generated notebooks to the relevant `docs/docs/integrations` directory in the monorepo root.
+> Some basic tests are generated in the tests/ directory. You should add more tests to cover your package's functionality.
 
-### Additional steps
+テストの実行と実装方法に関する情報は、[テスティングガイド](./testing)をご覧ください。
 
-Contributor steps:
+> For information on running and implementing tests, see the [Testing guide](./testing).
 
-- [ ] Add secret names to manual integrations workflow in `.github/workflows/_integration_test.yml`
-- [ ] Add secrets to release workflow (for pre-release testing) in `.github/workflows/_release.yml`
+### Write documentation | ドキュメンテーションを書く
 
-Maintainer steps (Contributors should **not** do these):
+`docs/`ディレクトリ内のJupyterノートブックからドキュメントが生成されます。生成されたノートブックをモノレポジトリのルートにある`docs/docs/integrations`ディレクトリに移動してください。
 
-- [ ] set up pypi and test pypi projects
-- [ ] add credential secrets to Github Actions
-- [ ] add package to conda-forge
+> Documentation is generated from Jupyter notebooks in the `docs/` directory. You should move the generated notebooks to the relevant `docs/docs/integrations` directory in the monorepo root.
+
+### Additional steps | 追加のステップ
+
+貢献者のステップ：
+
+> Contributor steps:
+
+* `.github/workflows/_integration_test.yml`において、手動統合ワークフローにシークレット名を追加してください。
+  > \[ ] Add secret names to manual integrations workflow in `.github/workflows/_integration_test.yml`
+* \[ ] プレリリーステストのために、`.github/workflows/_release.yml`にシークレットを追加してください。
+  > \[ ] Add secrets to release workflow (for pre-release testing) in `.github/workflows/_release.yml`
+
+メンテナの手順（コントリビューターはこれらの手順を**実行してはいけません**）：
+
+> Maintainer steps (Contributors should **not** do these):
+
+* \[ ] PyPIおよびTest PyPIのプロジェクトをセットアップする
+  > \[ ] set up pypi and test pypi projects
+* \[ ] Github Actionsに認証情報のシークレットを追加
+  > \[ ] add credential secrets to Github Actions
+* \[ ] conda-forgeにパッケージを追加
+  > \[ ] add package to conda-forge

@@ -1,6 +1,8 @@
-# Select by length
+# Select by length | 長さによって選択
 
-This example selector selects which examples to use based on length. This is useful when you are worried about constructing a prompt that will go over the length of the context window. For longer inputs, it will select fewer examples to include, while for shorter inputs it will select more.
+この例示セレクターは、長さに基づいて使用する例を選択します。これは、コンテキストウィンドウの長さを超えてしまうプロンプトを構築することを懸念している場合に便利です。長い入力に対しては、含める例を少なく選択し、短い入力に対しては、より多くの例を選択します。
+
+> This example selector selects which examples to use based on length. This is useful when you are worried about constructing a prompt that will go over the length of the context window. For longer inputs, it will select fewer examples to include, while for shorter inputs it will select more.
 
 ```python
 from langchain.prompts import PromptTemplate
@@ -44,7 +46,6 @@ dynamic_prompt = FewShotPromptTemplate(
 )
 ```
 
-
 ```python
 # An example with small input, so it selects all examples.
 print(dynamic_prompt.format(adjective="big"))
@@ -76,7 +77,6 @@ print(dynamic_prompt.format(adjective="big"))
 
 </CodeOutputBlock>
 
-
 ```python
 # An example with long input, so it selects only one example.
 long_string = "big and huge and massive and large and gigantic and tall and much much much much much bigger than everything else"
@@ -96,7 +96,6 @@ print(dynamic_prompt.format(adjective=long_string))
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 # You can add an example to an example selector as well.

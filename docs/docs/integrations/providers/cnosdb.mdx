@@ -1,15 +1,23 @@
-# CnosDB
-> [CnosDB](https://github.com/cnosdb/cnosdb) is an open-source distributed time series database with high performance, high compression rate and high ease of use.
+# CnosDB | CnosDB
 
-## Installation and Setup
+> [CnosDB](https://github.com/cnosdb/cnosdb)は、高性能、高圧縮率、そして高い使いやすさを兼ね備えたオープンソースの分散型時系列データベースです。
+>
+> > [CnosDB](https://github.com/cnosdb/cnosdb) is an open-source distributed time series database with high performance, high compression rate and high ease of use.
+
+## Installation and Setup | インストールとセットアップ
 
 ```python
 pip install cnos-connector
 ```
 
-## Connecting to CnosDB
-You can connect to CnosDB using the `SQLDatabase.from_cnosdb()` method.
-### Syntax
+## Connecting to CnosDB | CnosDBへの接続
+
+`SQLDatabase.from_cnosdb()` メソッドを使用して CnosDB に接続することができます。
+
+> You can connect to CnosDB using the `SQLDatabase.from_cnosdb()` method.
+
+### Syntax | 構文
+
 ```python
 def SQLDatabase.from_cnosdb(url: str = "127.0.0.1:8902",
                               user: str = "root",
@@ -17,24 +25,36 @@ def SQLDatabase.from_cnosdb(url: str = "127.0.0.1:8902",
                               tenant: str = "cnosdb",
                               database: str = "public")
 ```
-Args:
-1. url (str): The HTTP connection host name and port number of the CnosDB
-                service, excluding "http://" or "https://", with a default value
-                of "127.0.0.1:8902".
-2. user (str): The username used to connect to the CnosDB service, with a
-                default value of "root".
-3. password (str): The password of the user connecting to the CnosDB service,
-                with a default value of "".
-4. tenant (str): The name of the tenant used to connect to the CnosDB service,
-                with a default value of "cnosdb".
-5. database (str): The name of the database in the CnosDB tenant.
-## Examples
+
+引数:
+
+> Args:
+
+1. url (str): CnosDBサービスのHTTP接続ホスト名とポート番号で、「http://」または「https://」を除いたものです。デフォルト値は「127.0.0.1:8902」です。
+   > url (str): The HTTP connection host name and port number of the CnosDB
+   > service, excluding "http://" or "https://", with a default value
+   > of "127.0.0.1:8902".
+2. user (str): CnosDBサービスに接続するために使用されるユーザー名で、デフォルト値は「root」です。
+   > user (str): The username used to connect to the CnosDB service, with a
+   > default value of "root".
+3. password (str): CnosDBサービスに接続するユーザーのパスワードで、デフォルト値は""です。
+   > password (str): The password of the user connecting to the CnosDB service,
+   > with a default value of "".
+4. tenant (str): CnosDBサービスに接続するために使用されるテナントの名前で、デフォルト値は「cnosdb」です。
+   > tenant (str): The name of the tenant used to connect to the CnosDB service,
+   > with a default value of "cnosdb".
+5. database (str): CnosDBテナント内のデータベースの名前。
+   > database (str): The name of the database in the CnosDB tenant.
+
+## Examples | 例
+
 ```python
 # Connecting to CnosDB with SQLDatabase Wrapper
 from langchain.utilities import SQLDatabase
 
 db = SQLDatabase.from_cnosdb()
 ```
+
 ```python
 # Creating a OpenAI Chat LLM Wrapper
 from langchain.chat_models import ChatOpenAI
@@ -42,8 +62,12 @@ from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
 ```
 
-### SQL Database Chain
-This example demonstrates the use of the SQL Chain for answering a question over a CnosDB.
+### SQL Database Chain | SQLデータベースチェーン
+
+この例では、CnosDB上で質問に答えるためのSQL Chainの使用方法を示しています。
+
+> This example demonstrates the use of the SQL Chain for answering a question over a CnosDB.
+
 ```python
 from langchain.utilities import SQLDatabaseChain
 
@@ -53,6 +77,7 @@ db_chain.run(
     "What is the average temperature of air at station XiaoMaiDao between October 19, 2022 and Occtober 20, 2022?"
 )
 ```
+
 ```shell
 > Entering new  chain...
 What is the average temperature of air at station XiaoMaiDao between October 19, 2022 and Occtober 20, 2022?
@@ -61,8 +86,13 @@ SQLResult: [(68.0,)]
 Answer:The average temperature of air at station XiaoMaiDao between October 19, 2022 and October 20, 2022 is 68.0.
 > Finished chain.
 ```
-### SQL Database Agent
-This example demonstrates the use of the SQL Database Agent for answering questions over a CnosDB.
+
+### SQL Database Agent | SQLデータベースエージェント
+
+この例では、CnosDB上での質問に答えるためのSQL Database Agentの使用方法を示しています。
+
+> This example demonstrates the use of the SQL Database Agent for answering questions over a CnosDB.
+
 ```python
 from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
@@ -70,11 +100,13 @@ from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 toolkit = SQLDatabaseToolkit(db=db, llm=llm)
 agent = create_sql_agent(llm=llm, toolkit=toolkit, verbose=True)
 ```
+
 ```python
 agent.run(
     "What is the average temperature of air at station XiaoMaiDao between October 19, 2022 and Occtober 20, 2022?"
 )
 ```
+
 ```shell
 > Entering new  chain...
 Action: sql_db_list_tables

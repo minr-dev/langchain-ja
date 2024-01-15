@@ -1,20 +1,32 @@
-# Figma
+# Figma | Figma
 
->[Figma](https://www.figma.com/) is a collaborative web application for interface design.
+> [Figma](https://www.figma.com/)はインターフェースデザインのための協働型ウェブアプリケーションです。
+>
+> > [Figma](https://www.figma.com/) is a collaborative web application for interface design.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-The Figma API requires an `access token`, `node_ids`, and a `file key`.
+Figma APIは`access token`、`node_ids`、および`file key`を必要とします。
 
-The `file key` can be pulled from the URL.  https://www.figma.com/file/{filekey}/sampleFilename
+> The Figma API requires an `access token`, `node_ids`, and a `file key`.
 
-`Node IDs` are also available in the URL. Click on anything and look for the '?node-id={node_id}' param.
+`file key`はURLから取得できます。https://www.figma.com/file/{filekey}/sampleFilename
 
-`Access token` [instructions](https://help.figma.com/hc/en-us/articles/8085703771159-Manage-personal-access-tokens).
+> The `file key` can be pulled from the URL.  https://www.figma.com/file/{filekey}/sampleFilename
 
-## Document Loader
+`Node IDs`はURLにも含まれています。何かをクリックして、'?node-id={node\_id}'パラメータを探してください。
 
-See a [usage example](/docs/integrations/document_loaders/figma).
+> `Node IDs` are also available in the URL. Click on anything and look for the '?node-id={node\_id}' param.
+
+`アクセストークン`については、[こちらの手順](https://help.figma.com/hc/en-us/articles/8085703771159-Manage-personal-access-tokens)をご覧ください。
+
+> `Access token` [instructions](https://help.figma.com/hc/en-us/articles/8085703771159-Manage-personal-access-tokens).
+
+## Document Loader | ドキュメントローダー
+
+[使用例](/docs/integrations/document_loaders/figma)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/figma).
 
 ```python
 from langchain.document_loaders import FigmaFileLoader

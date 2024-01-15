@@ -1,20 +1,29 @@
-# Log10
+# Log10 | Log10
 
-This page covers how to use the [Log10](https://log10.io) within LangChain.
+このページでは、LangChain内で[Log10](https://log10.io)を使用する方法について説明しています。
 
-## What is Log10?
+> This page covers how to use the [Log10](https://log10.io) within LangChain.
 
-Log10 is an [open-source](https://github.com/log10-io/log10) proxiless LLM data management and application development platform that lets you log, debug and tag your Langchain calls.
+## What is Log10? | Log10とは何ですか？
 
-## Quick start
+Log10は、Langchainの呼び出しをログ記録、デバッグ、タグ付けすることができる、[オープンソース](https://github.com/log10-io/log10)のプロキシレスLLMデータ管理およびアプリケーション開発プラットフォームです。
 
-1. Create your free account at [log10.io](https://log10.io)
-2. Add your `LOG10_TOKEN` and `LOG10_ORG_ID` from the Settings and Organization tabs respectively as environment variables.
-3. Also add `LOG10_URL=https://log10.io` and your usual LLM API key: for e.g. `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` to your environment
+> Log10 is an [open-source](https://github.com/log10-io/log10) proxiless LLM data management and application development platform that lets you log, debug and tag your Langchain calls.
 
-## How to enable Log10 data management for Langchain
+## Quick start | クイックスタート
 
-Integration with log10 is a simple one-line `log10_callback` integration as shown below:
+1. [log10.io](https://log10.io)で無料アカウントを作成してください
+   > Create your free account at [log10.io](https://log10.io)
+2. `LOG10_TOKEN`と`LOG10_ORG_ID`をそれぞれ設定タブと組織タブから取得して、環境変数として追加してください。
+   > Add your `LOG10_TOKEN` and `LOG10_ORG_ID` from the Settings and Organization tabs respectively as environment variables.
+3. また、`LOG10_URL=https://log10.io`と、通常使用するLLM APIキー（例: `OPENAI_API_KEY`や`ANTHROPIC_API_KEY`）を環境変数に追加してください。
+   > Also add `LOG10_URL=https://log10.io` and your usual LLM API key: for e.g. `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` to your environment
+
+## How to enable Log10 data management for Langchain | LangchainでLog10データ管理を有効にする方法
+
+log10との統合は、以下に示すように、シンプルな1行の`log10_callback`で行うことができます：
+
+> Integration with log10 is a simple one-line `log10_callback` integration as shown below:
 
 ```python
 from langchain.chat_models import ChatOpenAI
@@ -33,11 +42,15 @@ messages = [
 llm = ChatOpenAI(model_name="gpt-3.5-turbo", callbacks=[log10_callback])
 ```
 
-[Log10 + Langchain + Logs docs](https://github.com/log10-io/log10/blob/main/logging.md#langchain-logger)
+[Log10 + Langchain + ログのドキュメント](https://github.com/log10-io/log10/blob/main/logging.md#langchain-logger)
 
-[More details + screenshots](https://log10.io/docs/logs) including instructions for self-hosting logs
+> [Log10 + Langchain + Logs docs](https://github.com/log10-io/log10/blob/main/logging.md#langchain-logger)
 
-## How to use tags with Log10
+自己ホスティングのログに関する指示を含む、詳細情報とスクリーンショットは[こちら](https://log10.io/docs/logs)をご覧ください。
+
+> [More details + screenshots](https://log10.io/docs/logs) including instructions for self-hosting logs
+
+## How to use tags with Log10 | Log10でタグを使用する方法
 
 ```python
 from langchain.llms import OpenAI
@@ -68,7 +81,9 @@ completion = llm.predict("You are a ping pong machine.\nPing?\n")
 print(completion)
 ```
 
-You can also intermix direct OpenAI calls and Langchain LLM calls:
+また、直接のOpenAIの呼び出しとLangchain LLMの呼び出しを組み合わせることもできます：
+
+> You can also intermix direct OpenAI calls and Langchain LLM calls:
 
 ```python
 import os
@@ -97,8 +112,12 @@ with log10_session(tags=["foo", "bar"]):
     print(response)
 ```
 
-## How to debug Langchain calls
+## How to debug Langchain calls | Langchainの呼び出しをデバッグする方法
 
-[Example of debugging](https://log10.io/docs/prompt_chain_debugging)
+[デバッグの例](https://log10.io/docs/prompt_chain_debugging)
 
-[More Langchain examples](https://github.com/log10-io/log10/tree/main/examples#langchain)
+> [Example of debugging](https://log10.io/docs/prompt_chain_debugging)
+
+[さらなるLangchainの例](https://github.com/log10-io/log10/tree/main/examples#langchain)
+
+> [More Langchain examples](https://github.com/log10-io/log10/tree/main/examples#langchain)

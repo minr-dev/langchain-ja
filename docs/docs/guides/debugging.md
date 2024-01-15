@@ -1,27 +1,38 @@
-# Debugging
+# Debugging | デバッグ
 
-If you're building with LLMs, at some point something will break, and you'll need to debug. A model call will fail, or the model output will be misformatted, or there will be some nested model calls and it won't be clear where along the way an incorrect output was created.
+LLMを使用してシステムを構築する際には、いずれ何らかの問題が発生し、デバッグが必要になることがあります。モデルの呼び出しが失敗するか、モデルの出力が誤った形式であるか、または複数のモデル呼び出しがネストされており、どの段階で不正確な出力が生成されたのかが明確でない場合があります。
 
-Here are a few different tools and functionalities to aid in debugging.
+> If you're building with LLMs, at some point something will break, and you'll need to debug. A model call will fail, or the model output will be misformatted, or there will be some nested model calls and it won't be clear where along the way an incorrect output was created.
 
+デバッグを支援するためのさまざまなツールと機能をここに紹介します。
 
+> Here are a few different tools and functionalities to aid in debugging.
 
-## Tracing
+## Tracing | トレース
 
-Platforms with tracing capabilities like [LangSmith](/docs/langsmith/) and [WandB](/docs/integrations/providers/wandb_tracing) are the most comprehensive solutions for debugging. These platforms make it easy to not only log and visualize LLM apps, but also to actively debug, test and refine them.
+トレーシング機能を備えたプラットフォーム、たとえば[LangSmith](/docs/langsmith/)や[WandB](/docs/integrations/providers/wandb_tracing)は、デバッグにおける最も包括的な解決策です。これらのプラットフォームにより、LLMアプリのログ記録や視覚化はもちろん、積極的にデバッグ、テスト、そして改善を行うことが容易になります。
 
-For anyone building production-grade LLM applications, we highly recommend using a platform like this.
+> Platforms with tracing capabilities like [LangSmith](/docs/langsmith/) and [WandB](/docs/integrations/providers/wandb_tracing) are the most comprehensive solutions for debugging. These platforms make it easy to not only log and visualize LLM apps, but also to actively debug, test and refine them.
+
+プロダクショングレードのLLMアプリケーションを開発している方々には、このようなプラットフォームを使用することを強く推奨します。
+
+> For anyone building production-grade LLM applications, we highly recommend using a platform like this.
 
 ![LangSmith run](../../static/img/run_details.png)
 
-## `set_debug` and `set_verbose`
+## `set_debug` and `set_verbose` | `set_debug` と `set_verbose` の設定
 
-If you're prototyping in Jupyter Notebooks or running Python scripts, it can be helpful to print out the intermediate steps of a Chain run. 
+Jupyter Notebooksでプロトタイピングを行う場合やPythonスクリプトを実行する際には、Chainの実行過程における中間ステップを出力して表示すると便利です。
 
-There are a number of ways to enable printing at varying degrees of verbosity.
+> If you're prototyping in Jupyter Notebooks or running Python scripts, it can be helpful to print out the intermediate steps of a Chain run.
 
-Let's suppose we have a simple agent, and want to visualize the actions it takes and tool outputs it receives. Without any debugging, here's what we see:
+様々な詳細度で出力を表示する方法がいくつかあります。
 
+> There are a number of ways to enable printing at varying degrees of verbosity.
+
+簡単なエージェントを例に取り、それが実行するアクションと受け取るツールの出力を視覚化したいと考えましょう。デバッグを行わない場合、以下のような結果が表示されます：
+
+> Let's suppose we have a simple agent, and want to visualize the actions it takes and tool outputs it receives. Without any debugging, here's what we see:
 
 ```python
 from langchain.agents import AgentType, initialize_agent, load_tools
@@ -31,7 +42,6 @@ llm = ChatOpenAI(model_name="gpt-4", temperature=0)
 tools = load_tools(["ddg-search", "llm-math"], llm=llm)
 agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION)
 ```
-
 
 ```python
 agent.run("Who directed the 2023 film Oppenheimer and what is their age? What is their age in days (assume 365 days per year)?")
@@ -45,10 +55,11 @@ agent.run("Who directed the 2023 film Oppenheimer and what is their age? What is
 
 </CodeOutputBlock>
 
-### `set_debug(True)`
+### `set_debug(True)` | `set_debug(True)`を有効にする
 
-Setting the global `debug` flag will cause all LangChain components with callback support (chains, models, agents, tools, retrievers) to print the inputs they receive and outputs they generate. This is the most verbose setting and will fully log raw inputs and outputs.
+グローバルな`debug`フラグを設定すると、コールバックをサポートしているすべてのLangChainコンポーネント（チェーン、モデル、エージェント、ツール、リトリーバー）は、受け取った入力と生成した出力を表示します。これは最も詳細な設定で、生の入力と出力を完全にログに記録します。
 
+> Setting the global `debug` flag will cause all LangChain components with callback support (chains, models, agents, tools, retrievers) to print the inputs they receive and outputs they generate. This is the most verbose setting and will fully log raw inputs and outputs.
 
 ```python
 from langchain.globals import set_debug
@@ -62,7 +73,7 @@ agent.run("Who directed the 2023 film Oppenheimer and what is their age? What is
 
 <CodeOutputBlock lang="python">
 
-```
+````
     [chain/start] [1:RunTypeEnum.chain:AgentExecutor] Entering Chain run with input:
     {
       "input": "Who directed the 2023 film Oppenheimer and what is their age? What is their age in days (assume 365 days per year)?"
@@ -370,16 +381,17 @@ agent.run("Who directed the 2023 film Oppenheimer and what is their age? What is
 
 
     'The director of the 2023 film Oppenheimer is Christopher Nolan and he is 52 years old. His age in days is approximately 18980 days.'
-```
+````
 
 </CodeOutputBlock>
 
 </details>
 
-### `set_verbose(True)`
+### `set_verbose(True)` | `set_verbose(True)`を設定すると、入出力がより読みやすい形式で表示され、アプリケーションのロジックに集中しやすくなるように、トークン使用統計などの一部の生の出力のログ記録を省略できます。
 
-Setting the `verbose` flag will print out inputs and outputs in a slightly more readable format and will skip logging certain raw outputs (like the token usage stats for an LLM call) so that you can focus on application logic.
+`verbose`フラグを設定すると、入力と出力がより読みやすい形式で表示され、LLMコールのトークン使用状況の統計など、特定の生の出力のログ記録を省略して、アプリケーションのロジックに集中できるようになります。
 
+> Setting the `verbose` flag will print out inputs and outputs in a slightly more readable format and will skip logging certain raw outputs (like the token usage stats for an LLM call) so that you can focus on application logic.
 
 ```python
 from langchain.globals import set_verbose
@@ -393,7 +405,7 @@ agent.run("Who directed the 2023 film Oppenheimer and what is their age? What is
 
 <CodeOutputBlock lang="python">
 
-```
+````
     
     
     > Entering new AgentExecutor chain...
@@ -596,16 +608,17 @@ agent.run("Who directed the 2023 film Oppenheimer and what is their age? What is
 
 
     'The director of the 2023 film Oppenheimer is Christopher Nolan and he is 53 years old in 2023. His age in days is 19345 days.'
-```
+````
 
 </CodeOutputBlock>
 
 </details>
 
-### `Chain(..., verbose=True)`
+### `Chain(..., verbose=True)` | `Chain(..., verbose=True)`を使用すると、そのオブジェクトへの入力と出力だけが表示されます（そのオブジェクトが特に呼び出した追加のコールバックを含む）。
 
-You can also scope verbosity down to a single object, in which case only the inputs and outputs to that object are printed (along with any additional callbacks calls made specifically by that object).
+また、冗長性を単一のオブジェクトに限定することもできます。その場合、そのオブジェクトへの入力と出力のみが表示されます（そのオブジェクトによって特に行われた追加のコールバック呼び出しも含む）。
 
+> You can also scope verbosity down to a single object, in which case only the inputs and outputs to that object are printed (along with any additional callbacks calls made specifically by that object).
 
 ```python
 # Passing verbose=True to initialize_agent will pass that along to the AgentExecutor (which is a Chain).
@@ -654,8 +667,12 @@ agent.run("Who directed the 2023 film Oppenheimer and what is their age? What is
 
 </details>
 
-## Other callbacks
+## Other callbacks | その他のコールバック
 
-`Callbacks` are what we use to execute any functionality within a component outside the primary component logic. All of the above solutions use `Callbacks` under the hood to log intermediate steps of components. There are a number of `Callbacks` relevant for debugging that come with LangChain out of the box, like the [FileCallbackHandler](/docs/modules/callbacks/how_to/filecallbackhandler). You can also implement your own callbacks to execute custom functionality.
+`Callbacks`は、主要なコンポーネントのロジック外でコンポーネント内の機能を実行するために使用されるものです。上記の解決策はすべて、コンポーネントの中間ステップを記録するために`Callbacks`を内部で使用しています。LangChainには、デバッグに役立つ多くの`Callbacks`が初めから組み込まれており、その一例として[FileCallbackHandler](/docs/modules/callbacks/how_to/filecallbackhandler)があります。また、カスタム機能を実行するために自分自身の`Callbacks`を実装することも可能です。
 
-See here for more info on [Callbacks](/docs/modules/callbacks/), how to use them, and customize them.
+> `Callbacks` are what we use to execute any functionality within a component outside the primary component logic. All of the above solutions use `Callbacks` under the hood to log intermediate steps of components. There are a number of `Callbacks` relevant for debugging that come with LangChain out of the box, like the [FileCallbackHandler](/docs/modules/callbacks/how_to/filecallbackhandler). You can also implement your own callbacks to execute custom functionality.
+
+[コールバック](/docs/modules/callbacks/)に関する詳細情報、それらの使用方法、およびカスタマイズ方法については、こちらをご覧ください。
+
+> See here for more info on [Callbacks](/docs/modules/callbacks/), how to use them, and customize them.

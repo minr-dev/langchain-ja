@@ -1,26 +1,44 @@
 ---
 sidebar_position: 2 
 ---
-# String Evaluators
 
-A string evaluator is a component within LangChain designed to assess the performance of a language model by comparing its generated outputs (predictions) to a reference string or an input. This comparison is a crucial step in the evaluation of language models, providing a measure of the accuracy or quality of the generated text.
+# String Evaluators | 文字列評価器
 
-In practice, string evaluators are typically used to evaluate a predicted string against a given input, such as a question or a prompt. Often, a reference label or context string is provided to define what a correct or ideal response would look like. These evaluators can be customized to tailor the evaluation process to fit your application's specific requirements.
+文字列評価器は、LangChain内にあるコンポーネントで、言語モデルの生成した出力（予測）を参照文字列や入力と比較することによって、言語モデルのパフォーマンスを評価するために設計されています。この比較は、言語モデルの評価において重要なステップであり、生成されたテキストの精度や品質を測定するための指標を提供します。
 
-To create a custom string evaluator, inherit from the `StringEvaluator` class and implement the `_evaluate_strings` method. If you require asynchronous support, also implement the `_aevaluate_strings` method.
+> A string evaluator is a component within LangChain designed to assess the performance of a language model by comparing its generated outputs (predictions) to a reference string or an input. This comparison is a crucial step in the evaluation of language models, providing a measure of the accuracy or quality of the generated text.
 
-Here's a summary of the key attributes and methods associated with a string evaluator:
+実際には、文字列評価器は通常、質問やプロンプトなどの与えられた入力に対する予測された文字列を評価するために使用されます。多くの場合、正しいまたは理想的な応答がどのようなものかを定義するために、参照ラベルやコンテキスト文字列が提供されます。これらの評価器は、アプリケーションの特定の要件に合わせて評価プロセスをカスタマイズするために調整可能です。
 
-- `evaluation_name`: Specifies the name of the evaluation.
-- `requires_input`: Boolean attribute that indicates whether the evaluator requires an input string. If True, the evaluator will raise an error when the input isn't provided. If False, a warning will be logged if an input _is_ provided, indicating that it will not be considered in the evaluation.
-- `requires_reference`: Boolean attribute specifying whether the evaluator requires a reference label. If True, the evaluator will raise an error when the reference isn't provided. If False, a warning will be logged if a reference _is_ provided, indicating that it will not be considered in the evaluation.
+> In practice, string evaluators are typically used to evaluate a predicted string against a given input, such as a question or a prompt. Often, a reference label or context string is provided to define what a correct or ideal response would look like. These evaluators can be customized to tailor the evaluation process to fit your application's specific requirements.
 
-String evaluators also implement the following methods:
+カスタム文字列評価器を作成するには、`StringEvaluator` クラスを継承し、`_evaluate_strings` メソッドを実装してください。非同期サポートが必要な場合は、`_aevaluate_strings` メソッドも実装してください。
 
-- `aevaluate_strings`: Asynchronously evaluates the output of the Chain or Language Model, with support for optional input and label.
-- `evaluate_strings`: Synchronously evaluates the output of the Chain or Language Model, with support for optional input and label.
+> To create a custom string evaluator, inherit from the `StringEvaluator` class and implement the `_evaluate_strings` method. If you require asynchronous support, also implement the `_aevaluate_strings` method.
 
-The following sections provide detailed information on available string evaluator implementations as well as how to create a custom string evaluator.
+以下は、文字列評価器に関連する主要な属性とメソッドの要約です：
+
+> Here's a summary of the key attributes and methods associated with a string evaluator:
+
+* `evaluation_name`：評価の名前を指定します。
+  > `evaluation_name`: Specifies the name of the evaluation.
+* `requires_input`：評価者が入力文字列を必要とするかどうかを示すブール属性です。True の場合、入力が提供されていないと評価者はエラーを発生させます。False の場合、入力が提供されていると警告が記録され、評価で考慮されないことを示します。
+  > `requires_input`: Boolean attribute that indicates whether the evaluator requires an input string. If True, the evaluator will raise an error when the input isn't provided. If False, a warning will be logged if an input *is* provided, indicating that it will not be considered in the evaluation.
+* `requires_reference`: 評価者が参照ラベルを必要とするかどうかを指定するブール属性です。True の場合、参照が提供されていないと評価者はエラーを発生させます。False の場合、参照が提供されていると警告が記録され、それが評価には考慮されないことを示します。
+  > `requires_reference`: Boolean attribute specifying whether the evaluator requires a reference label. If True, the evaluator will raise an error when the reference isn't provided. If False, a warning will be logged if a reference *is* provided, indicating that it will not be considered in the evaluation.
+
+文字列評価器は、以下のメソッドも実装しています：
+
+> String evaluators also implement the following methods:
+
+* `aevaluate_strings`：ChainまたはLanguage Modelの出力を非同期で評価する機能で、オプションの入力とラベルをサポートしています。
+  > `aevaluate_strings`: Asynchronously evaluates the output of the Chain or Language Model, with support for optional input and label.
+* `evaluate_strings`：ChainまたはLanguage Modelの出力を同期的に評価する機能で、オプションの入力とラベルに対応しています。
+  > `evaluate_strings`: Synchronously evaluates the output of the Chain or Language Model, with support for optional input and label.
+
+以下のセクションでは、利用可能な文字列評価器の実装に関する詳細情報と、カスタム文字列評価器を作成する方法について説明しています。
+
+> The following sections provide detailed information on available string evaluator implementations as well as how to create a custom string evaluator.
 
 import DocCardList from "@theme/DocCardList";
 

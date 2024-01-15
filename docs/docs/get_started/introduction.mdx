@@ -2,97 +2,214 @@
 sidebar_position: 0
 ---
 
-# Introduction
+# Introduction | ## はじめに
 
-**LangChain** is a framework for developing applications powered by language models. It enables applications that:
-- **Are context-aware**: connect a language model to sources of context (prompt instructions, few shot examples, content to ground its response in, etc.)
-- **Reason**: rely on a language model to reason (about how to answer based on provided context, what actions to take, etc.)
+**LangChain**は、言語モデルを活用したアプリケーション開発のためのフレームワークです。このフレームワークにより、次のようなアプリケーションが実現可能です：
 
-This framework consists of several parts.
-- **LangChain Libraries**: The Python and JavaScript libraries. Contains interfaces and integrations for a myriad of components, a basic run time for combining these components into chains and agents, and off-the-shelf implementations of chains and agents.
-- **[LangChain Templates](/docs/templates)**: A collection of easily deployable reference architectures for a wide variety of tasks.
-- **[LangServe](/docs/langserve)**: A library for deploying LangChain chains as a REST API.
-- **[LangSmith](/docs/langsmith)**: A developer platform that lets you debug, test, evaluate, and monitor chains built on any LLM framework and seamlessly integrates with LangChain.
+* **コンテキスト認識**：言語モデルをプロンプトの指示、数ショットの例、応答の根拠となるコンテンツなど、コンテキストの情報源に接続します。
+* **推論**：提供されたコンテキストに基づいて答える方法や取るべき行動などについて、言語モデルによる推論を行います。
+
+このフレームワークは複数のパーツから構成されています。
+
+* **LangChainライブラリ**：PythonとJavaScriptのライブラリです。多様なコンポーネントのインターフェースと統合、これらのコンポーネントをチェーンやエージェントに組み合わせる基本的なランタイム、そしてチェーンやエージェントの既製の実装が含まれています。
+* **[LangChainテンプレート](/docs/templates)**：様々なタスクに対して簡単にデプロイ可能な参照アーキテクチャのコレクションです。
+* **[LangServe](/docs/langserve)**：LangChainチェーンをREST APIとしてデプロイするためのライブラリです。
+* **[LangSmith](/docs/langsmith)**：任意のLLMフレームワーク上で構築されたチェーンをデバッグ、テスト、評価、監視する開発者プラットフォームで、LangChainとシームレスに統合されています。
+
+これらの製品は、アプリケーションのライフサイクル全体を簡素化します：
+
+* **開発**：LangChainまたはLangChain.jsでアプリケーションを記述します。テンプレートを参照しながら迅速に着手できます。
+* **製品化**：LangSmithを使用してチェーンを検査、テスト、監視し、継続的に改善し、自信を持ってデプロイできます。
+* **デプロイ**：LangServeを使って、任意のチェーンをAPIに変換します。
+
+## LangChainライブラリ
+
+LangChainパッケージの主な価値提案は以下の通りです：
+
+1. **コンポーネント**：言語モデルを扱うための組み合わせ可能なツールと統合です。コンポーネントはモジュール式で使いやすく、LangChainフレームワーク全体を使用していなくても活用できます。
+2. **既製のチェーン**：より高度なタスクを達成するために組み込まれたコンポーネントの集合です。
+
+既製のチェーンは、始めるのが簡単です。コンポーネントは、既存のチェーンをカスタマイズしたり、新しいチェーンを構築するのを容易にします。
+
+LangChainライブラリ自体は、以下の異なるパッケージから構成されています。
+
+* **`langchain-core`**：基本的な抽象化とLangChain Expression Languageを含みます。
+* **`langchain-community`**：サードパーティの統合を提供します。
+* **`langchain`**：アプリケーションの認知アーキテクチャを形成するチェーン、エージェント、および検索戦略が含まれています。
+
+## はじめに
+
+[こちら](/docs/get_started)から始めてください。
+
+**LangChain**は、言語モデルを駆使したアプリケーション開発のためのフレームワークです。これを利用することで、以下の特徴を持つアプリケーションを実現することができます：
+
+> **LangChain** is a framework for developing applications powered by language models. It enables applications that:
+
+* **文脈を認識する**: 言語モデルを文脈の情報源（プロンプトの指示、数ショットの事例、反応を根拠づける内容など）に接続します。
+  > **Are context-aware**: connect a language model to sources of context (prompt instructions, few shot examples, content to ground its response in, etc.)
+* **推論**: 提供されたコンテキストに基づいて、どのように答えるか、どのような行動を取るべきかを言語モデルに頼って推論します。
+  > **Reason**: rely on a language model to reason (about how to answer based on provided context, what actions to take, etc.)
+
+このフレームワークは、いくつかの部分から構成されています。
+
+> This framework consists of several parts.
+
+* **LangChainライブラリ**: PythonとJavaScriptのライブラリです。多様なコンポーネントのインターフェースと統合を含み、これらのコンポーネントをチェーンやエージェントに組み合わせるための基本的なランタイム、およびチェーンやエージェントの既製の実装が提供されています。
+  > **LangChain Libraries**: The Python and JavaScript libraries. Contains interfaces and integrations for a myriad of components, a basic run time for combining these components into chains and agents, and off-the-shelf implementations of chains and agents.
+* **[LangChain Templates](/docs/templates)**: 様々なタスクに適用可能で、容易にデプロイできる参照アーキテクチャのコレクションです。
+  > **[LangChain Templates](/docs/templates)**: A collection of easily deployable reference architectures for a wide variety of tasks.
+* **[LangServe](/docs/langserve)**: LangChainのチェーンをREST APIとしてデプロイするためのライブラリ。
+  > **[LangServe](/docs/langserve)**: A library for deploying LangChain chains as a REST API.
+* **[LangSmith](/docs/langsmith)**: どんなLLMフレームワーク上に構築されたチェーンでもデバッグ、テスト、評価、そして監視が可能な開発者向けプラットフォームで、LangChainとシームレスに統合することができます。
+  > **[LangSmith](/docs/langsmith)**: A developer platform that lets you debug, test, evaluate, and monitor chains built on any LLM framework and seamlessly integrates with LangChain.
 
 ![LangChain Diagram](/svg/langchain_stack.svg)
 
-Together, these products simplify the entire application lifecycle:
-- **Develop**: Write your applications in LangChain/LangChain.js. Hit the ground running using Templates for reference.
-- **Productionize**: Use LangSmith to inspect, test and monitor your chains, so that you can constantly improve and deploy with confidence.
-- **Deploy**: Turn any chain into an API with LangServe.
+これらの製品を組み合わせることで、アプリケーションのライフサイクル全体が簡素化されます。
 
-## LangChain Libraries
+> Together, these products simplify the entire application lifecycle:
 
-The main value props of the LangChain packages are:
-1. **Components**: composable tools and integrations for working with language models. Components are modular and easy-to-use, whether you are using the rest of the LangChain framework or not
-2. **Off-the-shelf chains**: built-in assemblages of components for accomplishing higher-level tasks
+* 開発：LangChainやLangChain.jsを使ってアプリケーションを書きましょう。参考用のテンプレートを利用して、すぐに開発をスタートできます。
+  > **Develop**: Write your applications in LangChain/LangChain.js. Hit the ground running using Templates for reference.
+* 製品化：LangSmithを活用してチェーンを検査、テスト、監視し、継続的に改善を行いつつ、自信を持ってデプロイできるようにします。
+  > **Productionize**: Use LangSmith to inspect, test and monitor your chains, so that you can constantly improve and deploy with confidence.
+* デプロイ：LangServeを使用して、任意のチェーンをAPIに変換します。
+  > **Deploy**: Turn any chain into an API with LangServe.
 
-Off-the-shelf chains make it easy to get started. Components make it easy to customize existing chains and build new ones.
+## LangChain Libraries | LangChain ライブラリ
 
-The LangChain libraries themselves are made up of several different packages.
-- **`langchain-core`**: Base abstractions and LangChain Expression Language.
-- **`langchain-community`**: Third party integrations.
-- **`langchain`**: Chains, agents, and retrieval strategies that make up an application's cognitive architecture.
+LangChainパッケージの主な価値提案は以下の通りです：
 
-## Get started
+> The main value props of the LangChain packages are:
 
-[Here’s](/docs/get_started/installation) how to install LangChain, set up your environment, and start building.
+1. 「コンポーネント」：言語モデルを操作するための組み合わせ可能なツールや統合機能です。コンポーネントはモジュール式であり、使い勝手が良く、LangChainフレームワークの他の部分を使用しているかどうかにかかわらず利用できます。
+   > **Components**: composable tools and integrations for working with language models. Components are modular and easy-to-use, whether you are using the rest of the LangChain framework or not
+2. 「既製のチェーン」：高度なタスクを遂行するためにあらかじめ組み立てられたコンポーネントの集合体
+   > **Off-the-shelf chains**: built-in assemblages of components for accomplishing higher-level tasks
 
-We recommend following our [Quickstart](/docs/get_started/quickstart) guide to familiarize yourself with the framework by building your first LangChain application.
+既製のチェーンを利用することで、手軽にスタートできます。コンポーネントにより、既存のチェーンのカスタマイズや新規チェーンの構築が容易になります。
 
-Read up on our [Security](/docs/security) best practices to make sure you're developing safely with LangChain.
+> Off-the-shelf chains make it easy to get started. Components make it easy to customize existing chains and build new ones.
+
+LangChainライブラリ自体は、複数の異なるパッケージから成り立っています。
+
+> The LangChain libraries themselves are made up of several different packages.
+
+* **`langchain-core`**: 基本的な抽象化とLangChain表現言語。
+  > **`langchain-core`**: Base abstractions and LangChain Expression Language.
+* **`langchain-community`**: サードパーティの統合。
+  > **`langchain-community`**: Third party integrations.
+* **`langchain`**: アプリケーションの認知アーキテクチャを構成するチェーン、エージェント、および情報取得戦略。
+  > **`langchain`**: Chains, agents, and retrieval strategies that make up an application's cognitive architecture.
+
+## Get started | はじめに
+
+LangChainのインストール、環境設定、そしてビルドを始める方法は[こちら](/docs/get_started/installation)です。
+
+> [Here’s](/docs/get_started/installation) how to install LangChain, set up your environment, and start building.
+
+LangChainフレームワークに慣れるために、私たちの[クイックスタート](/docs/get_started/quickstart)ガイドを参考にして、あなたの最初のLangChainアプリケーションを構築することをお勧めします。
+
+> We recommend following our [Quickstart](/docs/get_started/quickstart) guide to familiarize yourself with the framework by building your first LangChain application.
+
+LangChainを使用して安全に開発を行うためのベストプラクティスについては、[セキュリティ](/docs/security)のドキュメントをご覧ください。
+
+> Read up on our [Security](/docs/security) best practices to make sure you're developing safely with LangChain.
 
 :::note
 
-These docs focus on the Python LangChain library. [Head here](https://js.langchain.com) for docs on the JavaScript LangChain library.
+このドキュメントはPython用のLangChainライブラリに焦点を当てています。JavaScript用のLangChainライブラリに関するドキュメントは[こちら](https://js.langchain.com)をご覧ください。
+
+> These docs focus on the Python LangChain library. [Head here](https://js.langchain.com) for docs on the JavaScript LangChain library.
 
 :::
 
-## LangChain Expression Language (LCEL)
+## LangChain Expression Language (LCEL) | LangChain 表現言語 (LCEL)
 
-LCEL is a declarative way to compose chains. LCEL was designed from day 1 to support putting prototypes in production, with no code changes, from the simplest “prompt + LLM” chain to the most complex chains.
+LCELはチェーンを構成するための宣言的な手法です。LCELは設計初期から、最もシンプルな「プロンプト + LLM」チェーンから最も複雑なチェーンまで、コードを変更することなくプロトタイプを本番環境に適用するサポートを目的としています。
 
-- **[Overview](/docs/expression_language/)**: LCEL and its benefits
-- **[Interface](/docs/expression_language/interface)**: The standard interface for LCEL objects
-- **[How-to](/docs/expression_language/how_to)**: Key features of LCEL
-- **[Cookbook](/docs/expression_language/cookbook)**: Example code for accomplishing common tasks
+> LCEL is a declarative way to compose chains. LCEL was designed from day 1 to support putting prototypes in production, with no code changes, from the simplest “prompt + LLM” chain to the most complex chains.
 
+* **[概要](/docs/expression_language/)**: LCELとその利点
+  > **[Overview](/docs/expression_language/)**: LCEL and its benefits
+* **[インターフェース](/docs/expression_language/interface)**: LCELオブジェクトの標準インターフェース
+  > **[Interface](/docs/expression_language/interface)**: The standard interface for LCEL objects
+* **[ハウツー](/docs/expression_language/how_to)**: LCELの主要な機能
+  > **[How-to](/docs/expression_language/how_to)**: Key features of LCEL
+* **[クックブック](/docs/expression_language/cookbook)**: 一般的なタスクを行うためのサンプルコード
+  > **[Cookbook](/docs/expression_language/cookbook)**: Example code for accomplishing common tasks
 
-## Modules
+## Modules | モジュール
 
-LangChain provides standard, extendable interfaces and integrations for the following modules:
+LangChainは、以下のモジュールに対して、標準的で拡張可能なインターフェイスと統合機能を提供します：
 
-#### [Model I/O](/docs/modules/model_io/)
-Interface with language models
+> LangChain provides standard, extendable interfaces and integrations for the following modules:
 
-#### [Retrieval](/docs/modules/data_connection/)
-Interface with application-specific data
+#### [Model I/O](/docs/modules/model_io/) | [モデルI/O](/docs/modules/model_io/)
 
-#### [Agents](/docs/modules/agents/)
-Let models choose which tools to use given high-level directives
+言語モデルとのインターフェース
 
+> Interface with language models
 
-## Examples, ecosystem, and resources
+#### [Retrieval](/docs/modules/data_connection/) | [データ検索](/docs/modules/data_connection/)
 
-### [Use cases](/docs/use_cases/question_answering/)
-Walkthroughs and techniques for common end-to-end use cases, like:
-- [Document question answering](/docs/use_cases/question_answering/)
-- [Chatbots](/docs/use_cases/chatbots/)
-- [Analyzing structured data](/docs/use_cases/qa_structured/sql/)
-- and much more...
+アプリケーション特有のデータとのインターフェース
 
-### [Integrations](/docs/integrations/providers/)
-LangChain is part of a rich ecosystem of tools that integrate with our framework and build on top of it. Check out our growing list of [integrations](/docs/integrations/providers/).
+アプリケーション特有のデータとのインターフェース
 
-### [Guides](/docs/guides/guides/debugging)
-Best practices for developing with LangChain.
+> Interface with application-specific data
 
-### [API reference](https://api.python.langchain.com)
-Head to the reference section for full documentation of all classes and methods in the LangChain and LangChain Experimental Python packages.
+#### [Agents](/docs/modules/agents/) | #### [エージェント](/docs/modules/agents/)
 
-### [Developer's guide](/docs/contributing)
-Check out the developer's guide for guidelines on contributing and help getting your dev environment set up.
+モデルが高レベルの指示に基づいて使用するツールを選択する機能
 
-### [Community](/docs/community)
-Head to the [Community navigator](/docs/community) to find places to ask questions, share feedback, meet other developers, and dream about the future of LLM’s.
+高レベルの指示を受けて、モデルが使用するツールを選択します
 
+> Let models choose which tools to use given high-level directives
+
+## Examples, ecosystem, and resources | 事例、エコシステム、およびリソース
+
+### [Use cases](/docs/use_cases/question_answering/) | [ユースケース](/docs/use_cases/question_answering/)
+
+一般的なエンドツーエンドのユースケースに対するウォークスルーやテクニックを、以下の例で紹介します：
+
+> Walkthroughs and techniques for common end-to-end use cases, like:
+
+* [文書への質問応答](/docs/use_cases/question_answering/)
+  > [Document question answering](/docs/use_cases/question_answering/)
+* [チャットボット](/docs/use_cases/chatbots/)
+  > [Chatbots](/docs/use_cases/chatbots/)
+* [構造化データの分析](/docs/use_cases/qa_structured/sql/)
+  > [Analyzing structured data](/docs/use_cases/qa_structured/sql/)
+* その他にもさまざまな内容があります...
+  > and much more...
+
+### [Integrations](/docs/integrations/providers/) | 統合機能
+
+LangChainは、私たちのフレームワークに統合され、それを基に拡張される豊かなツールエコシステムの一部です。私たちの拡大し続ける[統合](/docs/integrations/providers/)のリストをぜひご覧ください。
+
+> LangChain is part of a rich ecosystem of tools that integrate with our framework and build on top of it. Check out our growing list of [integrations](/docs/integrations/providers/).
+
+### [Guides](/docs/guides/guides/debugging) | [デバッグガイド](/docs/guides/guides/debugging)
+
+LangChainを用いた開発におけるベストプラクティス。
+
+> Best practices for developing with LangChain.
+
+### [API reference](https://api.python.langchain.com) | [APIリファレンス](https://api.python.langchain.com)
+
+LangChainおよびLangChain Experimental Pythonパッケージに含まれるすべてのクラスとメソッドの完全なドキュメントについては、リファレンスセクションをご覧ください。
+
+> Head to the reference section for full documentation of all classes and methods in the LangChain and LangChain Experimental Python packages.
+
+### [Developer's guide](/docs/contributing) | [開発者向けガイド](/docs/contributing)
+
+開発者ガイドを確認し、貢献に関する指針や開発環境を整えるための支援を受ける方法についてご覧ください。
+
+> Check out the developer's guide for guidelines on contributing and help getting your dev environment set up.
+
+### [Community](/docs/community) | [コミュニティ](/docs/community)
+
+[コミュニティナビゲーター](/docs/community)を訪れて、質問を投稿したり、フィードバックを共有したり、他の開発者と交流したり、LLMの未来について想像を膨らませる場所を見つけましょう。
+
+> Head to the [Community navigator](/docs/community) to find places to ask questions, share feedback, meet other developers, and dream about the future of LLM’s.

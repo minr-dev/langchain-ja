@@ -1,19 +1,25 @@
-# SingleStoreDB
+# SingleStoreDB | SingleStoreDB
 
->[SingleStoreDB](https://singlestore.com/) is a high-performance distributed SQL database that supports deployment both in the [cloud](https://www.singlestore.com/cloud/) and on-premises. It provides vector storage, and vector functions including [dot_product](https://docs.singlestore.com/managed-service/en/reference/sql-reference/vector-functions/dot_product.html) and [euclidean_distance](https://docs.singlestore.com/managed-service/en/reference/sql-reference/vector-functions/euclidean_distance.html), thereby supporting AI applications that require text similarity matching. 
+> [SingleStoreDB](https://singlestore.com/)は、[クラウド](https://www.singlestore.com/cloud/)とオンプレミスの両方でデプロイメントをサポートする高性能分散SQLデータベースです。ベクターストレージを提供し、[dot\_product](https://docs.singlestore.com/managed-service/en/reference/sql-reference/vector-functions/dot_product.html)や[euclidean\_distance](https://docs.singlestore.com/managed-service/en/reference/sql-reference/vector-functions/euclidean_distance.html)を含むベクター関数を利用して、テキストの類似性マッチングを必要とするAIアプリケーションを支援します。
+>
+> > [SingleStoreDB](https://singlestore.com/) is a high-performance distributed SQL database that supports deployment both in the [cloud](https://www.singlestore.com/cloud/) and on-premises. It provides vector storage, and vector functions including [dot\_product](https://docs.singlestore.com/managed-service/en/reference/sql-reference/vector-functions/dot_product.html) and [euclidean\_distance](https://docs.singlestore.com/managed-service/en/reference/sql-reference/vector-functions/euclidean_distance.html), thereby supporting AI applications that require text similarity matching.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-There are several ways to establish a [connection](https://singlestoredb-python.labs.singlestore.com/generated/singlestoredb.connect.html) to the database. You can either set up environment variables or pass named parameters to the `SingleStoreDB constructor`. 
-Alternatively, you may provide these parameters to the `from_documents` and `from_texts` methods.
+データベースに[接続](https://singlestoredb-python.labs.singlestore.com/generated/singlestoredb.connect.html)する方法はいくつかあります。環境変数を設定するか、`SingleStoreDB constructor`に名前付きパラメータを渡すことができます。または、これらのパラメータを`from_documents`メソッドや`from_texts`メソッドに提供することもできます。
+
+> There are several ways to establish a [connection](https://singlestoredb-python.labs.singlestore.com/generated/singlestoredb.connect.html) to the database. You can either set up environment variables or pass named parameters to the `SingleStoreDB constructor`.
+> Alternatively, you may provide these parameters to the `from_documents` and `from_texts` methods.
 
 ```bash
 pip install singlestoredb
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/singlestoredb).
+[使用例](/docs/integrations/vectorstores/singlestoredb)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/singlestoredb).
 
 ```python
 from langchain.vectorstores import SingleStoreDB

@@ -1,30 +1,36 @@
-# NLPCloud
+# NLPCloud | NLPCloud
 
->[NLP Cloud](https://docs.nlpcloud.com/#introduction) is an artificial intelligence platform that allows you to use the most advanced AI engines, and even train your own engines with your own data. 
+> [NLP Cloud](https://docs.nlpcloud.com/#introduction)は、最先端のAIエンジンを使用できる人工知能プラットフォームであり、自分のデータを使って自分自身のエンジンをトレーニングすることもできます。
+>
+> > [NLP Cloud](https://docs.nlpcloud.com/#introduction) is an artificial intelligence platform that allows you to use the most advanced AI engines, and even train your own engines with your own data.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
-
-- Install the `nlpcloud` package.
+* `nlpcloud`パッケージをインストールしてください。
+  > Install the `nlpcloud` package.
 
 ```bash
 pip install nlpcloud
 ```
 
-- Get an NLPCloud api key and set it as an environment variable (`NLPCLOUD_API_KEY`)
+* NLPCloudのAPIキーを取得し、環境変数（`NLPCLOUD_API_KEY`）として設定してください。
+  > Get an NLPCloud api key and set it as an environment variable (`NLPCLOUD_API_KEY`)
 
+## LLM | LLM
 
-## LLM
+[使用例](/docs/integrations/llms/nlpcloud)をご覧ください。
 
-See a [usage example](/docs/integrations/llms/nlpcloud).
+> See a [usage example](/docs/integrations/llms/nlpcloud).
 
 ```python
 from langchain.llms import NLPCloud
 ```
 
-## Text Embedding Models
+## Text Embedding Models | テキスト埋め込みモデル
 
-See a [usage example](/docs/integrations/text_embedding/nlp_cloud)
+[使用例](/docs/integrations/text_embedding/nlp_cloud)をご覧ください
+
+> See a [usage example](/docs/integrations/text_embedding/nlp_cloud)
 
 ```python
 from langchain.embeddings import NLPCloudEmbeddings

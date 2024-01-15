@@ -1,43 +1,72 @@
 ---
 sidebar_position: 1
 ---
-# Document transformers
+
+# Document transformers | ドキュメントトランスフォーマー
 
 :::info
-Head to [Integrations](/docs/integrations/document_transformers/) for documentation on built-in document transformer integrations with 3rd-party tools.
+
+[Integrations](/docs/integrations/document_transformers/) で、サードパーティのツールと統合するための組み込みドキュメントトランスフォーマーのドキュメントについて確認してください。
+
+> Head to [Integrations](/docs/integrations/document_transformers/) for documentation on built-in document transformer integrations with 3rd-party tools.
+
 :::
 
-Once you've loaded documents, you'll often want to transform them to better suit your application. The simplest example
-is you may want to split a long document into smaller chunks that can fit into your model's context window. LangChain
-has a number of built-in document transformers that make it easy to split, combine, filter, and otherwise manipulate documents.
+ドキュメントを読み込んだ後、それをアプリケーションに適した形に変換したくなることがよくあります。最も単純な例として、長いドキュメントをモデルのコンテキストウィンドウに収まる小さなチャンクに分割したい場合が挙げられます。LangChainには、ドキュメントを分割、結合、フィルタリング、その他の方法で操作するための多くの組み込みドキュメントトランスフォーマーがあり、これによってドキュメントの操作が容易になります。
 
-## Text splitters
+> Once you've loaded documents, you'll often want to transform them to better suit your application. The simplest example
+> is you may want to split a long document into smaller chunks that can fit into your model's context window. LangChain
+> has a number of built-in document transformers that make it easy to split, combine, filter, and otherwise manipulate documents.
 
-When you want to deal with long pieces of text, it is necessary to split up that text into chunks.
-As simple as this sounds, there is a lot of potential complexity here. Ideally, you want to keep the semantically related pieces of text together. What "semantically related" means could depend on the type of text.
-This notebook showcases several ways to do that.
+## Text splitters | テキストスプリッター
 
-At a high level, text splitters work as following:
+長いテキストを扱いたい場合、そのテキストをチャンクに分割することが必要です。これが簡単に思えるかもしれませんが、実際にはかなりの複雑さが潜んでいます。理想的には、意味的に関連するテキストの部分を一緒に保ちたいものです。「意味的に関連する」とは、テキストの種類によって異なる意味を持つことがあります。このノートブックは、そのような分割を行ういくつかの方法を紹介しています。
 
-1. Split the text up into small, semantically meaningful chunks (often sentences).
-2. Start combining these small chunks into a larger chunk until you reach a certain size (as measured by some function).
-3. Once you reach that size, make that chunk its own piece of text and then start creating a new chunk of text with some overlap (to keep context between chunks).
+> When you want to deal with long pieces of text, it is necessary to split up that text into chunks.
+> As simple as this sounds, there is a lot of potential complexity here. Ideally, you want to keep the semantically related pieces of text together. What "semantically related" means could depend on the type of text.
+> This notebook showcases several ways to do that.
 
-That means there are two different axes along which you can customize your text splitter:
+大まかに言うと、テキストスプリッターは以下のように動作します：
 
-1. How the text is split
-2. How the chunk size is measured
+> At a high level, text splitters work as following:
 
-### Get started with text splitters
+1. テキストを小さく、意味を成す塊（多くの場合は文）に分割してください。
+   > Split the text up into small, semantically meaningful chunks (often sentences).
+2. これらの小さなチャンクを組み合わせて、ある一定のサイズ（何らかの関数によって測定される）に達するまで大きなチャンクにしていきます。
+   > Start combining these small chunks into a larger chunk until you reach a certain size (as measured by some function).
+3. そのサイズに達したら、そのチャンクを独立したテキストとして扱い、次にいくつかの重複を持たせて（チャンク間の文脈を維持するため）、新しいテキストのチャンクの作成を始めてください。
+   > Once you reach that size, make that chunk its own piece of text and then start creating a new chunk of text with some overlap (to keep context between chunks).
 
-The default recommended text splitter is the RecursiveCharacterTextSplitter. This text splitter takes a list of characters. It tries to create chunks based on splitting on the first character, but if any chunks are too large it then moves onto the next character, and so forth. By default the characters it tries to split on are `["\n\n", "\n", " ", ""]`
+それは、テキストスプリッターをカスタマイズすることができる2つの異なる軸があることを意味します：
 
-In addition to controlling which characters you can split on, you can also control a few other things:
+> That means there are two different axes along which you can customize your text splitter:
 
-- `length_function`: how the length of chunks is calculated. Defaults to just counting number of characters, but it's pretty common to pass a token counter here.
-- `chunk_size`: the maximum size of your chunks (as measured by the length function).
-- `chunk_overlap`: the maximum overlap between chunks. It can be nice to have some overlap to maintain some continuity between chunks (e.g. do a sliding window).
-- `add_start_index`: whether to include the starting position of each chunk within the original document in the metadata.
+1. テキストがどのように分割されるか
+   > How the text is split
+2. チャンクサイズの測定方法
+   > How the chunk size is measured
+
+### Get started with text splitters | テキストスプリッターの使い方を始めましょう
+
+デフォルトで推奨されるテキスト分割器は、RecursiveCharacterTextSplitterです。このテキスト分割器は文字のリストを受け取り、最初の文字で分割してチャンクを作成しようとしますが、チャンクが大きすぎる場合は次の文字に移り、このプロセスを繰り返します。デフォルトで分割しようとする文字は \`\[
+
+,
+, " ", ""]\` です。
+
+> The default recommended text splitter is the RecursiveCharacterTextSplitter. This text splitter takes a list of characters. It tries to create chunks based on splitting on the first character, but if any chunks are too large it then moves onto the next character, and so forth. By default the characters it tries to split on are `["\n\n", "\n", " ", ""]`
+
+分割可能な文字を制御することに加えて、他にも制御できるいくつかの要素があります：
+
+> In addition to controlling which characters you can split on, you can also control a few other things:
+
+* `length_function`：チャンクの長さがどのように計算されるかを定義します。デフォルトでは単に文字数を数えますが、トークンカウンターを渡すことも一般的です。
+  > `length_function`: how the length of chunks is calculated. Defaults to just counting number of characters, but it's pretty common to pass a token counter here.
+* `chunk_size`：チャンクの最大サイズ（length関数によって測定されます）。
+  > `chunk_size`: the maximum size of your chunks (as measured by the length function).
+* `chunk_overlap`：チャンク間の最大の重複部分です。チャンク間に少しの連続性を保つために、いくらかの重複があると良いでしょう（例えば、スライディングウィンドウを使用する場合など）。
+  > `chunk_overlap`: the maximum overlap between chunks. It can be nice to have some overlap to maintain some continuity between chunks (e.g. do a sliding window).
+* `add_start_index`：各チャンクの元のドキュメント内での開始位置をメタデータに含めるかどうか。
+  > `add_start_index`: whether to include the starting position of each chunk within the original document in the metadata.
 
 ```python
 # This is a long document we can split up.
@@ -45,11 +74,9 @@ with open('../../state_of_the_union.txt') as f:
     state_of_the_union = f.read()
 ```
 
-
 ```python
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 ```
-
 
 ```python
 text_splitter = RecursiveCharacterTextSplitter(
@@ -60,7 +87,6 @@ text_splitter = RecursiveCharacterTextSplitter(
     add_start_index = True,
 )
 ```
-
 
 ```python
 texts = text_splitter.create_documents([state_of_the_union])
@@ -77,19 +103,22 @@ print(texts[1])
 
 </CodeOutputBlock>
 
+### Evaluate text splitters | テキスト分割ツールを評価する
 
-### Evaluate text splitters
+`Greg Kamradt`によって作成された[Chunkvizユーティリティ](https://www.chunkviz.com/)を使用して、テキストスプリッターを評価することができます。`Chunkviz`は、テキストスプリッターがどのように機能しているかを視覚化するのに非常に適したツールです。これにより、テキストがどのように分割されているかが表示され、分割パラメーターの調整を助けてくれます。
 
-You can evaluate text splitters with the [Chunkviz utility](https://www.chunkviz.com/) created by `Greg Kamradt`.
-`Chunkviz` is a great tool for visualizing how your text splitter is working. It will show you how your text is 
-being split up and help in tuning up the splitting parameters.
+> You can evaluate text splitters with the [Chunkviz utility](https://www.chunkviz.com/) created by `Greg Kamradt`.
+> `Chunkviz` is a great tool for visualizing how your text splitter is working. It will show you how your text is
+> being split up and help in tuning up the splitting parameters.
 
+## Other transformations: | その他の変換：
 
-## Other transformations:
-### Filter redundant docs, translate docs, extract metadata, and more
+### Filter redundant docs, translate docs, extract metadata, and more | 冗長なドキュメントを除去し、ドキュメントを翻訳し、メタデータを抽出する等が可能です
 
-We can do perform a number of transformations on docs which are not simply splitting the text. With the
-`EmbeddingsRedundantFilter` we can identify similar documents and filter out redundancies. With integrations like
-[doctran](https://github.com/psychic-api/doctran/tree/main) we can do things like translate documents from one language
-to another, extract desired properties and add them to metadata, and convert conversational dialogue into a Q/A format
-set of documents.
+テキストを単純に分割するだけではなく、ドキュメントに対して様々な変換を行うことができます。`EmbeddingsRedundantFilter`を使用すると、類似したドキュメントを特定し、冗長性を除去することが可能です。[doctran](https://github.com/psychic-api/doctran/tree/main)のような統合機能を利用することで、ドキュメントをある言語から別の言語へ翻訳したり、望ましい属性を抽出してメタデータに追加したり、会話形式の対話をQ/A形式のドキュメントセットに変換することができます。
+
+> We can do perform a number of transformations on docs which are not simply splitting the text. With the
+> `EmbeddingsRedundantFilter` we can identify similar documents and filter out redundancies. With integrations like
+> [doctran](https://github.com/psychic-api/doctran/tree/main) we can do things like translate documents from one language
+> to another, extract desired properties and add them to metadata, and convert conversational dialogue into a Q/A format
+> set of documents.

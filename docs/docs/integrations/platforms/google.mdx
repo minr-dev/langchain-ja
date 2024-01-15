@@ -1,18 +1,24 @@
-# Google
+# Google | Google
 
-All functionality related to [Google Cloud Platform](https://cloud.google.com/) and other `Google` products.
+[Google Cloud Platform](https://cloud.google.com/)およびその他の`Google`製品に関連するすべての機能。
 
-## Chat models
+> All functionality related to [Google Cloud Platform](https://cloud.google.com/) and other `Google` products.
 
-### Google AI
+## Chat models | チャットモデル
 
-Access GoogleAI `Gemini` models such as `gemini-pro` and `gemini-pro-vision` through the `ChatGoogleGenerativeAI` class.
+### Google AI | Google AI
+
+`ChatGoogleGenerativeAI` クラスを通じて、`gemini-pro` や `gemini-pro-vision` などの GoogleAI `Gemini` モデルにアクセスできます。
+
+> Access GoogleAI `Gemini` models such as `gemini-pro` and `gemini-pro-vision` through the `ChatGoogleGenerativeAI` class.
 
 ```bash
 pip install -U langchain-google-genai
 ```
 
-Configure your API key.
+APIキーを設定してください。
+
+> Configure your API key.
 
 ```bash
 export GOOGLE_API_KEY=your-api-key
@@ -25,7 +31,9 @@ llm = ChatGoogleGenerativeAI(model="gemini-pro")
 llm.invoke("Sing a ballad of LangChain.")
 ```
 
-Gemini vision model supports image inputs when providing a single chat message. Example:
+Geminiビジョンモデルは、単一のチャットメッセージを提供する際に画像入力をサポートしています。例：
+
+> Gemini vision model supports image inputs when providing a single chat message. Example:
 
 ```python
 from langchain_core.messages import HumanMessage
@@ -45,227 +53,312 @@ message = HumanMessage(
 llm.invoke([message])
 ```
 
-The value of image_url can be any of the following:
+image\_urlの値は、以下のいずれかにすることができます：
 
-- A public image URL
-- A gcs file (e.g., "gcs://path/to/file.png")
-- A local file path
-- A base64 encoded image (e.g., data:image/png;base64,abcd124)
-- A PIL image
+> The value of image\_url can be any of the following:
 
-### Vertex AI
+* 公開画像のURL
+  > A public image URL
+* GCSファイル（例："gcs://path/to/file.png"）
+  > A gcs file (e.g., "gcs://path/to/file.png")
+* ローカルファイルパス
+  > A local file path
+* Base64でエンコードされた画像（例：data:image/png;base64,abcd124）
+  > A base64 encoded image (e.g., data:image/png;base64,abcd124)
+* PILイメージ
+  > A PIL image
 
-Access PaLM chat models like `chat-bison` and `codechat-bison` via Google Cloud.
+### Vertex AI | Vertex AI
 
-We need to install `google-cloud-aiplatform` python package.
+`chat-bison`や`codechat-bison`のようなPaLMチャットモデルにGoogle Cloud経由でアクセスします。
+
+> Access PaLM chat models like `chat-bison` and `codechat-bison` via Google Cloud.
+
+`google-cloud-aiplatform` Pythonパッケージをインストールする必要があります。
+
+> We need to install `google-cloud-aiplatform` python package.
 
 ```bash
 pip install google-cloud-aiplatform
 ```
 
-See a [usage example](/docs/integrations/chat/google_vertex_ai_palm).
+[使用例](/docs/integrations/chat/google_vertex_ai_palm)をご覧ください。
+
+> See a [usage example](/docs/integrations/chat/google_vertex_ai_palm).
 
 ```python
 from langchain.chat_models import ChatVertexAI
 ```
 
-## Document Loaders
-### Google BigQuery
+## Document Loaders | ドキュメントローダー
 
-> [Google BigQuery](https://cloud.google.com/bigquery) is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.
-`BigQuery` is a part of the `Google Cloud Platform`.
+### Google BigQuery | Google BigQuery
 
-We need to install `google-cloud-bigquery` python package.
+> [Google BigQuery](https://cloud.google.com/bigquery)は、クラウド間で動作し、データに応じてスケールするサーバーレスでコスト効率の良いエンタープライズデータウェアハウスです。`BigQuery`は`Google Cloud Platform`の一部です。
+>
+> > [Google BigQuery](https://cloud.google.com/bigquery) is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.
+> > `BigQuery` is a part of the `Google Cloud Platform`.
+
+`google-cloud-bigquery` Pythonパッケージをインストールする必要があります。
+
+> We need to install `google-cloud-bigquery` python package.
 
 ```bash
 pip install google-cloud-bigquery
 ```
 
-See a [usage example](/docs/integrations/document_loaders/google_bigquery).
+[使用例](/docs/integrations/document_loaders/google_bigquery)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/google_bigquery).
 
 ```python
 from langchain.document_loaders import BigQueryLoader
 ```
 
-## LLMs
+## LLMs | LLMs
 
-### Vertex AI
+### Vertex AI | Vertex AI
 
-Access to `Gemini` and `PaLM` LLMs (like `text-bison` and `code-bison`) via `Google Vertex AI`.
+`Google Vertex AI` を通じて `Gemini` や `PaLM` LLM（`text-bison` や `code-bison` のような）にアクセスする。
 
-We need to install `google-cloud-aiplatform` python package.
+> Access to `Gemini` and `PaLM` LLMs (like `text-bison` and `code-bison`) via `Google Vertex AI`.
+
+`google-cloud-aiplatform` Pythonパッケージをインストールする必要があります。
+
+> We need to install `google-cloud-aiplatform` python package.
 
 ```bash
 pip install google-cloud-aiplatform
 ```
 
-See a [usage example](/docs/integrations/llms/google_vertex_ai_palm).
+[使用例](/docs/integrations/llms/google_vertex_ai_palm)をご覧ください。
+
+> See a [usage example](/docs/integrations/llms/google_vertex_ai_palm).
 
 ```python
 from langchain.llms import VertexAI
 ```
 
-### Model Garden
+### Model Garden | モデルガーデン
 
-Access PaLM and hundreds of OSS models via `Vertex AI Model Garden`.
+`Vertex AI Model Garden`を通じてPaLMや数百のオープンソースモデルにアクセスできます。
 
-We need to install `google-cloud-aiplatform` python package.
+> Access PaLM and hundreds of OSS models via `Vertex AI Model Garden`.
+
+`google-cloud-aiplatform` Pythonパッケージをインストールする必要があります。
+
+> We need to install `google-cloud-aiplatform` python package.
 
 ```bash
 pip install google-cloud-aiplatform
 ```
 
-See a [usage example](/docs/integrations/llms/google_vertex_ai_palm#vertex-model-garden).
+[使用例](/docs/integrations/llms/google_vertex_ai_palm#vertex-model-garden)をご覧ください。
+
+> See a [usage example](/docs/integrations/llms/google_vertex_ai_palm#vertex-model-garden).
 
 ```python
 from langchain.llms import VertexAIModelGarden
 ```
 
+### Google Cloud Storage | Google Cloud Storage
 
-### Google Cloud Storage
+> [Google Cloud Storage](https://en.wikipedia.org/wiki/Google_Cloud_Storage)は、非構造化データを保存するための管理サービスです。
+>
+> > [Google Cloud Storage](https://en.wikipedia.org/wiki/Google_Cloud_Storage) is a managed service for storing unstructured data.
 
->[Google Cloud Storage](https://en.wikipedia.org/wiki/Google_Cloud_Storage) is a managed service for storing unstructured data.
+`google-cloud-storage` Pythonパッケージをインストールする必要があります。
 
-We need to install `google-cloud-storage` python package.
+> We need to install `google-cloud-storage` python package.
 
 ```bash
 pip install google-cloud-storage
 ```
 
-There are two loaders for the `Google Cloud Storage`: the `Directory` and the `File` loaders.
+`Google Cloud Storage`には、`Directory`と`File`の2種類のローダーがあります。
 
-See a [usage example](/docs/integrations/document_loaders/google_cloud_storage_directory).
+> There are two loaders for the `Google Cloud Storage`: the `Directory` and the `File` loaders.
+
+[使用例](/docs/integrations/document_loaders/google_cloud_storage_directory)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/google_cloud_storage_directory).
 
 ```python
 from langchain.document_loaders import GCSDirectoryLoader
 ```
-See a [usage example](/docs/integrations/document_loaders/google_cloud_storage_file).
+
+[使用例](/docs/integrations/document_loaders/google_cloud_storage_file)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/google_cloud_storage_file).
 
 ```python
 from langchain.document_loaders import GCSFileLoader
 ```
 
-### Google Drive
+### Google Drive | Google ドライブ
 
->[Google Drive](https://en.wikipedia.org/wiki/Google_Drive) is a file storage and synchronization service developed by Google.
+> [Google Drive](https://en.wikipedia.org/wiki/Google_Drive)は、Googleによって開発されたファイルストレージおよび同期サービスです。
+>
+> > [Google Drive](https://en.wikipedia.org/wiki/Google_Drive) is a file storage and synchronization service developed by Google.
 
-Currently, only `Google Docs` are supported.
+現在、サポートされているのは `Google Docs` のみです。
 
-We need to install several python packages.
+> Currently, only `Google Docs` are supported.
+
+いくつかのPythonパッケージをインストールする必要があります。
+
+> We need to install several python packages.
 
 ```bash
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/document_loaders/google_drive).
+[使用例と認証手順](/docs/integrations/document_loaders/google_drive)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/document_loaders/google_drive).
 
 ```python
 from langchain.document_loaders import GoogleDriveLoader
 ```
 
-### Speech-to-Text
+### Speech-to-Text | 音声からテキストへ
 
-> [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text) is an audio transcription API powered by Google's speech recognition models.
+> [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text)は、Googleの音声認識モデルを活用した音声書き起こしAPIです。
+>
+> > [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text) is an audio transcription API powered by Google's speech recognition models.
 
-This document loader transcribes audio files and outputs the text results as Documents.
+このドキュメントローダーは、オーディオファイルを書き起こし、そのテキスト結果をドキュメントとして出力します。
 
-First, we need to install the python package.
+> This document loader transcribes audio files and outputs the text results as Documents.
+
+まず、Pythonパッケージをインストールする必要があります。
+
+> First, we need to install the python package.
 
 ```bash
 pip install google-cloud-speech
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/document_loaders/google_speech_to_text).
+[使用例と認証手順](/docs/integrations/document_loaders/google_speech_to_text)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/document_loaders/google_speech_to_text).
 
 ```python
 from langchain.document_loaders import GoogleSpeechToTextLoader
 ```
 
-## Vector Stores
+## Vector Stores | ベクターストア
 
-### Google Vertex AI Vector Search
+### Google Vertex AI Vector Search | Google Vertex AI Vector Search
 
-> [Google Vertex AI Vector Search](https://cloud.google.com/vertex-ai/docs/matching-engine/overview),
-> formerly known as `Vertex AI Matching Engine`, provides the industry's leading high-scale 
-> low latency vector database. These vector databases are commonly
-> referred to as vector similarity-matching or an approximate nearest neighbor (ANN) service.
+> [Google Vertex AI Vector Search](https://cloud.google.com/vertex-ai/docs/matching-engine/overview)（旧称 `Vertex AI Matching Engine`）は、業界をリードする高スケールで低遅延のベクターデータベースを提供します。これらのベクターデータベースは一般に、ベクター類似性マッチングまたは近似最近傍（ANN）サービスとして知られています。
+>
+> > [Google Vertex AI Vector Search](https://cloud.google.com/vertex-ai/docs/matching-engine/overview),
+> > formerly known as `Vertex AI Matching Engine`, provides the industry's leading high-scale
+> > low latency vector database. These vector databases are commonly
+> > referred to as vector similarity-matching or an approximate nearest neighbor (ANN) service.
 
-We need to install several python packages.
+いくつかのPythonパッケージをインストールする必要があります。
+
+> We need to install several python packages.
 
 ```bash
 pip install tensorflow google-cloud-aiplatform tensorflow-hub tensorflow-text
 ```
 
-See a [usage example](/docs/integrations/vectorstores/matchingengine).
+[使用例](/docs/integrations/vectorstores/matchingengine)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/matchingengine).
 
 ```python
 from langchain.vectorstores import MatchingEngine
 ```
 
-### Google ScaNN
+### Google ScaNN | Google ScaNN
 
->[Google ScaNN](https://github.com/google-research/google-research/tree/master/scann)
-> (Scalable Nearest Neighbors) is a python package.
-> 
->`ScaNN` is a method for efficient vector similarity search at scale.
+> [Google ScaNN](https://github.com/google-research/google-research/tree/master/scann)（スケーラブル・ニアレスト・ネイバーズ）はPythonのパッケージです。
+>
+> > [Google ScaNN](https://github.com/google-research/google-research/tree/master/scann)
+> > (Scalable Nearest Neighbors) is a python package.
+>
+> `ScaNN`は、大規模なベクトル類似性検索を効率的に行うための方法です。
+>
+> > `ScaNN` is a method for efficient vector similarity search at scale.
 
->`ScaNN` includes search space pruning and quantization for Maximum Inner
-> Product Search and also supports other distance functions such as
-> Euclidean distance. The implementation is optimized for x86 processors
-> with AVX2 support. See its [Google Research github](https://github.com/google-research/google-research/tree/master/scann)
-> for more details.
+> `ScaNN`は、最大内積検索のための検索空間の剪定と量子化を含んでおり、ユークリッド距離などの他の距離関数にも対応しています。実装はAVX2をサポートするx86プロセッサ向けに最適化されています。詳細については、[Google Research github](https://github.com/google-research/google-research/tree/master/scann)をご覧ください。
+>
+> > `ScaNN` includes search space pruning and quantization for Maximum Inner
+> > Product Search and also supports other distance functions such as
+> > Euclidean distance. The implementation is optimized for x86 processors
+> > with AVX2 support. See its [Google Research github](https://github.com/google-research/google-research/tree/master/scann)
+> > for more details.
 
-We need to install `scann` python package.
+`scann` Pythonパッケージをインストールする必要があります。
+
+> We need to install `scann` python package.
 
 ```bash
 pip install scann
 ```
 
-See a [usage example](/docs/integrations/vectorstores/scann).
+[使用例](/docs/integrations/vectorstores/scann)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/scann).
 
 ```python
 from langchain.vectorstores import ScaNN
 ```
 
-## Retrievers
+## Retrievers | リトリーバー
 
-### Google Drive
+### Google Drive | Google ドライブ
 
-We need to install several python packages.
+いくつかのPythonパッケージをインストールする必要があります。
+
+> We need to install several python packages.
 
 ```bash
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/retrievers/google_drive).
+[使用例と認証手順](/docs/integrations/retrievers/google_drive)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/retrievers/google_drive).
 
 ```python
 from langchain_googledrive.retrievers import GoogleDriveRetriever
 ```
 
+### Vertex AI Search | Vertex AI 検索
 
-### Vertex AI Search
+> [Google Cloud Vertex AI Search](https://cloud.google.com/generative-ai-app-builder/docs/introduction)は、開発者が顧客や従業員向けに生成型AIを活用した検索エンジンを迅速に構築できるようにするサービスです。
+>
+> > [Google Cloud Vertex AI Search](https://cloud.google.com/generative-ai-app-builder/docs/introduction)
+> > allows developers to quickly build generative AI powered search engines for customers and employees.
 
-> [Google Cloud Vertex AI Search](https://cloud.google.com/generative-ai-app-builder/docs/introduction)
-> allows developers to quickly build generative AI powered search engines for customers and employees.
+`google-cloud-discoveryengine` Pythonパッケージをインストールする必要があります。
 
-We need to install the `google-cloud-discoveryengine` python package.
+> We need to install the `google-cloud-discoveryengine` python package.
 
 ```bash
 pip install google-cloud-discoveryengine
 ```
 
-See a [usage example](/docs/integrations/retrievers/google_vertex_ai_search).
+[使用例](/docs/integrations/retrievers/google_vertex_ai_search)をご覧ください。
+
+> See a [usage example](/docs/integrations/retrievers/google_vertex_ai_search).
 
 ```python
 from langchain.retrievers import GoogleVertexAISearchRetriever
 ```
 
-### Document AI Warehouse
-> [Google Cloud Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)
-> allows enterprises to search, store, govern, and manage documents and their AI-extracted 
-> data and metadata in a single platform.
-> 
+### Document AI Warehouse | ドキュメントAIウェアハウス
+
+> [Google Cloud Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)は、企業が文書とそのAIによって抽出されたデータやメタデータを検索、保存、管理、そして統制することができるシングルプラットフォームを提供します。
+>
+> > [Google Cloud Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)
+> > allows enterprises to search, store, govern, and manage documents and their AI-extracted
+> > data and metadata in a single platform.
 
 ```python
 from langchain.retrievers import GoogleDocumentAIWarehouseRetriever
@@ -278,313 +371,410 @@ documents = docai_wh_retriever.get_relevant_documents(
 )
 ```
 
-## Tools
+## Tools | ツール
 
-### Google Cloud Text-to-Speech
+### Google Cloud Text-to-Speech | Google Cloud Text-to-Speech
 
->[Google Cloud Text-to-Speech](https://cloud.google.com/text-to-speech) enables developers to 
-> synthesize natural-sounding speech with 100+ voices, available in multiple languages and variants. 
-> It applies DeepMind’s groundbreaking research in WaveNet and Google’s powerful neural networks 
-> to deliver the highest fidelity possible.
+> [Google Cloud Text-to-Speech](https://cloud.google.com/text-to-speech)は、開発者が100以上の声を使用して、複数の言語やバリエーションで自然に聞こえる音声を合成できるようにするサービスです。これはDeepMindの革新的なWaveNetの研究とGoogleの強力なニューラルネットワークを活用し、可能な限り高い忠実度の音声を提供することを目指しています。
+>
+> > [Google Cloud Text-to-Speech](https://cloud.google.com/text-to-speech) enables developers to
+> > synthesize natural-sounding speech with 100+ voices, available in multiple languages and variants.
+> > It applies DeepMind’s groundbreaking research in WaveNet and Google’s powerful neural networks
+> > to deliver the highest fidelity possible.
 
-We need to install a python package.
+Pythonパッケージをインストールする必要があります。
+
+> We need to install a python package.
 
 ```bash
 pip install google-cloud-text-to-speech
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_cloud_texttospeech).
+[使用例と認証手順](/docs/integrations/tools/google_cloud_texttospeech)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_cloud_texttospeech).
 
 ```python
 from langchain.tools import GoogleCloudTextToSpeechTool
 ```
 
+### Google Drive | Google ドライブ
 
-### Google Drive
+いくつかのPythonパッケージをインストールする必要があります。
 
-We need to install several python packages.
+> We need to install several python packages.
 
 ```bash
 pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_drive).
+[使用例と認証手順](/docs/integrations/tools/google_drive)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_drive).
 
 ```python
 from langchain.utilities.google_drive import GoogleDriveAPIWrapper
 from langchain.tools.google_drive.tool import GoogleDriveSearchTool
 ```
 
-### Google Places
+### Google Places | Google Places
 
-We need to install a python package.
+Pythonパッケージをインストールする必要があります。
+
+> We need to install a python package.
 
 ```bash
 pip install googlemaps
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_places).
+[使用例と認証手順](/docs/integrations/tools/google_places)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_places).
 
 ```python
 from langchain.tools import GooglePlacesTool
 ```
 
-### Google Search
+### Google Search | Google 検索
 
-- Set up a Custom Search Engine, following [these instructions](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
-- Get an API Key and Custom Search Engine ID from the previous step, and set them as environment variables 
-`GOOGLE_API_KEY` and `GOOGLE_CSE_ID` respectively.
+* [これらの指示](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)に従ってカスタム検索エンジンを設定してください。
+  > Set up a Custom Search Engine, following [these instructions](https://stackoverflow.com/questions/37083058/programmatically-searching-google-in-python-using-custom-search)
+* 前のステップでAPIキーとカスタム検索エンジンIDを取得し、それぞれ環境変数`GOOGLE_API_KEY`と`GOOGLE_CSE_ID`として設定してください。
+  > Get an API Key and Custom Search Engine ID from the previous step, and set them as environment variables
+  > `GOOGLE_API_KEY` and `GOOGLE_CSE_ID` respectively.
 
 ```python
 from langchain.utilities import GoogleSearchAPIWrapper
 ```
 
-For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/google_search).
+このラッパーのより詳細な使い方については、[このノートブック](/docs/integrations/tools/google_search)をご覧ください。
 
-We can easily load this wrapper as a Tool (to use with an Agent). We can do this with:
+> For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/google_search).
+
+このラッパーをツールとして（エージェントと一緒に使用するために）簡単にロードすることができます。これを行う方法は以下の通りです：
+
+> We can easily load this wrapper as a Tool (to use with an Agent). We can do this with:
 
 ```python
 from langchain.agents import load_tools
 tools = load_tools(["google-search"])
 ```
 
-### Google Finance
+### Google Finance | Google Finance
 
-We need to install a python package.
+Pythonパッケージをインストールする必要があります。
+
+> We need to install a python package.
 
 ```bash
 pip install google-search-results
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_finance).
+[使用例と認証手順](/docs/integrations/tools/google_finance)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_finance).
 
 ```python
 from langchain.tools.google_finance import GoogleFinanceQueryRun
 from langchain.utilities.google_finance import GoogleFinanceAPIWrapper
 ```
 
-### Google Jobs
+### Google Jobs | Googleの求人
 
-We need to install a python package.
+Pythonパッケージをインストールする必要があります。
+
+> We need to install a python package.
 
 ```bash
 pip install google-search-results
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_jobs).
+[使用例と認証手順](/docs/integrations/tools/google_jobs)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_jobs).
 
 ```python
 from langchain.tools.google_jobs import GoogleJobsQueryRun
 from langchain.utilities.google_finance import GoogleFinanceAPIWrapper
 ```
 
-### Google Lens
+### Google Lens | Google Lens
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_lens).
+[使用例と認証手順](/docs/integrations/tools/google_lens)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_lens).
 
 ```python
 from langchain.tools.google_lens import GoogleLensQueryRun
 from langchain.utilities.google_lens import GoogleLensAPIWrapper
 ```
 
-### Google Scholar
+### Google Scholar | Google Scholar
 
-We need to install a python package.
+Pythonパッケージをインストールする必要があります。
+
+> We need to install a python package.
 
 ```bash
 pip install google-search-results
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_scholar).
+[使用例と認証手順](/docs/integrations/tools/google_scholar)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_scholar).
 
 ```python
 from langchain.tools.google_scholar import GoogleScholarQueryRun
 from langchain.utilities.google_scholar import GoogleScholarAPIWrapper
 ```
 
-### Google Trends
+### Google Trends | Google トレンド
 
-We need to install a python package.
+Pythonパッケージをインストールする必要があります。
+
+> We need to install a python package.
 
 ```bash
 pip install google-search-results
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_trends).
+[使用例と認証手順](/docs/integrations/tools/google_trends)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_trends).
 
 ```python
 from langchain.tools.google_trends import GoogleTrendsQueryRun
 from langchain.utilities.google_trends import GoogleTrendsAPIWrapper
 ```
 
+## Document Transformers | ドキュメントトランスフォーマー
 
-## Document Transformers
+### Google Document AI | Google Document AI
 
-### Google Document AI
+> [Document AI](https://cloud.google.com/document-ai/docs/overview)は、文書の非構造化データを構造化データに変換する`Google Cloud Platform`サービスであり、それによってデータの理解、分析、そして活用が容易になります。
+>
+> > [Document AI](https://cloud.google.com/document-ai/docs/overview) is a `Google Cloud Platform`
+> > service that transforms unstructured data from documents into structured data, making it easier
+> > to understand, analyze, and consume.
 
->[Document AI](https://cloud.google.com/document-ai/docs/overview) is a `Google Cloud Platform` 
-> service that transforms unstructured data from documents into structured data, making it easier 
-> to understand, analyze, and consume.
+Google Cloud Storage（GCS）バケットを設定し、独自のOCRプロセッサを[作成する必要があります](https://cloud.google.com/document-ai/docs/create-processor)。`GCS_OUTPUT_PATH`はGCS上のフォルダへのパス（`gs://`で始まる）である必要があり、プロセッサ名は`projects/PROJECT_NUMBER/locations/LOCATION/processors/PROCESSOR_ID`の形式であるべきです。これはプログラムによって取得することも、Google Cloud Consoleの`Processor details`タブにある`Prediction endpoint`セクションからコピーすることも可能です。
 
-We need to set up a [`GCS` bucket and create your own OCR processor](https://cloud.google.com/document-ai/docs/create-processor)  
-The `GCS_OUTPUT_PATH` should be a path to a folder on GCS (starting with `gs://`) 
-and a processor name should look like `projects/PROJECT_NUMBER/locations/LOCATION/processors/PROCESSOR_ID`.
-We can get it either programmatically or copy from the `Prediction endpoint` section of the `Processor details`
-tab in the Google Cloud Console.
+> We need to set up a [`GCS` bucket and create your own OCR processor](https://cloud.google.com/document-ai/docs/create-processor)\
+> The `GCS_OUTPUT_PATH` should be a path to a folder on GCS (starting with `gs://`)
+> and a processor name should look like `projects/PROJECT_NUMBER/locations/LOCATION/processors/PROCESSOR_ID`.
+> We can get it either programmatically or copy from the `Prediction endpoint` section of the `Processor details`
+> tab in the Google Cloud Console.
 
 ```bash
 pip install google-cloud-documentai
 pip install google-cloud-documentai-toolbox
 ```
 
-See a [usage example](/docs/integrations/document_transformers/docai).
+[使用例](/docs/integrations/document_transformers/docai)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_transformers/docai).
 
 ```python
 from langchain.document_loaders.blob_loaders import Blob
 from langchain.document_loaders.parsers import DocAIParser
 ```
 
-### Google Translate
+### Google Translate | Google 翻訳
 
-> [Google Translate](https://translate.google.com/) is a multilingual neural machine
-> translation service developed by Google to translate text, documents and websites
-> from one language into another.
+> [Google Translate](https://translate.google.com/)は、Googleが開発した多言語ニューラルマシン翻訳サービスで、テキスト、ドキュメント、ウェブサイトをある言語から別の言語に翻訳します。
+>
+> > [Google Translate](https://translate.google.com/) is a multilingual neural machine
+> > translation service developed by Google to translate text, documents and websites
+> > from one language into another.
 
-The `GoogleTranslateTransformer` allows you to translate text and HTML with the [Google Cloud Translation API](https://cloud.google.com/translate).
+`GoogleTranslateTransformer` は、[Google Cloud Translation API](https://cloud.google.com/translate)を使用してテキストやHTMLを翻訳することができます。
 
-To use it, you should have the `google-cloud-translate` python package installed, and a Google Cloud project with the [Translation API enabled](https://cloud.google.com/translate/docs/setup). This transformer uses the [Advanced edition (v3)](https://cloud.google.com/translate/docs/intro-to-v3).
+> The `GoogleTranslateTransformer` allows you to translate text and HTML with the [Google Cloud Translation API](https://cloud.google.com/translate).
 
-First, we need to install the python package.
+これを使用するには、`google-cloud-translate` Pythonパッケージをインストールしておく必要があり、また[Translation APIが有効になっている](https://cloud.google.com/translate/docs/setup)Google Cloudプロジェクトが必要です。このトランスフォーマーは[Advanced edition (v3)](https://cloud.google.com/translate/docs/intro-to-v3)を使用します。
+
+> To use it, you should have the `google-cloud-translate` python package installed, and a Google Cloud project with the [Translation API enabled](https://cloud.google.com/translate/docs/setup). This transformer uses the [Advanced edition (v3)](https://cloud.google.com/translate/docs/intro-to-v3).
+
+まず、Pythonパッケージをインストールする必要があります。
+
+> First, we need to install the python package.
 
 ```bash
 pip install google-cloud-translate
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/document_transformers/google_translate).
+[使用例と認証手順](/docs/integrations/document_transformers/google_translate)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/document_transformers/google_translate).
 
 ```python
 from langchain.document_transformers import GoogleTranslateTransformer
 ```
 
-## Toolkits
+## Toolkits | ツールキット
 
-### GMail
+### GMail | GMail
 
-> [Gmail](https://en.wikipedia.org/wiki/Gmail) is a free email service provided by Google.
-This toolkit works with emails through the `Gmail API`.
+> [Gmail](https://en.wikipedia.org/wiki/Gmail)はGoogleが提供する無料のメールサービスです。このツールキットは`Gmail API`を通じてメールと連携して動作します。
+>
+> > [Gmail](https://en.wikipedia.org/wiki/Gmail) is a free email service provided by Google.
+> > This toolkit works with emails through the `Gmail API`.
 
-We need to install several python packages.
+いくつかのPythonパッケージをインストールする必要があります。
+
+> We need to install several python packages.
 
 ```bash
 pip install google-api-python-client google-auth-oauthlib google-auth-httplib2
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/toolkits/gmail).
+[使用例と認証手順](/docs/integrations/toolkits/gmail)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/toolkits/gmail).
 
 ```python
 from langchain.agents.agent_toolkits import GmailToolkit
 ```
 
+## Chat Loaders | チャットローダー
 
-## Chat Loaders
+### GMail | GMail
 
-### GMail
+> [Gmail](https://en.wikipedia.org/wiki/Gmail)はGoogleが提供する無料のメールサービスです。このローダーは`Gmail API`を通じてメールと連携して動作します。
+>
+> > [Gmail](https://en.wikipedia.org/wiki/Gmail) is a free email service provided by Google.
+> > This loader works with emails through the `Gmail API`.
 
-> [Gmail](https://en.wikipedia.org/wiki/Gmail) is a free email service provided by Google.
-This loader works with emails through the `Gmail API`.
+いくつかのPythonパッケージをインストールする必要があります。
 
-We need to install several python packages.
+> We need to install several python packages.
 
 ```bash
 pip install google-api-python-client google-auth-oauthlib google-auth-httplib2
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/chat_loaders/gmail).
+[使用例と認証手順](/docs/integrations/chat_loaders/gmail)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/chat_loaders/gmail).
 
 ```python
 from langchain.chat_loaders.gmail import GMailLoader
 ```
 
-## 3rd Party Integrations
+## 3rd Party Integrations | サードパーティ統合
 
-### SearchApi
+### SearchApi | SearchApi
 
->[SearchApi](https://www.searchapi.io/) provides a 3rd-party API to access Google search results, YouTube search & transcripts, and other Google-related engines.
+> [SearchApi](https://www.searchapi.io/)は、Googleの検索結果、YouTubeの検索とトランスクリプト、その他のGoogle関連のエンジンにアクセスするためのサードパーティAPIを提供しています。
+>
+> > [SearchApi](https://www.searchapi.io/) provides a 3rd-party API to access Google search results, YouTube search & transcripts, and other Google-related engines.
 
-See [usage examples and authorization instructions](/docs/integrations/tools/searchapi).
+[使用例と認証手順](/docs/integrations/tools/searchapi)をご覧ください。
+
+> See [usage examples and authorization instructions](/docs/integrations/tools/searchapi).
 
 ```python
 from langchain.utilities import SearchApiAPIWrapper
 ```
 
-### SerpAPI
+### SerpAPI | SerpAPI
 
->[SerpApi](https://serpapi.com/) provides a 3rd-party API to access Google search results.
+> [SerpApi](https://serpapi.com/)は、Googleの検索結果にアクセスするためのサードパーティAPIを提供しています。
+>
+> > [SerpApi](https://serpapi.com/) provides a 3rd-party API to access Google search results.
 
-See a [usage example and authorization instructions](/docs/integrations/tools/serpapi).
+[使用例と認証手順](/docs/integrations/tools/serpapi)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/serpapi).
 
 ```python
 from langchain.utilities import SerpAPIWrapper
 ```
 
-### Serper.dev
+### Serper.dev | Serper.dev
 
-See a [usage example and authorization instructions](/docs/integrations/tools/google_serper).
+[使用例と認証手順](/docs/integrations/tools/google_serper)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/tools/google_serper).
 
 ```python
 from langchain.utilities import GoogleSerperAPIWrapper
 ```
 
-### YouTube
+### YouTube | YouTube
 
->[YouTube Search](https://github.com/joetats/youtube_search) package searches `YouTube` videos avoiding using their heavily rate-limited API.
-> 
->It uses the form on the YouTube homepage and scrapes the resulting page.
+> [YouTube Search](https://github.com/joetats/youtube_search) パッケージは、使用制限が厳しい `YouTube` のAPIを避けて `YouTube` 動画を検索します。
+>
+> > [YouTube Search](https://github.com/joetats/youtube_search) package searches `YouTube` videos avoiding using their heavily rate-limited API.
+>
+> YouTubeのホームページにあるフォームを利用して、スクレイピングにより得られた結果のページを取得します。
+>
+> > It uses the form on the YouTube homepage and scrapes the resulting page.
 
-We need to install a python package.
+Pythonパッケージをインストールする必要があります。
+
+> We need to install a python package.
 
 ```bash
 pip install youtube_search
 ```
 
-See a [usage example](/docs/integrations/tools/youtube).
+[使用例](/docs/integrations/tools/youtube)をご覧ください。
+
+> See a [usage example](/docs/integrations/tools/youtube).
 
 ```python
 from langchain.tools import YouTubeSearchTool
 ```
 
-### YouTube audio
+### YouTube audio | YouTubeの音声
 
->[YouTube](https://www.youtube.com/) is an online video sharing and social media platform created by `Google`.
+> [YouTube](https://www.youtube.com/)は、`Google`によって作られたオンライン動画共有およびソーシャルメディアプラットフォームです。
+>
+> > [YouTube](https://www.youtube.com/) is an online video sharing and social media platform created by `Google`.
 
-Use `YoutubeAudioLoader` to fetch / download the audio files.
+`YoutubeAudioLoader`を使用して、オーディオファイルを取得／ダウンロードしてください。
 
-Then, use `OpenAIWhisperParser` to transcribe them to text.
+> Use `YoutubeAudioLoader` to fetch / download the audio files.
 
-We need to install several python packages.
+その後、`OpenAIWhisperParser`を使用して、それらをテキストに転写します。
+
+> Then, use `OpenAIWhisperParser` to transcribe them to text.
+
+いくつかのPythonパッケージをインストールする必要があります。
+
+> We need to install several python packages.
 
 ```bash
 pip install yt_dlp pydub librosa
 ```
 
-See a [usage example and authorization instructions](/docs/integrations/document_loaders/youtube_audio).
+[使用例と認証手順](/docs/integrations/document_loaders/youtube_audio)をご覧ください。
+
+> See a [usage example and authorization instructions](/docs/integrations/document_loaders/youtube_audio).
 
 ```python
 from langchain.document_loaders.blob_loaders.youtube_audio import YoutubeAudioLoader
 from langchain.document_loaders.parsers import OpenAIWhisperParser, OpenAIWhisperParserLocal
 ```
 
-### YouTube transcripts
+### YouTube transcripts | YouTubeのトランスクリプト
 
->[YouTube](https://www.youtube.com/) is an online video sharing and social media platform created by `Google`.
+> [YouTube](https://www.youtube.com/)は、`Google`によって作られたオンライン動画共有およびソーシャルメディアプラットフォームです。
+>
+> > [YouTube](https://www.youtube.com/) is an online video sharing and social media platform created by `Google`.
 
-We need to install `youtube-transcript-api` python package.
+`youtube-transcript-api` Pythonパッケージをインストールする必要があります。
+
+> We need to install `youtube-transcript-api` python package.
 
 ```bash
 pip install youtube-transcript-api
 ```
 
-See a [usage example](/docs/integrations/document_loaders/youtube_transcript).
+[使用例](/docs/integrations/document_loaders/youtube_transcript)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/youtube_transcript).
 
 ```python
 from langchain.document_loaders import YoutubeLoader

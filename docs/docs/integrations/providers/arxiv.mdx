@@ -1,35 +1,44 @@
-# Arxiv
+# Arxiv | Arxiv
 
->[arXiv](https://arxiv.org/) is an open-access archive for 2 million scholarly articles in the fields of physics, 
-> mathematics, computer science, quantitative biology, quantitative finance, statistics, electrical engineering and 
-> systems science, and economics.
+> [arXiv](https://arxiv.org/)は、物理学、数学、コンピュータサイエンス、定量生物学、定量金融、統計学、電気工学、システム科学、経済学の分野で200万件の学術記事を公開しているオープンアクセスアーカイブです。
+>
+> > [arXiv](https://arxiv.org/) is an open-access archive for 2 million scholarly articles in the fields of physics,
+> > mathematics, computer science, quantitative biology, quantitative finance, statistics, electrical engineering and
+> > systems science, and economics.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+まず、`arxiv` Pythonパッケージをインストールする必要があります。
 
-First, you need to install `arxiv` python package.
+> First, you need to install `arxiv` python package.
 
 ```bash
 pip install arxiv
 ```
 
-Second, you need to install `PyMuPDF` python package which transforms PDF files downloaded from the `arxiv.org` site into the text format.
+次に、`arxiv.org`サイトからダウンロードしたPDFファイルをテキスト形式に変換するPythonパッケージ`PyMuPDF`をインストールする必要があります。
+
+> Second, you need to install `PyMuPDF` python package which transforms PDF files downloaded from the `arxiv.org` site into the text format.
 
 ```bash
 pip install pymupdf
 ```
 
-## Document Loader
+## Document Loader | ドキュメントローダー
 
-See a [usage example](/docs/integrations/document_loaders/arxiv).
+[使用例](/docs/integrations/document_loaders/arxiv)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/arxiv).
 
 ```python
 from langchain.document_loaders import ArxivLoader
 ```
 
-## Retriever
+## Retriever | リトリーバー
 
-See a [usage example](/docs/integrations/retrievers/arxiv).
+[使用例](/docs/integrations/retrievers/arxiv)をご覧ください。
+
+> See a [usage example](/docs/integrations/retrievers/arxiv).
 
 ```python
 from langchain.retrievers import ArxivRetriever

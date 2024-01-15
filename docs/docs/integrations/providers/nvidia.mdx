@@ -1,22 +1,31 @@
-# NVIDIA
+# NVIDIA | NVIDIA
 
-> [NVIDIA AI Foundation Endpoints](https://www.nvidia.com/en-us/ai-data-science/foundation-models/) give users easy access to NVIDIA hosted API endpoints for NVIDIA AI Foundation Models like Mixtral 8x7B, Llama 2, Stable Diffusion, etc. These models, hosted on the [NVIDIA NGC catalog](https://catalog.ngc.nvidia.com/ai-foundation-models), are optimized, tested, and hosted on the NVIDIA AI platform, making them fast and easy to evaluate, further customize, and seamlessly run at peak performance on any accelerated stack.
-> 
-> With [NVIDIA AI Foundation Endpoints](https://www.nvidia.com/en-us/ai-data-science/foundation-models/), you can get quick results from a fully accelerated stack running on [NVIDIA DGX Cloud](https://www.nvidia.com/en-us/data-center/dgx-cloud/). Once customized, these models can be deployed anywhere with enterprise-grade security, stability, and support using [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/).
-> 
-> These models can be easily accessed via the [`langchain-nvidia-ai-endpoints`](https://pypi.org/project/langchain-nvidia-ai-endpoints/) package, as shown below.
+> [NVIDIA AI Foundation Endpoints](https://www.nvidia.com/en-us/ai-data-science/foundation-models/)は、Mixtral 8x7B、Llama 2、Stable DiffusionなどのNVIDIA AI Foundation Modelsに対して、NVIDIAがホストするAPIエンドポイントへの簡単なアクセスをユーザーに提供します。これらのモデルは、[NVIDIA NGCカタログ](https://catalog.ngc.nvidia.com/ai-foundation-models)にホストされており、NVIDIA AIプラットフォーム上で最適化され、テストされ、そしてホストされているため、高速で簡単に評価し、さらにカスタマイズし、任意のアクセラレーテッドスタックで最高のパフォーマンスを発揮しながらシームレスに実行することができます。
+>
+> > [NVIDIA AI Foundation Endpoints](https://www.nvidia.com/en-us/ai-data-science/foundation-models/) give users easy access to NVIDIA hosted API endpoints for NVIDIA AI Foundation Models like Mixtral 8x7B, Llama 2, Stable Diffusion, etc. These models, hosted on the [NVIDIA NGC catalog](https://catalog.ngc.nvidia.com/ai-foundation-models), are optimized, tested, and hosted on the NVIDIA AI platform, making them fast and easy to evaluate, further customize, and seamlessly run at peak performance on any accelerated stack.
+>
+> [NVIDIA AI Foundation Endpoints](https://www.nvidia.com/en-us/ai-data-science/foundation-models/)を使用すると、[NVIDIA DGX Cloud](https://www.nvidia.com/en-us/data-center/dgx-cloud/)上で完全に加速されたスタックを実行しながら、迅速な結果を得ることができます。これらのモデルをカスタマイズした後は、[NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/)を使用して、エンタープライズグレードのセキュリティ、安定性、およびサポートを備えて、どこにでもデプロイすることが可能です。
+>
+> > With [NVIDIA AI Foundation Endpoints](https://www.nvidia.com/en-us/ai-data-science/foundation-models/), you can get quick results from a fully accelerated stack running on [NVIDIA DGX Cloud](https://www.nvidia.com/en-us/data-center/dgx-cloud/). Once customized, these models can be deployed anywhere with enterprise-grade security, stability, and support using [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/).
+>
+> 以下に示すように、これらのモデルには[`langchain-nvidia-ai-endpoints`](https://pypi.org/project/langchain-nvidia-ai-endpoints/)パッケージを通じて簡単にアクセスできます。
+>
+> > These models can be easily accessed via the [`langchain-nvidia-ai-endpoints`](https://pypi.org/project/langchain-nvidia-ai-endpoints/) package, as shown below.
 
-## Installation
+## Installation | インストール
 
 ```bash
 pip install -U langchain-nvidia-ai-endpoints
 ```
 
-## Setup and Authentication
+## Setup and Authentication | セットアップと認証
 
-- Create a free [NVIDIA NGC](https://catalog.ngc.nvidia.com/) account.
-- Navigate to `Catalog > AI Foundation Models > (Model with API endpoint)`.
-- Select `API` and generate the key `NVIDIA_API_KEY`.
+* [NVIDIA NGC](https://catalog.ngc.nvidia.com/)のアカウントを無料で作成してください。
+  > Create a free [NVIDIA NGC](https://catalog.ngc.nvidia.com/) account.
+* `カタログ > AI Foundation Models > (APIエンドポイントを持つモデル)` に移動してください。
+  > Navigate to `Catalog > AI Foundation Models > (Model with API endpoint)`.
+* `API`を選択し、`NVIDIA_API_KEY`というキーを生成してください。
+  > Select `API` and generate the key `NVIDIA_API_KEY`.
 
 ```bash
 export NVIDIA_API_KEY=nvapi-XXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -30,12 +39,21 @@ result = llm.invoke("Write a ballad about LangChain.")
 print(result.content)
 ```
 
-## Using NVIDIA AI Foundation Endpoints
+## Using NVIDIA AI Foundation Endpoints | NVIDIA AI Foundation エンドポイントの使用
 
-A selection of NVIDIA AI Foundation models are supported directly in LangChain with familiar APIs.
+NVIDIA AI Foundationのモデルの一部は、馴染みのあるAPIを通じてLangChainで直接サポートされています。
 
-The active models which are supported can be found [in NGC](https://catalog.ngc.nvidia.com/ai-foundation-models).
+> A selection of NVIDIA AI Foundation models are supported directly in LangChain with familiar APIs.
 
-**The following may be useful examples to help you get started:**
-- **[`ChatNVIDIA` Model](/docs/integrations/chat/nvidia_ai_endpoints).**
-- **[`NVIDIAEmbeddings` Model for RAG Workflows](/docs/integrations/text_embedding/nvidia_ai_endpoints).**
+サポートされているアクティブモデルは、[NGC](https://catalog.ngc.nvidia.com/ai-foundation-models)で見つけることができます。
+
+> The active models which are supported can be found [in NGC](https://catalog.ngc.nvidia.com/ai-foundation-models).
+
+以下は、始めるのに役立つ有用な例です：
+
+> **The following may be useful examples to help you get started:**
+
+* **[`ChatNVIDIA` モデル](/docs/integrations/chat/nvidia_ai_endpoints)**。
+  > **[`ChatNVIDIA` Model](/docs/integrations/chat/nvidia_ai_endpoints).**
+* **[RAGワークフロー用の`NVIDIAEmbeddings`モデル](/docs/integrations/text_embedding/nvidia_ai_endpoints)**
+  > **[`NVIDIAEmbeddings` Model for RAG Workflows](/docs/integrations/text_embedding/nvidia_ai_endpoints).**

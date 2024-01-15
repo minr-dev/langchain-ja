@@ -1,20 +1,31 @@
-# Custom example selector
+# Custom example selector | カスタムサンプルセレクター
 
-In this tutorial, we'll create a custom example selector that selects examples randomly from a given list of examples.
+このチュートリアルでは、与えられた例のリストからランダムに例を選択するカスタムの例選択器を作成します。
 
-An `ExampleSelector` must implement two methods:
+> In this tutorial, we'll create a custom example selector that selects examples randomly from a given list of examples.
 
-1. An `add_example` method which takes in an example and adds it into the ExampleSelector
-2. A `select_examples` method which takes in input variables (which are meant to be user input) and returns a list of examples to use in the few-shot prompt.
+`ExampleSelector`は、二つのメソッドを実装しなければなりません：
 
-Let's implement a custom `ExampleSelector` that just selects two examples at random.
+> An `ExampleSelector` must implement two methods:
 
-**Note:**
-Take a look at the current set of example selector implementations supported in LangChain [here](/docs/modules/model_io/prompts/example_selectors/).
+1. `add_example` メソッドは、例を受け取って ExampleSelector に追加します
+   > An `add_example` method which takes in an example and adds it into the ExampleSelector
+2. `select_examples`メソッドは、ユーザー入力を意図した入力変数を受け取り、数ショットプロンプトで使用する例のリストを返します。
+   > A `select_examples` method which takes in input variables (which are meant to be user input) and returns a list of examples to use in the few-shot prompt.
+
+ランダムに2つの例を選ぶだけのカスタム`ExampleSelector`を実装しましょう。
+
+> Let's implement a custom `ExampleSelector` that just selects two examples at random.
+
+**注意:**
+LangChainでサポートされている現在の例示セレクターの実装を[こちら](/docs/modules/model_io/prompts/example_selectors/)でご覧ください。
+
+> **Note:**
+> Take a look at the current set of example selector implementations supported in LangChain [here](/docs/modules/model_io/prompts/example_selectors/).
 
 <!-- TODO(shreya): Add the correct link. -->
 
-## Implement custom example selector
+## Implement custom example selector | カスタム例のセレクタを実装する
 
 ```python
 from langchain.prompts.example_selector.base import BaseExampleSelector
@@ -37,8 +48,7 @@ class CustomExampleSelector(BaseExampleSelector):
 
 ```
 
-
-## Use custom example selector
+## Use custom example selector | カスタム例のセレクタを使用する
 
 ```python
 

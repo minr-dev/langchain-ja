@@ -1,25 +1,30 @@
-# Moderation chain
+# Moderation chain | モデレーションチェーン
 
-This notebook walks through examples of how to use a moderation chain, and several common ways for doing so. 
-Moderation chains are useful for detecting text that could be hateful, violent, etc. This can be useful to apply on both user input, but also on the output of a Language Model. 
-Some API providers, like OpenAI, [specifically prohibit](https://beta.openai.com/docs/usage-policies/use-case-policy) you, or your end users, from generating some 
-types of harmful content. To comply with this (and to just generally prevent your application from being harmful) 
-you may often want to append a moderation chain to any LLMChains, in order to make sure any output 
-the LLM generates is not harmful.
+このノートブックでは、モデレーションチェーンの使用例と、それを行ういくつかの一般的な方法を紹介します。モデレーションチェーンは、憎悪的、暴力的などのテキストを検出するのに役立ちます。これは、ユーザー入力だけでなく、言語モデルの出力にも適用すると便利です。OpenAIのような一部のAPIプロバイダーは、あなたやエンドユーザーが一部の有害なコンテンツを生成することを[特に禁止しています](https://beta.openai.com/docs/usage-policies/use-case-policy)。これに準拠するため（そして一般的にあなたのアプリケーションが有害でないようにするために）、LLMChainsにモデレーションチェーンを追加することがよくあります。これにより、LLMが生成するあらゆる出力が有害でないことを確認できます。
 
-If the content passed into the moderation chain is harmful, there is not one best way to handle it, 
-it probably depends on your application. Sometimes you may want to throw an error in the Chain 
-(and have your application handle that). Other times, you may want to return something to 
-the user explaining that the text was harmful. There could be other ways to handle it.
-We will cover all these ways in this walkthrough.
+> This notebook walks through examples of how to use a moderation chain, and several common ways for doing so.
+> Moderation chains are useful for detecting text that could be hateful, violent, etc. This can be useful to apply on both user input, but also on the output of a Language Model.
+> Some API providers, like OpenAI, [specifically prohibit](https://beta.openai.com/docs/usage-policies/use-case-policy) you, or your end users, from generating some
+> types of harmful content. To comply with this (and to just generally prevent your application from being harmful)
+> you may often want to append a moderation chain to any LLMChains, in order to make sure any output
+> the LLM generates is not harmful.
 
-We'll show:
+モデレーションチェーンに渡されたコンテンツが有害な場合、それを処理する最善の方法は一つに限られません。処理方法はお使いのアプリケーションによって異なるでしょう。時には、チェーンでエラーを発生させて（そしてそのエラーをアプリケーションで処理することもあります）。他の時には、テキストが有害であったことをユーザーに説明する何らかのメッセージを返すことを望むかもしれません。他にも処理方法はあるかもしれません。このウォークスルーでは、これらの方法をすべてカバーします。
 
-1. How to run any piece of text through a moderation chain.
-2. How to append a Moderation chain to an LLMChain.
+> If the content passed into the moderation chain is harmful, there is not one best way to handle it,
+> it probably depends on your application. Sometimes you may want to throw an error in the Chain
+> (and have your application handle that). Other times, you may want to return something to
+> the user explaining that the text was harmful. There could be other ways to handle it.
+> We will cover all these ways in this walkthrough.
 
+以下をご紹介します：
 
+> We'll show:
 
+1. 任意のテキストをモデレーションチェーンを通じて実行する方法。
+   > How to run any piece of text through a moderation chain.
+2. LLMChainにモデレーションチェーンを追加する方法。
+   > How to append a Moderation chain to an LLMChain.
 
 ```python
 from langchain.llms import OpenAI
@@ -27,11 +32,12 @@ from langchain.chains import OpenAIModerationChain, SequentialChain, LLMChain, S
 from langchain.prompts import PromptTemplate
 ```
 
-## How to use the moderation chain
+## How to use the moderation chain | モデレーションチェーンの使用方法
 
-Here's an example of using the moderation chain with default settings (will return a string 
-explaining stuff was flagged).
+こちらは、デフォルト設定を使用したモデレーションチェーンの使用例です（フラグが立てられた内容について説明する文字列が返されます）。
 
+> Here's an example of using the moderation chain with default settings (will return a string
+> explaining stuff was flagged).
 
 ```python
 moderation_chain = OpenAIModerationChain()
@@ -47,7 +53,6 @@ moderation_chain.run("This is okay")
 
 </CodeOutputBlock>
 
-
 ```python
 moderation_chain.run("I will kill you")
 ```
@@ -60,8 +65,9 @@ moderation_chain.run("I will kill you")
 
 </CodeOutputBlock>
 
-Here's an example of using the moderation chain to throw an error.
+こちらは、モデレーションチェーンを使用してエラーを発生させる例です。
 
+> Here's an example of using the moderation chain to throw an error.
 
 ```python
 moderation_chain_error = OpenAIModerationChain(error=True)
@@ -76,7 +82,6 @@ moderation_chain_error.run("This is okay")
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 moderation_chain_error.run("I will kill you")
@@ -131,11 +136,12 @@ moderation_chain_error.run("I will kill you")
 
 </CodeOutputBlock>
 
-## How to create a custom Moderation chain
+## How to create a custom Moderation chain | カスタムモデレーションチェーンの作成方法
 
-Here's an example of creating a custom moderation chain with a custom error message. 
-It requires some knowledge of OpenAI's moderation endpoint results. See [docs here](https://beta.openai.com/docs/api-reference/moderations).
+カスタムエラーメッセージを含むカスタムモデレーションチェーンの作成例をこちらでご紹介します。これにはOpenAIのモデレーションエンドポイントの結果に関するある程度の知識が必要です。詳細は[こちらのドキュメント](https://beta.openai.com/docs/api-reference/moderations)をご覧ください。
 
+> Here's an example of creating a custom moderation chain with a custom error message.
+> It requires some knowledge of OpenAI's moderation endpoint results. See [docs here](https://beta.openai.com/docs/api-reference/moderations).
 
 ```python
 class CustomModeration(OpenAIModerationChain):
@@ -158,7 +164,6 @@ custom_moderation.run("This is okay")
 
 </CodeOutputBlock>
 
-
 ```python
 custom_moderation.run("I will kill you")
 ```
@@ -171,13 +176,16 @@ custom_moderation.run("I will kill you")
 
 </CodeOutputBlock>
 
-## How to append a Moderation chain to an LLMChain
+## How to append a Moderation chain to an LLMChain | LLMChainにモデレーションチェーンを追加する方法
 
-To easily combine a moderation chain with an LLMChain, you can use the `SequentialChain` abstraction.
+LLMChainとモデレーションチェーンを簡単に組み合わせるためには、`SequentialChain` 抽象化を使用することができます。
 
-Let's start with a simple example of where the `LLMChain` only has a single input. For this purpose, 
-we will prompt the model, so it says something harmful.
+> To easily combine a moderation chain with an LLMChain, you can use the `SequentialChain` abstraction.
 
+まずは、`LLMChain`が単一の入力のみを持つ簡単な例から始めましょう。この目的のために、モデルにプロンプトを送り、何か有害なことを言わせるようにします。
+
+> Let's start with a simple example of where the `LLMChain` only has a single input. For this purpose,
+> we will prompt the model, so it says something harmful.
 
 ```python
 prompt = PromptTemplate(template="{text}", input_variables=["text"])
@@ -204,7 +212,6 @@ llm_chain.run(text)
 
 </CodeOutputBlock>
 
-
 ```python
 chain = SimpleSequentialChain(chains=[llm_chain, moderation_chain])
 
@@ -219,8 +226,9 @@ chain.run(text)
 
 </CodeOutputBlock>
 
-Now let's walk through an example of using it with an LLMChain which has multiple inputs (a bit more tricky because we can't use the SimpleSequentialChain)
+それでは、複数の入力を持つLLMChainを使用した例を見ていきましょう（SimpleSequentialChainを使えないため、少し複雑です）
 
+> Now let's walk through an example of using it with an LLMChain which has multiple inputs (a bit more tricky because we can't use the SimpleSequentialChain)
 
 ```python
 prompt = PromptTemplate(template="{setup}{new_input}Person2:", input_variables=["setup", "new_input"])
@@ -247,7 +255,6 @@ llm_chain(inputs, return_only_outputs=True)
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 # Setting the input/output keys so it lines up

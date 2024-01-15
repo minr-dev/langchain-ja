@@ -1,36 +1,45 @@
-# Doctran
+# Doctran | Doctran
 
->[Doctran](https://github.com/psychic-api/doctran) is a python package. It uses LLMs and open-source 
-> NLP libraries to transform raw text into clean, structured, information-dense documents 
-> that are optimized for vector space retrieval. You can think of `Doctran` as a black box where 
-> messy strings go in and nice, clean, labelled strings come out.
+> [Doctran](https://github.com/psychic-api/doctran)はPythonパッケージです。LLMsとオープンソースのNLPライブラリを使用して、生のテキストをクリーンで構造化された、情報密度の高い文書に変換し、ベクトル空間検索に最適化されたものにします。`Doctran`は、乱雑な文字列が入り、整理され、クリーンでラベル付けされた文字列が出てくるブラックボックスと考えることができます。
+>
+> > [Doctran](https://github.com/psychic-api/doctran) is a python package. It uses LLMs and open-source
+> > NLP libraries to transform raw text into clean, structured, information-dense documents
+> > that are optimized for vector space retrieval. You can think of `Doctran` as a black box where
+> > messy strings go in and nice, clean, labelled strings come out.
 
-
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install doctran
 ```
 
-## Document Transformers
+## Document Transformers | ドキュメントトランスフォーマー
 
-### Document Interrogator
+### Document Interrogator | ドキュメントインターロゲーター
 
-See a [usage example for DoctranQATransformer](/docs/integrations/document_transformers/doctran_interrogate_document).
+[DoctranQATransformerの使用例](/docs/integrations/document_transformers/doctran_interrogate_document)をご覧ください。
+
+> See a [usage example for DoctranQATransformer](/docs/integrations/document_transformers/doctran_interrogate_document).
 
 ```python
 from langchain.document_loaders import DoctranQATransformer
 ```
-### Property Extractor
 
-See a [usage example for DoctranPropertyExtractor](/docs/integrations/document_transformers/doctran_extract_properties).
+### Property Extractor | プロパティエクストラクター
+
+[DoctranPropertyExtractorの使用例](/docs/integrations/document_transformers/doctran_extract_properties)をご覧ください。
+
+> See a [usage example for DoctranPropertyExtractor](/docs/integrations/document_transformers/doctran_extract_properties).
 
 ```python
 from langchain.document_loaders import DoctranPropertyExtractor
 ```
-### Document Translator
 
-See a [usage example for DoctranTextTranslator](/docs/integrations/document_transformers/doctran_translate_document).
+### Document Translator | ドキュメント翻訳器
+
+[DoctranTextTranslatorの使用例](/docs/integrations/document_transformers/doctran_translate_document)をご覧ください。
+
+> See a [usage example for DoctranTextTranslator](/docs/integrations/document_transformers/doctran_translate_document).
 
 ```python
 from langchain.document_loaders import DoctranTextTranslator

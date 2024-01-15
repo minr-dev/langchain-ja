@@ -1,9 +1,13 @@
-# Replicating MRKL
+# Replicating MRKL | MRKLの複製
 
-This walkthrough demonstrates how to replicate the [MRKL](https://arxiv.org/pdf/2205.00445.pdf) system using agents.
+このウォークスルーは、エージェントを使用して[MRKL](https://arxiv.org/pdf/2205.00445.pdf)システムを複製する方法を示しています。
 
-This uses the example Chinook database.
-To set it up, follow the instructions on https://database.guide/2-sample-databases-sqlite/ and place the `.db` file in a "notebooks" folder at the root of this repository.
+> This walkthrough demonstrates how to replicate the [MRKL](https://arxiv.org/pdf/2205.00445.pdf) system using agents.
+
+これは例としてChinookデータベースを使用します。セットアップするには、https://database.guide/2-sample-databases-sqlite/ の指示に従って、`.db`ファイルをこのリポジトリのルートにある「notebooks」フォルダに配置してください。
+
+> This uses the example Chinook database.
+> To set it up, follow the instructions on https://database.guide/2-sample-databases-sqlite/ and place the `.db` file in a "notebooks" folder at the root of this repository.
 
 ```python
 from langchain.chains import LLMMathChain
@@ -14,7 +18,6 @@ from langchain_experimental.sql import SQLDatabaseChain
 from langchain.agents import initialize_agent, Tool
 from langchain.agents import AgentType
 ```
-
 
 ```python
 llm = OpenAI(temperature=0)
@@ -41,11 +44,9 @@ tools = [
 ]
 ```
 
-
 ```python
 mrkl = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
 ```
-
 
 ```python
 mrkl.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to the 0.43 power?")
@@ -53,7 +54,7 @@ mrkl.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to th
 
 <CodeOutputBlock lang="python">
 
-```
+````
     > Entering new AgentExecutor chain...
      I need to find out who Leo DiCaprio's girlfriend is and then calculate her age raised to the 0.43 power.
     Action: Search
@@ -81,10 +82,9 @@ mrkl.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to th
 
 
     "Camila Morrone is Leo DiCaprio's girlfriend and her current age raised to the 0.43 power is 3.7030049853137306."
-```
+````
 
 </CodeOutputBlock>
-
 
 ```python
 mrkl.run("What is the full name of the artist who recently released an album called 'The Storm Before the Calm' and are they in the FooBar database? If so, what albums of theirs are in the FooBar database?")
@@ -127,7 +127,7 @@ mrkl.run("What is the full name of the artist who recently released an album cal
 
 </CodeOutputBlock>
 
-## Using a Chat Model
+## Using a Chat Model | チャットモデルの使用
 
 ```python
 from langchain.chat_models import ChatOpenAI
@@ -157,11 +157,9 @@ tools = [
 ]
 ```
 
-
 ```python
 mrkl = initialize_agent(tools, llm, agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
 ```
-
 
 ```python
 mrkl.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to the 0.43 power?")
@@ -169,7 +167,7 @@ mrkl.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to th
 
 <CodeOutputBlock lang="python">
 
-```
+````
     > Entering new AgentExecutor chain...
     Thought: The first question requires a search, while the second question requires a calculator.
     Action:
@@ -209,10 +207,9 @@ mrkl.run("Who is Leo DiCaprio's girlfriend? What is her current age raised to th
 
 
     "Gigi Hadid is Leo DiCaprio's girlfriend and her current age raised to the 0.43 power is approximately 4.13."
-```
+````
 
 </CodeOutputBlock>
-
 
 ```python
 mrkl.run("What is the full name of the artist who recently released an album called 'The Storm Before the Calm' and are they in the FooBar database? If so, what albums of theirs are in the FooBar database?")
@@ -220,7 +217,7 @@ mrkl.run("What is the full name of the artist who recently released an album cal
 
 <CodeOutputBlock lang="python">
 
-```
+````
     > Entering new AgentExecutor chain...
     Question: What is the full name of the artist who recently released an album called 'The Storm Before the Calm' and are they in the FooBar database? If so, what albums of theirs are in the FooBar database?
     Thought: I should use the Search tool to find the answer to the first part of the question and then use the FooBar DB tool to find the answer to the second part.
@@ -264,6 +261,6 @@ mrkl.run("What is the full name of the artist who recently released an album cal
 
 
     'Alanis Morissette is in the FooBar database and has the album Jagged Little Pill in it.'
-```
+````
 
 </CodeOutputBlock>

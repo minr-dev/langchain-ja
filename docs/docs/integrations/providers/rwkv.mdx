@@ -1,20 +1,30 @@
-# RWKV-4
+# RWKV-4 | RWKV-4
 
-This page covers how to use the `RWKV-4` wrapper within LangChain.
-It is broken into two parts: installation and setup, and then usage with an example.
+このページでは、LangChain内での`RWKV-4`ラッパーの使用方法について説明しています。インストールとセットアップ、そして例を用いた使用方法の2つのパートに分けられています。
 
-## Installation and Setup
-- Install the Python package with `pip install rwkv`
-- Install the tokenizer Python package with `pip install tokenizer`
-- Download a [RWKV model](https://huggingface.co/BlinkDL/rwkv-4-raven/tree/main) and place it in your desired directory
-- Download the [tokens file](https://raw.githubusercontent.com/BlinkDL/ChatRWKV/main/20B_tokenizer.json)
+> This page covers how to use the `RWKV-4` wrapper within LangChain.
+> It is broken into two parts: installation and setup, and then usage with an example.
 
-## Usage
+## Installation and Setup | インストールとセットアップ
 
-### RWKV
+* `pip install rwkv`でPythonパッケージをインストールしてください
+  > Install the Python package with `pip install rwkv`
+* `pip install tokenizer` コマンドでtokenizer Pythonパッケージをインストールしてください
+  > Install the tokenizer Python package with `pip install tokenizer`
+* [RWKVモデル](https://huggingface.co/BlinkDL/rwkv-4-raven/tree/main)をダウンロードして、ご希望のディレクトリに配置してください
+  > Download a [RWKV model](https://huggingface.co/BlinkDL/rwkv-4-raven/tree/main) and place it in your desired directory
+* [トークンファイル](https://raw.githubusercontent.com/BlinkDL/ChatRWKV/main/20B_tokenizer.json)をダウンロードしてください。
+  > Download the [tokens file](https://raw.githubusercontent.com/BlinkDL/ChatRWKV/main/20B_tokenizer.json)
 
-To use the RWKV wrapper, you need to provide the path to the pre-trained model file and the tokenizer's configuration.
-```python
+## Usage | 使用方法
+
+### RWKV | RWKV
+
+RWKVラッパーを使用するには、事前にトレーニングされたモデルファイルへのパスとトークナイザーの設定を提供する必要があります。
+
+> To use the RWKV wrapper, you need to provide the path to the pre-trained model file and the tokenizer's configuration.
+
+````python
 from langchain.llms import RWKV
 
 # Test the model
@@ -45,13 +55,15 @@ def generate_prompt(instruction, input=None):
 
 model = RWKV(model="./models/RWKV-4-Raven-3B-v7-Eng-20230404-ctx4096.pth", strategy="cpu fp32", tokens_path="./rwkv/20B_tokenizer.json")
 response = model(generate_prompt("Once upon a time, "))
-```
-## Model File
+````
 
-You can find links to model file downloads at the [RWKV-4-Raven](https://huggingface.co/BlinkDL/rwkv-4-raven/tree/main) repository.
+## Model File | モデルファイル
 
-### Rwkv-4 models -> recommended VRAM
+モデルファイルのダウンロードリンクは、[RWKV-4-Raven](https://huggingface.co/BlinkDL/rwkv-4-raven/tree/main)リポジトリで見つけることができます。
 
+> You can find links to model file downloads at the [RWKV-4-Raven](https://huggingface.co/BlinkDL/rwkv-4-raven/tree/main) repository.
+
+### Rwkv-4 models -> recommended VRAM | Rwkv-4モデル -> 推奨されるVRAM
 
 ```
 RWKV VRAM
@@ -62,4 +74,6 @@ Model | 8bit | bf16/fp16 | fp32
 1b5   | 1.3GB| 3GB       | 6GB
 ```
 
-See the [rwkv pip](https://pypi.org/project/rwkv/) page for more information about strategies, including streaming and cuda support.
+ストリーミングやCUDAサポートを含む戦略に関する詳細は、[rwkv pip](https://pypi.org/project/rwkv/)ページでご確認いただけます。
+
+> See the [rwkv pip](https://pypi.org/project/rwkv/) page for more information about strategies, including streaming and cuda support.

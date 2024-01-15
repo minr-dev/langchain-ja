@@ -1,16 +1,19 @@
-# Split by character
+# Split by character | 文字ごとに分割する
 
-This is the simplest method. This splits based on characters (by default "\n\n") and measure chunk length by number of characters.
+これは最もシンプルな方法です。この方法は、文字（デフォルトでは「\n\n」）を基に分割し、チャンクの長さを文字数で測定します。
 
-1. How the text is split: by single character.
-2. How the chunk size is measured: by number of characters.
+> This is the simplest method. This splits based on characters (by default "\n\n") and measure chunk length by number of characters.
+
+1. テキストがどのように分割されるか：単一文字ごと。
+   > How the text is split: by single character.
+2. チャンクサイズの測定方法：文字数による。
+   > How the chunk size is measured: by number of characters.
 
 ```python
 # This is a long document we can split up.
 with open('../../../state_of_the_union.txt') as f:
     state_of_the_union = f.read()
 ```
-
 
 ```python
 from langchain.text_splitter import CharacterTextSplitter
@@ -22,7 +25,6 @@ text_splitter = CharacterTextSplitter(
     is_separator_regex = False,
 )
 ```
-
 
 ```python
 texts = text_splitter.create_documents([state_of_the_union])
@@ -37,8 +39,9 @@ print(texts[0])
 
 </CodeOutputBlock>
 
-Here's an example of passing metadata along with the documents, notice that it is split along with the documents.
+こちらは、ドキュメントと一緒にメタデータを渡す例です。それがドキュメントと共に分割されていることに注目してください。
 
+> Here's an example of passing metadata along with the documents, notice that it is split along with the documents.
 
 ```python
 metadatas = [{"document": 1}, {"document": 2}]
@@ -53,7 +56,6 @@ print(documents[0])
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 text_splitter.split_text(state_of_the_union)[0]

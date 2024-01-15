@@ -1,6 +1,8 @@
-# Split code
+# Split code | コード分割
 
-CodeTextSplitter allows you to split your code with multiple languages supported. Import enum `Language` and specify the language. 
+CodeTextSplitterを使用すると、複数の言語に対応したコードの分割が可能です。列挙型`Language`をインポートして、分割するコードの言語を指定してください。
+
+> CodeTextSplitter allows you to split your code with multiple languages supported. Import enum `Language` and specify the language.
 
 ```python
 from langchain.text_splitter import (
@@ -8,7 +10,6 @@ from langchain.text_splitter import (
     Language,
 )
 ```
-
 
 ```python
 # Full list of support languages
@@ -41,7 +42,6 @@ from langchain.text_splitter import (
 
 </CodeOutputBlock>
 
-
 ```python
 # You can also see the separators used for a given language
 RecursiveCharacterTextSplitter.get_separators_for_language(Language.PYTHON)
@@ -55,10 +55,11 @@ RecursiveCharacterTextSplitter.get_separators_for_language(Language.PYTHON)
 
 </CodeOutputBlock>
 
-## Python
+## Python | Python
 
-Here's an example using the PythonTextSplitter:
+以下はPythonTextSplitterを使用した例です：
 
+> Here's an example using the PythonTextSplitter:
 
 ```python
 PYTHON_CODE = """
@@ -84,9 +85,11 @@ python_docs
 
 </CodeOutputBlock>
 
-## JS
-Here's an example using the JS text splitter:
+## JS | JS
 
+以下はJSテキストスプリッターを使用した例です：
+
+> Here's an example using the JS text splitter:
 
 ```python
 JS_CODE = """
@@ -114,9 +117,11 @@ js_docs
 
 </CodeOutputBlock>
 
-## TS
-Here's an example using the TS text splitter:
+## TS | TS
 
+以下はTSテキストスプリッターを使用した例です：
+
+> Here's an example using the TS text splitter:
 
 ```python
 TS_CODE = """
@@ -144,10 +149,11 @@ ts_docs
 
 </CodeOutputBlock>
 
-## Markdown
+## Markdown | Markdown
 
-Here's an example using the Markdown text splitter:
+Markdownテキストスプリッターを使用した例をこちらに示します：
 
+> Here's an example using the Markdown text splitter:
 
 ````python
 markdown_text = """
@@ -166,7 +172,6 @@ As an open-source project in a rapidly developing field, we are extremely open t
 """
 ````
 
-
 ```python
 md_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.MARKDOWN, chunk_size=60, chunk_overlap=0
@@ -177,7 +182,7 @@ md_docs
 
 <CodeOutputBlock lang="python">
 
-```
+````
     [Document(page_content='# 🦜️🔗 LangChain', metadata={}),
      Document(page_content='⚡ Building applications with LLMs through composability ⚡', metadata={}),
      Document(page_content='## Quick Install', metadata={}),
@@ -186,14 +191,15 @@ md_docs
      Document(page_content='```', metadata={}),
      Document(page_content='As an open-source project in a rapidly developing field, we', metadata={}),
      Document(page_content='are extremely open to contributions.', metadata={})]
-```
+````
 
 </CodeOutputBlock>
 
-## Latex
+## Latex | LaTeX
 
-Here's an example on Latex text:
+以下はLaTeXテキストの例です：
 
+> Here's an example on Latex text:
 
 ```python
 latex_text = """
@@ -215,7 +221,6 @@ LLMs have many applications in industry, including chatbots, content creation, a
 \end{document}
 """
 ```
-
 
 ```python
 latex_splitter = RecursiveCharacterTextSplitter.from_language(
@@ -254,10 +259,11 @@ latex_docs
 
 </CodeOutputBlock>
 
-## HTML
+## HTML | HTML
 
-Here's an example using an HTML text splitter:
+HTMLテキスト分割器を使用した例をこちらに示します：
 
+> Here's an example using an HTML text splitter:
 
 ```python
 html_text = """
@@ -287,7 +293,6 @@ html_text = """
 """
 ```
 
-
 ```python
 html_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.HTML, chunk_size=60, chunk_overlap=0
@@ -316,9 +321,11 @@ html_docs
 
 </CodeOutputBlock>
 
+## Solidity | Solidity
 
-## Solidity
-Here's an example using the Solidity text splitter:
+以下はSolidityテキストスプリッターを使用した例です：
+
+> Here's an example using the Solidity text splitter:
 
 ```python
 SOL_CODE = """
@@ -344,13 +351,15 @@ sol_docs
     Document(page_content='pragma solidity ^0.8.20;', metadata={}),
     Document(page_content='contract HelloWorld {\n   function add(uint a, uint b) pure public returns(uint) {\n       return a + b;\n   }\n}', metadata={})
 ]
- ```
+```
 
  </CodeOutputBlock>
 
+## C# | C\#
 
-## C#
-Here's an example using the C# text splitter:
+以下はC#テキストスプリッターを使用した例です：
+
+> Here's an example using the C# text splitter:
 
 ```csharp
 using System;
@@ -413,6 +422,6 @@ class Program
      Document(page_content='citizen', metadata={}),
      Document(page_content='}\n    }', metadata={}),
      Document(page_content='}', metadata={})]
- ```
+```
 
  </CodeOutputBlock>

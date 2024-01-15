@@ -1,44 +1,68 @@
-# OpenWeatherMap
+# OpenWeatherMap | OpenWeatherMap
 
->[OpenWeatherMap](https://openweathermap.org/api/) provides all essential weather data for a specific location:
->- Current weather
->- Minute forecast for 1 hour
->- Hourly forecast for 48 hours
->- Daily forecast for 8 days
->- National weather alerts
->- Historical weather data for 40+ years back
+> [OpenWeatherMap](https://openweathermap.org/api/)は、特定の場所のすべての必要な天気データを提供します：
+>
+> > [OpenWeatherMap](https://openweathermap.org/api/) provides all essential weather data for a specific location:
+>
+> * 現在の天気
+>   > Current weather
+> * 1時間の分刻み予報
+>   > Minute forecast for 1 hour
+> * 48時間の1時間ごとの天気予報
+>   > Hourly forecast for 48 hours
+> * 8日間の天気予報
+>   > Daily forecast for 8 days
+> * 全国の気象警報
+>   > National weather alerts
+> * 40年以上前の歴史的気象データ
+>   > Historical weather data for 40+ years back
 
-This page covers how to use the `OpenWeatherMap API` within LangChain.
+このページでは、LangChain内で`OpenWeatherMap API`を使用する方法について説明しています。
 
-## Installation and Setup
+> This page covers how to use the `OpenWeatherMap API` within LangChain.
 
-- Install requirements with
+## Installation and Setup | インストールとセットアップ
+
+* 必要なパッケージをインストールするには
+  > Install requirements with
+
 ```bash
 pip install pyowm
 ```
-- Go to OpenWeatherMap and sign up for an account to get your API key [here](https://openweathermap.org/api/)
-- Set your API key as `OPENWEATHERMAP_API_KEY` environment variable
 
-## Wrappers
+* OpenWeatherMapにアクセスしてアカウントにサインアップし、[こちら](https://openweathermap.org/api/)からAPIキーを取得してください。
+  > Go to OpenWeatherMap and sign up for an account to get your API key [here](https://openweathermap.org/api/)
+* `OPENWEATHERMAP_API_KEY`という環境変数としてあなたのAPIキーを設定してください
+  > Set your API key as `OPENWEATHERMAP_API_KEY` environment variable
 
-### Utility
+## Wrappers | ラッパー
 
-There exists a OpenWeatherMapAPIWrapper utility which wraps this API. To import this utility:
+### Utility | ユーティリティ
+
+OpenWeatherMapAPIWrapperというユーティリティが存在し、このAPIをラップしています。このユーティリティをインポートするには：
+
+> There exists a OpenWeatherMapAPIWrapper utility which wraps this API. To import this utility:
 
 ```python
 from langchain.utilities.openweathermap import OpenWeatherMapAPIWrapper
 ```
 
-For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/openweathermap).
+このラッパーのより詳細な使い方については、[このノートブック](/docs/integrations/tools/openweathermap)をご覧ください。
 
-### Tool
+> For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/openweathermap).
 
-You can also easily load this wrapper as a Tool (to use with an Agent).
-You can do this with:
+### Tool | ツール
+
+このラッパーは、エージェントと一緒に使用するためのツールとしても簡単に読み込むことができます。以下の方法でこれを行うことができます：
+
+> You can also easily load this wrapper as a Tool (to use with an Agent).
+> You can do this with:
 
 ```python
 from langchain.agents import load_tools
 tools = load_tools(["openweathermap-api"])
 ```
 
-For more information on tools, see [this page](/docs/modules/agents/tools/).
+ツールに関する詳細は、[このページ](/docs/modules/agents/tools/)をご覧ください。
+
+> For more information on tools, see [this page](/docs/modules/agents/tools/).

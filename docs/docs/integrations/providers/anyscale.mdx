@@ -1,17 +1,25 @@
-# Anyscale
+# Anyscale | Anyscale
 
-This page covers how to use the Anyscale ecosystem within LangChain.
-It is broken into two parts: installation and setup, and then references to specific Anyscale wrappers.
+このページでは、LangChain内でAnyscaleエコシステムを使用する方法について説明しています。内容はインストールとセットアップ、そして特定のAnyscaleラッパーへの参照という2つの部分に分けられています。
 
-## Installation and Setup
-- Get an Anyscale Service URL, route and API key and set them as environment variables (`ANYSCALE_SERVICE_URL`,`ANYSCALE_SERVICE_ROUTE`, `ANYSCALE_SERVICE_TOKEN`). 
-- Please see [the Anyscale docs](https://docs.anyscale.com/productionize/services-v2/get-started) for more details.
+> This page covers how to use the Anyscale ecosystem within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific Anyscale wrappers.
 
-## Wrappers
+## Installation and Setup | インストールとセットアップ
 
-### LLM
+* AnyscaleサービスのURL、ルート、APIキーを取得し、それらを環境変数（`ANYSCALE_SERVICE_URL`、`ANYSCALE_SERVICE_ROUTE`、`ANYSCALE_SERVICE_TOKEN`）として設定してください。
+  > Get an Anyscale Service URL, route and API key and set them as environment variables (`ANYSCALE_SERVICE_URL`,`ANYSCALE_SERVICE_ROUTE`, `ANYSCALE_SERVICE_TOKEN`).
+* 詳細については、[Anyscaleのドキュメント](https://docs.anyscale.com/productionize/services-v2/get-started)をご覧ください。
+  > Please see [the Anyscale docs](https://docs.anyscale.com/productionize/services-v2/get-started) for more details.
 
-There exists an Anyscale LLM wrapper, which you can access with 
+## Wrappers | ラッパー
+
+### LLM | LLM
+
+Anyscale LLMラッパーが存在し、次の方法でアクセスできます
+
+> There exists an Anyscale LLM wrapper, which you can access with
+
 ```python
 from langchain.llms import Anyscale
 ```

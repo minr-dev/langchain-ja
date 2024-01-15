@@ -3,54 +3,87 @@ sidebar_label: Package Versioning
 sidebar_position: 4
 ---
 
-# 📕 Package Versioning
+# 📕 Package Versioning | 📕 パッケージバージョニング
 
-As of now, LangChain has an ad hoc release process: releases are cut with high frequency by
-a maintainer and published to [PyPI](https://pypi.org/). 
-The different packages are versioned slightly differently.
+現在、LangChainは特定の事情に応じたリリースプロセスを採用しており、メンテナーが頻繁にリリースを行い、[PyPI](https://pypi.org/)に公開しています。各パッケージは少しずつ異なるバージョニングが施されています。
 
-## `langchain-core`
+> As of now, LangChain has an ad hoc release process: releases are cut with high frequency by
+> a maintainer and published to [PyPI](https://pypi.org/).
+> The different packages are versioned slightly differently.
 
-`langchain-core` is currently on version `0.1.x`. 
+## `langchain-core` | `langchain-core`
 
-As `langchain-core` contains the base abstractions and runtime for the whole LangChain ecosystem, we will communicate any breaking changes with advance notice and version bumps. The exception for this is anything in `langchain_core.beta`. The reason for `langchain_core.beta` is that given the rate of change of the field, being able to move quickly is still a priority, and this module is our attempt to do so.
+`langchain-core`は現在、バージョン`0.1.x`を採用しています。
 
-Minor version increases will occur for:
+> `langchain-core` is currently on version `0.1.x`.
 
-- Breaking changes for any public interfaces NOT in `langchain_core.beta`
+`langchain-core`はLangChainエコシステム全体の基本的な抽象概念とランタイムを含んでいるため、重大な変更がある場合は事前に通知し、バージョンを更新します。ただし、`langchain_core.beta`に含まれるものはこの限りではありません。`langchain_core.beta`が存在する理由は、この分野の変化の速度を考慮して、迅速に進めることが依然として優先されているためであり、このモジュールはその迅速な対応を可能にするための試みです。
 
-Patch version increases will occur for:
+> As `langchain-core` contains the base abstractions and runtime for the whole LangChain ecosystem, we will communicate any breaking changes with advance notice and version bumps. The exception for this is anything in `langchain_core.beta`. The reason for `langchain_core.beta` is that given the rate of change of the field, being able to move quickly is still a priority, and this module is our attempt to do so.
 
-- Bug fixes
-- New features
-- Any changes to private interfaces
-- Any changes to `langchain_core.beta`
+マイナーバージョンの増加は以下の場合に行われます：
 
-## `langchain`
+> Minor version increases will occur for:
 
-`langchain` is currently on version `0.0.x`
+* `langchain_core.beta`には含まれていない公開インターフェースに対する破壊的変更
+  > Breaking changes for any public interfaces NOT in `langchain_core.beta`
 
-All changes will be accompanied by a patch version increase. Any changes to public interfaces are nearly always done in a backwards compatible way and will be communicated ahead of time when they are not backwards compatible.
+パッチバージョンの増加は以下の場合に行われます：
 
-We are targeting January 2024 for a release of `langchain` v0.1, at which point `langchain` will adopt the same versioning policy as `langchain-core`.
+> Patch version increases will occur for:
 
-## `langchain-community`
+* バグ修正
+  > Bug fixes
+* 新機能
+  > New features
+* プライベートインターフェースの変更
+  > Any changes to private interfaces
+* `langchain_core.beta`に対する変更
+  > Any changes to `langchain_core.beta`
 
-`langchain-community` is currently on version `0.0.x`
+## `langchain` | 📕 パッケージバージョニング
 
-All changes will be accompanied by a patch version increase.
+`langchain`は現在、バージョン`0.0.x`になっています。
 
-## `langchain-experimental`
+> `langchain` is currently on version `0.0.x`
 
-`langchain-experimental` is currently on version `0.0.x`
+全ての変更はパッチバージョンの増加を伴います。公開インターフェースに対する変更は、ほとんど常に後方互換性を保つ形で実施されますが、後方互換性が保たれない場合は、変更が行われる前に事前に通知されます。
 
-All changes will be accompanied by a patch version increase.
+> All changes will be accompanied by a patch version increase. Any changes to public interfaces are nearly always done in a backwards compatible way and will be communicated ahead of time when they are not backwards compatible.
 
-## Partner Packages
+私たちは、2024年1月に`langchain` v0.1をリリースすることを目標としており、その時点で`langchain`は`langchain-core`と同様のバージョニングポリシーを採用する予定です。
 
-Partner packages are versioned independently.
+> We are targeting January 2024 for a release of `langchain` v0.1, at which point `langchain` will adopt the same versioning policy as `langchain-core`.
 
-# 🌟 Recognition
+## `langchain-community` | `langchain-community`の現在のバージョンは`0.0.x`です。全ての変更はパッチバージョンの増加を伴います。
 
-If your contribution has made its way into a release, we will want to give you credit on Twitter (only if you want though)!
-If you have a Twitter account you would like us to mention, please let us know in the PR or through another means.
+`langchain-community`は現在、バージョン`0.0.x`です。
+
+> `langchain-community` is currently on version `0.0.x`
+
+全ての変更はパッチバージョンの増加を伴います。
+
+> All changes will be accompanied by a patch version increase.
+
+## `langchain-experimental` | `langchain-experimental`
+
+`langchain-experimental`は現在、バージョン`0.0.x`になっています。
+
+> `langchain-experimental` is currently on version `0.0.x`
+
+全ての変更はパッチバージョンの増加を伴います。
+
+> All changes will be accompanied by a patch version increase.
+
+## Partner Packages | パートナーパッケージ
+
+パートナーパッケージは独立してバージョン管理されます。
+
+> Partner packages are versioned independently.
+
+# 🌟 Recognition | 🌟 謝辞
+
+もし貴方の貢献がリリースに取り入れられた場合、私たちは（ご希望があれば）Twitterで表彰したいと思います。もし言及してほしいTwitterアカウントがあれば、プルリクエストか他の方法でお知らせください。
+
+> If your contribution has made its way into a release, we will want to give you credit on Twitter (only if you want though)!
+> If you have a Twitter account you would like us to mention, please let us know in the PR or through another means.

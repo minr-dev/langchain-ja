@@ -1,17 +1,20 @@
-# Annoy
+# Annoy | Annoy
 
-> [Annoy](https://github.com/spotify/annoy) (`Approximate Nearest Neighbors Oh Yeah`) is a C++ library with Python bindings to search for points in space that are close to a given query point. It also creates large read-only file-based data structures that are mmapped into memory so that many processes may share the same data. 
-## Installation and Setup
+> [Annoy](https://github.com/spotify/annoy)（`Approximate Nearest Neighbors Oh Yeah`）は、与えられたクエリポイントに近い空間内の点を検索するC++ライブラリで、Pythonバインディングを備えています。また、大規模な読み取り専用のファイルベースのデータ構造を作成し、メモリにマップされることで、多くのプロセスが同じデータを共有できるようになっています。
+>
+> > [Annoy](https://github.com/spotify/annoy) (`Approximate Nearest Neighbors Oh Yeah`) is a C++ library with Python bindings to search for points in space that are close to a given query point. It also creates large read-only file-based data structures that are mmapped into memory so that many processes may share the same data.
 
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install annoy
 ```
 
+## Vectorstore | ベクターストア
 
-## Vectorstore
+[使用例](/docs/integrations/vectorstores/annoy)をご覧ください。
 
-See a [usage example](/docs/integrations/vectorstores/annoy).
+> See a [usage example](/docs/integrations/vectorstores/annoy).
 
 ```python
 from langchain.vectorstores import Annoy

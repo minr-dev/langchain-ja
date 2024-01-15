@@ -1,16 +1,25 @@
 ---
 sidebar_position: 1
 ---
-# Chat Messages
+
+# Chat Messages | チャットメッセージ
 
 :::info
-Head to [Integrations](/docs/integrations/memory/) for documentation on built-in memory integrations with 3rd-party databases and tools.
+
+サードパーティのデータベースやツールとの組み込みメモリ統合に関するドキュメントは、[Integrations](/docs/integrations/memory/) でご覧いただけます。
+
+> Head to [Integrations](/docs/integrations/memory/) for documentation on built-in memory integrations with 3rd-party databases and tools.
+
 :::
 
-One of the core utility classes underpinning most (if not all) memory modules is the `ChatMessageHistory` class.
-This is a super lightweight wrapper that provides convenience methods for saving HumanMessages, AIMessages, and then fetching them all.
+ほとんどの（場合によっては全ての）メモリーモジュールの基盤となるコアユーティリティクラスの一つに`ChatMessageHistory`クラスがあります。これは非常に軽量なラッパーで、HumanMessagesやAIMessagesを保存するための便利なメソッドを提供し、それらを一括で取得することもできます。
 
-You may want to use this class directly if you are managing memory outside of a chain.
+> One of the core utility classes underpinning most (if not all) memory modules is the `ChatMessageHistory` class.
+> This is a super lightweight wrapper that provides convenience methods for saving HumanMessages, AIMessages, and then fetching them all.
+
+チェーンの外部でメモリを管理している場合、このクラスを直接使用することが望ましいかもしれません。
+
+> You may want to use this class directly if you are managing memory outside of a chain.
 
 ```python
 from langchain.memory import ChatMessageHistory
@@ -21,7 +30,6 @@ history.add_user_message("hi!")
 
 history.add_ai_message("whats up?")
 ```
-
 
 ```python
 history.messages

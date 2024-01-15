@@ -2,19 +2,30 @@
 sidebar_position: 5
 sidebar_class_name: hidden
 ---
-# Callbacks
+
+# Callbacks | コールバック
 
 :::info
-Head to [Integrations](/docs/integrations/callbacks/) for documentation on built-in callbacks integrations with 3rd-party tools.
+
+サードパーティのツールとの組み込みコールバック統合に関するドキュメントについては、[Integrations](/docs/integrations/callbacks/)を参照してください。
+
+> Head to [Integrations](/docs/integrations/callbacks/) for documentation on built-in callbacks integrations with 3rd-party tools.
+
 :::
 
-LangChain provides a callbacks system that allows you to hook into the various stages of your LLM application. This is useful for logging, monitoring, streaming, and other tasks.
+LangChainは、LLMアプリケーションの様々な段階にフックすることを可能にするコールバックシステムを提供しています。これは、ログの記録、モニタリング、ストリーミング、その他のタスクに役立ちます。
 
-You can subscribe to these events by using the `callbacks` argument available throughout the API. This argument is list of handler objects, which are expected to implement one or more of the methods described below in more detail.
+> LangChain provides a callbacks system that allows you to hook into the various stages of your LLM application. This is useful for logging, monitoring, streaming, and other tasks.
 
-## Callback handlers
+API全体で利用可能な`callbacks`引数を使用して、これらのイベントを購読することができます。この引数はハンドラーオブジェクトのリストで、以下に詳述するメソッドの1つ以上を実装することが期待されています。
 
-`CallbackHandlers` are objects that implement the `CallbackHandler` interface, which has a method for each event that can be subscribed to. The `CallbackManager` will call the appropriate method on each handler when the event is triggered.
+> You can subscribe to these events by using the `callbacks` argument available throughout the API. This argument is list of handler objects, which are expected to implement one or more of the methods described below in more detail.
+
+## Callback handlers | コールバックハンドラ
+
+`CallbackHandlers`は、購読可能な各イベントに対してメソッドを持つ`CallbackHandler`インターフェースを実装するオブジェクトです。イベントがトリガーされると、`CallbackManager`は各ハンドラーに適切なメソッドを呼び出します。
+
+> `CallbackHandlers` are objects that implement the `CallbackHandler` interface, which has a method for each event that can be subscribed to. The `CallbackManager` will call the appropriate method on each handler when the event is triggered.
 
 ```python
 class BaseCallbackHandler:
@@ -77,11 +88,15 @@ class BaseCallbackHandler:
         """Run on agent end."""
 ```
 
-## Get started
+## Get started | 始めましょう
 
-LangChain provides a few built-in handlers that you can use to get started. These are available in the `langchain/callbacks` module. The most basic handler is the `StdOutCallbackHandler`, which simply logs all events to `stdout`.
+LangChainには、始めるために使用できるいくつかの組み込みハンドラーがあります。これらは`langchain/callbacks`モジュールで利用可能です。最も基本的なハンドラーは`StdOutCallbackHandler`で、すべてのイベントを`stdout`に単純にログとして記録します。
 
-**Note**: when the `verbose` flag on the object is set to true, the `StdOutCallbackHandler` will be invoked even without being explicitly passed in.
+> LangChain provides a few built-in handlers that you can use to get started. These are available in the `langchain/callbacks` module. The most basic handler is the `StdOutCallbackHandler`, which simply logs all events to `stdout`.
+
+注意：オブジェクトの `verbose` フラグが true に設定されている場合、`StdOutCallbackHandler` は明示的に渡されなくても呼び出されます。
+
+> **Note**: when the `verbose` flag on the object is set to true, the `StdOutCallbackHandler` will be invoked even without being explicitly passed in.
 
 ```python
 from langchain.callbacks import StdOutCallbackHandler
@@ -135,17 +150,24 @@ chain.run(number=2, callbacks=[handler])
 
 </CodeOutputBlock>
 
-## Where to pass in callbacks
+## Where to pass in callbacks | コールバックを渡す場所
 
-The `callbacks` argument is available on most objects throughout the API (Chains, Models, Tools, Agents, etc.) in two different places:
+`callbacks` 引数は、API全体でほとんどのオブジェクト（Chains、Models、Tools、Agentsなど）において、2箇所で利用可能です：
 
-- **Constructor callbacks**: defined in the constructor, e.g. `LLMChain(callbacks=[handler], tags=['a-tag'])`, which will be used for all calls made on that object, and will be scoped to that object only, e.g. if you pass a handler to the `LLMChain` constructor, it will not be used by the Model attached to that chain.
-- **Request callbacks**: defined in the `run()`/`apply()` methods used for issuing a request, e.g. `chain.run(input, callbacks=[handler])`, which will be used for that specific request only, and all sub-requests that it contains (e.g. a call to an LLMChain triggers a call to a Model, which uses the same handler passed in the `call()` method).
+> The `callbacks` argument is available on most objects throughout the API (Chains, Models, Tools, Agents, etc.) in two different places:
 
-The `verbose` argument is available on most objects throughout the API (Chains, Models, Tools, Agents, etc.) as a constructor argument, e.g. `LLMChain(verbose=True)`, and it is equivalent to passing a `ConsoleCallbackHandler` to the `callbacks` argument of that object and all child objects. This is useful for debugging, as it will log all events to the console.
+* **コンストラクタコールバック**: コンストラクタで定義され、例えば `LLMChain(callbacks=[handler], tags=['a-tag'])` のように、そのオブジェクトで行われる全ての呼び出しに使用され、そのオブジェクトにのみ適用されます。例えば、`LLMChain` コンストラクタにハンドラを渡すと、それはそのチェーンに紐付けられたモデルでは使用されません。
+  > **Constructor callbacks**: defined in the constructor, e.g. `LLMChain(callbacks=[handler], tags=['a-tag'])`, which will be used for all calls made on that object, and will be scoped to that object only, e.g. if you pass a handler to the `LLMChain` constructor, it will not be used by the Model attached to that chain.
+* **リクエストコールバック**: `run()`/`apply()` メソッド内で定義され、リクエストを発行する際に使用されるものです。例えば `chain.run(input, callbacks=[handler])` は、その特定のリクエストだけでなく、それに含まれるすべてのサブリクエストに対しても使用されます（例えば、LLMChainへの呼び出しがModelへの呼び出しをトリガーする場合、`call()` メソッドで渡された同じハンドラーが使用されます）。
+  > **Request callbacks**: defined in the `run()`/`apply()` methods used for issuing a request, e.g. `chain.run(input, callbacks=[handler])`, which will be used for that specific request only, and all sub-requests that it contains (e.g. a call to an LLMChain triggers a call to a Model, which uses the same handler passed in the `call()` method).
 
-### When do you want to use each of these?
+`verbose` 引数は、API 全体にわたるほとんどのオブジェクト（Chains、Models、Tools、Agents など）のコンストラクタ引数として利用可能です。例えば `LLMChain(verbose=True)` のように指定します。これは、そのオブジェクトおよびすべての子オブジェクトの `callbacks` 引数に `ConsoleCallbackHandler` を渡すことに相当します。これはデバッグ時に有用で、すべてのイベントをコンソールにログとして出力します。
 
-- Constructor callbacks are most useful for use cases such as logging, monitoring, etc., which are _not specific to a single request_, but rather to the entire chain. For example, if you want to log all the requests made to an `LLMChain`, you would pass a handler to the constructor.
-- Request callbacks are most useful for use cases such as streaming, where you want to stream the output of a single request to a specific websocket connection, or other similar use cases. For example, if you want to stream the output of a single request to a websocket, you would pass a handler to the `call()` method
+> The `verbose` argument is available on most objects throughout the API (Chains, Models, Tools, Agents, etc.) as a constructor argument, e.g. `LLMChain(verbose=True)`, and it is equivalent to passing a `ConsoleCallbackHandler` to the `callbacks` argument of that object and all child objects. This is useful for debugging, as it will log all events to the console.
 
+### When do you want to use each of these? | これらをそれぞれいつ使用したいですか？
+
+* コンストラクタコールバックは、ログ記録、モニタリングなど、*単一のリクエストに特化していない*が、むしろチェーン全体に関連するユースケースに最も有用です。例えば、`LLMChain`へのすべてのリクエストをログに記録したい場合、ハンドラをコンストラクタに渡すことになります。
+  > Constructor callbacks are most useful for use cases such as logging, monitoring, etc., which are *not specific to a single request*, but rather to the entire chain. For example, if you want to log all the requests made to an `LLMChain`, you would pass a handler to the constructor.
+* リクエストコールバックは、単一のリクエストの出力を特定のウェブソケット接続にストリーミングしたい場合や、その他類似のユースケースなど、ストリーミングのような用途に最も有用です。例えば、単一のリクエストの出力をウェブソケットにストリーミングしたい場合、`call()`メソッドにハンドラを渡すことになります。
+  > Request callbacks are most useful for use cases such as streaming, where you want to stream the output of a single request to a specific websocket connection, or other similar use cases. For example, if you want to stream the output of a single request to a websocket, you would pass a handler to the `call()` method

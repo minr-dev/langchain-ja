@@ -1,15 +1,23 @@
-# Predibase
+# Predibase | Predibase
 
-Learn how to use LangChain with models on Predibase. 
+Predibase上のモデルを使ってLangChainの使用方法を学びましょう。
 
-## Setup
-- Create a [Predibase](https://predibase.com/) account and [API key](https://docs.predibase.com/sdk-guide/intro).
-- Install the Predibase Python client with `pip install predibase`
-- Use your API key to authenticate
+> Learn how to use LangChain with models on Predibase.
 
-### LLM
+## Setup | セットアップ
 
-Predibase integrates with LangChain by implementing LLM module. You can see a short example below or a full notebook under LLM > Integrations > Predibase. 
+* [Predibase](https://predibase.com/)のアカウントを作成し、[APIキー](https://docs.predibase.com/sdk-guide/intro)を取得してください。
+  > Create a [Predibase](https://predibase.com/) account and [API key](https://docs.predibase.com/sdk-guide/intro).
+* `pip install predibase`でPredibase Pythonクライアントをインストールしてください
+  > Install the Predibase Python client with `pip install predibase`
+* APIキーを使用して認証してください
+  > Use your API key to authenticate
+
+### LLM | LLM
+
+Predibaseは、LLMモジュールを実装することによりLangChainと統合されています。以下に簡単な例を示しますが、LLM > Integrations > Predibaseの下には完全なノートブックも用意されています。
+
+> Predibase integrates with LangChain by implementing LLM module. You can see a short example below or a full notebook under LLM > Integrations > Predibase.
 
 ```python
 import os

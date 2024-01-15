@@ -1,26 +1,35 @@
-# Psychic
+# Psychic | サイキック
 
->[Psychic](https://www.psychic.dev/) is a platform for integrating with SaaS tools like `Notion`, `Zendesk`, 
-> `Confluence`, and `Google Drive` via OAuth and syncing documents from these applications to your SQL or vector
-> database. You can think of it like Plaid for unstructured data. 
+> [Psychic](https://www.psychic.dev/)は、`Notion`、`Zendesk`、`Confluence`、`Google Drive`などのSaaSツールとOAuthを介して統合し、これらのアプリケーションからドキュメントをSQLやベクターデータベースに同期するプラットフォームです。非構造化データに対するPlaidのようなものと考えることができます。
+>
+> > [Psychic](https://www.psychic.dev/) is a platform for integrating with SaaS tools like `Notion`, `Zendesk`,
+> > `Confluence`, and `Google Drive` via OAuth and syncing documents from these applications to your SQL or vector
+> > database. You can think of it like Plaid for unstructured data.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install psychicapi
 ```
 
-Psychic is easy to set up - you import the `react` library and configure it with your `Sidekick API` key, which you get 
-from the [Psychic dashboard](https://dashboard.psychic.dev/). When you connect the applications, you  
-view these connections from the dashboard and retrieve data using the server-side libraries.
- 
-1. Create an account in the [dashboard](https://dashboard.psychic.dev/).
-2. Use the [react library](https://docs.psychic.dev/sidekick-link) to add the Psychic link modal to your frontend react app. You will use this to connect the SaaS apps.
-3. Once you have created a connection, you can use the `PsychicLoader` by following the [example notebook](/docs/integrations/document_loaders/psychic)
+Psychicのセットアップは簡単です - `react` ライブラリをインポートし、[Psychicダッシュボード](https://dashboard.psychic.dev/)から取得した `Sidekick API` キーで設定します。アプリケーションを接続した後、ダッシュボードからこれらの接続を確認し、サーバーサイドのライブラリを使用してデータを取得できます。
 
+> Psychic is easy to set up - you import the `react` library and configure it with your `Sidekick API` key, which you get
+> from the [Psychic dashboard](https://dashboard.psychic.dev/). When you connect the applications, you\
+> view these connections from the dashboard and retrieve data using the server-side libraries.
 
-## Advantages vs Other Document Loaders
+1. [ダッシュボード](https://dashboard.psychic.dev/)でアカウントを作成してください。
+   > Create an account in the [dashboard](https://dashboard.psychic.dev/).
+2. [react library](https://docs.psychic.dev/sidekick-link)を使用して、フロントエンドのReactアプリにPsychic linkモーダルを追加してください。これを使用してSaaSアプリケーションを接続します。
+   > Use the [react library](https://docs.psychic.dev/sidekick-link) to add the Psychic link modal to your frontend react app. You will use this to connect the SaaS apps.
+3. 接続を作成したら、[example notebook](/docs/integrations/document_loaders/psychic)に従って`PsychicLoader`を使用できます。
+   > Once you have created a connection, you can use the `PsychicLoader` by following the [example notebook](/docs/integrations/document_loaders/psychic)
 
-1.	**Universal API:** Instead of building OAuth flows and learning the APIs for every SaaS app, you integrate Psychic once and leverage our universal API to retrieve data.
-2.	**Data Syncs:** Data in your customers' SaaS apps can get stale fast. With Psychic you can configure webhooks to keep your documents up to date on a daily or realtime basis.
-3.	**Simplified OAuth:** Psychic handles OAuth end-to-end so that you don't have to spend time creating OAuth clients for each integration, keeping access tokens fresh, and handling OAuth redirect logic.
+## Advantages vs Other Document Loaders | 他のドキュメントローダーと比較した利点
+
+1. **ユニバーサルAPI:** さまざまなSaaSアプリケーションのOAuthフローを一つ一つ構築し、それぞれのAPIを学ぶ必要はありません。Psychicを一度統合すれば、私たちのユニバーサルAPIを通じてデータを取得できます。
+   > **Universal API:** Instead of building OAuth flows and learning the APIs for every SaaS app, you integrate Psychic once and leverage our universal API to retrieve data.
+2. **データ同期:** お客様のSaaSアプリケーション内のデータはすぐに古くなる可能性があります。Psychicを使用すると、ウェブフックを設定して、ドキュメントを毎日またはリアルタイムで最新の状態に保つことができます。
+   > **Data Syncs:** Data in your customers' SaaS apps can get stale fast. With Psychic you can configure webhooks to keep your documents up to date on a daily or realtime basis.
+3. **簡素化されたOAuth:** PsychicはOAuthをエンドツーエンドで処理することで、あなたが各統合のためにOAuthクライアントを作成したり、アクセストークンを最新に保ったり、OAuthリダイレクトロジックを扱う手間を省くことができます。
+   > **Simplified OAuth:** Psychic handles OAuth end-to-end so that you don't have to spend time creating OAuth clients for each integration, keeping access tokens fresh, and handling OAuth redirect logic.

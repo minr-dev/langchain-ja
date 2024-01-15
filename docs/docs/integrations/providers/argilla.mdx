@@ -1,28 +1,38 @@
-# Argilla
+# Argilla | アルジラ
 
 ![Argilla - Open-source data platform for LLMs](https://argilla.io/og.png)
 
->[Argilla](https://argilla.io/) is an open-source data curation platform for LLMs.
-> Using Argilla, everyone can build robust language models through faster data curation 
-> using both human and machine feedback. We provide support for each step in the MLOps cycle, 
-> from data labelling to model monitoring.
+> [Argilla](https://argilla.io/)は、LLM（大規模言語モデル）のためのオープンソースのデータキュレーションプラットフォームです。Argillaを使用することで、人間と機械のフィードバックを組み合わせることにより、より迅速にデータキュレーションを行い、堅牢な言語モデルを構築することができます。私たちは、データラベリングからモデルモニタリングまで、MLOpsサイクルの各ステップでのサポートを提供しています。
+>
+> > [Argilla](https://argilla.io/) is an open-source data curation platform for LLMs.
+> > Using Argilla, everyone can build robust language models through faster data curation
+> > using both human and machine feedback. We provide support for each step in the MLOps cycle,
+> > from data labelling to model monitoring.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-First, you'll need to install the  `argilla` Python package as follows:
+まず、以下のようにして `argilla` Pythonパッケージをインストールする必要があります：
+
+> First, you'll need to install the  `argilla` Python package as follows:
 
 ```bash
 pip install argilla --upgrade
 ```
 
-If you already have an Argilla Server running, then you're good to go; but if
-you don't, follow the next steps to install it.
+すでにArgilla Serverが稼働している場合は、そのまま進めてください。そうでない場合は、次の手順に従ってインストールしてください。
 
-If you don't you can refer to [Argilla - 🚀 Quickstart](https://docs.argilla.io/en/latest/getting_started/quickstart.html#Running-Argilla-Quickstart) to deploy Argilla either on HuggingFace Spaces, locally, or on a server.
+> If you already have an Argilla Server running, then you're good to go; but if
+> you don't, follow the next steps to install it.
 
-## Tracking
+もしまだArgillaをデプロイしていない場合は、HuggingFace Spaces、ローカル、またはサーバー上でArgillaをデプロイする方法について、[Argilla - 🚀 クイックスタート](https://docs.argilla.io/en/latest/getting_started/quickstart.html#Running-Argilla-Quickstart)を参照してください。
 
-See a [usage example of `ArgillaCallbackHandler`](/docs/integrations/callbacks/argilla).
+> If you don't you can refer to [Argilla - 🚀 Quickstart](https://docs.argilla.io/en/latest/getting_started/quickstart.html#Running-Argilla-Quickstart) to deploy Argilla either on HuggingFace Spaces, locally, or on a server.
+
+## Tracking | 追跡
+
+`ArgillaCallbackHandler`の[使用例を見る](/docs/integrations/callbacks/argilla)。
+
+> See a [usage example of `ArgillaCallbackHandler`](/docs/integrations/callbacks/argilla).
 
 ```python
 from langchain.callbacks import ArgillaCallbackHandler

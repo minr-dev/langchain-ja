@@ -1,49 +1,62 @@
-# PromptLayer
+# PromptLayer | プロンプトレイヤー
 
->[PromptLayer](https://docs.promptlayer.com/introduction) is a platform for prompt engineering. 
-> It also helps with the LLM observability to visualize requests, version prompts, and track usage.
+> [PromptLayer](https://docs.promptlayer.com/introduction)は、プロンプトエンジニアリングのためのプラットフォームです。リクエストの可視化、プロンプトのバージョン管理、使用状況の追跡を通じて、LLMの可観測性の向上にも役立ちます。
 >
->While `PromptLayer` does have LLMs that integrate directly with LangChain (e.g. 
-> [`PromptLayerOpenAI`](https://docs.promptlayer.com/languages/langchain)), 
-> using a callback is the recommended way to integrate `PromptLayer` with LangChain.
+> > [PromptLayer](https://docs.promptlayer.com/introduction) is a platform for prompt engineering.
+> > It also helps with the LLM observability to visualize requests, version prompts, and track usage.
+>
+> `PromptLayer`にはLangChainと直接統合するLLMがあります（例えば[`PromptLayerOpenAI`](https://docs.promptlayer.com/languages/langchain)）。ただし、`PromptLayer`をLangChainに統合する推奨される方法は、コールバックを使用することです。
+>
+> > While `PromptLayer` does have LLMs that integrate directly with LangChain (e.g.
+> > [`PromptLayerOpenAI`](https://docs.promptlayer.com/languages/langchain)),
+> > using a callback is the recommended way to integrate `PromptLayer` with LangChain.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-To work with `PromptLayer`, we have to:
-- Create a `PromptLayer` account
-- Create an api token and set it as an environment variable (`PROMPTLAYER_API_KEY`)
+`PromptLayer`を使用するためには、次の手順を実行する必要があります：
 
-Install a Python package:
+> To work with `PromptLayer`, we have to:
+
+* `PromptLayer`アカウントを作成する
+  > Create a `PromptLayer` account
+* APIトークンを作成し、環境変数（`PROMPTLAYER_API_KEY`）として設定してください
+  > Create an api token and set it as an environment variable (`PROMPTLAYER_API_KEY`)
+
+Pythonパッケージのインストール：
+
+> Install a Python package:
 
 ```bash
 pip install promptlayer
 ```
 
+## Callback | コールバック
 
-## Callback
+[使用例](/docs/integrations/callbacks/promptlayer)をご覧ください。
 
-See a [usage example](/docs/integrations/callbacks/promptlayer).
+> See a [usage example](/docs/integrations/callbacks/promptlayer).
 
 ```python
 import promptlayer  # Don't forget this import!
 from langchain.callbacks import PromptLayerCallbackHandler
 ```
 
+## LLM | LLM
 
-## LLM
+[使用例](/docs/integrations/llms/promptlayer_openai)をご覧ください。
 
-See a [usage example](/docs/integrations/llms/promptlayer_openai).
+> See a [usage example](/docs/integrations/llms/promptlayer_openai).
 
 ```python
 from langchain.llms import PromptLayerOpenAI
 ```
 
+## Chat Models | チャットモデル
 
-## Chat Models
+[使用例](/docs/integrations/chat/promptlayer_chatopenai)をご覧ください。
 
-See a [usage example](/docs/integrations/chat/promptlayer_chatopenai).
+> See a [usage example](/docs/integrations/chat/promptlayer_chatopenai).
 
 ```python
 from langchain.chat_models import PromptLayerChatOpenAI
 ```
-

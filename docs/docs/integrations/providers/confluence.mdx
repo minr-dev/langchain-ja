@@ -1,21 +1,25 @@
-# Confluence
+# Confluence | Confluence
 
->[Confluence](https://www.atlassian.com/software/confluence) is a wiki collaboration platform that saves and organizes all of the project-related material. `Confluence` is a knowledge base that primarily handles content management activities. 
+> [Confluence](https://www.atlassian.com/software/confluence)は、プロジェクト関連の資料を保存し整理するためのウィキ協働プラットフォームです。`Confluence`は、主にコンテンツ管理活動を扱うナレッジベースです。
+>
+> > [Confluence](https://www.atlassian.com/software/confluence) is a wiki collaboration platform that saves and organizes all of the project-related material. `Confluence` is a knowledge base that primarily handles content management activities.
 
-
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install atlassian-python-api
 ```
 
-We need to set up `username/api_key` or `Oauth2 login`. 
-See [instructions](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).
+`username/api_key`または`Oauth2 login`を設定する必要があります。詳細は[こちらの手順](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)をご覧ください。
 
+> We need to set up `username/api_key` or `Oauth2 login`.
+> See [instructions](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).
 
-## Document Loader
+## Document Loader | ドキュメントローダー
 
-See a [usage example](/docs/integrations/document_loaders/confluence).
+[使用例](/docs/integrations/document_loaders/confluence)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/confluence).
 
 ```python
 from langchain.document_loaders import ConfluenceLoader

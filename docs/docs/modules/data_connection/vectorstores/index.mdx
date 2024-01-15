@@ -1,39 +1,55 @@
 ---
 sidebar_position: 3
 ---
-# Vector stores
+
+# Vector stores | ベクターを格納する場所
 
 :::info
-Head to [Integrations](/docs/integrations/vectorstores/) for documentation on built-in integrations with 3rd-party vector stores.
+
+[統合](/docs/integrations/vectorstores/)にアクセスして、サードパーティのベクターストアとの既存の統合に関するドキュメントをご覧ください。
+
+> Head to [Integrations](/docs/integrations/vectorstores/) for documentation on built-in integrations with 3rd-party vector stores.
+
 :::
 
-One of the most common ways to store and search over unstructured data is to embed it and store the resulting embedding
-vectors, and then at query time to embed the unstructured query and retrieve the embedding vectors that are
-'most similar' to the embedded query. A vector store takes care of storing embedded data and performing vector search
-for you.
+非構造化データを保存し、検索する最も一般的な方法の一つは、それを埋め込んで得られる埋め込みベクトルを保存し、クエリ時に非構造化クエリを埋め込み、その埋め込みクエリに「最も類似」している埋め込みベクトルを取り出すことです。ベクトルストアは、埋め込まれたデータの保存とベクトル検索を代わりに行ってくれます。
+
+> One of the most common ways to store and search over unstructured data is to embed it and store the resulting embedding
+> vectors, and then at query time to embed the unstructured query and retrieve the embedding vectors that are
+> 'most similar' to the embedded query. A vector store takes care of storing embedded data and performing vector search
+> for you.
 
 ![vector store diagram](/img/vector_stores.jpg)
 
-## Get started
+## Get started | 始めましょう
 
-This walkthrough showcases basic functionality related to vector stores. A key part of working with vector stores is creating the vector to put in them, which is usually created via embeddings. Therefore, it is recommended that you familiarize yourself with the [text embedding model](/docs/modules/data_connection/text_embedding/) interfaces before diving into this.
+このウォークスルーでは、ベクターストアに関連する基本機能を紹介しています。ベクターストアを扱う上での重要な部分は、それに格納するベクターを作成することで、これは通常、埋め込みを用いて作成されます。そのため、この内容に深く入る前に、[テキスト埋め込みモデル](/docs/modules/data_connection/text_embedding/)インターフェースに慣れておくことを推奨します。
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+> This walkthrough showcases basic functionality related to vector stores. A key part of working with vector stores is creating the vector to put in them, which is usually created via embeddings. Therefore, it is recommended that you familiarize yourself with the [text embedding model](/docs/modules/data_connection/text_embedding/) interfaces before diving into this.
 
-There are many great vector store options, here are a few that are free, open-source, and run entirely on your local machine. Review all integrations for many great hosted offerings.
+'@theme/Tabs'からTabsをインポートし、'@theme/TabItem'からTabItemをインポートします。
+
+> import Tabs from '@theme/Tabs';
+> import TabItem from '@theme/TabItem';
+
+多くの優れたベクターストアの選択肢がありますが、ここでは無料で、オープンソースで、ローカルマシン上で完全に動作するいくつかを紹介します。さらに、ホストされている多くの素晴らしいサービスについては、全ての統合をレビューしてください。
+
+> There are many great vector store options, here are a few that are free, open-source, and run entirely on your local machine. Review all integrations for many great hosted offerings.
 
 <Tabs>
   <TabItem value="chroma" label="Chroma" default>
 
-This walkthrough uses the `chroma` vector database, which runs on your local machine as a library.
+このウォークスルーでは、ローカルマシン上のライブラリとして動作する `chroma` ベクターデータベースを使用します。
+
+> This walkthrough uses the `chroma` vector database, which runs on your local machine as a library.
 
 ```bash
 pip install chromadb
 ```
 
-We want to use OpenAIEmbeddings so we have to get the OpenAI API Key.
+OpenAIEmbeddingsを使用するためには、OpenAI APIキーを取得する必要があります。
 
+> We want to use OpenAIEmbeddings so we have to get the OpenAI API Key.
 
 ```python
 import os
@@ -58,14 +74,17 @@ db = Chroma.from_documents(documents, OpenAIEmbeddings())
   </TabItem>
   <TabItem value="faiss" label="FAISS">
 
-This walkthrough uses the `FAISS` vector database, which makes use of the Facebook AI Similarity Search (FAISS) library.
+このウォークスルーでは、Facebook AI Similarity Search（FAISS）ライブラリを利用した`FAISS`ベクターデータベースを使用します。
+
+> This walkthrough uses the `FAISS` vector database, which makes use of the Facebook AI Similarity Search (FAISS) library.
 
 ```bash
 pip install faiss-cpu
 ```
 
-We want to use OpenAIEmbeddings so we have to get the OpenAI API Key.
+OpenAIEmbeddingsを使用するためには、OpenAI API Keyを取得する必要があります。
 
+> We want to use OpenAIEmbeddings so we have to get the OpenAI API Key.
 
 ```python
 import os
@@ -90,14 +109,17 @@ db = FAISS.from_documents(documents, OpenAIEmbeddings())
   </TabItem>
   <TabItem value="lance" label="Lance">
 
-This notebook shows how to use functionality related to the LanceDB vector database based on the Lance data format.
+このノートブックは、Lanceデータフォーマットに基づくLanceDBベクターデータベースに関連する機能の使用方法を示しています。
+
+> This notebook shows how to use functionality related to the LanceDB vector database based on the Lance data format.
 
 ```bash
 pip install lancedb
 ```
 
-We want to use OpenAIEmbeddings so we have to get the OpenAI API Key.
+OpenAIEmbeddingsを使用するためには、OpenAI APIキーを取得する必要があります。
 
+> We want to use OpenAIEmbeddings so we have to get the OpenAI API Key.
 
 ```python
 import os
@@ -137,9 +159,7 @@ db = LanceDB.from_documents(documents, OpenAIEmbeddings(), connection=table)
   </TabItem>
 </Tabs>
 
-
-
-### Similarity search
+### Similarity search | 類似性検索
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
@@ -161,9 +181,11 @@ print(docs[0].page_content)
 
 </CodeOutputBlock>
 
-### Similarity search by vector
+### Similarity search by vector | ベクトルによる類似性検索
 
-It is also possible to do a search for documents similar to a given embedding vector using `similarity_search_by_vector` which accepts an embedding vector as a parameter instead of a string.
+与えられた埋め込みベクトルに類似するドキュメントを検索することも可能です。そのためには、文字列の代わりに埋め込みベクトルをパラメータとして受け取る `similarity_search_by_vector` を使用します。
+
+> It is also possible to do a search for documents similar to a given embedding vector using `similarity_search_by_vector` which accepts an embedding vector as a parameter instead of a string.
 
 ```python
 embedding_vector = OpenAIEmbeddings().embed_query(query)
@@ -171,7 +193,9 @@ docs = db.similarity_search_by_vector(embedding_vector)
 print(docs[0].page_content)
 ```
 
-The query is the same, and so the result is also the same.
+クエリが同じなので、結果も同じです。
+
+> The query is the same, and so the result is also the same.
 
 <CodeOutputBlock lang="python">
 
@@ -187,13 +211,19 @@ The query is the same, and so the result is also the same.
 
 </CodeOutputBlock>
 
-## Asynchronous operations
+## Asynchronous operations | 非同期操作
 
-Vector stores are usually run as a separate service that requires some IO operations, and therefore they might be called asynchronously. That gives performance benefits as you don't waste time waiting for responses from external services. That might also be important if you work with an asynchronous framework, such as [FastAPI](https://fastapi.tiangolo.com/).
+ベクターストアは通常、いくつかのIO操作が必要な別のサービスとして運用され、そのため非同期に呼び出されることがあります。これにより、外部サービスからの応答を待つ時間を無駄にすることなく、パフォーマンスの利点を享受できます。また、[FastAPI](https://fastapi.tiangolo.com/)のような非同期フレームワークを使用している場合には、これが特に重要になることもあります。
 
-LangChain supports async operation on vector stores. All the methods might be called using their async counterparts, with the prefix `a`, meaning `async`.
+> Vector stores are usually run as a separate service that requires some IO operations, and therefore they might be called asynchronously. That gives performance benefits as you don't waste time waiting for responses from external services. That might also be important if you work with an asynchronous framework, such as [FastAPI](https://fastapi.tiangolo.com/).
 
-`Qdrant` is a vector store, which supports all the async operations, thus it will be used in this walkthrough.
+LangChainはベクターストアに対する非同期操作をサポートしています。すべてのメソッドは、`async`を意味する接頭辞`a`を付けた非同期版で呼び出すことが可能です。
+
+> LangChain supports async operation on vector stores. All the methods might be called using their async counterparts, with the prefix `a`, meaning `async`.
+
+`Qdrant`はベクターストアであり、非同期操作をすべてサポートしているため、このウォークスルーで使用されます。
+
+> `Qdrant` is a vector store, which supports all the async operations, thus it will be used in this walkthrough.
 
 ```bash
 pip install qdrant-client
@@ -203,13 +233,13 @@ pip install qdrant-client
 from langchain.vectorstores import Qdrant
 ```
 
-### Create a vector store asynchronously
+### Create a vector store asynchronously | 非同期にベクトルストアを作成する
 
 ```python
 db = await Qdrant.afrom_documents(documents, embeddings, "http://localhost:6333")
 ```
 
-### Similarity search
+### Similarity search | 類似性検索
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
@@ -231,16 +261,18 @@ print(docs[0].page_content)
 
 </CodeOutputBlock>
 
-### Similarity search by vector
+### Similarity search by vector | ベクトルによる類似性検索
 
 ```python
 embedding_vector = embeddings.embed_query(query)
 docs = await db.asimilarity_search_by_vector(embedding_vector)
 ```
 
-## Maximum marginal relevance search (MMR)
+## Maximum marginal relevance search (MMR) | 最大限の周辺関連性検索（MMR）
 
-Maximal marginal relevance optimizes for similarity to query **and** diversity among selected documents. It is also supported in async API.
+最大限の周辺関連性は、クエリへの類似性と選択されたドキュメント間の多様性の両方を最適化します。これは非同期APIでもサポートされています。
+
+> Maximal marginal relevance optimizes for similarity to query **and** diversity among selected documents. It is also supported in async API.
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"

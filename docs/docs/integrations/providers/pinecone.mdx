@@ -1,24 +1,30 @@
-# Pinecone
+# Pinecone | Pinecone
 
->[Pinecone](https://docs.pinecone.io/docs/overview) is a vector database with broad functionality.
+> [Pinecone](https://docs.pinecone.io/docs/overview)は、幅広い機能を持つベクターデータベースです。
+>
+> > [Pinecone](https://docs.pinecone.io/docs/overview) is a vector database with broad functionality.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+Python SDKをインストールする：
 
-Install the Python SDK:
+> Install the Python SDK:
 
 ```bash
 pip install pinecone-client
 ```
 
+## Vector store | ベクトルストア
 
-## Vector store
+Pineconeインデックスを操作するためのラッパーが存在し、ベクトルストアとして使用することが可能です。これはセマンティック検索や例示選択のために利用できます。
 
-There exists a wrapper around Pinecone indexes, allowing you to use it as a vectorstore,
-whether for semantic search or example selection.
+> There exists a wrapper around Pinecone indexes, allowing you to use it as a vectorstore,
+> whether for semantic search or example selection.
 
 ```python
 from langchain.vectorstores import Pinecone
 ```
 
-For a more detailed walkthrough of the Pinecone vectorstore, see [this notebook](/docs/integrations/vectorstores/pinecone)
+Pinecone vectorstoreのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/pinecone)をご覧ください。
+
+> For a more detailed walkthrough of the Pinecone vectorstore, see [this notebook](/docs/integrations/vectorstores/pinecone)

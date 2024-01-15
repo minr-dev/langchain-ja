@@ -1,24 +1,32 @@
-# C Transformers
+# C Transformers | C Transformers
 
-This page covers how to use the [C Transformers](https://github.com/marella/ctransformers) library within LangChain.
-It is broken into two parts: installation and setup, and then references to specific C Transformers wrappers.
+このページでは、LangChain内で[C Transformers](https://github.com/marella/ctransformers)ライブラリを使用する方法について説明しています。内容はインストールとセットアップ、そして特定のC Transformersラッパーへの参照という2つのパートに分けられています。
 
-## Installation and Setup
+> This page covers how to use the [C Transformers](https://github.com/marella/ctransformers) library within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific C Transformers wrappers.
 
-- Install the Python package with `pip install ctransformers`
-- Download a supported [GGML model](https://huggingface.co/TheBloke) (see [Supported Models](https://github.com/marella/ctransformers#supported-models))
+## Installation and Setup | インストールとセットアップ
 
-## Wrappers
+* `pip install ctransformers` を使用してPythonパッケージをインストールしてください
+  > Install the Python package with `pip install ctransformers`
+* [GGMLモデル](https://huggingface.co/TheBloke)をダウンロードしてください（[対応モデル](https://github.com/marella/ctransformers#supported-models)を参照してください）。
+  > Download a supported [GGML model](https://huggingface.co/TheBloke) (see [Supported Models](https://github.com/marella/ctransformers#supported-models))
 
-### LLM
+## Wrappers | ラッパー
 
-There exists a CTransformers LLM wrapper, which you can access with:
+### LLM | LLM
+
+CTransformers LLMラッパーが存在し、以下の方法でアクセスできます：
+
+> There exists a CTransformers LLM wrapper, which you can access with:
 
 ```python
 from langchain.llms import CTransformers
 ```
 
-It provides a unified interface for all models:
+すべてのモデルに対して統一されたインターフェースを提供します：
+
+> It provides a unified interface for all models:
 
 ```python
 llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2')
@@ -26,25 +34,33 @@ llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2')
 print(llm('AI is going to'))
 ```
 
-If you are getting `illegal instruction` error, try using `lib='avx'` or `lib='basic'`:
+`illegal instruction` エラーが発生した場合は、`lib='avx'` または `lib='basic'` を使用してみてください。
+
+> If you are getting `illegal instruction` error, try using `lib='avx'` or `lib='basic'`:
 
 ```py
 llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2', lib='avx')
 ```
 
-It can be used with models hosted on the Hugging Face Hub:
+Hugging Face Hubにホストされているモデルで使用できます：
+
+> It can be used with models hosted on the Hugging Face Hub:
 
 ```py
 llm = CTransformers(model='marella/gpt-2-ggml')
 ```
 
-If a model repo has multiple model files (`.bin` files), specify a model file using:
+もしモデルリポジトリに複数のモデルファイル（`.bin` ファイル）がある場合は、以下を使用してモデルファイルを指定してください：
+
+> If a model repo has multiple model files (`.bin` files), specify a model file using:
 
 ```py
 llm = CTransformers(model='marella/gpt-2-ggml', model_file='ggml-model.bin')
 ```
 
-Additional parameters can be passed using the `config` parameter:
+`config` パラメータを使用して、追加のパラメータを渡すことができます：
+
+> Additional parameters can be passed using the `config` parameter:
 
 ```py
 config = {'max_new_tokens': 256, 'repetition_penalty': 1.1}
@@ -52,6 +68,10 @@ config = {'max_new_tokens': 256, 'repetition_penalty': 1.1}
 llm = CTransformers(model='marella/gpt-2-ggml', config=config)
 ```
 
-See [Documentation](https://github.com/marella/ctransformers#config) for a list of available parameters.
+利用可能なパラメータのリストについては、[ドキュメント](https://github.com/marella/ctransformers#config)をご覧ください。
 
-For a more detailed walkthrough of this, see [this notebook](/docs/integrations/llms/ctransformers).
+> See [Documentation](https://github.com/marella/ctransformers#config) for a list of available parameters.
+
+これについてのより詳細なウォークスルーは、[このノートブック](/docs/integrations/llms/ctransformers)をご覧ください。
+
+> For a more detailed walkthrough of this, see [this notebook](/docs/integrations/llms/ctransformers).

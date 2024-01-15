@@ -1,8 +1,13 @@
-# Caching
-LangChain provides an optional caching layer for LLMs. This is useful for two reasons:
+# Caching | キャッシュ
 
-It can save you money by reducing the number of API calls you make to the LLM provider, if you're often requesting the same completion multiple times.
-It can speed up your application by reducing the number of API calls you make to the LLM provider.
+LangChainはLLM向けのオプショナルなキャッシングレイヤーを提供しています。これが便利な理由は2つあります：
+
+> LangChain provides an optional caching layer for LLMs. This is useful for two reasons:
+
+同じ出力を複数回要求している場合、LLMプロバイダーへのAPIコールの回数を減らすことで、費用を節約することができます。また、LLMプロバイダーへのAPIコールの回数を減らすことで、アプリケーションの速度を向上させることができます。
+
+> It can save you money by reducing the number of API calls you make to the LLM provider, if you're often requesting the same completion multiple times.
+> It can speed up your application by reducing the number of API calls you make to the LLM provider.
 
 ```python
 from langchain.globals import set_llm_cache
@@ -12,8 +17,7 @@ from langchain.llms import OpenAI
 llm = OpenAI(model_name="gpt-3.5-turbo-instruct", n=2, best_of=2)
 ```
 
-## In Memory Cache
-
+## In Memory Cache | インメモリキャッシュ
 
 ```python
 from langchain.cache import InMemoryCache
@@ -35,7 +39,6 @@ llm.predict("Tell me a joke")
 
 </CodeOutputBlock>
 
-
 ```python
 # The second time it is, so it goes faster
 llm.predict("Tell me a joke")
@@ -53,20 +56,17 @@ llm.predict("Tell me a joke")
 
 </CodeOutputBlock>
 
-## SQLite Cache
-
+## SQLite Cache | SQLite キャッシュ
 
 ```bash
 rm .langchain.db
 ```
-
 
 ```python
 # We can do the same thing with a SQLite cache
 from langchain.cache import SQLiteCache
 set_llm_cache(SQLiteCache(database_path=".langchain.db"))
 ```
-
 
 ```python
 # The first time, it is not yet in cache, so it should take longer
@@ -85,7 +85,6 @@ llm.predict("Tell me a joke")
 
 </CodeOutputBlock>
 
-
 ```python
 # The second time it is, so it goes faster
 llm.predict("Tell me a joke")
@@ -103,17 +102,20 @@ llm.predict("Tell me a joke")
 
 </CodeOutputBlock>
 
-## Optional caching in chains
-You can also turn off caching for particular nodes in chains. Note that because of certain interfaces, it's often easier to construct the chain first, and then edit the LLM afterwards.
+## Optional caching in chains | チェーン内のオプショナルキャッシング
 
-As an example, we will load a summarizer map-reduce chain. We will cache results for the map-step, but then not freeze it for the combine step.
+チェーン内の特定のノードでキャッシングを無効にすることもできます。特定のインターフェースのため、通常は先にチェーンを構築してから、その後でLLMを編集する方が簡単です。
 
+> You can also turn off caching for particular nodes in chains. Note that because of certain interfaces, it's often easier to construct the chain first, and then edit the LLM afterwards.
+
+例として、サマライザーのマップリデュースチェーンを読み込みます。マップステップの結果はキャッシュしますが、コンバインステップではキャッシュを固定しません。
+
+> As an example, we will load a summarizer map-reduce chain. We will cache results for the map-step, but then not freeze it for the combine step.
 
 ```python
 llm = OpenAI(model_name="gpt-3.5-turbo-instruct")
 no_cache_llm = OpenAI(model_name="gpt-3.5-turbo-instruct", cache=False)
 ```
-
 
 ```python
 from langchain.text_splitter import CharacterTextSplitter
@@ -122,13 +124,11 @@ from langchain.chains.mapreduce import MapReduceChain
 text_splitter = CharacterTextSplitter()
 ```
 
-
 ```python
 with open('../../../state_of_the_union.txt') as f:
     state_of_the_union = f.read()
 texts = text_splitter.split_text(state_of_the_union)
 ```
-
 
 ```python
 from langchain.docstore.document import Document
@@ -136,11 +136,9 @@ docs = [Document(page_content=t) for t in texts[:3]]
 from langchain.chains.summarize import load_summarize_chain
 ```
 
-
 ```python
 chain = load_summarize_chain(llm, chain_type="map_reduce", reduce_llm=no_cache_llm)
 ```
-
 
 ```python
 chain.run(docs)
@@ -158,8 +156,9 @@ chain.run(docs)
 
 </CodeOutputBlock>
 
-When we run it again, we see that it runs substantially faster but the final answer is different. This is due to caching at the map steps, but not at the reduce step.
+再度実行すると、かなり速く動作することがわかりますが、最終的な答えが異なります。これは、マップステップでキャッシングが行われているが、リデュースステップでは行われていないためです。
 
+> When we run it again, we see that it runs substantially faster but the final answer is different. This is due to caching at the map steps, but not at the reduce step.
 
 ```python
 chain.run(docs)
@@ -176,7 +175,6 @@ chain.run(docs)
 ```
 
 </CodeOutputBlock>
-
 
 ```bash
 rm .langchain.db sqlite.db

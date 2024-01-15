@@ -1,80 +1,98 @@
-# Tencent
+# Tencent | Tencent
 
->[Tencent Holdings Ltd. (Wikipedia)](https://en.wikipedia.org/wiki/Tencent) (Chinese: 腾讯; pinyin: Téngxùn) 
-> is a Chinese multinational technology conglomerate and holding company headquartered 
-> in Shenzhen. `Tencent` is one of the highest grossing multimedia companies in the 
-> world based on revenue. It is also the world's largest company in the video game industry
-> based on its equity investments.
- 
+> [Tencent Holdings Ltd. (Wikipedia)](https://en.wikipedia.org/wiki/Tencent)（中国語: 腾讯; ピンイン: Téngxùn）は、中国の多国籍技術コングロマリットであり、深センに本社を置く持株会社です。`Tencent`は、収益に基づいて世界で最も収益の高いマルチメディア企業の一つです。また、エクイティ投資に基づいて世界最大のビデオゲーム業界の企業でもあります。
+>
+> > [Tencent Holdings Ltd. (Wikipedia)](https://en.wikipedia.org/wiki/Tencent) (Chinese: 腾讯; pinyin: Téngxùn)
+> > is a Chinese multinational technology conglomerate and holding company headquartered
+> > in Shenzhen. `Tencent` is one of the highest grossing multimedia companies in the
+> > world based on revenue. It is also the world's largest company in the video game industry
+> > based on its equity investments.
 
-## Chat model 
+## Chat model | チャットモデル
 
->[Tencent's hybrid model API](https://cloud.tencent.com/document/product/1729) (`Hunyuan API`) 
-> implements dialogue communication, content generation, 
-> analysis and understanding, and can be widely used in various scenarios such as intelligent 
-> customer service, intelligent marketing, role playing, advertising, copyrighting, product description,
-> script creation, resume generation, article writing, code generation, data analysis, and content
-> analysis.
+> [TencentのハイブリッドモデルAPI](https://cloud.tencent.com/document/product/1729)（`Hunyuan API`）は、対話コミュニケーション、コンテンツ生成、分析と理解を実装しており、インテリジェントなカスタマーサービス、インテリジェントマーケティング、ロールプレイング、広告、コピーライティング、製品説明、スクリプト作成、履歴書作成、記事執筆、コード生成、データ分析、コンテンツ分析など、様々なシナリオで広く使用されています。
+>
+> > [Tencent's hybrid model API](https://cloud.tencent.com/document/product/1729) (`Hunyuan API`)
+> > implements dialogue communication, content generation,
+> > analysis and understanding, and can be widely used in various scenarios such as intelligent
+> > customer service, intelligent marketing, role playing, advertising, copyrighting, product description,
+> > script creation, resume generation, article writing, code generation, data analysis, and content
+> > analysis.
 
+詳細については、[このノートブック](/docs/integrations/chat/tencent_hunyuan)をご覧ください。
 
-For more information, see [this notebook](/docs/integrations/chat/tencent_hunyuan)
+> For more information, see [this notebook](/docs/integrations/chat/tencent_hunyuan)
 
 ```python
 from langchain.chat_models import ChatHunyuan
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
->[Tencent Cloud VectorDB](https://www.tencentcloud.com/products/vdb) is a fully managed, 
-> self-developed enterprise-level distributed database service
->dedicated to storing, retrieving, and analyzing multidimensional vector data. The database supports a variety of index
->types and similarity calculation methods, and a single index supports 1 billion vectors, millions of QPS, and
->millisecond query latency. `Tencent Cloud Vector Database` can not only provide an external knowledge base for large
->models and improve the accuracy of large models' answers, but also be widely used in AI fields such as
->recommendation systems, NLP services, computer vision, and intelligent customer service.
+> [Tencent Cloud VectorDB](https://www.tencentcloud.com/products/vdb)は、完全に管理された、自社開発のエンタープライズレベルの分散データベースサービスで、多次元ベクトルデータの保存、検索、分析に特化しています。このデータベースは様々なインデックスタイプと類似性計算方法をサポートしており、単一のインデックスで10億のベクトル、数百万のQPS、ミリ秒単位のクエリレイテンシーをサポートします。`Tencent Cloud Vector Database`は、大規模モデルの外部知識ベースを提供し、大規模モデルの回答の精度を向上させるだけでなく、推薦システム、NLPサービス、コンピュータビジョン、インテリジェントカスタマーサービスなどのAI分野で広く使用されています。
+>
+> > [Tencent Cloud VectorDB](https://www.tencentcloud.com/products/vdb) is a fully managed,
+> > self-developed enterprise-level distributed database service
+> > dedicated to storing, retrieving, and analyzing multidimensional vector data. The database supports a variety of index
+> > types and similarity calculation methods, and a single index supports 1 billion vectors, millions of QPS, and
+> > millisecond query latency. `Tencent Cloud Vector Database` can not only provide an external knowledge base for large
+> > models and improve the accuracy of large models' answers, but also be widely used in AI fields such as
+> > recommendation systems, NLP services, computer vision, and intelligent customer service.
 
-Install the Python SDK:
+Python SDKをインストールする：
+
+> Install the Python SDK:
 
 ```bash
 pip install tcvectordb
 ```
 
-For more information, see [this notebook](/docs/integrations/vectorstores/tencentvectordb)
+詳細については、[このノートブック](/docs/integrations/vectorstores/tencentvectordb)をご覧ください。
+
+> For more information, see [this notebook](/docs/integrations/vectorstores/tencentvectordb)
 
 ```python
 from langchain.vectorstores import TencentVectorDB
 ```
 
-## Document Loaders
+## Document Loaders | ドキュメントローダー
 
-### Tencent COS
+### Tencent COS | Tencent COS
 
->[Tencent Cloud Object Storage (COS)](https://www.tencentcloud.com/products/cos) is a distributed 
-> storage service that enables you to store any amount of data from anywhere via HTTP/HTTPS protocols. 
-> `COS` has no restrictions on data structure or format. It also has no bucket size limit and 
-> partition management, making it suitable for virtually any use case, such as data delivery, 
-> data processing, and data lakes. COS provides a web-based console, multi-language SDKs and APIs, 
-> command line tool, and graphical tools. It works well with Amazon S3 APIs, allowing you to quickly 
-> access community tools and plugins.
+> [Tencent Cloud Object Storage (COS)](https://www.tencentcloud.com/products/cos)は、HTTP/HTTPSプロトコルを介してどこからでも任意の量のデータを保存できる分散ストレージサービスです。`COS`はデータ構造や形式に制限がなく、バケットサイズの制限やパーティション管理も必要ありません。これにより、データ配信、データ処理、データレイクなど、ほぼあらゆるユースケースに適しています。COSはウェブベースのコンソール、多言語対応のSDKとAPI、コマンドラインツール、グラフィカルツールを提供しています。また、Amazon S3 APIと互換性があるため、コミュニティのツールやプラグインに迅速にアクセスできます。
+>
+> > [Tencent Cloud Object Storage (COS)](https://www.tencentcloud.com/products/cos) is a distributed
+> > storage service that enables you to store any amount of data from anywhere via HTTP/HTTPS protocols.
+> > `COS` has no restrictions on data structure or format. It also has no bucket size limit and
+> > partition management, making it suitable for virtually any use case, such as data delivery,
+> > data processing, and data lakes. COS provides a web-based console, multi-language SDKs and APIs,
+> > command line tool, and graphical tools. It works well with Amazon S3 APIs, allowing you to quickly
+> > access community tools and plugins.
 
-Install the Python SDK:
+Python SDKをインストールする：
+
+> Install the Python SDK:
 
 ```bash
 pip install cos-python-sdk-v5
 ```
 
-#### Tencent COS Directory
+#### Tencent COS Directory | Tencent COS ディレクトリ
 
-For more information, see [this notebook](/docs/integrations/document_loaders/tencent_cos_directory)
+詳細については、[このノートブック](/docs/integrations/document_loaders/tencent_cos_directory)をご覧ください。
+
+> For more information, see [this notebook](/docs/integrations/document_loaders/tencent_cos_directory)
 
 ```python
 from langchain.document_loaders import TencentCOSDirectoryLoader
 from qcloud_cos import CosConfig
 ```
 
-#### Tencent COS File
+#### Tencent COS File | Tencent COSファイル
 
-For more information, see [this notebook](/docs/integrations/document_loaders/tencent_cos_file)
+詳細については、[このノートブック](/docs/integrations/document_loaders/tencent_cos_file)をご覧ください。
+
+> For more information, see [this notebook](/docs/integrations/document_loaders/tencent_cos_file)
 
 ```python
 from langchain.document_loaders import TencentCOSFileLoader

@@ -1,17 +1,23 @@
-# GPT4All
+# GPT4All | GPT4All
 
-This page covers how to use the `GPT4All` wrapper within LangChain. The tutorial is divided into two parts: installation and setup, followed by usage with an example.
+このページでは、LangChain内での`GPT4All`ラッパーの使用方法について説明します。チュートリアルは、インストールとセットアップに続いて、例を用いた使用方法の2部構成になっています。
 
-## Installation and Setup
+> This page covers how to use the `GPT4All` wrapper within LangChain. The tutorial is divided into two parts: installation and setup, followed by usage with an example.
 
-- Install the Python package with `pip install pyllamacpp`
-- Download a [GPT4All model](https://github.com/nomic-ai/pyllamacpp#supported-model) and place it in your desired directory
+## Installation and Setup | インストールとセットアップ
 
-## Usage
+* `pip install pyllamacpp`でPythonパッケージをインストールしてください
+  > Install the Python package with `pip install pyllamacpp`
+* [GPT4Allモデル](https://github.com/nomic-ai/pyllamacpp#supported-model)をダウンロードして、ご希望のディレクトリに配置してください。
+  > Download a [GPT4All model](https://github.com/nomic-ai/pyllamacpp#supported-model) and place it in your desired directory
 
-### GPT4All
+## Usage | 使用方法
 
-To use the GPT4All wrapper, you need to provide the path to the pre-trained model file and the model's configuration.
+### GPT4All | GPT4All
+
+GPT4Allラッパーを使用するには、事前にトレーニングされたモデルファイルへのパスとモデルの構成を提供する必要があります。
+
+> To use the GPT4All wrapper, you need to provide the path to the pre-trained model file and the model's configuration.
 
 ```python
 from langchain.llms import GPT4All
@@ -23,9 +29,13 @@ model = GPT4All(model="./models/gpt4all-model.bin", n_ctx=512, n_threads=8)
 response = model("Once upon a time, ")
 ```
 
-You can also customize the generation parameters, such as n_predict, temp, top_p, top_k, and others.
+また、n\_predict、temp、top\_p、top\_kなどの生成パラメータをカスタマイズすることもできます。
 
-To stream the model's predictions, add in a CallbackManager.
+> You can also customize the generation parameters, such as n\_predict, temp, top\_p, top\_k, and others.
+
+モデルの予測をストリーミングするには、CallbackManagerを追加してください。
+
+> To stream the model's predictions, add in a CallbackManager.
 
 ```python
 from langchain.llms import GPT4All
@@ -41,8 +51,12 @@ model = GPT4All(model="./models/gpt4all-model.bin", n_ctx=512, n_threads=8)
 model("Once upon a time, ", callbacks=callbacks)
 ```
 
-## Model File
+## Model File | モデルファイル
 
-You can find links to model file downloads in the [pyllamacpp](https://github.com/nomic-ai/pyllamacpp) repository.
+モデルファイルのダウンロードリンクは、[pyllamacpp](https://github.com/nomic-ai/pyllamacpp)リポジトリで見つけることができます。
 
-For a more detailed walkthrough of this, see [this notebook](/docs/integrations/llms/gpt4all)
+> You can find links to model file downloads in the [pyllamacpp](https://github.com/nomic-ai/pyllamacpp) repository.
+
+これについてのより詳細なウォークスルーは、[このノートブック](/docs/integrations/llms/gpt4all)をご覧ください。
+
+> For a more detailed walkthrough of this, see [this notebook](/docs/integrations/llms/gpt4all)

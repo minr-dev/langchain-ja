@@ -1,72 +1,111 @@
-# Zep
+# Zep | Zep
 
-## [Fast, Scalable Building Blocks for LLM Apps](http://www.getzep.com)
-Zep is an open source platform for productionizing LLM apps. Go from a prototype
-built in LangChain or LlamaIndex, or a custom app, to production in minutes without
-rewriting code.
+## [Fast, Scalable Building Blocks for LLM Apps](http://www.getzep.com) | [高速でスケーラブルなLLMアプリの構築ブロック](http://www.getzep.com)
 
-Key Features:
+Zepは、LLMアプリを本番環境で稼働させるためのオープンソースプラットフォームです。LangChainやLlamaIndexで構築したプロトタイプ、またはカスタムアプリを、コードを書き換えることなく数分で本番運用に移行できます。
 
-- **Fast!** Zep operates independently of the your chat loop, ensuring a snappy user experience.
-- **Chat History Memory, Archival, and Enrichment**, populate your prompts with relevant chat history, sumamries, named entities, intent data, and more.
-- **Vector Search over Chat History and Documents** Automatic embedding of documents, chat histories, and summaries. Use Zep's similarity or native MMR Re-ranked search to find the most relevant.
-- **Manage Users and their Chat Sessions** Users and their Chat Sessions are first-class citizens in Zep, allowing you to manage user interactions with your bots or agents easily.
-- **Records Retention and Privacy Compliance** Comply with corporate and regulatory mandates for records retention while ensuring compliance with privacy regulations such as CCPA and GDPR. Fulfill *Right To Be Forgotten* requests with a single API call
+> Zep is an open source platform for productionizing LLM apps. Go from a prototype
+> built in LangChain or LlamaIndex, or a custom app, to production in minutes without
+> rewriting code.
 
-Zep project: [https://github.com/getzep/zep](https://github.com/getzep/zep)
-Docs: [https://docs.getzep.com/](https://docs.getzep.com/)
+主な特徴：
 
-## Installation and Setup
+> Key Features:
 
-1. Install the Zep service. See the [Zep Quick Start Guide](https://docs.getzep.com/deployment/quickstart/).
+* **速い！** Zepは、あなたのチャットループとは独立して動作するため、スナッピーなユーザー体験を提供します。
+  > **Fast!** Zep operates independently of the your chat loop, ensuring a snappy user experience.
+* **チャット履歴の記憶、アーカイブ、および充実化**では、関連するチャット履歴、要約、名前付きエンティティ、意図データなどをプロンプトに組み込んで充実させることができます。
+  > **Chat History Memory, Archival, and Enrichment**, populate your prompts with relevant chat history, sumamries, named entities, intent data, and more.
+* **チャット履歴とドキュメントにおけるベクター検索** ドキュメント、チャット履歴、要約を自動的に埋め込む機能。Zepの類似性検索またはネイティブMMR再ランク付け検索を利用して、最も関連性の高い情報を見つけ出すことができます。
+  > **Vector Search over Chat History and Documents** Automatic embedding of documents, chat histories, and summaries. Use Zep's similarity or native MMR Re-ranked search to find the most relevant.
+* **ユーザーとチャットセッションの管理** Zepでは、ユーザーとそのチャットセッションを第一級の市民として扱い、ボットやエージェントとのユーザーのインタラクションを簡単に管理できます。
+  > **Manage Users and their Chat Sessions** Users and their Chat Sessions are first-class citizens in Zep, allowing you to manage user interactions with your bots or agents easily.
+* **記録保存とプライバシーのコンプライアンス** 企業や規制の記録保存要件に準拠しつつ、CCPAやGDPRなどのプライバシー規制にも適合を保証します。*忘れられる権利*の要請に対しては、単一のAPIコールで対応可能です。
+  > **Records Retention and Privacy Compliance** Comply with corporate and regulatory mandates for records retention while ensuring compliance with privacy regulations such as CCPA and GDPR. Fulfill *Right To Be Forgotten* requests with a single API call
 
-2. Install the Zep Python SDK:
+Zepプロジェクト: <https://github.com/getzep/zep>
+ドキュメント: <https://docs.getzep.com/>
+
+> Zep project: <https://github.com/getzep/zep>
+> Docs: <https://docs.getzep.com/>
+
+## Installation and Setup | インストールとセットアップ
+
+1. Zepサービスをインストールしてください。[Zepクイックスタートガイド](https://docs.getzep.com/deployment/quickstart/)をご覧ください。
+   > Install the Zep service. See the [Zep Quick Start Guide](https://docs.getzep.com/deployment/quickstart/).
+
+2. Zep Python SDKのインストール方法：
+   > Install the Zep Python SDK:
 
 ```bash
 pip install zep_python
 ```
 
-## Zep Memory
+## Zep Memory | Zep Memory
 
-Zep's [Memory API](https://docs.getzep.com/sdk/chat_history/) persists your app's chat history and metadata to a Session, enriches the memory, automatically generates summaries, and enables vector similarity search over historical chat messages and summaries.
+Zepの[Memory API](https://docs.getzep.com/sdk/chat_history/)は、アプリのチャット履歴とメタデータをセッションに永続化し、記憶を豊かにし、自動的に要約を生成し、過去のチャットメッセージと要約に対してベクトル類似性検索を行えるようにします。
 
-There are two approaches to populating your prompt with chat history:
+> Zep's [Memory API](https://docs.getzep.com/sdk/chat_history/) persists your app's chat history and metadata to a Session, enriches the memory, automatically generates summaries, and enables vector similarity search over historical chat messages and summaries.
 
-1. Retrieve the most recent N messages (and potentionally a summary) from a Session and use them to construct your prompt.
-2. Search over the Session's chat history for messages that are relevant and use them to construct your prompt.
+プロンプトをチャット履歴で埋める方法には、二つのアプローチがあります：
 
-Both of these approaches may be useful, with the first providing the LLM with context as to the most recent interactions with a human. The second approach enables you to look back further in the chat history and retrieve messages that are relevant to the current conversation in a token-efficient manner. 
+> There are two approaches to populating your prompt with chat history:
+
+1. セッションから最新のN件のメッセージ（および場合によっては要約も）を取得し、それらを使用してプロンプトを構築してください。
+   > Retrieve the most recent N messages (and potentionally a summary) from a Session and use them to construct your prompt.
+2. セッションのチャット履歴を検索し、関連するメッセージを見つけ出して、それらを使ってプロンプトを構築してください。
+   > Search over the Session's chat history for messages that are relevant and use them to construct your prompt.
+
+これらのアプローチはどちらも有用で、最初のアプローチはLLMに人間との最新のインタラクションに関する文脈を提供します。二番目のアプローチでは、チャット履歴を遡って現在の会話に関連するメッセージをトークン効率的に取得することができます。
+
+> Both of these approaches may be useful, with the first providing the LLM with context as to the most recent interactions with a human. The second approach enables you to look back further in the chat history and retrieve messages that are relevant to the current conversation in a token-efficient manner.
 
 ```python
 from langchain.memory import ZepMemory
 ```
 
-See a [RAG App Example here](/docs/docs/integrations/memory/zep_memory).
+[RAG Appの例はこちら](/docs/docs/integrations/memory/zep_memory)をご覧ください。
 
-## Memory Retriever
+> See a [RAG App Example here](/docs/docs/integrations/memory/zep_memory).
 
-Zep's Memory Retriever is a LangChain Retriever that enables you to retrieve messages from a Zep Session and use them to construct your prompt.
+## Memory Retriever | メモリーリトリーバー
 
-The Retriever supports searching over both individual messages and summaries of conversations. The latter is useful for providing rich, but succinct context to the LLM as to relevant past conversations.
+Zep's Memory RetrieverはLangChain Retrieverの一つで、Zepセッションからメッセージを取得し、それらを使用してあなたのプロンプトを構築することができます。
 
-Zep's Memory Retriever supports both similarity search and [Maximum Marginal Relevance (MMR) reranking](https://docs.getzep.com/sdk/search_query/). MMR search is useful for ensuring that the retrieved messages are diverse and not too similar to each other
+> Zep's Memory Retriever is a LangChain Retriever that enables you to retrieve messages from a Zep Session and use them to construct your prompt.
 
-See a [usage example](/docs/integrations/retrievers/zep_memorystore).
+Retrieverは、個別のメッセージと会話の要約の両方に対する検索をサポートしています。後者は、関連する過去の会話についてLLMに豊かでありながらも簡潔なコンテキストを提供するのに有用です。
+
+> The Retriever supports searching over both individual messages and summaries of conversations. The latter is useful for providing rich, but succinct context to the LLM as to relevant past conversations.
+
+Zep's Memory Retrieverは、類似性検索と[Maximum Marginal Relevance（MMR）の再ランキング](https://docs.getzep.com/sdk/search_query/)の両方をサポートしています。MMR検索は、取得されたメッセージが多様であり、互いに似すぎていないことを確保するのに役立ちます。
+
+> Zep's Memory Retriever supports both similarity search and [Maximum Marginal Relevance (MMR) reranking](https://docs.getzep.com/sdk/search_query/). MMR search is useful for ensuring that the retrieved messages are diverse and not too similar to each other
+
+[使用例](/docs/integrations/retrievers/zep_memorystore)をご覧ください。
+
+> See a [usage example](/docs/integrations/retrievers/zep_memorystore).
 
 ```python
 from langchain.retrievers import ZepRetriever
 ```
 
-## Zep VectorStore
+## Zep VectorStore | Zep VectorStore
 
-Zep's [Document VectorStore API](https://docs.getzep.com/sdk/documents/) enables you to store and retrieve documents using vector similarity search. Zep doesn't require you to understand 
-distance functions, types of embeddings, or indexing best practices. You just pass in your chunked documents, and Zep handles the rest.
+Zepの[Document VectorStore API](https://docs.getzep.com/sdk/documents/)を利用すると、ベクトル類似性検索を使って文書を保存及び取得することができます。Zepを使用する際には、距離関数、埋め込みの種類、インデックス作成のベストプラクティスを理解する必要はありません。あなたが行うのは、文書をチャンクに分けて渡すことだけで、残りはZepが処理します。
 
-Zep supports both similarity search and [Maximum Marginal Relevance (MMR) reranking](https://docs.getzep.com/sdk/search_query/). 
-MMR search is useful for ensuring that the retrieved documents are diverse and not too similar to each other.
+> Zep's [Document VectorStore API](https://docs.getzep.com/sdk/documents/) enables you to store and retrieve documents using vector similarity search. Zep doesn't require you to understand
+> distance functions, types of embeddings, or indexing best practices. You just pass in your chunked documents, and Zep handles the rest.
+
+Zepは類似性検索と[最大限マージナル関連性（MMR）再ランキング](https://docs.getzep.com/sdk/search_query/)の両方をサポートしています。MMR検索は、取得されたドキュメントが多様性を持ち、互いに過度に似通っていないことを保証するのに役立ちます。
+
+> Zep supports both similarity search and [Maximum Marginal Relevance (MMR) reranking](https://docs.getzep.com/sdk/search_query/).
+> MMR search is useful for ensuring that the retrieved documents are diverse and not too similar to each other.
 
 ```python
 from langchain.vectorstores.zep import ZepVectorStore
 ```
 
-See a [usage example](/docs/integrations/vectorstores/zep).
+[使用例](/docs/integrations/vectorstores/zep)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/zep).

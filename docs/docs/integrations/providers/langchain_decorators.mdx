@@ -1,28 +1,40 @@
-# LangChain Decorators ✨
+# LangChain Decorators ✨ | LangChain デコレータ ✨
 
-~~~
+```
 Disclaimer: `LangChain decorators` is not created by the LangChain team and is not supported by it.
-~~~
+```
 
->`LangChain decorators` is a layer on the top of LangChain that provides syntactic sugar 🍭 for writing custom langchain prompts and chains
+> `LangChain decorators`は、カスタムのLangChainプロンプトやチェーンを書くためのシンタックスシュガー🍭を提供するLangChainの最上層にあるレイヤーです。
 >
->For Feedback, Issues, Contributions - please raise an issue here: 
->[ju-bezdek/langchain-decorators](https://github.com/ju-bezdek/langchain-decorators)
+> > `LangChain decorators` is a layer on the top of LangChain that provides syntactic sugar 🍭 for writing custom langchain prompts and chains
+>
+> フィードバック、問題点、貢献については、こちらでイシューを立ててください：[ju-bezdek/langchain-decorators](https://github.com/ju-bezdek/langchain-decorators)
+>
+> > For Feedback, Issues, Contributions - please raise an issue here:
+> > [ju-bezdek/langchain-decorators](https://github.com/ju-bezdek/langchain-decorators)
 
+主な原則と利点：
 
-Main principles and benefits:
+> Main principles and benefits:
 
-- more `pythonic` way of writing code
-- write multiline prompts that won't break your code flow with indentation
-- making use of IDE in-built support for **hinting**, **type checking** and **popup with docs** to quickly peek in the function to see the prompt, parameters it consumes etc.
-- leverage all the power of 🦜🔗 LangChain ecosystem
-- adding support for **optional parameters**
-- easily share parameters between the prompts by binding them to one class
+* より「Pythonらしい」コードの書き方
+  > more `pythonic` way of writing code
+* インデントを崩さないように複数行のプロンプトを書く方法
+  > write multiline prompts that won't break your code flow with indentation
+* IDEの組み込みサポートを活用して、**ヒント表示**、**型チェック**、そして**ドキュメント付きのポップアップ**を使い、関数内のプロンプトやそれが受け取るパラメータなどを素早く確認できます。
+  > making use of IDE in-built support for **hinting**, **type checking** and **popup with docs** to quickly peek in the function to see the prompt, parameters it consumes etc.
+* 🦜🔗 LangChain エコシステムのすべての力を活用する
+  > leverage all the power of 🦜🔗 LangChain ecosystem
+* オプションパラメーターのサポートを追加する
+  > adding support for **optional parameters**
+* パラメータを一つのクラスにバインドすることで、プロンプト間で簡単に共有できます
+  > easily share parameters between the prompts by binding them to one class
 
+以下は、**LangChain Decorators ✨** を使用して書かれたコードの簡単な例です
 
-Here is a simple example of a code written with **LangChain Decorators ✨**
+> Here is a simple example of a code written with **LangChain Decorators ✨**
 
-``` python
+```python
 
 @llm_prompt
 def write_me_short_post(topic:str, platform:str="twitter", audience:str = "developers")->str:
@@ -39,28 +51,41 @@ write_me_short_post(topic="starwars")
 write_me_short_post(topic="starwars", platform="redit")
 ```
 
-# Quick start
-## Installation
+# Quick start | クイックスタート
+
+## Installation | インストール
+
 ```bash
 pip install langchain_decorators
 ```
 
-## Examples
+## Examples | 例
 
-Good idea on how to start is to review the examples here:
- - [jupyter notebook](https://github.com/ju-bezdek/langchain-decorators/blob/main/example_notebook.ipynb)
- - [colab notebook](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=N4cf__D0E2Yk)
+始めるにあたっての良い方法は、こちらの例を見てみることです：
 
-# Defining other parameters
-Here we are just marking a function as a prompt with `llm_prompt` decorator, turning it effectively into a LLMChain. Instead of running it 
+> Good idea on how to start is to review the examples here:
 
+* [jupyter notebook](https://github.com/ju-bezdek/langchain-decorators/blob/main/example_notebook.ipynb)
+  > [jupyter notebook](https://github.com/ju-bezdek/langchain-decorators/blob/main/example_notebook.ipynb)
+* [colab notebook](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=N4cf__D0E2Yk)
+  > [colab notebook](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=N4cf__D0E2Yk)
 
-Standard LLMchain takes much more init parameter than just inputs_variables and prompt... here is this implementation detail hidden in the decorator.
-Here is how it works:
+# Defining other parameters | その他のパラメーターの定義
 
-1. Using **Global settings**:
+ここでは、関数を`llm_prompt`デコレータでプロンプトとしてマークし、それをLLMChainに効果的に変換しています。それを実行するのではなく
 
-``` python
+> Here we are just marking a function as a prompt with `llm_prompt` decorator, turning it effectively into a LLMChain. Instead of running it
+
+標準のLLMchainは、inputs\_variablesやpromptだけではなく、さらに多くの初期パラメータを必要とします... この実装の詳細はデコレータによって隠されています。
+その動作原理は以下の通りです：
+
+> Standard LLMchain takes much more init parameter than just inputs\_variables and prompt... here is this implementation detail hidden in the decorator.
+> Here is how it works:
+
+1. **グローバル設定**の使用：
+   > Using **Global settings**:
+
+```python
 # define global settings for all prompty (if not set - chatGPT is the current default)
 from langchain_decorators import GlobalSettings
 
@@ -70,9 +95,10 @@ GlobalSettings.define_settings(
 )
 ```
 
-2. Using predefined **prompt types**
+2. 事前定義された**プロンプトタイプ**の使用
+   > Using predefined **prompt types**
 
-``` python
+```python
 #You can change the default prompt types
 from langchain_decorators import PromptTypes, PromptTypeSettings
 
@@ -88,9 +114,10 @@ def write_a_complicated_code(app_idea:str)->str:
 
 ```
 
-3.  Define the settings **directly in the decorator**
+3. 設定を**デコレータ内で直接定義する**
+   > Define the settings **directly in the decorator**
 
-``` python
+```python
 from langchain.llms import OpenAI
 
 @llm_prompt(
@@ -102,9 +129,11 @@ def creative_writer(book_title:str)->str:
     ...
 ```
 
-## Passing a memory and/or callbacks:
+## Passing a memory and/or callbacks: | メモリおよび/またはコールバックを渡す方法：
 
-To pass any of these, just declare them in the function (or use kwargs to pass anything)
+これらのいずれかを渡すには、関数内で宣言するか、kwargsを使用して何でも渡すことができます。
+
+> To pass any of these, just declare them in the function (or use kwargs to pass anything)
 
 ```python
 
@@ -122,18 +151,28 @@ await write_me_short_post(topic="old movies")
 
 ```
 
-# Simplified streaming
+# Simplified streaming | シンプルなストリーミング
 
-If we want to leverage streaming:
- - we need to define prompt as async function 
- - turn on the streaming on the decorator, or we can define PromptType with streaming on
- - capture the stream using StreamingContext
+ストリーミングを活用したい場合：
 
-This way we just mark which prompt should be streamed, not needing to tinker with what LLM should we use, passing around the creating and distribute streaming handler into particular part of our chain... just turn the streaming on/off on prompt/prompt type...
+> If we want to leverage streaming:
 
-The streaming will happen only if we call it in streaming context ... there we can define a simple function to handle the stream
+* プロンプトを非同期関数として定義する必要があります
+  > we need to define prompt as async function
+* デコレータでストリーミングをオンにするか、またはストリーミングをオンにしてPromptTypeを定義することができます
+  > turn on the streaming on the decorator, or we can define PromptType with streaming on
+* StreamingContextを使用してストリームをキャプチャする
+  > capture the stream using StreamingContext
 
-``` python
+この方法では、どのLLMを使用するか決めたり、ストリーミングハンドラーを作成して特定のチェーン部分に配布することなく、ストリーミングしたいプロンプトを単にマークするだけで済みます。プロンプトやプロンプトタイプに対して、ストリーミングをオン/オフするだけです。
+
+> This way we just mark which prompt should be streamed, not needing to tinker with what LLM should we use, passing around the creating and distribute streaming handler into particular part of our chain... just turn the streaming on/off on prompt/prompt type...
+
+ストリーミングは、ストリーミングコンテキストで呼び出された場合にのみ行われます...そこで、ストリームを処理するシンプルな関数を定義することができます
+
+> The streaming will happen only if we call it in streaming context ... there we can define a simple function to handle the stream
+
+```python
 # this code example is complete and should run as it is
 
 from langchain_decorators import StreamingContext, llm_prompt
@@ -169,15 +208,19 @@ print("Here is the result:")
 print(result)
 ```
 
+# Prompt declarations | プロンプト宣言
 
-# Prompt declarations
-By default the prompt is is the whole function docs, unless you mark your prompt 
+デフォルトでは、プロンプトは関数のドキュメント全体になりますが、プロンプトにマークを付けるとそうではなくなります。
 
-## Documenting your prompt
+> By default the prompt is is the whole function docs, unless you mark your prompt
 
-We can specify what part of our docs is the prompt definition, by specifying a code block with `<prompt>` language tag
+## Documenting your prompt | プロンプトのドキュメント化
 
-``` python
+ドキュメントのどの部分がプロンプト定義であるかを、`<prompt>` 言語タグを使ったコードブロックを指定することで明示できます
+
+> We can specify what part of our docs is the prompt definition, by specifying a code block with `<prompt>` language tag
+
+````python
 @llm_prompt
 def write_me_short_post(topic:str, platform:str="twitter", audience:str = "developers"):
     """
@@ -194,13 +237,15 @@ def write_me_short_post(topic:str, platform:str="twitter", audience:str = "devel
     (It has also a nice benefit that IDE (like VS code) will display the prompt properly (not trying to parse it as markdown, and thus not showing new lines properly))
     """
     return 
-```
+````
 
-## Chat messages prompt
+## Chat messages prompt | チャットメッセージのプロンプト
 
-For chat models is very useful to define prompt as a set of message templates... here is how to do it:
+チャットモデルにとって、プロンプトをメッセージテンプレートのセットとして定義することは非常に有用です... 以下がその方法です：
 
-``` python
+> For chat models is very useful to define prompt as a set of message templates... here is how to do it:
+
+````python
 @llm_prompt
 def simulate_conversation(human_input:str, agent_role:str="a pirate"):
     """
@@ -244,19 +289,24 @@ def simulate_conversation(human_input:str, agent_role:str="a pirate"):
     """
     pass
 
-```
+````
 
-the roles here are model native roles (assistant, user, system for chatGPT)
+ここでの役割は、モデル固有の役割です（アシスタント、ユーザー、chatGPTのシステム）
 
+> the roles here are model native roles (assistant, user, system for chatGPT)
 
+# Optional sections | オプショナルセクション
 
-# Optional sections
-- you can define a whole sections of your prompt that should be optional
-- if any input in the section is missing, the whole section won't be rendered
+* プロンプトの特定のセクション全体をオプショナルとして定義できます
+  > you can define a whole sections of your prompt that should be optional
+* セクション内のいずれかの入力が欠けている場合、そのセクション全体は表示されません
+  > if any input in the section is missing, the whole section won't be rendered
 
-the syntax for this is as follows:
+この構文は以下の通りです：
 
-``` python
+> the syntax for this is as follows:
+
+```python
 @llm_prompt
 def prompt_with_optional_partials():
     """
@@ -271,13 +321,14 @@ def prompt_with_optional_partials():
     """
 ```
 
+# Output parsers | 出力パーサー
 
-# Output parsers
+* llm\_prompt デコレータは、出力タイプに基づいて最適な出力パーサーを自動的に検出しようとします。（設定されていない場合は、生の文字列を返します）
+  > llm\_prompt decorator natively tries to detect the best output parser based on the output type. (if not set, it returns the raw string)
+* list、dict、およびpydanticの出力も、ネイティブに（自動的に）サポートされています
+  > list, dict and pydantic outputs are also supported natively (automatically)
 
-- llm_prompt decorator natively tries to detect the best output parser based on the output type. (if not set, it returns the raw string)
-- list, dict and pydantic outputs are also supported natively (automatically)
-
-``` python
+```python
 # this code example is complete and should run as it is
 
 from langchain_decorators import llm_prompt
@@ -291,12 +342,14 @@ def write_name_suggestions(company_business:str, count:int)->list:
 write_name_suggestions(company_business="sells cookies", count=5)
 ```
 
-## More complex structures
+## More complex structures | より複雑な構造
 
-for dict / pydantic you need to specify the formatting instructions... 
-this can be tedious, that's why you can let the output parser gegnerate you the instructions based on the model (pydantic)
+dictやpydanticを使用する場合、フォーマット指示を指定する必要があります...これは面倒な作業です。そのため、モデル（pydantic）に基づいて指示を生成する出力パーサーを使うことで、作業を簡単にすることができます。
 
-``` python
+> for dict / pydantic you need to specify the formatting instructions...
+> this can be tedious, that's why you can let the output parser gegnerate you the instructions based on the model (pydantic)
+
+```python
 from langchain_decorators import llm_prompt
 from pydantic import BaseModel, Field
 
@@ -322,10 +375,9 @@ print("company employees: ",company.employees)
 
 ```
 
+# Binding the prompt to an object | プロンプトをオブジェクトにバインドする
 
-# Binding the prompt to an object
-
-``` python
+````python
 from pydantic import BaseModel
 from langchain_decorators import llm_prompt
 
@@ -361,10 +413,11 @@ class AssistantPersonality(BaseModel):
 personality = AssistantPersonality(assistant_name="John", assistant_role="a pirate")
 
 print(personality.introduce_your_self(personality))
-```
+````
 
+# More examples: | さらなる例：
 
-# More examples:
-
-- these and few more examples are also available in the [colab notebook here](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=N4cf__D0E2Yk)
-- including the [ReAct Agent re-implementation](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=3bID5fryE2Yp) using purely langchain decorators
+* これらの例とさらにいくつかの例は、[こちらのcolabノートブック](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=N4cf__D0E2Yk)でも利用可能です。
+  > these and few more examples are also available in the [colab notebook here](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=N4cf__D0E2Yk)
+* [ReAct Agentの再実装](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=3bID5fryE2Yp)を含む、完全にlangchainデコレータのみを使用したものです
+  > including the [ReAct Agent re-implementation](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=3bID5fryE2Yp) using purely langchain decorators

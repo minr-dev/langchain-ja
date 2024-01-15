@@ -1,22 +1,25 @@
-# JSON
+# JSON | 基準
 
->[JSON (JavaScript Object Notation)](https://en.wikipedia.org/wiki/JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
+> [JSON（JavaScript Object Notation）](https://en.wikipedia.org/wiki/JSON)は、属性と値のペアや配列（またはその他のシリアライズ可能な値）からなるデータオブジェクトを保存し、伝送するために人間が読めるテキストを使用するオープンスタンダードのファイルフォーマットおよびデータ交換フォーマットです。
+>
+> > [JSON (JavaScript Object Notation)](https://en.wikipedia.org/wiki/JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
->[JSON Lines](https://jsonlines.org/) is a file format where each line is a valid JSON value.
+> [JSON Lines](https://jsonlines.org/)は、各行が有効なJSON値であるファイル形式です。
+>
+> > [JSON Lines](https://jsonlines.org/) is a file format where each line is a valid JSON value.
 
->The `JSONLoader` uses a specified [jq schema](https://en.wikipedia.org/wiki/Jq_(programming_language)) to parse the JSON files. It uses the `jq` python package.
-Check this [manual](https://stedolan.github.io/jq/manual/#Basicfilters) for a detailed documentation of the `jq` syntax.
-
+> `JSONLoader`は指定された[jq スキーマ](https://en.wikipedia.org/wiki/Jq_\(programming_language\))を使用してJSONファイルを解析します。これにはPythonの`jq`パッケージが使用されます。`jq`の構文についての詳細なドキュメントについては、この[マニュアル](https://stedolan.github.io/jq/manual/#Basicfilters)をご覧ください。
+>
+> > The `JSONLoader` uses a specified [jq schema](https://en.wikipedia.org/wiki/Jq_\(programming_language\)) to parse the JSON files. It uses the `jq` python package.
+> > Check this [manual](https://stedolan.github.io/jq/manual/#Basicfilters) for a detailed documentation of the `jq` syntax.
 
 ```python
 #!pip install jq
 ```
 
-
 ```python
 from langchain.document_loaders import JSONLoader
 ```
-
 
 ```python
 import json
@@ -27,7 +30,6 @@ from pprint import pprint
 file_path='./example_data/facebook_chat.json'
 data = json.loads(Path(file_path).read_text())
 ```
-
 
 ```python
 pprint(data)
@@ -84,13 +86,13 @@ pprint(data)
 
 </CodeOutputBlock>
 
+## Using `JSONLoader` | `JSONLoader`の使用
 
-## Using `JSONLoader`
+JSONデータの`messages`キー内にある`content`フィールドから値を抽出することに興味があるとしましょう。以下に示すように、`JSONLoader`を使用してこれを簡単に行うことができます。
 
-Suppose we are interested in extracting the values under the `content` field within the `messages` key of the JSON data. This can easily be done through the `JSONLoader` as shown below.
+> Suppose we are interested in extracting the values under the `content` field within the `messages` key of the JSON data. This can easily be done through the `JSONLoader` as shown below.
 
-
-### JSON file
+### JSON file | JSONファイル
 
 ```python
 loader = JSONLoader(
@@ -100,7 +102,6 @@ loader = JSONLoader(
 
 data = loader.load()
 ```
-
 
 ```python
 pprint(data)
@@ -124,11 +125,12 @@ pprint(data)
 
 </CodeOutputBlock>
 
+### JSON Lines file | JSON Linesファイル
 
-### JSON Lines file
+JSON Linesファイルからドキュメントを読み込む場合、`json_lines=True`を渡し、`jq_schema`を指定して単一のJSONオブジェクトから`page_content`を抽出する必要があります。
 
-If you want to load documents from a JSON Lines file, you pass `json_lines=True`
-and specify `jq_schema` to extract `page_content` from a single JSON object.
+> If you want to load documents from a JSON Lines file, you pass `json_lines=True`
+> and specify `jq_schema` to extract `page_content` from a single JSON object.
 
 ```python
 file_path = './example_data/facebook_chat_messages.jsonl'
@@ -146,7 +148,6 @@ pprint(Path(file_path).read_text())
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 loader = JSONLoader(
@@ -172,8 +173,9 @@ pprint(data)
 
 </CodeOutputBlock>
 
+別のオプションとしては、`jq_schema='.'` を設定し、`content_key` を指定することです：
 
-Another option is set `jq_schema='.'` and provide `content_key`:
+> Another option is set `jq_schema='.'` and provide `content_key`:
 
 ```python
 loader = JSONLoader(
@@ -199,29 +201,39 @@ pprint(data)
 
 </CodeOutputBlock>
 
+## Extracting metadata | メタデータの抽出
 
-## Extracting metadata
+一般的に、私たちはJSONファイルに含まれるメタデータを、その内容から作成されるドキュメントに含めることを望んでいます。
 
-Generally, we want to include metadata available in the JSON file into the documents that we create from the content.
+> Generally, we want to include metadata available in the JSON file into the documents that we create from the content.
 
-The following demonstrates how metadata can be extracted using the `JSONLoader`.
+`JSONLoader`を使用してメタデータを抽出する方法を以下に示します。
 
-There are some key changes to be noted. In the previous example where we didn't collect the metadata, we managed to directly specify in the schema where the value for the `page_content` can be extracted from.
+> The following demonstrates how metadata can be extracted using the `JSONLoader`.
+
+いくつかの重要な変更点に注意が必要です。以前の例ではメタデータを収集していなかったので、スキーマ内で`page_content`の値をどこから抽出するかを直接指定することができました。
+
+> There are some key changes to be noted. In the previous example where we didn't collect the metadata, we managed to directly specify in the schema where the value for the `page_content` can be extracted from.
 
 ```
 .messages[].content
 ```
 
-In the current example, we have to tell the loader to iterate over the records in the `messages` field. The jq_schema then has to be:
+現在の例では、ローダーに`messages`フィールド内のレコードを反復処理するよう指示する必要があります。そのため、jq\_schemaは以下のようになります：
+
+> In the current example, we have to tell the loader to iterate over the records in the `messages` field. The jq\_schema then has to be:
 
 ```
 .messages[]
 ```
 
-This allows us to pass the records (dict) into the `metadata_func` that has to be implemented. The `metadata_func` is responsible for identifying which pieces of information in the record should be included in the metadata stored in the final `Document` object.
+これにより、実装が必要な`metadata_func`にレコード（辞書型）を渡すことができます。`metadata_func`は、レコード内のどの情報を最終的な`Document`オブジェクトに保存されるメタデータに含めるべきかを識別する責任を持っています。
 
-Additionally, we now have to explicitly specify in the loader, via the `content_key` argument, the key from the record where the value for the `page_content` needs to be extracted from.
+> This allows us to pass the records (dict) into the `metadata_func` that has to be implemented. The `metadata_func` is responsible for identifying which pieces of information in the record should be included in the metadata stored in the final `Document` object.
 
+さらに、ローダーでは`content_key`引数を介して、`page_content`の値を抽出するために必要なレコードのキーを明示的に指定する必要があります。
+
+> Additionally, we now have to explicitly specify in the loader, via the `content_key` argument, the key from the record where the value for the `page_content` needs to be extracted from.
 
 ```python
 # Define the metadata extraction function.
@@ -242,7 +254,6 @@ loader = JSONLoader(
 
 data = loader.load()
 ```
-
 
 ```python
 pprint(data)
@@ -266,16 +277,23 @@ pprint(data)
 
 </CodeOutputBlock>
 
-Now, you will see that the documents contain the metadata associated with the content we extracted.
+これで、抽出したコンテンツに関連付けられたメタデータが含まれているドキュメントが表示されることになります。
 
-## The `metadata_func`
+> Now, you will see that the documents contain the metadata associated with the content we extracted.
 
-As shown above, the `metadata_func` accepts the default metadata generated by the `JSONLoader`. This allows full control to the user with respect to how the metadata is formatted.
+## The `metadata_func` | `metadata_func`
 
-For example, the default metadata contains the `source` and the `seq_num` keys. However, it is possible that the JSON data contain these keys as well. The user can then exploit the `metadata_func` to rename the default keys and use the ones from the JSON data.
+上記の通り、`metadata_func`は`JSONLoader`によって生成されるデフォルトのメタデータを受け入れます。これにより、メタデータがどのようにフォーマットされるかについて、ユーザーが完全にコントロールすることが可能になります。
 
-The example below shows how we can modify the `source` to only contain information of the file source relative to the `langchain` directory.
+> As shown above, the `metadata_func` accepts the default metadata generated by the `JSONLoader`. This allows full control to the user with respect to how the metadata is formatted.
 
+たとえば、デフォルトのメタデータには `source` と `seq_num` のキーが含まれています。しかし、JSONデータにもこれらのキーが含まれていることがあります。その場合、ユーザーは `metadata_func` を利用してデフォルトのキーをリネームし、JSONデータのキーを使用することができます。
+
+> For example, the default metadata contains the `source` and the `seq_num` keys. However, it is possible that the JSON data contain these keys as well. The user can then exploit the `metadata_func` to rename the default keys and use the ones from the JSON data.
+
+以下の例では、`langchain`ディレクトリに対して相対的なファイルソースの情報のみを含むように`source`を変更する方法を示しています。
+
+> The example below shows how we can modify the `source` to only contain information of the file source relative to the `langchain` directory.
 
 ```python
 # Define the metadata extraction function.
@@ -302,7 +320,6 @@ loader = JSONLoader(
 data = loader.load()
 ```
 
-
 ```python
 pprint(data)
 ```
@@ -325,9 +342,11 @@ pprint(data)
 
 </CodeOutputBlock>
 
-## Common JSON structures with jq schema
+## Common JSON structures with jq schema | jqスキーマによる共通のJSON構造
 
-The list below provides a reference to the possible `jq_schema` the user can use to extract content from the JSON data depending on the structure.
+以下のリストは、JSONデータからコンテンツを抽出する際に、データの構造に応じてユーザーが使用できる`jq_schema`の参照情報を提供しています。
+
+> The list below provides a reference to the possible `jq_schema` the user can use to extract content from the JSON data depending on the structure.
 
 ```
 JSON        -> [{"text": ...}, {"text": ...}, {"text": ...}]

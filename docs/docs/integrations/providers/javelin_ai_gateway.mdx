@@ -1,31 +1,42 @@
-# Javelin AI Gateway
+# Javelin AI Gateway | ジャベリンAIゲートウェイ
 
-[The Javelin AI Gateway](https://www.getjavelin.io) service is a high-performance, enterprise grade API Gateway for AI applications.  
-It is designed to streamline the usage and access of various large language model (LLM) providers, 
-such as OpenAI, Cohere, Anthropic and custom large language models within an organization by incorporating
-robust access security for all interactions with LLMs. 
+[Javelin AI Gateway](https://www.getjavelin.io)サービスは、AIアプリケーション向けの高性能なエンタープライズグレードのAPIゲートウェイです。OpenAI、Cohere、Anthropic、および組織内のカスタム大規模言語モデル（LLM）など、さまざまな大規模言語モデルプロバイダーの使用とアクセスを合理化するように設計されており、LLMとのすべてのインタラクションに対する堅牢なアクセスセキュリティを提供しています。
 
-Javelin offers a high-level interface that simplifies the interaction with LLMs by providing a unified endpoint 
-to handle specific LLM related requests. 
+> [The Javelin AI Gateway](https://www.getjavelin.io) service is a high-performance, enterprise grade API Gateway for AI applications.\
+> It is designed to streamline the usage and access of various large language model (LLM) providers,
+> such as OpenAI, Cohere, Anthropic and custom large language models within an organization by incorporating
+> robust access security for all interactions with LLMs.
 
-See the Javelin AI Gateway [documentation](https://docs.getjavelin.io) for more details.  
-[Javelin Python SDK](https://www.github.com/getjavelin/javelin-python) is an easy to use client library meant to be embedded into AI Applications
+Javelinは、特定のLLM関連のリクエストを処理する統一されたエンドポイントを提供することにより、LLMとのやり取りを簡素化する高レベルのインターフェースを提供します。
 
-## Installation and Setup
+> Javelin offers a high-level interface that simplifies the interaction with LLMs by providing a unified endpoint
+> to handle specific LLM related requests.
 
-Install `javelin_sdk` to interact with Javelin AI Gateway:
+詳細については、Javelin AI Gatewayの[ドキュメント](https://docs.getjavelin.io)をご覧ください。
+[Javelin Python SDK](https://www.github.com/getjavelin/javelin-python)は、AIアプリケーションに組み込むための使いやすいクライアントライブラリです。
+
+> See the Javelin AI Gateway [documentation](https://docs.getjavelin.io) for more details.\
+> [Javelin Python SDK](https://www.github.com/getjavelin/javelin-python) is an easy to use client library meant to be embedded into AI Applications
+
+## Installation and Setup | インストールとセットアップ
+
+Javelin AI Gatewayとやり取りするために`javelin_sdk`をインストールしてください。
+
+> Install `javelin_sdk` to interact with Javelin AI Gateway:
 
 ```sh
 pip install 'javelin_sdk'
 ```
 
-Set the Javelin's API key as an environment variable:
+JavelinのAPIキーを環境変数として設定してください：
+
+> Set the Javelin's API key as an environment variable:
 
 ```sh
 export JAVELIN_API_KEY=...
 ```
 
-## Completions Example
+## Completions Example | コンプリーション例
 
 ```python
 
@@ -48,7 +59,7 @@ print(result)
 
 ```
 
-## Embeddings Example
+## Embeddings Example | 埋め込みの例
 
 ```python
 from langchain.embeddings import JavelinAIGatewayEmbeddings
@@ -63,7 +74,8 @@ print(embeddings.embed_query("hello"))
 print(embeddings.embed_documents(["hello"]))
 ```
 
-## Chat Example
+## Chat Example | チャット例
+
 ```python
 from langchain.chat_models import ChatJavelinAIGateway
 from langchain.schema import HumanMessage, SystemMessage
@@ -89,4 +101,3 @@ chat = ChatJavelinAIGateway(
 print(chat(messages))
 
 ```
-

@@ -1,9 +1,12 @@
-# Format template output
+# Format template output | テンプレート出力のフォーマット
 
-The output of the format method is available as a string, list of messages and `ChatPromptValue`
+`format` メソッドの出力は、文字列、メッセージのリスト、および `ChatPromptValue` として利用可能です
 
-As string:
+> The output of the format method is available as a string, list of messages and `ChatPromptValue`
 
+文字列として：
+
+> As string:
 
 ```python
 output = chat_prompt.format(input_language="English", output_language="French", text="I love programming.")
@@ -18,7 +21,6 @@ output
 
 </CodeOutputBlock>
 
-
 ```python
 # or alternatively
 output_2 = chat_prompt.format_prompt(input_language="English", output_language="French", text="I love programming.").to_string()
@@ -26,8 +28,9 @@ output_2 = chat_prompt.format_prompt(input_language="English", output_language="
 assert output == output_2
 ```
 
-As list of Message objects:
+Messageオブジェクトのリスト:
 
+> As list of Message objects:
 
 ```python
 chat_prompt.format_prompt(input_language="English", output_language="French", text="I love programming.").to_messages()
@@ -42,8 +45,9 @@ chat_prompt.format_prompt(input_language="English", output_language="French", te
 
 </CodeOutputBlock>
 
-As `ChatPromptValue`:
+`ChatPromptValue`として：
 
+> As `ChatPromptValue`:
 
 ```python
 chat_prompt.format_prompt(input_language="English", output_language="French", text="I love programming.")

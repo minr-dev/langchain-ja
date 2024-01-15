@@ -1,10 +1,14 @@
-# Outline
+# Outline | 概要
 
-> [Outline](https://www.getoutline.com/) is an open-source collaborative knowledge base platform designed for team information sharing.
+> [Outline](https://www.getoutline.com/)は、チーム内での情報共有を目的としたオープンソースの共同知識ベースプラットフォームです。
+>
+> > [Outline](https://www.getoutline.com/) is an open-source collaborative knowledge base platform designed for team information sharing.
 
-## Setup
+## Setup | セットアップ
 
-You first need to [create an api key](https://www.getoutline.com/developers#section/Authentication) for your Outline instance. Then you need to set the following environment variables:
+まず、Outlineインスタンス用に[APIキーを作成する](https://www.getoutline.com/developers#section/Authentication)必要があります。その後、以下の環境変数を設定する必要があります：
+
+> You first need to [create an api key](https://www.getoutline.com/developers#section/Authentication) for your Outline instance. Then you need to set the following environment variables:
 
 ```python
 import os
@@ -13,9 +17,11 @@ os.environ["OUTLINE_API_KEY"] = "xxx"
 os.environ["OUTLINE_INSTANCE_URL"] = "https://app.getoutline.com"
 ```
 
-## Retriever
+## Retriever | リトリーバー
 
-See a [usage example](/docs/integrations/retrievers/outline).
+[使用例](/docs/integrations/retrievers/outline)をご覧ください。
+
+> See a [usage example](/docs/integrations/retrievers/outline).
 
 ```python
 from langchain.retrievers import OutlineRetriever

@@ -1,15 +1,18 @@
-# Composition
+# Composition | 構成
 
-This notebook goes over how to compose multiple prompts together. This can be useful when you want to reuse parts of prompts. This can be done with a PipelinePrompt. A PipelinePrompt consists of two main parts:
+このノートブックでは、複数のプロンプトを組み合わせる方法について説明しています。これは、プロンプトの一部を再利用したいときに便利です。これはPipelinePromptを用いて実現することができます。PipelinePromptは主に2つの主要な部分から構成されています：
 
-- Final prompt: The final prompt that is returned
-- Pipeline prompts: A list of tuples, consisting of a string name and a prompt template. Each prompt template will be formatted and then passed to future prompt templates as a variable with the same name.
+> This notebook goes over how to compose multiple prompts together. This can be useful when you want to reuse parts of prompts. This can be done with a PipelinePrompt. A PipelinePrompt consists of two main parts:
+
+* 最終プロンプト：返される最終プロンプト
+  > Final prompt: The final prompt that is returned
+* パイプラインプロンプト：文字列の名前とプロンプトテンプレートからなるタプルのリストです。各プロンプトテンプレートはフォーマットされ、その後、同じ名前の変数として次のプロンプトテンプレートに渡されます。
+  > Pipeline prompts: A list of tuples, consisting of a string name and a prompt template. Each prompt template will be formatted and then passed to future prompt templates as a variable with the same name.
 
 ```python
 from langchain.prompts.pipeline import PipelinePromptTemplate
 from langchain.prompts.prompt import PromptTemplate
 ```
-
 
 ```python
 full_template = """{introduction}
@@ -20,12 +23,10 @@ full_template = """{introduction}
 full_prompt = PromptTemplate.from_template(full_template)
 ```
 
-
 ```python
 introduction_template = """You are impersonating {person}."""
 introduction_prompt = PromptTemplate.from_template(introduction_template)
 ```
-
 
 ```python
 example_template = """Here's an example of an interaction:
@@ -35,7 +36,6 @@ A: {example_a}"""
 example_prompt = PromptTemplate.from_template(example_template)
 ```
 
-
 ```python
 start_template = """Now, do this for real!
 
@@ -43,7 +43,6 @@ Q: {input}
 A:"""
 start_prompt = PromptTemplate.from_template(start_template)
 ```
-
 
 ```python
 input_prompts = [
@@ -53,7 +52,6 @@ input_prompts = [
 ]
 pipeline_prompt = PipelinePromptTemplate(final_prompt=full_prompt, pipeline_prompts=input_prompts)
 ```
-
 
 ```python
 pipeline_prompt.input_variables
@@ -66,7 +64,6 @@ pipeline_prompt.input_variables
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 print(pipeline_prompt.format(

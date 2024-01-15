@@ -1,29 +1,44 @@
-# PGVector
+# PGVector | PGVector
 
-This page covers how to use the Postgres [PGVector](https://github.com/pgvector/pgvector) ecosystem within LangChain
-It is broken into two parts: installation and setup, and then references to specific PGVector wrappers.
+このページでは、LangChain内でPostgres [PGVector](https://github.com/pgvector/pgvector) エコシステムを使用する方法について説明しています。内容は、インストールとセットアップ、そして特定のPGVectorラッパーへの参照という二つの部分に分けられています。
 
-## Installation
-- Install the Python package with `pip install pgvector`
+> This page covers how to use the Postgres [PGVector](https://github.com/pgvector/pgvector) ecosystem within LangChain
+> It is broken into two parts: installation and setup, and then references to specific PGVector wrappers.
 
+## Installation | インストール
 
-## Setup
-1. The first step is to create a database with the `pgvector` extension installed.
+* `pip install pgvector`でPythonパッケージをインストールしてください
+  > Install the Python package with `pip install pgvector`
 
-    Follow the steps at [PGVector Installation Steps](https://github.com/pgvector/pgvector#installation) to install the database and the extension. The docker image is the easiest way to get started.
+## Setup | セットアップ
 
-## Wrappers
+1. `pgvector` 拡張機能がインストールされたデータベースを作成することが最初のステップです。
 
-### VectorStore
+   > The first step is to create a database with the `pgvector` extension installed.
 
-There exists a wrapper around Postgres vector databases, allowing you to use it as a vectorstore,
-whether for semantic search or example selection.
+   [PGVector インストール手順](https://github.com/pgvector/pgvector#installation)に従って、データベースと拡張機能をインストールしてください。Docker イメージを使用するのが最も簡単な方法です。
 
-To import this vectorstore:
+   > Follow the steps at [PGVector Installation Steps](https://github.com/pgvector/pgvector#installation) to install the database and the extension. The docker image is the easiest way to get started.
+
+## Wrappers | ラッパー
+
+### VectorStore | VectorStore
+
+Postgresベクターデータベースの周りにはラッパーが存在し、それをベクターストアとして使用することができます。これはセマンティック検索や例の選択などの目的に利用可能です。
+
+> There exists a wrapper around Postgres vector databases, allowing you to use it as a vectorstore,
+> whether for semantic search or example selection.
+
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
+
 ```python
 from langchain.vectorstores.pgvector import PGVector
 ```
 
-### Usage
+### Usage | 使用方法
 
-For a more detailed walkthrough of the PGVector Wrapper, see [this notebook](/docs/integrations/vectorstores/pgvector)
+PGVector Wrapperのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/pgvector)をご覧ください。
+
+> For a more detailed walkthrough of the PGVector Wrapper, see [this notebook](/docs/integrations/vectorstores/pgvector)

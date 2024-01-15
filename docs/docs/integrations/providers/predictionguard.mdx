@@ -1,37 +1,57 @@
-# Prediction Guard
+# Prediction Guard | Prediction Guard
 
-This page covers how to use the Prediction Guard ecosystem within LangChain.
-It is broken into two parts: installation and setup, and then references to specific Prediction Guard wrappers.
+このページでは、LangChain内でPrediction Guardエコシステムを使用する方法について説明しています。内容はインストールとセットアップ、そして特定のPrediction Guardラッパーへの参照という2つのパートに分けられています。
 
-## Installation and Setup
-- Install the Python SDK with `pip install predictionguard`
-- Get a Prediction Guard access token (as described [here](https://docs.predictionguard.com/)) and set it as an environment variable (`PREDICTIONGUARD_TOKEN`)
+> This page covers how to use the Prediction Guard ecosystem within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific Prediction Guard wrappers.
 
-## LLM Wrapper
+## Installation and Setup | インストールとセットアップ
 
-There exists a Prediction Guard LLM wrapper, which you can access with 
+* `pip install predictionguard`でPython SDKをインストールしてください
+  > Install the Python SDK with `pip install predictionguard`
+* Prediction Guardのアクセストークンを取得し（[こちら](https://docs.predictionguard.com/)に記載されている方法で）、それを環境変数（`PREDICTIONGUARD_TOKEN`）として設定してください。
+  > Get a Prediction Guard access token (as described [here](https://docs.predictionguard.com/)) and set it as an environment variable (`PREDICTIONGUARD_TOKEN`)
+
+## LLM Wrapper | LLMラッパー
+
+Prediction Guard LLMラッパーが存在し、次の方法でアクセスできます
+
+> There exists a Prediction Guard LLM wrapper, which you can access with
+
 ```python
 from langchain.llms import PredictionGuard
 ```
 
-You can provide the name of the Prediction Guard model as an argument when initializing the LLM:
+LLMを初期化する際に、Prediction Guardモデルの名前を引数として提供できます：
+
+> You can provide the name of the Prediction Guard model as an argument when initializing the LLM:
+
 ```python
 pgllm = PredictionGuard(model="MPT-7B-Instruct")
 ```
 
-You can also provide your access token directly as an argument:
+また、アクセストークンを直接引数として提供することもできます：
+
+> You can also provide your access token directly as an argument:
+
 ```python
 pgllm = PredictionGuard(model="MPT-7B-Instruct", token="<your access token>")
 ```
 
-Finally, you can provide an "output" argument that is used to structure/ control the output of the LLM:
+最後に、「output」という引数を提供することができます。これは、LLMの出力を構造化または制御するために使用されます：
+
+> Finally, you can provide an "output" argument that is used to structure/ control the output of the LLM:
+
 ```python
 pgllm = PredictionGuard(model="MPT-7B-Instruct", output={"type": "boolean"})
 ```
 
-## Example usage
+## Example usage | 使用例
 
-Basic usage of the controlled or guarded LLM wrapper:
+制御されたまたはガードされたLLMラッパーの基本的な使用法：
+
+> Basic usage of the controlled or guarded LLM wrapper:
+
 ```python
 import os
 
@@ -73,7 +93,10 @@ pgllm = PredictionGuard(model="MPT-7B-Instruct",
 pgllm(prompt.format(query="What kind of post is this?"))
 ```
 
-Basic LLM Chaining with the Prediction Guard wrapper:
+Prediction Guardラッパーを使った基本的なLLMチェーン:
+
+> Basic LLM Chaining with the Prediction Guard wrapper:
+
 ```python
 import os
 

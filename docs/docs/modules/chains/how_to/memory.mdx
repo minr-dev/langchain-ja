@@ -1,8 +1,10 @@
-# Adding memory (state)
+# Adding memory (state) | メモリ（ステート）の追加
 
-Chains can be initialized with a Memory object, which will persist data across calls to the chain. This makes a Chain stateful.
+チェーンはMemoryオブジェクトを使って初期化することができ、これによりチェーンの呼び出し間でデータが保持されます。これにより、チェーンは状態を持つことになります。
 
-## Get started
+> Chains can be initialized with a Memory object, which will persist data across calls to the chain. This makes a Chain stateful.
+
+## Get started | 始めましょう
 
 ```python
 from langchain.chains import ConversationChain
@@ -27,6 +29,6 @@ conversation.run("And the next 4?")
 
 </CodeOutputBlock>
 
-Essentially, `BaseMemory` defines an interface of how `langchain` stores memory. It allows reading of stored data through `load_memory_variables` method and storing new data through `save_context` method. You can learn more about it in the [Memory](/docs/modules/memory/) section.
+基本的に、`BaseMemory`は`langchain`がメモリをどのように保存するかのインターフェースを定義しています。これにより、`load_memory_variables`メソッドを通じて保存されたデータを読み込むことと、`save_context`メソッドを通じて新しいデータを保存することが可能になります。詳細については[メモリ](/docs/modules/memory/)セクションで学ぶことができます。
 
-
+> Essentially, `BaseMemory` defines an interface of how `langchain` stores memory. It allows reading of stored data through `load_memory_variables` method and storing new data through `save_context` method. You can learn more about it in the [Memory](/docs/modules/memory/) section.

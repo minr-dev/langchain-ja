@@ -1,31 +1,39 @@
-# Facebook Faiss
+# Facebook Faiss | Facebook Faiss
 
->[Facebook AI Similarity Search (Faiss)](https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/) 
-> is a library for efficient similarity search and clustering of dense vectors. It contains algorithms that 
-> search in sets of vectors of any size, up to ones that possibly do not fit in RAM. It also contains supporting 
-> code for evaluation and parameter tuning.
+> [Facebook AI Similarity Search (Faiss)](https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/)は、密集したベクトルの効率的な類似性検索とクラスタリングのためのライブラリです。任意のサイズのベクトルのセットを検索するアルゴリズムを含んでおり、その中にはRAMに収まらないほど大きなものもあります。また、評価とパラメータチューニングのためのサポートコードも含まれています。
+>
+> > [Facebook AI Similarity Search (Faiss)](https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/)
+> > is a library for efficient similarity search and clustering of dense vectors. It contains algorithms that
+> > search in sets of vectors of any size, up to ones that possibly do not fit in RAM. It also contains supporting
+> > code for evaluation and parameter tuning.
 
-[Faiss documentation](https://faiss.ai/).
+[Faissのドキュメント](https://faiss.ai/)。
 
+> [Faiss documentation](https://faiss.ai/).
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-We need to install `faiss` python package.
+`faiss` Pythonパッケージをインストールする必要があります。
+
+> We need to install `faiss` python package.
 
 ```bash
 pip install faiss-gpu # For CUDA 7.5+ supported GPU's.
 ```
 
-OR
+または
+
+> OR
 
 ```bash
 pip install faiss-cpu # For CPU Installation
 ```
 
+## Vector Store | ベクターストア
 
-## Vector Store
+[使用例](/docs/integrations/vectorstores/faiss)をご覧ください。
 
-See a [usage example](/docs/integrations/vectorstores/faiss).
+> See a [usage example](/docs/integrations/vectorstores/faiss).
 
 ```python
 from langchain.vectorstores import FAISS

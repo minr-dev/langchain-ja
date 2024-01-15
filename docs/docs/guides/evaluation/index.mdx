@@ -1,42 +1,68 @@
 import DocCardList from "@theme/DocCardList";
 
-# Evaluation
+# Evaluation | 評価
 
-Building applications with language models involves many moving parts. One of the most critical components is ensuring that the outcomes produced by your models are reliable and useful across a broad array of inputs, and that they work well with your application's other software components. Ensuring reliability usually boils down to some combination of application design, testing & evaluation, and runtime checks. 
+言語モデルを使用したアプリケーションの構築には、多くの動く部分が関わっています。最も重要なコンポーネントの一つは、モデルが生成する結果が幅広い入力に対して信頼性があり、有用であること、そしてアプリケーションの他のソフトウェアコンポーネントともうまく機能することを確実にすることです。信頼性を確保することは通常、アプリケーション設計、テストと評価、そして実行時のチェックの組み合わせに帰結します。
 
-The guides in this section review the APIs and functionality LangChain provides to help you better evaluate your applications. Evaluation and testing are both critical when thinking about deploying LLM applications, since production environments require repeatable and useful outcomes.
+> Building applications with language models involves many moving parts. One of the most critical components is ensuring that the outcomes produced by your models are reliable and useful across a broad array of inputs, and that they work well with your application's other software components. Ensuring reliability usually boils down to some combination of application design, testing & evaluation, and runtime checks.
 
-LangChain offers various types of evaluators to help you measure performance and integrity on diverse data, and we hope to encourage the community to create and share other useful evaluators so everyone can improve. These docs will introduce the evaluator types, how to use them, and provide some examples of their use in real-world scenarios.
+このセクションのガイドでは、LangChainが提供するAPIと機能をレビューし、アプリケーションの評価をより適切に行うための支援をします。LLMアプリケーションをデプロイする際には、評価とテストが非常に重要です。なぜなら、本番環境では繰り返し可能で有用な結果が求められるためです。
 
-Each evaluator type in LangChain comes with ready-to-use implementations and an extensible API that allows for customization according to your unique requirements. Here are some of the types of evaluators we offer:
+> The guides in this section review the APIs and functionality LangChain provides to help you better evaluate your applications. Evaluation and testing are both critical when thinking about deploying LLM applications, since production environments require repeatable and useful outcomes.
 
-- [String Evaluators](/docs/guides/evaluation/string/): These evaluators assess the predicted string for a given input, usually comparing it against a reference string.
-- [Trajectory Evaluators](/docs/guides/evaluation/trajectory/): These are used to evaluate the entire trajectory of agent actions.
-- [Comparison Evaluators](/docs/guides/evaluation/comparison/): These evaluators are designed to compare predictions from two runs on a common input.
+LangChainは、さまざまなデータにおけるパフォーマンスと整合性を測定するための評価者タイプを提供しており、コミュニティが他の有用な評価者を作成し、共有することを奨励しています。そうすることで、皆が改善できることを願っています。このドキュメントでは、評価者タイプの紹介、使用方法、そして実際のシナリオでの使用例を紹介します。
 
-These evaluators can be used across various scenarios and can be applied to different chain and LLM implementations in the LangChain library.
+> LangChain offers various types of evaluators to help you measure performance and integrity on diverse data, and we hope to encourage the community to create and share other useful evaluators so everyone can improve. These docs will introduce the evaluator types, how to use them, and provide some examples of their use in real-world scenarios.
 
-We also are working to share guides and cookbooks that demonstrate how to use these evaluators in real-world scenarios, such as:
+LangChainの各評価タイプには、すぐに使用できる実装が用意されており、独自の要件に合わせてカスタマイズできる拡張性のあるAPIが提供されています。以下は、私たちが提供する評価タイプの例です：
 
-- [Chain Comparisons](/docs/guides/evaluation/examples/comparisons): This example uses a comparison evaluator to predict the preferred output. It reviews ways to measure confidence intervals to select statistically significant differences in aggregate preference scores across different models or prompts.
+> Each evaluator type in LangChain comes with ready-to-use implementations and an extensible API that allows for customization according to your unique requirements. Here are some of the types of evaluators we offer:
 
+* [String Evaluators](/docs/guides/evaluation/string/)：これらの評価器は、与えられた入力に対して予測された文字列を評価し、通常は参照文字列と比較します。
+  > [String Evaluators](/docs/guides/evaluation/string/): These evaluators assess the predicted string for a given input, usually comparing it against a reference string.
+* [Trajectory Evaluators](/docs/guides/evaluation/trajectory/)：これらは、エージェントの行動の全体的な軌跡を評価するために使用されます。
+  > [Trajectory Evaluators](/docs/guides/evaluation/trajectory/): These are used to evaluate the entire trajectory of agent actions.
+* [比較評価ツール](/docs/guides/evaluation/comparison/)：これらの評価ツールは、共通の入力に対する2つの実行からの予測を比較するために設計されています。
+  > [Comparison Evaluators](/docs/guides/evaluation/comparison/): These evaluators are designed to compare predictions from two runs on a common input.
 
-## LangSmith Evaluation
+これらの評価器は様々なシナリオにおいて使用でき、LangChainライブラリの異なるチェーンやLLM実装に適用することが可能です。
 
-LangSmith provides an integrated evaluation and tracing framework that allows you to check for regressions, compare systems, and easily identify and fix any sources of errors and performance issues. Check out the docs on [LangSmith Evaluation](https://docs.smith.langchain.com/category/testing--evaluation) and additional [cookbooks](https://docs.smith.langchain.com/category/langsmith-cookbook) for more detailed information on evaluating your applications.
+> These evaluators can be used across various scenarios and can be applied to different chain and LLM implementations in the LangChain library.
 
-## LangChain benchmarks
+また、これらの評価ツールを実際のシナリオでどのように使用するかを示すガイドやクックブックの共有にも取り組んでいます。例えば：
 
-Your application quality is a function both of the LLM you choose and the prompting and data retrieval strategies you employ to provide model contexet. We have published a number of benchmark tasks within the [LangChain Benchmarks](https://langchain-ai.github.io/langchain-benchmarks/) package to grade different LLM systems on tasks such as:
+> We also are working to share guides and cookbooks that demonstrate how to use these evaluators in real-world scenarios, such as:
 
-- Agent tool use
-- Retrieval-augmented question-answering
-- Structured Extraction 
+* [チェーン比較](/docs/guides/evaluation/examples/comparisons)：この例では、比較評価器を使用して好ましい出力を予測します。異なるモデルやプロンプトにおける集約された好みのスコアに統計的に有意な差があるかを判断するための信頼区間の測定方法について検討します。
+  > [Chain Comparisons](/docs/guides/evaluation/examples/comparisons): This example uses a comparison evaluator to predict the preferred output. It reviews ways to measure confidence intervals to select statistically significant differences in aggregate preference scores across different models or prompts.
 
-Check out the docs for examples and leaderboard information.
+## LangSmith Evaluation | LangSmith 評価
 
-## Reference Docs
+LangSmithは、回帰をチェックし、システムを比較し、エラーやパフォーマンス問題の原因を容易に特定して修正することができる統合評価およびトレーシングフレームワークを提供しています。アプリケーションの評価に関するより詳細な情報については、[LangSmith Evaluation](https://docs.smith.langchain.com/category/testing--evaluation)のドキュメントと追加の[クックブック](https://docs.smith.langchain.com/category/langsmith-cookbook)をご覧ください。
 
-For detailed information on the available evaluators, including how to instantiate, configure, and customize them, check out the [reference documentation](https://api.python.langchain.com/en/latest/api_reference.html#module-langchain.evaluation) directly.
+> LangSmith provides an integrated evaluation and tracing framework that allows you to check for regressions, compare systems, and easily identify and fix any sources of errors and performance issues. Check out the docs on [LangSmith Evaluation](https://docs.smith.langchain.com/category/testing--evaluation) and additional [cookbooks](https://docs.smith.langchain.com/category/langsmith-cookbook) for more detailed information on evaluating your applications.
+
+## LangChain benchmarks | LangChain ベンチマーク
+
+アプリケーションの品質は、選択したLLMと、モデルのコンテキストを提供するために使用するプロンプティングやデータ取得戦略の両方に依存します。私たちは、[LangChain Benchmarks](https://langchain-ai.github.io/langchain-benchmarks/)パッケージ内で、以下のようなタスクにおける異なるLLMシステムを評価するためのベンチマークタスクを多数公開しています：
+
+> Your application quality is a function both of the LLM you choose and the prompting and data retrieval strategies you employ to provide model contexet. We have published a number of benchmark tasks within the [LangChain Benchmarks](https://langchain-ai.github.io/langchain-benchmarks/) package to grade different LLM systems on tasks such as:
+
+* エージェントツールの使用
+  > Agent tool use
+* 検索強化型質問応答
+  > Retrieval-augmented question-answering
+* 構造化抽出
+  > Structured Extraction
+
+例やリーダーボード情報については、ドキュメントをご覧ください。
+
+> Check out the docs for examples and leaderboard information.
+
+## Reference Docs | リファレンスドキュメント
+
+利用可能な評価器に関する詳細情報、およびそれらをインスタンス化、設定、カスタマイズする方法については、[リファレンスドキュメント](https://api.python.langchain.com/en/latest/api_reference.html#module-langchain.evaluation)を直接ご覧ください。
+
+> For detailed information on the available evaluators, including how to instantiate, configure, and customize them, check out the [reference documentation](https://api.python.langchain.com/en/latest/api_reference.html#module-langchain.evaluation) directly.
 
 <DocCardList />

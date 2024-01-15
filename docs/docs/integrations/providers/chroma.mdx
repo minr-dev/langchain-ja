@@ -1,28 +1,35 @@
-# Chroma
+# Chroma | クロマ
 
->[Chroma](https://docs.trychroma.com/getting-started) is a database for building AI applications with embeddings.
+> [Chroma](https://docs.trychroma.com/getting-started)は、埋め込みを使用してAIアプリケーションを構築するためのデータベースです。
+>
+> > [Chroma](https://docs.trychroma.com/getting-started) is a database for building AI applications with embeddings.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install chromadb
 ```
 
+## VectorStore | VectorStore
 
-## VectorStore
+Chromaベクターデータベースの周りにはラッパーが存在し、それをベクターストアとして使用することができます。これはセマンティック検索や例の選択にも利用可能です。
 
-There exists a wrapper around Chroma vector databases, allowing you to use it as a vectorstore,
-whether for semantic search or example selection.
+> There exists a wrapper around Chroma vector databases, allowing you to use it as a vectorstore,
+> whether for semantic search or example selection.
 
 ```python
 from langchain.vectorstores import Chroma
 ```
 
-For a more detailed walkthrough of the Chroma wrapper, see [this notebook](/docs/integrations/vectorstores/chroma)
+Chromaラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/chroma)をご覧ください。
 
-## Retriever
+> For a more detailed walkthrough of the Chroma wrapper, see [this notebook](/docs/integrations/vectorstores/chroma)
 
-See a [usage example](/docs/modules/data_connection/retrievers/how_to/self_query/chroma_self_query).
+## Retriever | リトリーバー
+
+[使用例](/docs/modules/data_connection/retrievers/how_to/self_query/chroma_self_query)をご覧ください。
+
+> See a [usage example](/docs/modules/data_connection/retrievers/how_to/self_query/chroma_self_query).
 
 ```python
 from langchain.retrievers import SelfQueryRetriever

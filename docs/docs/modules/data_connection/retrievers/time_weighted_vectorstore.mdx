@@ -1,14 +1,20 @@
-# Time-weighted vector store retriever
+# Time-weighted vector store retriever | 時間加重ベクトルストアリトリーバー
 
-This retriever uses a combination of semantic similarity and a time decay.
+このリトリーバーは、意味的類似性と時間の経過による減衰を組み合わせて使用します。
 
-The algorithm for scoring them is:
+> This retriever uses a combination of semantic similarity and a time decay.
+
+それらを採点するアルゴリズムは以下の通りです：
+
+> The algorithm for scoring them is:
 
 ```
 semantic_similarity + (1.0 - decay_rate) ^ hours_passed
 ```
 
-Notably, `hours_passed` refers to the hours passed since the object in the retriever **was last accessed**, not since it was created. This means that frequently accessed objects remain "fresh".
+特筆すべき点として、`hours_passed`はオブジェクトが作成されてからではなく、**最後にアクセスされた時点から**経過した時間を指します。これは、頻繁にアクセスされるオブジェクトは「新鮮」な状態を保つことを意味しています。
+
+> Notably, `hours_passed` refers to the hours passed since the object in the retriever **was last accessed**, not since it was created. This means that frequently accessed objects remain "fresh".
 
 ```python
 import faiss
@@ -21,10 +27,11 @@ from langchain.schema import Document
 from langchain.vectorstores import FAISS
 ```
 
-## Low decay rate
+## Low decay rate | 低い減衰率
 
-A low `decay rate` (in this, to be extreme, we will set it close to 0) means memories will be "remembered" for longer. A `decay rate` of 0 means memories never be forgotten, making this retriever equivalent to the vector lookup.
+低い`decay rate`（この場合、極端な例としてほぼ0に設定します）は、記憶がより長く「保持される」ことを意味します。`decay rate`が0であれば、記憶は決して忘れられないため、このリトリバーはベクトル検索と同等になります。
 
+> A low `decay rate` (in this, to be extreme, we will set it close to 0) means memories will be "remembered" for longer. A `decay rate` of 0 means memories never be forgotten, making this retriever equivalent to the vector lookup.
 
 ```python
 # Define your embedding model
@@ -35,7 +42,6 @@ index = faiss.IndexFlatL2(embedding_size)
 vectorstore = FAISS(embeddings_model.embed_query, index, InMemoryDocstore({}), {})
 retriever = TimeWeightedVectorStoreRetriever(vectorstore=vectorstore, decay_rate=.0000000000000000000000001, k=1)
 ```
-
 
 ```python
 yesterday = datetime.now() - timedelta(days=1)
@@ -51,7 +57,6 @@ retriever.add_documents([Document(page_content="hello foo")])
 
 </CodeOutputBlock>
 
-
 ```python
 # "Hello World" is returned first because it is most salient, and the decay rate is close to 0., meaning it's still recent enough
 retriever.get_relevant_documents("hello world")
@@ -65,11 +70,11 @@ retriever.get_relevant_documents("hello world")
 
 </CodeOutputBlock>
 
-## High decay rate
+## High decay rate | 高い減衰率
 
-With a high `decay rate` (e.g., several 9's), the `recency score` quickly goes to 0! If you set this all the way to 1, `recency` is 0 for all objects, once again making this equivalent to a vector lookup.
+高い`decay rate`（例えば、9がいくつか続く数値）を設定すると、`recency score`は急速に0になります！この値を完全に1に設定すると、`recency`は全てのオブジェクトに対して0となり、これは再びベクトル検索と同等のものになります。
 
-
+> With a high `decay rate` (e.g., several 9's), the `recency score` quickly goes to 0! If you set this all the way to 1, `recency` is 0 for all objects, once again making this equivalent to a vector lookup.
 
 ```python
 # Define your embedding model
@@ -80,7 +85,6 @@ index = faiss.IndexFlatL2(embedding_size)
 vectorstore = FAISS(embeddings_model.embed_query, index, InMemoryDocstore({}), {})
 retriever = TimeWeightedVectorStoreRetriever(vectorstore=vectorstore, decay_rate=.999, k=1)
 ```
-
 
 ```python
 yesterday = datetime.now() - timedelta(days=1)
@@ -96,7 +100,6 @@ retriever.add_documents([Document(page_content="hello foo")])
 
 </CodeOutputBlock>
 
-
 ```python
 # "Hello Foo" is returned first because "hello world" is mostly forgotten
 retriever.get_relevant_documents("hello world")
@@ -110,16 +113,16 @@ retriever.get_relevant_documents("hello world")
 
 </CodeOutputBlock>
 
-## Virtual time
+## Virtual time | 仮想時間
 
-Using some utils in LangChain, you can mock out the time component.
+LangChainのいくつかのユーティリティを使用することで、時間コンポーネントをモックアウトすることができます。
 
+> Using some utils in LangChain, you can mock out the time component.
 
 ```python
 from langchain.utils import mock_now
 import datetime
 ```
-
 
 ```python
 # Notice the last access time is that date time

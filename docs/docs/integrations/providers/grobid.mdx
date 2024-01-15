@@ -1,25 +1,41 @@
-# Grobid
+# Grobid | Grobid
 
-GROBID is a machine learning library for extracting, parsing, and re-structuring raw documents.
+GROBIDは、生のドキュメントから情報を抽出、解析し、再構築するための機械学習ライブラリです。
 
-It is designed and expected to be used to parse academic papers, where it works particularly well.
+> GROBID is a machine learning library for extracting, parsing, and re-structuring raw documents.
 
-*Note*: if the articles supplied to Grobid are large documents (e.g. dissertations) exceeding a certain number
-of elements, they might not be processed.
+これは、学術論文を解析するために使用されることを想定して設計されており、その分野では特に優れた性能を発揮するようになっています。
 
-This page covers how to use the Grobid to parse articles for LangChain.
+> It is designed and expected to be used to parse academic papers, where it works particularly well.
 
-## Installation
-The grobid installation is described in details in https://grobid.readthedocs.io/en/latest/Install-Grobid/.
-However, it is probably easier and less troublesome to run grobid through a docker container,
-as documented [here](https://grobid.readthedocs.io/en/latest/Grobid-docker/).
+注意：Grobidに供給される文書が大規模なもの（例えば、学位論文）で、特定の数の要素を超えている場合、処理されないことがあります。
 
-## Use Grobid with LangChain
+> *Note*: if the articles supplied to Grobid are large documents (e.g. dissertations) exceeding a certain number
+> of elements, they might not be processed.
 
-Once grobid is installed and up and running (you can check by accessing it http://localhost:8070),
-you're ready to go.
+このページでは、LangChainのために記事を解析するためにGrobidを使用する方法について説明しています。
 
-You can now use the GrobidParser to produce documents
+> This page covers how to use the Grobid to parse articles for LangChain.
+
+## Installation | インストール
+
+Grobidのインストール方法は、https://grobid.readthedocs.io/en/latest/Install-Grobid/ に詳しく記載されています。しかし、[こちら](https://grobid.readthedocs.io/en/latest/Grobid-docker/)に文書化されているように、Dockerコンテナを通じてGrobidを実行する方が、おそらく簡単でトラブルも少ないでしょう。
+
+> The grobid installation is described in details in https://grobid.readthedocs.io/en/latest/Install-Grobid/.
+> However, it is probably easier and less troublesome to run grobid through a docker container,
+> as documented [here](https://grobid.readthedocs.io/en/latest/Grobid-docker/).
+
+## Use Grobid with LangChain | LangChainでGrobidを使用する
+
+grobidがインストールされ、起動していることを確認できたら（http://localhost:8070 にアクセスして確認できます）、準備は整いました。
+
+> Once grobid is installed and up and running (you can check by accessing it http://localhost:8070),
+> you're ready to go.
+
+GrobidParserを使用してドキュメントを生成することができます
+
+> You can now use the GrobidParser to produce documents
+
 ```python
 from langchain.document_loaders.parsers import GrobidParser
 from langchain.document_loaders.generic import GenericLoader
@@ -42,5 +58,8 @@ loader = GenericLoader.from_filesystem(
 )
 docs = loader.load()
 ```
-Chunk metadata will include Bounding Boxes. Although these are a bit funky to parse,
-they are explained in https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/
+
+チャンクのメタデータにはバウンディングボックスが含まれます。これらは解析するのが少し変わっていますが、https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/ で説明されています。
+
+> Chunk metadata will include Bounding Boxes. Although these are a bit funky to parse,
+> they are explained in https://grobid.readthedocs.io/en/latest/Coordinates-in-PDF/

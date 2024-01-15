@@ -1,23 +1,31 @@
-# SearchApi
+# SearchApi | SearchApi
 
-This page covers how to use the [SearchApi](https://www.searchapi.io/) Google Search API within LangChain. SearchApi is a real-time SERP API for easy SERP scraping.
+このページでは、LangChain内で[SearchApi](https://www.searchapi.io/) Google検索APIを使用する方法について説明します。SearchApiは、簡単にSERPをスクレイピングするためのリアルタイムSERP APIです。
 
-## Setup
+> This page covers how to use the [SearchApi](https://www.searchapi.io/) Google Search API within LangChain. SearchApi is a real-time SERP API for easy SERP scraping.
 
-- Go to [https://www.searchapi.io/](https://www.searchapi.io/) to sign up for a free account
-- Get the api key and set it as an environment variable (`SEARCHAPI_API_KEY`)
+## Setup | セットアップ
 
-## Wrappers
+* 無料アカウントにサインアップするには、<https://www.searchapi.io/> にアクセスしてください
+  > Go to <https://www.searchapi.io/> to sign up for a free account
+* APIキーを取得し、環境変数（`SEARCHAPI_API_KEY`）として設定してください
+  > Get the api key and set it as an environment variable (`SEARCHAPI_API_KEY`)
 
-### Utility
+## Wrappers | ラッパー
 
-There is a SearchApiAPIWrapper utility which wraps this API. To import this utility:
+### Utility | ユーティリティ
+
+このAPIをラップするSearchApiAPIWrapperユーティリティがあります。このユーティリティをインポートするには：
+
+> There is a SearchApiAPIWrapper utility which wraps this API. To import this utility:
 
 ```python
 from langchain.utilities import SearchApiAPIWrapper
 ```
 
-You can use it as part of a Self Ask chain:
+Self Askチェーンの一部として使用することができます：
+
+> You can use it as part of a Self Ask chain:
 
 ```python
 from langchain.utilities import SearchApiAPIWrapper
@@ -44,7 +52,7 @@ self_ask_with_search = initialize_agent(tools, llm, agent=AgentType.SELF_ASK_WIT
 self_ask_with_search.run("Who lived longer: Plato, Socrates, or Aristotle?")
 ```
 
-#### Output
+#### Output | 出力
 
 ```
 > Entering new AgentExecutor chain...
@@ -67,14 +75,18 @@ So the final answer is: Plato
 'Plato'
 ```
 
-### Tool
+### Tool | ツール
 
-You can also easily load this wrapper as a Tool (to use with an Agent).
-You can do this with:
+このラッパーは、ツールとしても簡単に読み込むことができます（エージェントと一緒に使用するため）。これを行う方法は以下の通りです：
+
+> You can also easily load this wrapper as a Tool (to use with an Agent).
+> You can do this with:
 
 ```python
 from langchain.agents import load_tools
 tools = load_tools(["searchapi"])
 ```
 
-For more information on tools, see [this page](/docs/modules/agents/tools/).
+ツールに関する詳細は、[このページ](/docs/modules/agents/tools/)をご覧ください。
+
+> For more information on tools, see [this page](/docs/modules/agents/tools/).

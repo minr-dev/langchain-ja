@@ -2,51 +2,67 @@
 sidebar_position: 0
 ---
 
-# Agent Types
+# Agent Types | エージェントの種類
 
-Agents use an LLM to determine which actions to take and in what order.
-An action can either be using a tool and observing its output, or returning a response to the user.
-Here are the agents available in LangChain.
+エージェントはLLMを使用して、どのアクションをどの順序で実行するかを決定します。アクションには、ツールを使用してその出力を観察すること、またはユーザーにレスポンスを返すことが含まれます。こちらがLangChainで利用可能なエージェントの一覧です。
 
-## [Zero-shot ReAct](/docs/modules/agents/agent_types/react)
+> Agents use an LLM to determine which actions to take and in what order.
+> An action can either be using a tool and observing its output, or returning a response to the user.
+> Here are the agents available in LangChain.
 
-This agent uses the [ReAct](https://arxiv.org/pdf/2210.03629) framework to determine which tool to use
-based solely on the tool's description. Any number of tools can be provided.
-This agent requires that a description is provided for each tool.
+## [Zero-shot ReAct](/docs/modules/agents/agent_types/react) | [ゼロショットReAct](/docs/modules/agents/agent_types/react)
 
-**Note**: This is the most general purpose action agent.
+このエージェントは、[ReAct](https://arxiv.org/pdf/2210.03629) フレームワークを使用して、ツールの説明のみに基づいてどのツールを使用するかを決定します。提供されるツールの数に制限はありません。このエージェントは、各ツールに対する説明が提供されている必要があります。
 
-## [Structured input ReAct](/docs/modules/agents/agent_types/structured_chat)
+> This agent uses the [ReAct](https://arxiv.org/pdf/2210.03629) framework to determine which tool to use
+> based solely on the tool's description. Any number of tools can be provided.
+> This agent requires that a description is provided for each tool.
 
-The structured tool chat agent is capable of using multi-input tools.
-Older agents are configured to specify an action input as a single string, but this agent can use a tools' argument
-schema to create a structured action input. This is useful for more complex tool usage, like precisely
-navigating around a browser.
+注意：これは最も汎用的なアクションエージェントです。
 
-## [OpenAI Functions](/docs/modules/agents/agent_types/openai_functions_agent)
+> **Note**: This is the most general purpose action agent.
 
-Certain OpenAI models (like gpt-3.5-turbo-0613 and gpt-4-0613) have been explicitly fine-tuned to detect when a
-function should be called and respond with the inputs that should be passed to the function.
-The OpenAI Functions Agent is designed to work with these models.
+## [Structured input ReAct](/docs/modules/agents/agent_types/structured_chat) | [Structured input ReAct](/docs/modules/agents/agent_types/structured_chat)
 
-## [Conversational](/docs/modules/agents/agent_types/chat_conversation_agent)
+構造化ツールチャットエージェントは、複数の入力ツールを使用できます。従来のエージェントはアクション入力を単一の文字列として指定するよう設定されていましたが、このエージェントはツールの引数スキーマを利用して構造化されたアクション入力を作成できます。これは、ブラウザの周りを正確にナビゲートするなど、より複雑なツール使用に便利です。
 
-This agent is designed to be used in conversational settings.
-The prompt is designed to make the agent helpful and conversational.
-It uses the ReAct framework to decide which tool to use, and uses memory to remember the previous conversation interactions.
+> The structured tool chat agent is capable of using multi-input tools.
+> Older agents are configured to specify an action input as a single string, but this agent can use a tools' argument
+> schema to create a structured action input. This is useful for more complex tool usage, like precisely
+> navigating around a browser.
 
-## [Self-ask with search](/docs/modules/agents/agent_types/self_ask_with_search)
+## [OpenAI Functions](/docs/modules/agents/agent_types/openai_functions_agent) | [OpenAI Functions](/docs/modules/agents/agent_types/openai_functions_agent)
 
-This agent utilizes a single tool that should be named `Intermediate Answer`.
-This tool should be able to look up factual answers to questions. This agent
-is equivalent to the original [self-ask with search paper](https://ofir.io/self-ask.pdf),
-where a Google search API was provided as the tool.
+特定のOpenAIモデル（例えばgpt-3.5-turbo-0613やgpt-4-0613）は、関数を呼び出すべきタイミングを検出し、その関数に渡すべき入力を返答するように明示的にファインチューニングされています。OpenAI Functions Agentは、これらのモデルと連携して機能するように設計されています。
 
-## [ReAct document store](/docs/modules/agents/agent_types/react_docstore)
+> Certain OpenAI models (like gpt-3.5-turbo-0613 and gpt-4-0613) have been explicitly fine-tuned to detect when a
+> function should be called and respond with the inputs that should be passed to the function.
+> The OpenAI Functions Agent is designed to work with these models.
 
-This agent uses the ReAct framework to interact with a docstore. Two tools must
-be provided: a `Search` tool and a `Lookup` tool (they must be named exactly as so).
-The `Search` tool should search for a document, while the `Lookup` tool should look up
-a term in the most recently found document.
-This agent is equivalent to the
-original [ReAct paper](https://arxiv.org/pdf/2210.03629.pdf), specifically the Wikipedia example.
+## [Conversational](/docs/modules/agents/agent_types/chat_conversation_agent) | [会話型](/docs/modules/agents/agent_types/chat_conversation_agent)
+
+このエージェントは、会話の場で使用するように設計されています。プロンプトは、エージェントが役立ち、会話的になるように設計されています。どのツールを使用するかを決定するためにReActフレームワークを利用し、以前の会話のやりとりを記憶するためにメモリーを使用します。
+
+> This agent is designed to be used in conversational settings.
+> The prompt is designed to make the agent helpful and conversational.
+> It uses the ReAct framework to decide which tool to use, and uses memory to remember the previous conversation interactions.
+
+## [Self-ask with search](/docs/modules/agents/agent_types/self_ask_with_search) | [検索を伴う自己問い合わせ](/docs/modules/agents/agent_types/self_ask_with_search)
+
+このエージェントは`Intermediate Answer`と名付けられるべき単一のツールを利用します。このツールは、質問に対する事実に基づいた答えを検索する能力を持っている必要があります。このエージェントは、ツールとしてGoogle検索APIが提供されていたオリジナルの[self-ask with search paper](https://ofir.io/self-ask.pdf)に相当します。
+
+> This agent utilizes a single tool that should be named `Intermediate Answer`.
+> This tool should be able to look up factual answers to questions. This agent
+> is equivalent to the original [self-ask with search paper](https://ofir.io/self-ask.pdf),
+> where a Google search API was provided as the tool.
+
+## [ReAct document store](/docs/modules/agents/agent_types/react_docstore) | [ReActドキュメントストア](/docs/modules/agents/agent_types/react_docstore)
+
+このエージェントは、docstoreと対話するためにReActフレームワークを使用します。提供されるべきツールは2つあり、それぞれ`Search`ツールと`Lookup`ツールと正確に名付けられていなければなりません。`Search`ツールは文書を検索する機能を持ち、`Lookup`ツールは最も最近に見つかった文書内で用語を調べる機能を持っています。このエージェントは、[ReAct論文](https://arxiv.org/pdf/2210.03629.pdf)に記載されているオリジナルの例、特にWikipediaの例と同等です。
+
+> This agent uses the ReAct framework to interact with a docstore. Two tools must
+> be provided: a `Search` tool and a `Lookup` tool (they must be named exactly as so).
+> The `Search` tool should search for a document, while the `Lookup` tool should look up
+> a term in the most recently found document.
+> This agent is equivalent to the
+> original [ReAct paper](https://arxiv.org/pdf/2210.03629.pdf), specifically the Wikipedia example.

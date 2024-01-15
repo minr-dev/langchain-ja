@@ -1,15 +1,18 @@
-# Vector store-backed retriever
+# Vector store-backed retriever | ベクトルストアをバックエンドとするリトリバー
 
-A vector store retriever is a retriever that uses a vector store to retrieve documents. It is a lightweight wrapper around the vector store class to make it conform to the retriever interface.
-It uses the search methods implemented by a vector store, like similarity search and MMR, to query the texts in the vector store.
+ベクトルストアリトリーバーは、ドキュメントを取得するためにベクトルストアを使用するリトリーバーです。これは、リトリーバーインターフェースに準拠するようにベクトルストアクラスの周りに作られた軽量のラッパーです。ベクトルストアに実装されている検索メソッド、例えば類似性検索やMMRを使用して、ベクトルストア内のテキストをクエリします。
 
-Once you construct a vector store, it's very easy to construct a retriever. Let's walk through an example.
+> A vector store retriever is a retriever that uses a vector store to retrieve documents. It is a lightweight wrapper around the vector store class to make it conform to the retriever interface.
+> It uses the search methods implemented by a vector store, like similarity search and MMR, to query the texts in the vector store.
+
+ベクトルストアを構築すると、リトリバーを構築するのは非常に簡単です。例を挙げて説明しましょう。
+
+> Once you construct a vector store, it's very easy to construct a retriever. Let's walk through an example.
 
 ```python
 from langchain.document_loaders import TextLoader
 loader = TextLoader('../../../state_of_the_union.txt')
 ```
-
 
 ```python
 from langchain.text_splitter import CharacterTextSplitter
@@ -31,56 +34,55 @@ db = FAISS.from_documents(texts, embeddings)
 
 </CodeOutputBlock>
 
-
 ```python
 retriever = db.as_retriever()
 ```
-
 
 ```python
 docs = retriever.get_relevant_documents("what did he say about ketanji brown jackson")
 ```
 
-## Maximum marginal relevance retrieval
-By default, the vector store retriever uses similarity search. If the underlying vector store supports maximum marginal relevance search, you can specify that as the search type.
+## Maximum marginal relevance retrieval | 最大限の周辺関連性検索
 
+デフォルトでは、ベクトルストアリトリーバーは類似性検索を利用します。もし基盤となるベクトルストアが最大限縁関連性検索（MMR検索）に対応している場合、検索タイプとしてそれを指定できます。
+
+> By default, the vector store retriever uses similarity search. If the underlying vector store supports maximum marginal relevance search, you can specify that as the search type.
 
 ```python
 retriever = db.as_retriever(search_type="mmr")
 ```
 
-
 ```python
 docs = retriever.get_relevant_documents("what did he say about ketanji brown jackson")
 ```
 
-## Similarity score threshold retrieval
+## Similarity score threshold retrieval | 類似度スコアの閾値取得
 
-You can also set a retrieval method that sets a similarity score threshold and only returns documents with a score above that threshold.
+類似性スコアの閾値を設定し、その閾値を超えるスコアを持つドキュメントのみを返すような検索方法も設定できます。
 
+> You can also set a retrieval method that sets a similarity score threshold and only returns documents with a score above that threshold.
 
 ```python
 retriever = db.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": .5})
 ```
 
-
 ```python
 docs = retriever.get_relevant_documents("what did he say about ketanji brown jackson")
 ```
 
-## Specifying top k
-You can also specify search kwargs like `k` to use when doing retrieval.
+## Specifying top k | トップkの指定
 
+検索を行う際に使用する`k`のような検索キーワード引数も指定できます。
+
+> You can also specify search kwargs like `k` to use when doing retrieval.
 
 ```python
 retriever = db.as_retriever(search_kwargs={"k": 1})
 ```
 
-
 ```python
 docs = retriever.get_relevant_documents("what did he say about ketanji brown jackson")
 ```
-
 
 ```python
 len(docs)

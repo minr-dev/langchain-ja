@@ -1,9 +1,16 @@
-# Safety
+# Safety | 安全性
 
-One of the key concerns with using LLMs is that they may generate harmful or unethical text. This is an area of active research in the field. Here we present some built-in chains inspired by this research, which are intended to make the outputs of LLMs safer.
+LLMを使用する際の主要な懸念点の一つは、有害または倫理に反するテキストを生成する可能性があることです。これは現在活発に研究されている分野です。ここでは、LLMの出力をより安全にすることを目的として、この研究に基づいて開発されたいくつかの組み込みチェーンを紹介します。
 
-- [Amazon Comprehend moderation chain](/docs/guides/safety/amazon_comprehend_chain): Use [Amazon Comprehend](https://aws.amazon.com/comprehend/) to detect and handle Personally Identifiable Information (PII) and toxicity.
-- [Constitutional chain](/docs/guides/safety/constitutional_chain): Prompt the model with a set of principles which should guide the model behavior.
-- [Hugging Face prompt injection identification](/docs/guides/safety/huggingface_prompt_injection_identification): Detect and handle prompt injection attacks. 
-- [Logical Fallacy chain](/docs/guides/safety/logical_fallacy_chain): Checks the model output against logical fallacies to correct any deviation.
-- [Moderation chain](/docs/guides/safety/moderation): Check if any output text is harmful and flag it.
+> One of the key concerns with using LLMs is that they may generate harmful or unethical text. This is an area of active research in the field. Here we present some built-in chains inspired by this research, which are intended to make the outputs of LLMs safer.
+
+* [Amazon Comprehend moderation chain](/docs/guides/safety/amazon_comprehend_chain)：[Amazon Comprehend](https://aws.amazon.com/comprehend/)を使用して、個人を特定できる情報（PII）と有害性を検出して対応します。
+  > [Amazon Comprehend moderation chain](/docs/guides/safety/amazon_comprehend_chain): Use [Amazon Comprehend](https://aws.amazon.com/comprehend/) to detect and handle Personally Identifiable Information (PII) and toxicity.
+* [憲法チェーン](/docs/guides/safety/constitutional_chain)：モデルの行動を指導する原則のセットを用いて、モデルにプロンプトを行います。
+  > [Constitutional chain](/docs/guides/safety/constitutional_chain): Prompt the model with a set of principles which should guide the model behavior.
+* [Hugging Faceプロンプトインジェクション識別](/docs/guides/safety/huggingface_prompt_injection_identification)：プロンプトインジェクション攻撃を検出して対処する。
+  > [Hugging Face prompt injection identification](/docs/guides/safety/huggingface_prompt_injection_identification): Detect and handle prompt injection attacks.
+* [Logical Fallacy chain](/docs/guides/safety/logical_fallacy_chain)：モデルの出力が論理的誤謬に反していないかチェックし、逸脱があれば修正します。
+  > [Logical Fallacy chain](/docs/guides/safety/logical_fallacy_chain): Checks the model output against logical fallacies to correct any deviation.
+* [モデレーションチェーン](/docs/guides/safety/moderation)：出力テキストに有害な内容が含まれていないかをチェックし、問題があればフラグを立ててください。
+  > [Moderation chain](/docs/guides/safety/moderation): Check if any output text is harmful and flag it.

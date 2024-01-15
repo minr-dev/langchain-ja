@@ -1,62 +1,102 @@
-# Jaguar
+# Jaguar | ジャガー
 
-This page describes how to use Jaguar vector database within LangChain.
-It contains three sections: introduction, installation and setup, and Jaguar API.
+このページでは、LangChain内でJaguarベクトルデータベースを使用する方法について説明しています。3つのセクションが含まれています：イントロダクション、インストールとセットアップ、そしてJaguar API。
 
+> This page describes how to use Jaguar vector database within LangChain.
+> It contains three sections: introduction, installation and setup, and Jaguar API.
 
-## Introduction
+## Introduction | イントロダクション
 
-Jaguar vector database has the following characteristics:
+Jaguarベクトルデータベースには、以下の特徴があります：
 
-1. It is a distributed vector database
-2. The “ZeroMove” feature of JaguarDB enables instant horizontal scalability
-3. Multimodal: embeddings, text, images, videos, PDFs, audio, time series, and geospatial
-4. All-masters: allows both parallel reads and writes
-5. Anomaly detection capabilities
-6. RAG support: combines LLM with proprietary and real-time data
-7. Shared metadata: sharing of metadata across multiple vector indexes
-8. Distance metrics: Euclidean, Cosine, InnerProduct, Manhatten, Chebyshev, Hamming, Jeccard, Minkowski
+> Jaguar vector database has the following characteristics:
 
-[Overview of Jaguar scalable vector database](http://www.jaguardb.com)
+1. それは分散型ベクターデータベースです
+   > It is a distributed vector database
+2. JaguarDBの「ZeroMove」機能により、即時の水平スケーラビリティが実現します
+   > The “ZeroMove” feature of JaguarDB enables instant horizontal scalability
+3. マルチモーダル：埋め込み、テキスト、画像、動画、PDF、オーディオ、時系列、地理空間
+   > Multimodal: embeddings, text, images, videos, PDFs, audio, time series, and geospatial
+4. All-masters: 並行して読み取りと書き込みが可能
+   > All-masters: allows both parallel reads and writes
+5. 異常検知機能
+   > Anomaly detection capabilities
+6. RAGサポート：LLMを独自のリアルタイムデータと組み合わせる
+   > RAG support: combines LLM with proprietary and real-time data
+7. 共有メタデータ：複数のベクターインデックス間でのメタデータの共有
+   > Shared metadata: sharing of metadata across multiple vector indexes
+8. 距離尺度：ユークリッド、コサイン、内積、マンハッタン、チェビシェフ、ハミング、ジャカード、ミンコフスキー
+   > Distance metrics: Euclidean, Cosine, InnerProduct, Manhatten, Chebyshev, Hamming, Jeccard, Minkowski
 
-You can run JaguarDB in docker container; or download the software and run on-cloud or off-cloud.
+[Jaguarスケーラブルベクターデータベースの概要](http://www.jaguardb.com)
 
-## Installation and Setup
+> [Overview of Jaguar scalable vector database](http://www.jaguardb.com)
 
-- Install the JaguarDB on one host or multiple hosts
-- Install the Jaguar HTTP Gateway server on one host
-- Install the JaguarDB HTTP Client package
+JaguarDBはDockerコンテナで実行することができます。また、ソフトウェアをダウンロードしてクラウド上またはクラウド外で実行することもできます。
 
-The steps are described in [Jaguar Documents](http://www.jaguardb.com/support.html)
+> You can run JaguarDB in docker container; or download the software and run on-cloud or off-cloud.
 
-Environment Variables in client programs:
+## Installation and Setup | インストールとセットアップ
 
-    export OPENAI_API_KEY="......"
-    export JAGUAR_API_KEY="......"
+* JaguarDBを1台のホストまたは複数のホストにインストールしてください
+  > Install the JaguarDB on one host or multiple hosts
+* Jaguar HTTP Gatewayサーバーを1台のホストにインストールしてください
+  > Install the Jaguar HTTP Gateway server on one host
+* JaguarDB HTTPクライアントパッケージをインストールしてください
+  > Install the JaguarDB HTTP Client package
 
-  
-## Jaguar API
+[Jaguar Documents](http://www.jaguardb.com/support.html)に手順が記載されています。
 
-Together with LangChain, a Jaguar client class is provided by importing it in Python:
+> The steps are described in [Jaguar Documents](http://www.jaguardb.com/support.html)
+
+クライアントプログラムの環境変数：
+
+> Environment Variables in client programs:
+
+```
+export OPENAI_API_KEY="......"
+export JAGUAR_API_KEY="......"
+```
+
+## Jaguar API | ジャガーAPI
+
+LangChainと共に、Pythonでインポートすることにより提供されるJaguarクライアントクラスがあります：
+
+> Together with LangChain, a Jaguar client class is provided by importing it in Python:
 
 ```python
 from langchain_community.vectorstores.jaguar import Jaguar
 ```
 
-Supported API functions of the Jaguar class are:
+JaguarクラスがサポートするAPI機能は以下の通りです：
 
-- `add_texts`
-- `add_documents`
-- `from_texts`
-- `from_documents`
-- `similarity_search`
-- `is_anomalous`
-- `create`
-- `delete`
-- `clear`
-- `drop`
-- `login`
-- `logout`
+> Supported API functions of the Jaguar class are:
 
+* `add_texts`
+  > `add_texts`
+* `add_documents`
+  > `add_documents`
+* `from_texts`
+  > `from_texts`
+* `from_documents`
+  > `from_documents`
+* `similarity_search`
+  > `similarity_search`
+* `is_anomalous`
+  > `is_anomalous`
+* `create`
+  > `create`
+* `delete`
+  > `delete`
+* `clear`
+  > `clear`
+* `drop`
+  > `drop`
+* `login`
+  > `login`
+* ログアウト
+  > `logout`
 
-For more details of the Jaguar API, please refer to [this notebook](/docs/integrations/vectorstores/jaguar)
+Jaguar APIの詳細については、[このノートブック](/docs/integrations/vectorstores/jaguar)を参照してください。
+
+> For more details of the Jaguar API, please refer to [this notebook](/docs/integrations/vectorstores/jaguar)

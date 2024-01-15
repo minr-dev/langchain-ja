@@ -1,22 +1,33 @@
 ---
 sidebar_position: 0
 ---
-# Document loaders
+
+# Document loaders | ドキュメントローダー
 
 :::info
-Head to [Integrations](/docs/integrations/document_loaders/) for documentation on built-in document loader integrations with 3rd-party tools.
+
+サードパーティツールと組み込み済みのドキュメントローダー統合に関するドキュメントについては、[インテグレーション](/docs/integrations/document_loaders/)のセクションをご覧ください。
+
+> Head to [Integrations](/docs/integrations/document_loaders/) for documentation on built-in document loader integrations with 3rd-party tools.
+
 :::
 
-Use document loaders to load data from a source as `Document`'s. A `Document` is a piece of text
-and associated metadata. For example, there are document loaders for loading a simple `.txt` file, for loading the text
-contents of any web page, or even for loading a transcript of a YouTube video.
+`Document`としてソースからデータをロードするためにドキュメントローダーを使用します。`Document`はテキストとそれに関連するメタデータの集まりです。例えば、シンプルな`.txt`ファイルをロードするドキュメントローダーや、任意のウェブページのテキスト内容をロードするドキュメントローダー、またはYouTubeビデオのトランスクリプトをロードするドキュメントローダーがあります。
 
-Document loaders provide a "load" method for loading data as documents from a configured source. They optionally
-implement a "lazy load" as well for lazily loading data into memory.
+> Use document loaders to load data from a source as `Document`'s. A `Document` is a piece of text
+> and associated metadata. For example, there are document loaders for loading a simple `.txt` file, for loading the text
+> contents of any web page, or even for loading a transcript of a YouTube video.
 
-## Get started
+ドキュメントローダーは、設定されたソースからデータをドキュメントとして読み込む「load」メソッドを提供します。また、オプションでデータをメモリに遅延して読み込む「lazy load」も実装することが可能です。
 
-The simplest loader reads in a file as text and places it all into one document.
+> Document loaders provide a "load" method for loading data as documents from a configured source. They optionally
+> implement a "lazy load" as well for lazily loading data into memory.
+
+## Get started | 始めましょう
+
+最もシンプルなローダーは、ファイルをテキストとして読み込み、その全てを一つのドキュメントに配置します。
+
+> The simplest loader reads in a file as text and places it all into one document.
 
 ```python
 from langchain.document_loaders import TextLoader

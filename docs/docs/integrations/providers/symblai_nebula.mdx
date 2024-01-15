@@ -1,17 +1,25 @@
-# Nebula
+# Nebula | ネビュラ
 
-This page covers how to use [Nebula](https://symbl.ai/nebula), [Symbl.ai](https://symbl.ai/)'s LLM, ecosystem within LangChain.
-It is broken into two parts: installation and setup, and then references to specific Nebula wrappers.
+このページでは、LangChain内での[Nebula](https://symbl.ai/nebula)（[Symbl.ai](https://symbl.ai/)のLLMエコシステム）の使用方法について説明しています。これはインストールとセットアップ、そして特定のNebulaラッパーへの参照という2つの部分に分かれています。
 
-## Installation and Setup
+> This page covers how to use [Nebula](https://symbl.ai/nebula), [Symbl.ai](https://symbl.ai/)'s LLM, ecosystem within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific Nebula wrappers.
 
-- Get an [Nebula API Key](https://info.symbl.ai/Nebula_Private_Beta.html) and set as environment variable `NEBULA_API_KEY`
-- Please see the [Nebula documentation](https://docs.symbl.ai/docs/nebula-llm) for more details.
-- No time? Visit the [Nebula Quickstart Guide](https://docs.symbl.ai/docs/nebula-quickstart).
+## Installation and Setup | インストールとセットアップ
 
-### LLM
+* [Nebula API Key](https://info.symbl.ai/Nebula_Private_Beta.html)を取得し、環境変数`NEBULA_API_KEY`として設定してください
+  > Get an [Nebula API Key](https://info.symbl.ai/Nebula_Private_Beta.html) and set as environment variable `NEBULA_API_KEY`
+* 詳細については、[Nebulaのドキュメント](https://docs.symbl.ai/docs/nebula-llm)をご覧ください。
+  > Please see the [Nebula documentation](https://docs.symbl.ai/docs/nebula-llm) for more details.
+* 時間がありませんか？[Nebula Quickstart Guide](https://docs.symbl.ai/docs/nebula-quickstart)をご覧ください。
+  > No time? Visit the [Nebula Quickstart Guide](https://docs.symbl.ai/docs/nebula-quickstart).
 
-There exists an Nebula LLM wrapper, which you can access with
+### LLM | LLM
+
+Nebula LLMラッパーが存在し、次の方法でアクセスできます
+
+> There exists an Nebula LLM wrapper, which you can access with
+
 ```python
 from langchain.llms import Nebula
 llm = Nebula()

@@ -1,28 +1,31 @@
-# Xata
+# Xata | Xata
 
-> [Xata](https://xata.io) is a serverless data platform, based on `PostgreSQL`. 
-> It provides a Python SDK for interacting with your database, and a UI 
-> for managing your data.
-> `Xata` has a native vector type, which can be added to any table, and 
-> supports similarity search. LangChain inserts vectors directly to `Xata`, 
-> and queries it for the nearest neighbors of a given vector, so that you can
-> use all the LangChain Embeddings integrations with `Xata`.
+> [Xata](https://xata.io)は`PostgreSQL`を基盤としたサーバーレスデータプラットフォームです。データベースとの対話にはPython SDKを提供し、データの管理にはUIが用意されています。`Xata`には任意のテーブルに追加可能なネイティブベクタータイプがあり、類似性検索に対応しています。LangChainはベクターを直接`Xata`に挿入し、与えられたベクターの最近傍をクエリして、`Xata`でLangChainのエンベディング統合機能をすべて使用できるようにします。
+>
+> > [Xata](https://xata.io) is a serverless data platform, based on `PostgreSQL`.
+> > It provides a Python SDK for interacting with your database, and a UI
+> > for managing your data.
+> > `Xata` has a native vector type, which can be added to any table, and
+> > supports similarity search. LangChain inserts vectors directly to `Xata`,
+> > and queries it for the nearest neighbors of a given vector, so that you can
+> > use all the LangChain Embeddings integrations with `Xata`.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+`xata` Pythonパッケージをインストールする必要があります。
 
-
-We need to install `xata` python package.
+> We need to install `xata` python package.
 
 ```bash
 pip install xata==1.0.0a7 
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/xata).
+[使用例](/docs/integrations/vectorstores/xata)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/xata).
 
 ```python
 from langchain.vectorstores import XataVectorStore
 ```
-

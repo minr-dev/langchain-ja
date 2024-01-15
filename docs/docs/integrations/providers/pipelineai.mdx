@@ -1,18 +1,24 @@
-# PipelineAI
+# PipelineAI | PipelineAI
 
-This page covers how to use the PipelineAI ecosystem within LangChain.
-It is broken into two parts: installation and setup, and then references to specific PipelineAI wrappers.
+このページでは、LangChain内でPipelineAIエコシステムを使用する方法について説明しています。内容は、インストールとセットアップに関する部分と、特定のPipelineAIラッパーに関する参照部分の2つに分けられています。
 
-## Installation and Setup
+> This page covers how to use the PipelineAI ecosystem within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific PipelineAI wrappers.
 
-- Install with `pip install pipeline-ai`
-- Get a Pipeline Cloud api key and set it as an environment variable (`PIPELINE_API_KEY`)
+## Installation and Setup | インストールとセットアップ
 
-## Wrappers
+* `pip install pipeline-ai`でインストールしてください
+  > Install with `pip install pipeline-ai`
+* Pipeline CloudのAPIキーを取得し、環境変数（`PIPELINE_API_KEY`）として設定してください。
+  > Get a Pipeline Cloud api key and set it as an environment variable (`PIPELINE_API_KEY`)
 
-### LLM
+## Wrappers | ラッパー
 
-There exists a PipelineAI LLM wrapper, which you can access with
+### LLM | LLM
+
+PipelineAI LLMラッパーが存在し、以下の方法でアクセスできます
+
+> There exists a PipelineAI LLM wrapper, which you can access with
 
 ```python
 from langchain.llms import PipelineAI

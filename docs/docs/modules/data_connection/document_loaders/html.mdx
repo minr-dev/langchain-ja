@@ -1,23 +1,24 @@
-# HTML
+# HTML | HTML
 
->[The HyperText Markup Language or HTML](https://en.wikipedia.org/wiki/HTML) is the standard markup language for documents designed to be displayed in a web browser.
+> [HyperText Markup Language または HTML](https://en.wikipedia.org/wiki/HTML) は、ウェブブラウザで表示されるように設計された文書のための標準的なマークアップ言語です。
+>
+> > [The HyperText Markup Language or HTML](https://en.wikipedia.org/wiki/HTML) is the standard markup language for documents designed to be displayed in a web browser.
 
-This covers how to load `HTML` documents into a document format that we can use downstream.
+これは、`HTML`ドキュメントを、後続の処理で使用できるドキュメント形式に読み込む方法について説明しています。
+
+> This covers how to load `HTML` documents into a document format that we can use downstream.
 
 ```python
 from langchain.document_loaders import UnstructuredHTMLLoader
 ```
 
-
 ```python
 loader = UnstructuredHTMLLoader("example_data/fake-content.html")
 ```
 
-
 ```python
 data = loader.load()
 ```
-
 
 ```python
 data
@@ -31,15 +32,15 @@ data
 
 </CodeOutputBlock>
 
-## Loading HTML with BeautifulSoup4
+## Loading HTML with BeautifulSoup4 | BeautifulSoup4でHTMLを読み込む
 
-We can also use `BeautifulSoup4` to load HTML documents using the `BSHTMLLoader`.  This will extract the text from the HTML into `page_content`, and the page title as `title` into `metadata`.
+`BSHTMLLoader`を使用して`BeautifulSoup4`でHTMLドキュメントを読み込むこともできます。これにより、HTMLからテキストを`page_content`に抽出し、ページタイトルを`metadata`の`title`に抽出します。
 
+> We can also use `BeautifulSoup4` to load HTML documents using the `BSHTMLLoader`.  This will extract the text from the HTML into `page_content`, and the page title as `title` into `metadata`.
 
 ```python
 from langchain.document_loaders import BSHTMLLoader
 ```
-
 
 ```python
 loader = BSHTMLLoader("example_data/fake-content.html")

@@ -2,32 +2,55 @@
 sidebar_class_name: hidden
 ---
 
-# LangChain Expression Language (LCEL)
+# LangChain Expression Language (LCEL) | LangChain 式言語 (LCEL)
 
-LangChain Expression Language, or LCEL, is a declarative way to easily compose chains together.
-LCEL was designed from day 1 to **support putting prototypes in production, with no code changes**, from the simplest “prompt + LLM” chain to the most complex chains (we’ve seen folks successfully run LCEL chains with 100s of steps in production). To highlight a few of the reasons you might want to use LCEL:
+LangChain Expression Language、略してLCELは、チェーンを容易に組み合わせるための宣言型の方法です。LCELは初日から、最もシンプルな「プロンプト + LLM」チェーンから、非常に複雑なチェーン（実際に本番環境で数百ステップのLCELチェーンを成功裏に運用している例があります）に至るまで、**コードの変更を伴わずにプロトタイプを本番環境へ移行することを支援する**ように設計されています。LCELを使用することをお勧めする理由をいくつか挙げてみましょう：
 
-**Streaming support**
-When you build your chains with LCEL you get the best possible time-to-first-token (time elapsed until the first chunk of output comes out). For some chains this means eg. we stream tokens straight from an LLM to a streaming output parser, and you get back parsed, incremental chunks of output at the same rate as the LLM provider outputs the raw tokens.
+> LangChain Expression Language, or LCEL, is a declarative way to easily compose chains together.
+> LCEL was designed from day 1 to **support putting prototypes in production, with no code changes**, from the simplest “prompt + LLM” chain to the most complex chains (we’ve seen folks successfully run LCEL chains with 100s of steps in production). To highlight a few of the reasons you might want to use LCEL:
 
-**Async support**
-Any chain built with LCEL can be called both with the synchronous API (eg. in your Jupyter notebook while prototyping) as well as with the asynchronous API (eg. in a [LangServe](/docs/langsmith) server). This enables using the same code for prototypes and in production, with great performance, and the ability to handle many concurrent requests in the same server.
+LCELを使用してチェーンを構築すると、最初のトークンが出力されるまでの時間（最初の出力チャンクが現れるまでの時間）が最短になります。例えば、あるチェーンでは、LLMからストリーミング出力パーサーに直接トークンをストリーミングし、LLMプロバイダーが生トークンを出力するのと同じ速度で、解析済みのインクリメンタル出力チャンクを受け取ることができます。
 
-**Optimized parallel execution**
-Whenever your LCEL chains have steps that can be executed in parallel (eg if you fetch documents from multiple retrievers) we automatically do it, both in the sync and the async interfaces, for the smallest possible latency.
+> **Streaming support**
+> When you build your chains with LCEL you get the best possible time-to-first-token (time elapsed until the first chunk of output comes out). For some chains this means eg. we stream tokens straight from an LLM to a streaming output parser, and you get back parsed, incremental chunks of output at the same rate as the LLM provider outputs the raw tokens.
 
-**Retries and fallbacks**
-Configure retries and fallbacks for any part of your LCEL chain. This is a great way to make your chains more reliable at scale. We’re currently working on adding streaming support for retries/fallbacks, so you can get the added reliability without any latency cost.
+LCELを使用して構築された任意のチェーンは、同期API（例えばプロトタイピング時のJupyterノートブックで）だけでなく、非同期API（例えば[LangServe](/docs/langsmith)サーバーで）でも呼び出すことが可能です。これにより、プロトタイプと本番環境で同一のコードを使用でき、優れたパフォーマンスを維持しつつ、同一サーバー上で多くの同時リクエストを処理する能力が実現します。
 
-**Access intermediate results**
-For more complex chains it’s often very useful to access the results of intermediate steps even before the final output is produced. This can be used to let end-users know something is happening, or even just to debug your chain. You can stream intermediate results, and it’s available on every [LangServe](/docs/langserve) server.
+> **Async support**
+> Any chain built with LCEL can be called both with the synchronous API (eg. in your Jupyter notebook while prototyping) as well as with the asynchronous API (eg. in a [LangServe](/docs/langsmith) server). This enables using the same code for prototypes and in production, with great performance, and the ability to handle many concurrent requests in the same server.
 
-**Input and output schemas**
-Input and output schemas give every LCEL chain Pydantic and JSONSchema schemas inferred from the structure of your chain. This can be used for validation of inputs and outputs, and is an integral part of LangServe.
+最適化された並列実行
+LCELチェーンに並列で実行可能なステップが含まれている場合（例えば、複数のリトリバーからドキュメントを取得する場合など）、我々は最小限の遅延を実現するために、同期および非同期のインターフェースにおいて自動的にそれらを並列実行します。
 
-**Seamless LangSmith tracing integration**
-As your chains get more and more complex, it becomes increasingly important to understand what exactly is happening at every step.
-With LCEL, **all** steps are automatically logged to [LangSmith](/docs/langsmith/) for maximum observability and debuggability.
+> **Optimized parallel execution**
+> Whenever your LCEL chains have steps that can be executed in parallel (eg if you fetch documents from multiple retrievers) we automatically do it, both in the sync and the async interfaces, for the smallest possible latency.
 
-**Seamless LangServe deployment integration**
-Any chain created with LCEL can be easily deployed using [LangServe](/docs/langserve).
+**リトライとフォールバック**
+LCELチェーンの任意の部分にリトライとフォールバックを設定できます。これにより、大規模に展開する際のチェーンの信頼性を向上させることができます。現在、リトライ/フォールバック機能にストリーミングサポートを追加する作業を進めており、追加された信頼性を遅延時間の増加なしで実現できるようになります。
+
+> **Retries and fallbacks**
+> Configure retries and fallbacks for any part of your LCEL chain. This is a great way to make your chains more reliable at scale. We’re currently working on adding streaming support for retries/fallbacks, so you can get the added reliability without any latency cost.
+
+**中間結果のアクセス**
+より複雑なチェーンにおいては、最終出力が生成される前でも、中間ステップの結果を確認することが非常に役立ちます。これにより、エンドユーザーに何らかの処理が行われていることを知らせたり、チェーンのデバッグを行うことができます。中間結果はストリーミングで送信可能であり、すべての[LangServe](/docs/langserve)サーバーで利用できます。
+
+> **Access intermediate results**
+> For more complex chains it’s often very useful to access the results of intermediate steps even before the final output is produced. This can be used to let end-users know something is happening, or even just to debug your chain. You can stream intermediate results, and it’s available on every [LangServe](/docs/langserve) server.
+
+**入力と出力のスキーマ**
+LCELチェーンには、チェーンの構造から推定されるPydanticおよびJSONSchemaのスキーマが付与されます。これは入力と出力の検証に使用でき、LangServeの不可欠な部分です。
+
+> **Input and output schemas**
+> Input and output schemas give every LCEL chain Pydantic and JSONSchema schemas inferred from the structure of your chain. This can be used for validation of inputs and outputs, and is an integral part of LangServe.
+
+**シームレスなLangSmithトレーシング統合**
+チェーンが複雑になるにつれ、各ステップで具体的に何が起きているのかを把握することがますます重要になってきます。LCELでは、**全ての**ステップが最大限の可観測性とデバッグ性を確保するために、自動的に[LangSmith](/docs/langsmith/)にログされます。
+
+> **Seamless LangSmith tracing integration**
+> As your chains get more and more complex, it becomes increasingly important to understand what exactly is happening at every step.
+> With LCEL, **all** steps are automatically logged to [LangSmith](/docs/langsmith/) for maximum observability and debuggability.
+
+LCELを使用して作成された任意のチェーンは、[LangServe](/docs/langserve)を用いて容易にデプロイ可能です。
+
+> **Seamless LangServe deployment integration**
+> Any chain created with LCEL can be easily deployed using [LangServe](/docs/langserve).

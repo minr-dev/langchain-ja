@@ -1,34 +1,51 @@
-# Golden
+# Golden | ゴールデン
 
->[Golden](https://golden.com) provides a set of natural language APIs for querying and enrichment using the Golden Knowledge Graph e.g. queries such as: `Products from OpenAI`, `Generative ai companies with series a funding`, and `rappers who invest` can be used to retrieve structured data about relevant entities.
+> [Golden](https://golden.com)は、Golden Knowledge Graphを使用してクエリやデータの充実化を行うための自然言語APIのセットを提供しています。例えば、「OpenAIの製品」、「シリーズAの資金調達を行ったジェネラティブAI企業」、「投資を行うラッパー」といったクエリを使用して、関連するエンティティについての構造化されたデータを取得することができます。
 >
->The `golden-query` langchain tool is a wrapper on top of the [Golden Query API](https://docs.golden.com/reference/query-api) which enables programmatic access to these results.
->See the [Golden Query API docs](https://docs.golden.com/reference/query-api) for more information.
+> > [Golden](https://golden.com) provides a set of natural language APIs for querying and enrichment using the Golden Knowledge Graph e.g. queries such as: `Products from OpenAI`, `Generative ai companies with series a funding`, and `rappers who invest` can be used to retrieve structured data about relevant entities.
+>
+> `golden-query` langchainツールは、これらの結果にプログラムからアクセスするための[Golden Query API](https://docs.golden.com/reference/query-api)のラッパーです。詳細については、[Golden Query APIのドキュメント](https://docs.golden.com/reference/query-api)をご覧ください。
+>
+> > The `golden-query` langchain tool is a wrapper on top of the [Golden Query API](https://docs.golden.com/reference/query-api) which enables programmatic access to these results.
+> > See the [Golden Query API docs](https://docs.golden.com/reference/query-api) for more information.
 
-## Installation and Setup
-- Go to the [Golden API docs](https://docs.golden.com/) to get an overview about the Golden API.
-- Get your API key from the [Golden API Settings](https://golden.com/settings/api) page.
-- Save your API key into GOLDEN_API_KEY env variable
+## Installation and Setup | インストールとセットアップ
 
-## Wrappers
+* Golden APIについての概要を得るために、[Golden APIドキュメント](https://docs.golden.com/)にアクセスしてください。
+  > Go to the [Golden API docs](https://docs.golden.com/) to get an overview about the Golden API.
+* [Golden API Settings](https://golden.com/settings/api)ページからAPIキーを取得してください。
+  > Get your API key from the [Golden API Settings](https://golden.com/settings/api) page.
+* APIキーをGOLDEN\_API\_KEY環境変数に保存してください
+  > Save your API key into GOLDEN\_API\_KEY env variable
 
-### Utility
+## Wrappers | ラッパー
 
-There exists a GoldenQueryAPIWrapper utility which wraps this API. To import this utility:
+### Utility | ユーティリティ
+
+GoldenQueryAPIWrapperというユーティリティが存在し、このAPIをラップしています。このユーティリティをインポートするには：
+
+> There exists a GoldenQueryAPIWrapper utility which wraps this API. To import this utility:
 
 ```python
 from langchain.utilities.golden_query import GoldenQueryAPIWrapper
 ```
 
-For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/golden_query).
+このラッパーのより詳細な使い方については、[このノートブック](/docs/integrations/tools/golden_query)をご覧ください。
 
-### Tool
+> For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/golden_query).
 
-You can also easily load this wrapper as a Tool (to use with an Agent).
-You can do this with:
+### Tool | ツール
+
+このラッパーは、エージェントと一緒に使用するためのツールとしても簡単に読み込むことができます。以下の方法でこれを行うことができます：
+
+> You can also easily load this wrapper as a Tool (to use with an Agent).
+> You can do this with:
+
 ```python
 from langchain.agents import load_tools
 tools = load_tools(["golden-query"])
 ```
 
-For more information on tools, see [this page](/docs/modules/agents/tools/).
+ツールに関する詳細は、[このページ](/docs/modules/agents/tools/)をご覧ください。
+
+> For more information on tools, see [this page](/docs/modules/agents/tools/).

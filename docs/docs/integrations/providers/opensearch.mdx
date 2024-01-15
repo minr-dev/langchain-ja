@@ -1,21 +1,33 @@
-# OpenSearch
+# OpenSearch | OpenSearch
 
-This page covers how to use the OpenSearch ecosystem within LangChain.
-It is broken into two parts: installation and setup, and then references to specific OpenSearch wrappers.
+このページでは、LangChain内でOpenSearchエコシステムを使用する方法について説明しています。内容は、インストールとセットアップに関する部分と、特定のOpenSearchラッパーに関する参照の部分の2つに分かれています。
 
-## Installation and Setup
-- Install the Python package with `pip install opensearch-py`
-## Wrappers
+> This page covers how to use the OpenSearch ecosystem within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific OpenSearch wrappers.
 
-### VectorStore
+## Installation and Setup | インストールとセットアップ
 
-There exists a wrapper around OpenSearch vector databases, allowing you to use it as a vectorstore 
-for semantic search using approximate vector search powered by lucene, nmslib and faiss engines 
-or using painless scripting and script scoring functions for bruteforce vector search.
+* `pip install opensearch-py`でPythonパッケージをインストールしてください
+  > Install the Python package with `pip install opensearch-py`
 
-To import this vectorstore:
+## Wrappers | ラッパー
+
+### VectorStore | VectorStore
+
+OpenSearchベクターデータベースを取り巻くラッパーが存在し、これを利用してlucene、nmslib、faissエンジンによる近似ベクター検索を行うセマンティック検索のためのベクターストアとして、またはpainlessスクリプティングとスクリプトスコアリング機能を使用したブルートフォースベクター検索のためのベクターストアとして使用できます。
+
+> There exists a wrapper around OpenSearch vector databases, allowing you to use it as a vectorstore
+> for semantic search using approximate vector search powered by lucene, nmslib and faiss engines
+> or using painless scripting and script scoring functions for bruteforce vector search.
+
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
+
 ```python
 from langchain.vectorstores import OpenSearchVectorSearch
 ```
 
-For a more detailed walkthrough of the OpenSearch wrapper, see [this notebook](/docs/integrations/vectorstores/opensearch)
+OpenSearchラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/opensearch)をご覧ください。
+
+> For a more detailed walkthrough of the OpenSearch wrapper, see [this notebook](/docs/integrations/vectorstores/opensearch)

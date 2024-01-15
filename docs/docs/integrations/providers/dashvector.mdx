@@ -1,24 +1,40 @@
-# DashVector
+# DashVector | DashVector
 
-> [DashVector](https://help.aliyun.com/document_detail/2510225.html) is a fully-managed vectorDB service that supports high-dimension dense and sparse vectors, real-time insertion and filtered search. It is built to scale automatically and can adapt to different application requirements.  
+> [DashVector](https://help.aliyun.com/document_detail/2510225.html)は、高次元の密集ベクトルと疎ベクトルをサポートし、リアルタイムでのデータ挿入とフィルター検索が可能な、完全に管理されたvectorDBサービスです。自動的にスケールアップし、さまざまなアプリケーション要件に対応するように設計されています。
+>
+> > [DashVector](https://help.aliyun.com/document_detail/2510225.html) is a fully-managed vectorDB service that supports high-dimension dense and sparse vectors, real-time insertion and filtered search. It is built to scale automatically and can adapt to different application requirements.
 
-This document demonstrates to leverage DashVector within the LangChain ecosystem. In particular, it shows how to install DashVector, and how to use it as a VectorStore plugin in LangChain.
-It is broken into two parts: installation and setup, and then references to specific DashVector wrappers.
+このドキュメントでは、LangChainエコシステム内でDashVectorを活用する方法を示しています。特に、DashVectorのインストール方法と、LangChainでVectorStoreプラグインとして使用する方法について説明しています。
+このドキュメントは、インストールとセットアップ、そして特定のDashVectorラッパーに関する参照の二つのパートに分かれています。
 
-## Installation and Setup
-Install the Python SDK:
+> This document demonstrates to leverage DashVector within the LangChain ecosystem. In particular, it shows how to install DashVector, and how to use it as a VectorStore plugin in LangChain.
+> It is broken into two parts: installation and setup, and then references to specific DashVector wrappers.
+
+## Installation and Setup | インストールとセットアップ
+
+Python SDKをインストールする：
+
+> Install the Python SDK:
+
 ```bash
 pip install dashvector
 ```
 
-## VectorStore
+## VectorStore | VectorStore
 
-A DashVector Collection is wrapped as a familiar VectorStore for native usage within LangChain, 
-which allows it to be readily used for various scenarios, such as semantic search or example selection.
+DashVector コレクションは、LangChain 内でネイティブに使用するために、馴染みのある VectorStore としてラップされており、セマンティック検索や例の選択など、さまざまなシナリオで容易に使用できるようになっています。
 
-You may import the vectorstore by:
+> A DashVector Collection is wrapped as a familiar VectorStore for native usage within LangChain,
+> which allows it to be readily used for various scenarios, such as semantic search or example selection.
+
+vectorstoreは以下の方法でインポートできます：
+
+> You may import the vectorstore by:
+
 ```python
 from langchain.vectorstores import DashVector
 ```
 
-For a detailed walkthrough of the DashVector wrapper, please refer to [this notebook](/docs/integrations/vectorstores/dashvector)
+DashVectorラッパーの詳細な使い方については、[このノートブック](/docs/integrations/vectorstores/dashvector)を参照してください。
+
+> For a detailed walkthrough of the DashVector wrapper, please refer to [this notebook](/docs/integrations/vectorstores/dashvector)

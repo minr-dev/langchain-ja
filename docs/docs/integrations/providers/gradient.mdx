@@ -1,27 +1,44 @@
-# Gradient
+# Gradient | グラデーション
 
->[Gradient](https://gradient.ai/) allows to fine tune and get completions on LLMs with a simple web API.
+> [Gradient](https://gradient.ai/)は、シンプルなWeb APIを使用してLLMを微調整し、補完を得ることができます。
+>
+> > [Gradient](https://gradient.ai/) allows to fine tune and get completions on LLMs with a simple web API.
 
-## Installation and Setup
-- Install the Python SDK :
+## Installation and Setup | インストールとセットアップ
+
+* Python SDKのインストール：
+  > Install the Python SDK :
+
 ```bash
 pip install gradientai
 ```
-Get a [Gradient access token and workspace](https://gradient.ai/) and set it as an environment variable (`Gradient_ACCESS_TOKEN`) and (`GRADIENT_WORKSPACE_ID`)
 
-## LLM
+[Gradientのアクセストークンとワークスペース](https://gradient.ai/)を取得し、それらを環境変数(`Gradient_ACCESS_TOKEN`)と(`GRADIENT_WORKSPACE_ID`)として設定してください。
 
-There exists an Gradient LLM wrapper, which you can access with 
-See a [usage example](/docs/integrations/llms/gradient).
+> Get a [Gradient access token and workspace](https://gradient.ai/) and set it as an environment variable (`Gradient_ACCESS_TOKEN`) and (`GRADIENT_WORKSPACE_ID`)
+
+## LLM | LLM
+
+Gradient LLMラッパーが存在し、以下のリンクで使用方法を確認できます。
+[使用例を見る](/docs/integrations/llms/gradient)。
+
+> There exists an Gradient LLM wrapper, which you can access with
+> See a [usage example](/docs/integrations/llms/gradient).
 
 ```python
 from langchain.llms import GradientLLM
 ```
 
-## Text Embedding Model
+## Text Embedding Model | テキスト埋め込みモデル
 
-There exists an Gradient Embedding model, which you can access with 
+Gradient Embeddingモデルが存在し、次の方法でアクセスできます
+
+> There exists an Gradient Embedding model, which you can access with
+
 ```python
 from langchain.embeddings import GradientEmbeddings
 ```
-For a more detailed walkthrough of this, see [this notebook](/docs/integrations/text_embedding/gradient)
+
+これについてのより詳細なウォークスルーは、[このノートブック](/docs/integrations/text_embedding/gradient)をご覧ください。
+
+> For a more detailed walkthrough of this, see [this notebook](/docs/integrations/text_embedding/gradient)

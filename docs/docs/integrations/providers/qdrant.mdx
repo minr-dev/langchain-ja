@@ -1,27 +1,36 @@
-# Qdrant
+# Qdrant | Qdrant
 
->[Qdrant](https://qdrant.tech/documentation/) (read: quadrant) is a vector similarity search engine. 
-> It provides a production-ready service with a convenient API to store, search, and manage 
-> points - vectors with an additional payload. `Qdrant` is tailored to extended filtering support.
+> [Qdrant](https://qdrant.tech/documentation/)（クアドラントと読みます）は、ベクトル類似性検索エンジンです。これは、追加のペイロードを含むベクトルである点を保存、検索、そして管理するための便利なAPIを備えた、本番環境に対応したサービスを提供しています。`Qdrant`は、拡張されたフィルタリングサポートに特化しています。
+>
+> > [Qdrant](https://qdrant.tech/documentation/) (read: quadrant) is a vector similarity search engine.
+> > It provides a production-ready service with a convenient API to store, search, and manage
+> > points - vectors with an additional payload. `Qdrant` is tailored to extended filtering support.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+Python SDKをインストールする：
 
-Install the Python SDK:
+> Install the Python SDK:
 
 ```bash
 pip install qdrant-client
 ```
 
+## Vector Store | ベクターストア
 
-## Vector Store
+`Qdrant`インデックスを操作するためのラッパーが存在し、それをベクトルストアとして使用することができます。これはセマンティック検索や例示選択に利用できます。
 
-There exists a wrapper around `Qdrant` indexes, allowing you to use it as a vectorstore,
-whether for semantic search or example selection.
+> There exists a wrapper around `Qdrant` indexes, allowing you to use it as a vectorstore,
+> whether for semantic search or example selection.
 
-To import this vectorstore:
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
+
 ```python
 from langchain.vectorstores import Qdrant
 ```
 
-For a more detailed walkthrough of the Qdrant wrapper, see [this notebook](/docs/integrations/vectorstores/qdrant)
+Qdrantラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/qdrant)をご覧ください。
+
+> For a more detailed walkthrough of the Qdrant wrapper, see [this notebook](/docs/integrations/vectorstores/qdrant)

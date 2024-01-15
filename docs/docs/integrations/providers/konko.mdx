@@ -1,55 +1,74 @@
-# Konko
-This page covers how to run models on Konko within LangChain.
+# Konko | Konko
 
-Konko API is a fully managed API designed to help application developers:
+このページでは、LangChain内のKonkoでモデルを実行する方法について説明しています。
 
-Select the right LLM(s) for their application
-Prototype with various open-source and proprietary LLMs
-Move to production in-line with their security, privacy, throughput, latency SLAs without infrastructure set-up or administration using Konko AI's SOC 2 compliant infrastructure
+> This page covers how to run models on Konko within LangChain.
 
-## Installation and Setup
+Konko APIは、アプリケーション開発者を支援するために設計された完全に管理されたAPIです。
 
-### First you'll need an API key
-You can request it by messaging [support@konko.ai](mailto:support@konko.ai) 
+> Konko API is a fully managed API designed to help application developers:
 
-### Install Konko AI's Python SDK
+彼らのアプリケーションに最適なLLM（大規模言語モデル）を選択する
+様々なオープンソースおよび独自のLLMを用いてプロトタイピングを行う
+Konko AIのSOC 2準拠のインフラストラクチャを使用し、インフラの設定や管理を必要とせず、セキュリティ、プライバシー、スループット、レイテンシーのSLAを満たした状態で本番環境へ移行する
 
-#### 1. Enable a Python3.8+ environment
+> Select the right LLM(s) for their application
+> Prototype with various open-source and proprietary LLMs
+> Move to production in-line with their security, privacy, throughput, latency SLAs without infrastructure set-up or administration using Konko AI's SOC 2 compliant infrastructure
 
-#### 2. Set API Keys
+## Installation and Setup | インストールとセットアップ
 
-##### Option 1: Set Environment Variables
+### First you'll need an API key | まず、APIキーが必要になります
 
-1. You can set environment variables for 
-   1. KONKO_API_KEY (Required)
-   2. OPENAI_API_KEY (Optional)
+それをリクエストするには、<support@konko.ai> にメッセージを送ってください。
 
-2. In your current shell session, use the export command:
+> You can request it by messaging <support@konko.ai>
+
+### Install Konko AI's Python SDK | Konko AIのPython SDKをインストールする
+
+#### 1. Enable a Python3.8+ environment | Python3.8以上の環境を有効にする
+
+#### 2. Set API Keys | 2. APIキーの設定
+
+##### Option 1: Set Environment Variables | オプション 1: 環境変数の設定
+
+1. 環境変数を設定することができます
+   > You can set environment variables for
+   1. KONKO\_API\_KEY（必須）
+      > KONKO\_API\_KEY (Required)
+   2. OPENAI\_API\_KEY（オプショナル）
+      > OPENAI\_API\_KEY (Optional)
+
+2. 現在のシェルセッションで、exportコマンドを使用してください：
+   > In your current shell session, use the export command:
 
 ```shell
 export KONKO_API_KEY={your_KONKO_API_KEY_here}
 export OPENAI_API_KEY={your_OPENAI_API_KEY_here} #Optional
 ```
 
-Alternatively, you can add the above lines directly to your shell startup script (such as .bashrc or .bash_profile for Bash shell and .zshrc for Zsh shell) to have them set automatically every time a new shell session starts.
+または、上記の行をシェルのスタートアップスクリプト（Bashシェルの場合は.bashrcや.bash\_profile、Zshシェルの場合は.zshrcなど）に直接追加することで、新しいシェルセッションが開始される度にそれらが自動的に設定されるようにすることもできます。
 
-##### Option 2: Set API Keys Programmatically
+> Alternatively, you can add the above lines directly to your shell startup script (such as .bashrc or .bash\_profile for Bash shell and .zshrc for Zsh shell) to have them set automatically every time a new shell session starts.
 
-If you prefer to set your API keys directly within your Python script or Jupyter notebook, you can use the following commands:
+##### Option 2: Set API Keys Programmatically | オプション 2: プログラムでAPIキーを設定する
+
+PythonスクリプトやJupyterノートブック内で直接APIキーを設定することを好む場合は、以下のコマンドを使用できます：
+
+> If you prefer to set your API keys directly within your Python script or Jupyter notebook, you can use the following commands:
 
 ```python
 konko.set_api_key('your_KONKO_API_KEY_here')  
 konko.set_openai_api_key('your_OPENAI_API_KEY_here') # Optional
 ```
 
-#### 3. Install the SDK
-
+#### 3. Install the SDK | 3. SDKのインストール
 
 ```shell
 pip install konko
 ```
 
-#### 4. Verify Installation & Authentication
+#### 4. Verify Installation & Authentication | 4. インストールと認証の確認
 
 ```python
 #Confirm konko has installed successfully
@@ -58,21 +77,31 @@ import konko
 konko.Model.list()
 ```
 
-## Calling a model
+## Calling a model | モデルを呼び出す
 
-Find a model on the [Konko Introduction page](https://docs.konko.ai/docs#available-models)
+[Konko Introduction page](https://docs.konko.ai/docs#available-models)でモデルを探してください。
 
-For example, for this [LLama 2 model](https://docs.konko.ai/docs/meta-llama-2-13b-chat). The model id would be: `"meta-llama/Llama-2-13b-chat-hf"`
+> Find a model on the [Konko Introduction page](https://docs.konko.ai/docs#available-models)
 
-Another way to find the list of models running on the Konko instance is through this [endpoint](https://docs.konko.ai/reference/listmodels).
+例えば、この[LLama 2 モデル](https://docs.konko.ai/docs/meta-llama-2-13b-chat)についてです。モデルIDは次のようになります：`"meta-llama/Llama-2-13b-chat-hf"`
 
-From here, we can initialize our model:
+> For example, for this [LLama 2 model](https://docs.konko.ai/docs/meta-llama-2-13b-chat). The model id would be: `"meta-llama/Llama-2-13b-chat-hf"`
+
+Konkoインスタンスで実行されているモデルのリストを見つけるもう一つの方法は、この[エンドポイント](https://docs.konko.ai/reference/listmodels)を参照することです。
+
+> Another way to find the list of models running on the Konko instance is through this [endpoint](https://docs.konko.ai/reference/listmodels).
+
+ここから、モデルを初期化することができます：
+
+> From here, we can initialize our model:
 
 ```python
 chat_instance = ChatKonko(max_tokens=10, model = 'meta-llama/Llama-2-13b-chat-hf')
 ```
 
-And run it:
+そして実行します：
+
+> And run it:
 
 ```python
 msg = HumanMessage(content="Hi")

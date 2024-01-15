@@ -1,26 +1,43 @@
-# Llama.cpp
+# Llama.cpp | Llama.cpp
 
-This page covers how to use [llama.cpp](https://github.com/ggerganov/llama.cpp) within LangChain.
-It is broken into two parts: installation and setup, and then references to specific Llama-cpp wrappers.
+このページでは、LangChain内で[llama.cpp](https://github.com/ggerganov/llama.cpp)を使用する方法について説明しています。内容は、インストールとセットアップ、そして特定のLlama-cppラッパーへの参照という二つの部分に分けられています。
 
-## Installation and Setup
-- Install the Python package with `pip install llama-cpp-python`
-- Download one of the [supported models](https://github.com/ggerganov/llama.cpp#description) and convert them to the llama.cpp format per the [instructions](https://github.com/ggerganov/llama.cpp)
+> This page covers how to use [llama.cpp](https://github.com/ggerganov/llama.cpp) within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific Llama-cpp wrappers.
 
-## Wrappers
+## Installation and Setup | インストールとセットアップ
 
-### LLM
+* `pip install llama-cpp-python`でPythonパッケージをインストールしてください
+  > Install the Python package with `pip install llama-cpp-python`
+* [サポートされているモデル](https://github.com/ggerganov/llama.cpp#description)のいずれかをダウンロードし、[指示](https://github.com/ggerganov/llama.cpp)に従ってそれらをllama.cpp形式に変換してください。
+  > Download one of the [supported models](https://github.com/ggerganov/llama.cpp#description) and convert them to the llama.cpp format per the [instructions](https://github.com/ggerganov/llama.cpp)
 
-There exists a LlamaCpp LLM wrapper, which you can access with 
+## Wrappers | ラッパー
+
+### LLM | LLM
+
+LlamaCpp LLMラッパーが存在し、次の方法でアクセスできます
+
+> There exists a LlamaCpp LLM wrapper, which you can access with
+
 ```python
 from langchain.llms import LlamaCpp
 ```
-For a more detailed walkthrough of this, see [this notebook](/docs/integrations/llms/llamacpp)
 
-### Embeddings
+これについてのより詳細なウォークスルーは、[このノートブック](/docs/integrations/llms/llamacpp)をご覧ください。
 
-There exists a LlamaCpp Embeddings wrapper, which you can access with 
+> For a more detailed walkthrough of this, see [this notebook](/docs/integrations/llms/llamacpp)
+
+### Embeddings | 埋め込み
+
+LlamaCpp Embeddingsラッパーが存在し、次の方法でアクセスできます
+
+> There exists a LlamaCpp Embeddings wrapper, which you can access with
+
 ```python
 from langchain.embeddings import LlamaCppEmbeddings
 ```
-For a more detailed walkthrough of this, see [this notebook](/docs/integrations/text_embedding/llamacpp)
+
+これについてのより詳細なウォークスルーは、[このノートブック](/docs/integrations/text_embedding/llamacpp)をご覧ください。
+
+> For a more detailed walkthrough of this, see [this notebook](/docs/integrations/text_embedding/llamacpp)

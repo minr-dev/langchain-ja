@@ -1,6 +1,8 @@
-# Validate template
+# Validate template | テンプレートを検証する
 
-By default, `PromptTemplate` will validate the `template` string by checking whether the `input_variables` match the variables defined in `template`. You can disable this behavior by setting `validate_template` to `False`.
+デフォルトでは、`PromptTemplate`は`template`文字列を検証し、`input_variables`が`template`内で定義された変数と一致しているかどうかを確認します。この動作を無効にするには、`validate_template`を`False`に設定してください。
+
+> By default, `PromptTemplate` will validate the `template` string by checking whether the `input_variables` match the variables defined in `template`. You can disable this behavior by setting `validate_template` to `False`.
 
 ```python
 template = "I am learning langchain because {reason}."
@@ -11,4 +13,3 @@ prompt_template = PromptTemplate(template=template,
                                  input_variables=["reason", "foo"],
                                  validate_template=False) # No error
 ```
-

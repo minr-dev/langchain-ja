@@ -1,34 +1,48 @@
-# Infino
+# Infino | Infino
 
->[Infino](https://github.com/infinohq/infino) is an open-source observability platform that stores both metrics and application logs together.
+> [Infino](https://github.com/infinohq/infino)は、メトリクスとアプリケーションログの両方を一緒に保存するオープンソースの監視プラットフォームです。
+>
+> > [Infino](https://github.com/infinohq/infino) is an open-source observability platform that stores both metrics and application logs together.
 
-Key features of `Infino` include:
-- **Metrics Tracking**: Capture time taken by LLM model to handle request, errors, number of tokens, and costing indication for the particular LLM.
-- **Data Tracking**: Log and store prompt, request, and response data for each LangChain interaction.
-- **Graph Visualization**: Generate basic graphs over time, depicting metrics such as request duration, error occurrences, token count, and cost.
+`Infino`の主な機能には以下のものが含まれます：
 
-## Installation and Setup
+> Key features of `Infino` include:
 
-First, you'll need to install the  `infinopy` Python package as follows:
+* **メトリクス追跡**: LLMモデルがリクエストを処理するのにかかった時間、エラー、トークン数、および特定のLLMに関するコストの指標を記録します。
+  > **Metrics Tracking**: Capture time taken by LLM model to handle request, errors, number of tokens, and costing indication for the particular LLM.
+* **データ追跡**: 各LangChainのインタラクションにおけるプロンプト、リクエスト、およびレスポンスデータをログに記録し、保存します。
+  > **Data Tracking**: Log and store prompt, request, and response data for each LangChain interaction.
+* **グラフの可視化**: 時間経過に伴う基本的なグラフを生成し、リクエストの所要時間、エラーの発生、トークン数、コストなどの指標を描写します。
+  > **Graph Visualization**: Generate basic graphs over time, depicting metrics such as request duration, error occurrences, token count, and cost.
+
+## Installation and Setup | インストールとセットアップ
+
+まず、以下の手順で `infinopy` Pythonパッケージをインストールする必要があります：
+
+> First, you'll need to install the  `infinopy` Python package as follows:
 
 ```bash
 pip install infinopy
 ```
 
-If you already have an `Infino Server` running, then you're good to go; but if
-you don't, follow the next steps to start it:
+すでに`Infino Server`が稼働している場合は、そのまま進めてください。そうでない場合は、次の手順に従って起動してください：
 
-- Make sure you have Docker installed
-- Run the following in your terminal:
-    ```
-    docker run --rm --detach --name infino-example -p 3000:3000 infinohq/infino:latest
-    ```
+> If you already have an `Infino Server` running, then you're good to go; but if
+> you don't, follow the next steps to start it:
 
+* Dockerがインストールされていることを確認してください
+  > Make sure you have Docker installed
+* ターミナルで以下のコマンドを実行してください：
+  > Run the following in your terminal:
+  ```
+  docker run --rm --detach --name infino-example -p 3000:3000 infinohq/infino:latest
+  ```
 
+## Using Infino | Infinoの使用
 
-## Using Infino
+`InfinoCallbackHandler`の[使用例を見る](/docs/integrations/callbacks/infino)。
 
-See a [usage example of `InfinoCallbackHandler`](/docs/integrations/callbacks/infino).
+> See a [usage example of `InfinoCallbackHandler`](/docs/integrations/callbacks/infino).
 
 ```python
 from langchain.callbacks import InfinoCallbackHandler

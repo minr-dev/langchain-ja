@@ -1,20 +1,25 @@
-# StarRocks
+# StarRocks | StarRocks
 
->[StarRocks](https://www.starrocks.io/) is a High-Performance Analytical Database.
-`StarRocks` is a next-gen sub-second MPP database for full analytics scenarios, including multi-dimensional analytics, real-time analytics and ad-hoc query.
+> [StarRocks](https://www.starrocks.io/)は、高性能分析データベースです。`StarRocks`は、多次元分析、リアルタイム分析、アドホッククエリを含む全ての分析シナリオに対応する次世代のサブセカンドMPPデータベースです。
+>
+> > [StarRocks](https://www.starrocks.io/) is a High-Performance Analytical Database.
+> > `StarRocks` is a next-gen sub-second MPP database for full analytics scenarios, including multi-dimensional analytics, real-time analytics and ad-hoc query.
 
->Usually `StarRocks` is categorized into OLAP, and it has showed excellent performance in [ClickBench — a Benchmark For Analytical DBMS](https://benchmark.clickhouse.com/). Since it has a super-fast vectorized execution engine, it could also be used as a fast vectordb.
+> `StarRocks`は通常OLAPに分類され、[ClickBench — 分析用DBMSのためのベンチマーク](https://benchmark.clickhouse.com/)で優れたパフォーマンスを示しています。超高速なベクトル化実行エンジンを搭載しているため、高速なvectordbとしても使用できます。
+>
+> > Usually `StarRocks` is categorized into OLAP, and it has showed excellent performance in [ClickBench — a Benchmark For Analytical DBMS](https://benchmark.clickhouse.com/). Since it has a super-fast vectorized execution engine, it could also be used as a fast vectordb.
 
-## Installation and Setup
-
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install pymysql
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/starrocks).
+[使用例](/docs/integrations/vectorstores/starrocks)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/starrocks).
 
 ```python
 from langchain.vectorstores import StarRocks

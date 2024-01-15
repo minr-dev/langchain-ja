@@ -1,18 +1,22 @@
-# Atlas
+# Atlas | アトラス
 
->[Nomic Atlas](https://docs.nomic.ai/index.html) is a platform for interacting with both 
-> small and internet scale unstructured datasets.
+> [Nomic Atlas](https://docs.nomic.ai/index.html)は、小規模なデータセットからインターネット規模の非構造化データセットまで、幅広く対応するプラットフォームです。
+>
+> > [Nomic Atlas](https://docs.nomic.ai/index.html) is a platform for interacting with both
+> > small and internet scale unstructured datasets.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+* `pip install nomic`でPythonパッケージをインストールしてください。
+  > Install the Python package with `pip install nomic`
+* `Nomic`は、langchainsの詩のエクストラ機能にも含まれており、`poetry install -E all`を実行することでインストールできます。
+  > `Nomic` is also included in langchains poetry extras `poetry install -E all`
 
-- Install the Python package with `pip install nomic`
-- `Nomic` is also included in langchains poetry extras `poetry install -E all`
+## VectorStore | VectorStore
 
+[使用例](/docs/integrations/vectorstores/atlas)をご覧ください。
 
-## VectorStore
-
-See a [usage example](/docs/integrations/vectorstores/atlas).
+> See a [usage example](/docs/integrations/vectorstores/atlas).
 
 ```python
 from langchain.vectorstores import AtlasDB

@@ -1,29 +1,47 @@
-# Runhouse
+# Runhouse | Runhouse
 
-This page covers how to use the [Runhouse](https://github.com/run-house/runhouse) ecosystem within LangChain.
-It is broken into three parts: installation and setup, LLMs, and Embeddings.
+このページでは、LangChain内で[Runhouse](https://github.com/run-house/runhouse)エコシステムを使用する方法について説明しています。それはインストールとセットアップ、LLMs、エンベディングスの3つのパートに分けられています。
 
-## Installation and Setup
-- Install the Python SDK with `pip install runhouse`
-- If you'd like to use on-demand cluster, check your cloud credentials with `sky check`
+> This page covers how to use the [Runhouse](https://github.com/run-house/runhouse) ecosystem within LangChain.
+> It is broken into three parts: installation and setup, LLMs, and Embeddings.
 
-## Self-hosted LLMs
-For a basic self-hosted LLM, you can use the `SelfHostedHuggingFaceLLM` class. For more
-custom LLMs, you can use the `SelfHostedPipeline` parent class.
+## Installation and Setup | インストールとセットアップ
+
+* `pip install runhouse`でPython SDKをインストールしてください
+  > Install the Python SDK with `pip install runhouse`
+* オンデマンドクラスタを使用したい場合は、`sky check`でクラウドの認証情報を確認してください
+  > If you'd like to use on-demand cluster, check your cloud credentials with `sky check`
+
+## Self-hosted LLMs | セルフホスト型LLMs
+
+基本的な自己ホスト型のLLMには、`SelfHostedHuggingFaceLLM` クラスを使用できます。さらにカスタマイズされたLLMには、`SelfHostedPipeline` 親クラスを使用できます。
+
+> For a basic self-hosted LLM, you can use the `SelfHostedHuggingFaceLLM` class. For more
+> custom LLMs, you can use the `SelfHostedPipeline` parent class.
 
 ```python
 from langchain.llms import SelfHostedPipeline, SelfHostedHuggingFaceLLM
 ```
 
-For a more detailed walkthrough of the Self-hosted LLMs, see [this notebook](/docs/integrations/llms/runhouse)
+セルフホスト型LLMsのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/llms/runhouse)をご覧ください。
 
-## Self-hosted Embeddings
-There are several ways to use self-hosted embeddings with LangChain via Runhouse.
+> For a more detailed walkthrough of the Self-hosted LLMs, see [this notebook](/docs/integrations/llms/runhouse)
 
-For a basic self-hosted embedding from a Hugging Face Transformers model, you can use 
-the `SelfHostedEmbedding` class.
+## Self-hosted Embeddings | セルフホスト型エンベディング
+
+Runhouseを介してLangChainでセルフホストされた埋め込みを使用する方法はいくつかあります。
+
+> There are several ways to use self-hosted embeddings with LangChain via Runhouse.
+
+基本的な自己ホスト型の埋め込みには、Hugging Face Transformersモデルから`SelfHostedEmbedding`クラスを使用できます。
+
+> For a basic self-hosted embedding from a Hugging Face Transformers model, you can use
+> the `SelfHostedEmbedding` class.
+
 ```python
 from langchain.llms import SelfHostedPipeline, SelfHostedHuggingFaceLLM
 ```
 
-For a more detailed walkthrough of the Self-hosted Embeddings, see [this notebook](/docs/integrations/text_embedding/self-hosted)
+セルフホステッド・エンベディングスのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/text_embedding/self-hosted)をご覧ください。
+
+> For a more detailed walkthrough of the Self-hosted Embeddings, see [this notebook](/docs/integrations/text_embedding/self-hosted)

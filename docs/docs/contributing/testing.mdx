@@ -2,119 +2,166 @@
 sidebar_position: 2
 ---
 
-# Testing
+# Testing | テスト
 
-All of our packages have unit tests and integration tests, and we favor unit tests over integration tests.
+私たちのすべてのパッケージにはユニットテストとインテグレーションテストが含まれていますが、インテグレーションテストよりもユニットテストを優先しています。
 
-Unit tests run on every pull request, so they should be fast and reliable.
+> All of our packages have unit tests and integration tests, and we favor unit tests over integration tests.
 
-Integration tests run once a day, and they require more setup, so they should be reserved for confirming interface points with external services.
+ユニットテストは各プルリクエストに対して実行されるため、迅速かつ信頼性の高いものである必要があります。
 
-## Unit Tests
+> Unit tests run on every pull request, so they should be fast and reliable.
 
-Unit tests cover modular logic that does not require calls to outside APIs.
-If you add new logic, please add a unit test.
+統合テストは1日に1回実行され、より多くのセットアップが必要ですので、外部サービスとのインターフェースポイントを検証するために特に行うべきです。
 
-To install dependencies for unit tests:
+> Integration tests run once a day, and they require more setup, so they should be reserved for confirming interface points with external services.
+
+## Unit Tests | ユニットテスト
+
+ユニットテストは、外部APIを呼び出す必要がないモジュラーなロジックを対象としています。新しいロジックを追加する場合は、それに対応するユニットテストを追加してください。
+
+> Unit tests cover modular logic that does not require calls to outside APIs.
+> If you add new logic, please add a unit test.
+
+ユニットテストの依存関係をインストールするには：
+
+> To install dependencies for unit tests:
 
 ```bash
 poetry install --with test
 ```
 
-To run unit tests:
+ユニットテストを実行する方法：
+
+> To run unit tests:
 
 ```bash
 make test
 ```
 
-To run unit tests in Docker:
+Docker内でユニットテストを実行する方法：
+
+> To run unit tests in Docker:
 
 ```bash
 make docker_tests
 ```
 
-To run a specific test:
+特定のテストを実行するには：
+
+> To run a specific test:
 
 ```bash
 TEST_FILE=tests/unit_tests/test_imports.py make test
 ```
 
-## Integration Tests
+## Integration Tests | 統合テスト
 
-Integration tests cover logic that requires making calls to outside APIs (often integration with other services).
-If you add support for a new external API, please add a new integration test.
+統合テストは、外部APIへの呼び出しが必要なロジック（多くの場合、他のサービスとの統合を伴います）を対象としています。新しい外部APIのサポートを追加する場合は、それに適した新しい統合テストを追加してください。
 
-**Warning:** Almost no tests should be integration tests.
+> Integration tests cover logic that requires making calls to outside APIs (often integration with other services).
+> If you add support for a new external API, please add a new integration test.
 
-  Tests that require making network connections make it difficult for other
-  developers to test the code.
+警告：統合テストはほとんど必要ではありません。
 
-  Instead favor relying on `responses` library and/or mock.patch to mock
-  requests using small fixtures.
+> **Warning:** Almost no tests should be integration tests.
 
-To install dependencies for integration tests:
+ネットワーク接続が必要なテストは、他の開発者がコードをテストする際に障害となり得ます。
+
+> Tests that require making network connections make it difficult for other
+> developers to test the code.
+
+代わりに、小さなフィクスチャを使用してリクエストをモックする際には、`responses` ライブラリや mock.patch を利用することを推奨します。
+
+> Instead favor relying on `responses` library and/or mock.patch to mock
+> requests using small fixtures.
+
+統合テストのための依存関係をインストールするには：
+
+> To install dependencies for integration tests:
 
 ```bash
 poetry install --with test,test_integration
 ```
 
-To run integration tests:
+統合テストを実行するには：
+
+> To run integration tests:
 
 ```bash
 make integration_tests
 ```
 
-### Prepare
+### Prepare | 準備
 
-The integration tests use several search engines and databases. The tests
-aim to verify the correct behavior of the engines and databases according to
-their specifications and requirements.
+統合テストでは、複数の検索エンジンとデータベースを利用します。これらのテストの目的は、各エンジンとデータベースがそれぞれの仕様と要件に沿って正しく動作していることを検証することです。
 
-To run some integration tests, such as tests located in
-`tests/integration_tests/vectorstores/`, you will need to install the following
-software:
+> The integration tests use several search engines and databases. The tests
+> aim to verify the correct behavior of the engines and databases according to
+> their specifications and requirements.
 
-- Docker
-- Python 3.8.1 or later
+一部の統合テストを実行するためには、`tests/integration_tests/vectorstores/`にあるテストのような例を挙げると、以下のソフトウェアをインストールする必要があります：
 
-Any new dependencies should be added by running:
+> To run some integration tests, such as tests located in
+> `tests/integration_tests/vectorstores/`, you will need to install the following
+> software:
+
+* Docker内でユニットテストを実行するためには、以下のコマンドを使用します。
+  > Docker
+* Python 3.8.1以降
+  > Python 3.8.1 or later
+
+新しい依存関係は、次のコマンドを実行して追加されます：
+
+> Any new dependencies should be added by running:
 
 ```bash
 # add package and install it after adding:
 poetry add tiktoken@latest --group "test_integration" && poetry install --with test_integration
 ```
 
-Before running any tests, you should start a specific Docker container that has all the
-necessary dependencies installed. For instance, we use the `elasticsearch.yml` container
-for `test_elasticsearch.py`:
+テストを実行する前に、必要な依存関係がインストールされている特定のDockerコンテナを起動してください。例えば、`test_elasticsearch.py`用には`elasticsearch.yml`コンテナを使用します：
+
+> Before running any tests, you should start a specific Docker container that has all the
+> necessary dependencies installed. For instance, we use the `elasticsearch.yml` container
+> for `test_elasticsearch.py`:
 
 ```bash
 cd tests/integration_tests/vectorstores/docker-compose
 docker-compose -f elasticsearch.yml up
 ```
 
-For environments that requires more involving preparation, look for `*.sh`. For instance,
-`opensearch.sh` builds a required docker image and then launch opensearch.
+より複雑な準備が必要な環境では、`*.sh`ファイルを探してください。たとえば、`opensearch.sh`は必要なDockerイメージをビルドし、その後OpenSearchを起動します。
 
+> For environments that requires more involving preparation, look for `*.sh`. For instance,
+> `opensearch.sh` builds a required docker image and then launch opensearch.
 
-### Prepare environment variables for local testing:
+### Prepare environment variables for local testing: | ローカルテストのための環境変数の設定:
 
-- copy `tests/integration_tests/.env.example` to `tests/integration_tests/.env`
-- set variables in `tests/integration_tests/.env` file, e.g `OPENAI_API_KEY`
+* `tests/integration_tests/.env.example`を`tests/integration_tests/.env`へコピーしてください。
+  > copy `tests/integration_tests/.env.example` to `tests/integration_tests/.env`
+* `tests/integration_tests/.env` ファイルに変数を設定してください。例えば `OPENAI_API_KEY` のように。
+  > set variables in `tests/integration_tests/.env` file, e.g `OPENAI_API_KEY`
 
-Additionally, it's important to note that some integration tests may require certain
-environment variables to be set, such as `OPENAI_API_KEY`. Be sure to set any required
-environment variables before running the tests to ensure they run correctly.
+また、`OPENAI_API_KEY`のような特定の環境変数を設定する必要がある統合テストもあることを留意してください。テストを実行する前に、必要な環境変数をすべて設定し、テストが正確に実行されるようにしてください。
 
-### Recording HTTP interactions with pytest-vcr
+> Additionally, it's important to note that some integration tests may require certain
+> environment variables to be set, such as `OPENAI_API_KEY`. Be sure to set any required
+> environment variables before running the tests to ensure they run correctly.
 
-Some of the integration tests in this repository involve making HTTP requests to
-external services. To prevent these requests from being made every time the tests are
-run, we use pytest-vcr to record and replay HTTP interactions.
+### Recording HTTP interactions with pytest-vcr | pytest-vcrによるHTTP通信の記録
 
-When running tests in a CI/CD pipeline, you may not want to modify the existing
-cassettes. You can use the --vcr-record=none command-line option to disable recording
-new cassettes. Here's an example:
+このリポジトリに含まれるいくつかの統合テストは、外部サービスにHTTPリクエストを行うことを含んでいます。テストが実行されるたびにこれらのリクエストが送信されるのを防ぐために、pytest-vcrを利用してHTTP通信を記録し、再生することができます。
+
+> Some of the integration tests in this repository involve making HTTP requests to
+> external services. To prevent these requests from being made every time the tests are
+> run, we use pytest-vcr to record and replay HTTP interactions.
+
+CI/CDパイプラインでテストを実行する際、既存のカセットを変更したくないことがあるかもしれません。その場合、--vcr-record=none コマンドラインオプションを使用して新しいカセットの記録を無効にすることができます。以下に例を示します：
+
+> When running tests in a CI/CD pipeline, you may not want to modify the existing
+> cassettes. You can use the --vcr-record=none command-line option to disable recording
+> new cassettes. Here's an example:
 
 ```bash
 pytest --log-cli-level=10 tests/integration_tests/vectorstores/test_pinecone.py --vcr-record=none
@@ -122,7 +169,7 @@ pytest tests/integration_tests/vectorstores/test_elasticsearch.py --vcr-record=n
 
 ```
 
-### Run some tests with coverage:
+### Run some tests with coverage: | カバレッジを含めたテストの実行:
 
 ```bash
 pytest tests/integration_tests/vectorstores/test_elasticsearch.py --cov=langchain --cov-report=html
@@ -130,17 +177,23 @@ start "" htmlcov/index.html || open htmlcov/index.html
 
 ```
 
-## Coverage
+## Coverage | コードカバレッジ
 
-Code coverage (i.e. the amount of code that is covered by unit tests) helps identify areas of the code that are potentially more or less brittle.
+コードカバレッジ（すなわち、ユニットテストによってカバーされるコードの量）は、コード内で潜在的に脆弱な部分、またはそうでない部分を特定するのに役立ちます。
 
-Coverage requires the dependencies for integration tests:
+> Code coverage (i.e. the amount of code that is covered by unit tests) helps identify areas of the code that are potentially more or less brittle.
+
+カバレッジを取得するには、統合テスト用の依存関係が必要です：
+
+> Coverage requires the dependencies for integration tests:
 
 ```bash
 poetry install --with test_integration
 ```
 
-To get a report of current coverage, run the following:
+現在のコードカバレッジのレポートを取得するには、以下のコマンドを実行してください：
+
+> To get a report of current coverage, run the following:
 
 ```bash
 make coverage

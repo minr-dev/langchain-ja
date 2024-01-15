@@ -1,22 +1,30 @@
-# scikit-learn
+# scikit-learn | scikit-learn
 
->[scikit-learn](https://scikit-learn.org/stable/) is an open-source collection of machine learning algorithms, 
-> including some implementations of the [k nearest neighbors](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html). `SKLearnVectorStore` wraps this implementation and adds the possibility to persist the vector store in json, bson (binary json) or Apache Parquet format.
+> [scikit-learn](https://scikit-learn.org/stable/)は、[k nearest neighbors](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html)の実装を含むオープンソースの機械学習アルゴリズムのコレクションです。`SKLearnVectorStore`はこの実装をラップし、ベクターストアをjson、bson（バイナリjson）、またはApache Parquet形式で永続化する機能を提供します。
+>
+> > [scikit-learn](https://scikit-learn.org/stable/) is an open-source collection of machine learning algorithms,
+> > including some implementations of the [k nearest neighbors](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html). `SKLearnVectorStore` wraps this implementation and adds the possibility to persist the vector store in json, bson (binary json) or Apache Parquet format.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-- Install the Python package with `pip install scikit-learn`
+* `pip install scikit-learn`でPythonパッケージをインストールしてください
+  > Install the Python package with `pip install scikit-learn`
 
+## Vector Store | ベクターストア
 
-## Vector Store
+`SKLearnVectorStore`は、scikit-learnパッケージ内の最近傍探索実装の周りにシンプルなラッパーを提供し、それをベクトルストアとして使用できるようにします。
 
-`SKLearnVectorStore` provides a simple wrapper around the nearest neighbor implementation in the
-scikit-learn package, allowing you to use it as a vectorstore.
+> `SKLearnVectorStore` provides a simple wrapper around the nearest neighbor implementation in the
+> scikit-learn package, allowing you to use it as a vectorstore.
 
-To import this vectorstore:
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
 
 ```python
 from langchain.vectorstores import SKLearnVectorStore
 ```
 
-For a more detailed walkthrough of the SKLearnVectorStore wrapper, see [this notebook](/docs/integrations/vectorstores/sklearn).
+SKLearnVectorStoreラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/sklearn)をご覧ください。
+
+> For a more detailed walkthrough of the SKLearnVectorStore wrapper, see [this notebook](/docs/integrations/vectorstores/sklearn).

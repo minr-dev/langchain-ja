@@ -2,42 +2,61 @@
 keywords: [LLMSingleActionAgent]
 ---
 
-# Custom LLM Chat Agent
+# Custom LLM Chat Agent | カスタムLLMチャットエージェント
 
-This notebook explains how to create your own custom agent based on a chat model.
+このノートブックでは、チャットモデルに基づいたカスタムエージェントの作成方法について説明しています。
 
-An LLM chat agent consists of four key components:
+> This notebook explains how to create your own custom agent based on a chat model.
 
-- `PromptTemplate`: This is the prompt template that instructs the language model on what to do.
-- `ChatModel`: This is the language model that powers the agent.
-- `stop` sequence: Instructs the LLM to stop generating as soon as this string is found.
-- `OutputParser`: This determines how to parse the LLM output into an `AgentAction` or `AgentFinish` object.
+LLMチャットエージェントは、以下の4つの主要コンポーネントで構成されています：
 
-The LLM Agent is used in an `AgentExecutor`. This `AgentExecutor` can largely be thought of as a loop that:
-1. Passes user input and any previous steps to the Agent (in this case, the LLM Agent)
-2. If the Agent returns an `AgentFinish`, then return that directly to the user
-3. If the Agent returns an `AgentAction`, then use that to call a tool and get an `Observation`
-4. Repeat, passing the `AgentAction` and `Observation` back to the Agent until an `AgentFinish` is emitted.
+> An LLM chat agent consists of four key components:
 
-`AgentAction` is a response that consists of `action` and `action_input`. `action` refers to which tool to use, and `action_input` refers to the input to that tool. `log` can also be provided as more context (that can be used for logging, tracing, etc).
+* `PromptTemplate`：これは、言語モデルに何をするかを指示するプロンプトテンプレートです。
+  > `PromptTemplate`: This is the prompt template that instructs the language model on what to do.
+* `ChatModel`：これはエージェントを動かす言語モデルです。
+  > `ChatModel`: This is the language model that powers the agent.
+* `stop` シーケンス：この文字列が見つかったら、LLMに直ちに生成を停止するよう指示します。
+  > `stop` sequence: Instructs the LLM to stop generating as soon as this string is found.
+* `OutputParser`: これは、LLMの出力を`AgentAction`または`AgentFinish`オブジェクトにパースする方法を決定します。
+  > `OutputParser`: This determines how to parse the LLM output into an `AgentAction` or `AgentFinish` object.
 
-`AgentFinish` is a response that contains the final message to be sent back to the user. This should be used to end an agent run.
+LLM Agentは`AgentExecutor`内で使用されます。この`AgentExecutor`は、大まかには次のようなループだと考えることができます：
 
-In this notebook we walk through how to create a custom LLM agent.
+> The LLM Agent is used in an `AgentExecutor`. This `AgentExecutor` can largely be thought of as a loop that:
 
+1. ユーザーの入力と、これまでのステップをエージェント（この場合はLLMエージェント）に渡します
+   > Passes user input and any previous steps to the Agent (in this case, the LLM Agent)
+2. もしエージェントが`AgentFinish`を返したら、それを直接ユーザーに返してください
+   > If the Agent returns an `AgentFinish`, then return that directly to the user
+3. エージェントが`AgentAction`を返した場合、その`AgentAction`を使用してツールを呼び出し、`Observation`を取得してください。
+   > If the Agent returns an `AgentAction`, then use that to call a tool and get an `Observation`
+4. `AgentFinish`が出力されるまで、`AgentAction`と`Observation`をエージェントに渡し続けてください。
+   > Repeat, passing the `AgentAction` and `Observation` back to the Agent until an `AgentFinish` is emitted.
 
+`AgentAction`は、`action`と`action_input`から構成されるレスポンスです。`action`は使用するツールを指し、`action_input`はそのツールへの入力を指します。さらにコンテキストとして`log`も提供されることがあり、これはログ記録やトレースなどに使用できます。
 
-## Set up environment
+> `AgentAction` is a response that consists of `action` and `action_input`. `action` refers to which tool to use, and `action_input` refers to the input to that tool. `log` can also be provided as more context (that can be used for logging, tracing, etc).
 
-Do necessary imports, etc.
+`AgentFinish`は、ユーザーに送り返す最終メッセージを含むレスポンスです。これはエージェントの実行を終了する際に使用すべきです。
 
+> `AgentFinish` is a response that contains the final message to be sent back to the user. This should be used to end an agent run.
+
+このノートブックでは、カスタムLLMエージェントの作成方法を説明します。
+
+> In this notebook we walk through how to create a custom LLM agent.
+
+## Set up environment | 環境を設定する
+
+必要なインポートなどを行ってください。
+
+> Do necessary imports, etc.
 
 ```bash
 pip install langchain
 pip install google-search-results
 pip install openai
 ```
-
 
 ```python
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent, AgentOutputParser
@@ -51,15 +70,15 @@ import re
 from getpass import getpass
 ```
 
-## Set up tools
+## Set up tools | ツールの設定
 
-Set up any tools the agent may want to use. This may be necessary to put in the prompt (so that the agent knows to use these tools).
+エージェントが使用したいと思うツールをセットアップしてください。これは、エージェントがこれらのツールを使用することを知らせるために、プロンプトに記載する必要があるかもしれません。
 
+> Set up any tools the agent may want to use. This may be necessary to put in the prompt (so that the agent knows to use these tools).
 
 ```python
 SERPAPI_API_KEY = getpass()
 ```
-
 
 ```python
 # Define which tools the agent can use to answer user queries
@@ -73,14 +92,18 @@ tools = [
 ]
 ```
 
-## Prompt template
+## Prompt template | プロンプト テンプレート
 
-This instructs the agent on what to do. Generally, the template should incorporate:
+これはエージェントに何をするべきか指示します。一般的に、テンプレートには以下の要素を取り入れるべきです：
 
-- `tools`: which tools the agent has access and how and when to call them.
-- `intermediate_steps`: These are tuples of previous (`AgentAction`, `Observation`) pairs. These are generally not passed directly to the model, but the prompt template formats them in a specific way.
-- `input`: generic user input
+> This instructs the agent on what to do. Generally, the template should incorporate:
 
+* `tools`: エージェントがアクセスできるツールと、それらをいつ、どのように呼び出すか。
+  > `tools`: which tools the agent has access and how and when to call them.
+* `intermediate_steps`：これらは、以前の（`AgentAction`、`Observation`）のペアのタプルです。これらは通常、モデルに直接渡されるわけではありませんが、プロンプトテンプレートが特定の形式でそれらを整形する際に使用されます。
+  > `intermediate_steps`: These are tuples of previous (`AgentAction`, `Observation`) pairs. These are generally not passed directly to the model, but the prompt template formats them in a specific way.
+* `input`: 一般的なユーザー入力
+  > `input`: generic user input
 
 ```python
 # Set up the base template
@@ -109,7 +132,6 @@ Question: {input}
 {agent_scratchpad}"""
 ```
 
-
 ```python
 # Set up a prompt template
 class CustomPromptTemplate(BaseChatPromptTemplate):
@@ -136,7 +158,6 @@ class CustomPromptTemplate(BaseChatPromptTemplate):
         return [HumanMessage(content=formatted)]
 ```
 
-
 ```python
 prompt = CustomPromptTemplate(
     template=template,
@@ -147,12 +168,15 @@ prompt = CustomPromptTemplate(
 )
 ```
 
-## Output parser
+## Output parser | 出力パーサー
 
-The output parser is responsible for parsing the LLM output into `AgentAction` and `AgentFinish`. This usually depends heavily on the prompt used.
+出力パーサーは、LLMの出力を`AgentAction`と`AgentFinish`に解析する責任があります。これは通常、使用されるプロンプトに大きく依存します。
 
-This is where you can change the parsing to do retries, handle whitespace, etc.
+> The output parser is responsible for parsing the LLM output into `AgentAction` and `AgentFinish`. This usually depends heavily on the prompt used.
 
+ここでは、リトライを行ったり、空白を処理したりするためのパースを変更できます。
+
+> This is where you can change the parsing to do retries, handle whitespace, etc.
 
 ```python
 class CustomOutputParser(AgentOutputParser):
@@ -177,41 +201,44 @@ class CustomOutputParser(AgentOutputParser):
         return AgentAction(tool=action, tool_input=action_input.strip(" ").strip('"'), log=llm_output)
 ```
 
-
 ```python
 output_parser = CustomOutputParser()
 ```
 
-## Set up LLM
+## Set up LLM | LLMのセットアップ
 
-Choose the LLM you want to use!
+使用したいLLMを選んでください！
 
+> Choose the LLM you want to use!
 
 ```python
 OPENAI_API_KEY = getpass()
 ```
 
-
 ```python
 llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0)
 ```
 
-## Define the stop sequence
+## Define the stop sequence | 停止シーケンスを定義する
 
-This is important because it tells the LLM when to stop generation.
+これは重要です。なぜなら、LLMに生成を停止するタイミングを伝えるためです。
 
-This depends heavily on the prompt and model you are using. Generally, you want this to be whatever token you use in the prompt to denote the start of an `Observation` (otherwise, the LLM may hallucinate an observation for you).
+> This is important because it tells the LLM when to stop generation.
 
-## Set up the Agent
+これは使用しているプロンプトとモデルに大きく依存します。一般的に、プロンプト内で`Observation`（観察）の開始を示すために使用するトークンであることが望ましいです（そうしないと、LLMが勝手に観察を作り出すことがあります）。
 
-We can now combine everything to set up our agent:
+> This depends heavily on the prompt and model you are using. Generally, you want this to be whatever token you use in the prompt to denote the start of an `Observation` (otherwise, the LLM may hallucinate an observation for you).
 
+## Set up the Agent | エージェントの設定
+
+これで全てを組み合わせて、私たちのエージェントを設定することができます。
+
+> We can now combine everything to set up our agent:
 
 ```python
 # LLM chain consisting of the LLM and a prompt
 llm_chain = LLMChain(llm=llm, prompt=prompt)
 ```
-
 
 ```python
 tool_names = [tool.name for tool in tools]
@@ -223,15 +250,15 @@ agent = LLMSingleActionAgent(
 )
 ```
 
-## Use the Agent
+## Use the Agent | エージェントの使用
 
-Now we can use it!
+これで使えるようになりました！
 
+> Now we can use it!
 
 ```python
 agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)
 ```
-
 
 ```python
 agent_executor.run("Search for Leo DiCaprio's girlfriend on the internet.")

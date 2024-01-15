@@ -1,11 +1,16 @@
 ---
 sidebar_position: 2
 ---
-# Documents
 
-These are the core chains for working with documents. They are useful for summarizing documents, answering questions over documents, extracting information from documents, and more.
+# Documents | ドキュメント
 
-These chains all implement a common interface:
+これらはドキュメント作業における中核となるチェーンです。ドキュメントの要約、ドキュメントに関する質問への回答、ドキュメントからの情報抽出などに役立ちます。
+
+> These are the core chains for working with documents. They are useful for summarizing documents, answering questions over documents, extracting information from documents, and more.
+
+これらのチェーンはすべて共通のインターフェースを実装しています。
+
+> These chains all implement a common interface:
 
 ```python
 class BaseCombineDocumentsChain(Chain, ABC):
@@ -16,6 +21,7 @@ class BaseCombineDocumentsChain(Chain, ABC):
         """Combine documents into a single string."""
 
 ```
+
 import DocCardList from "@theme/DocCardList";
 
 <DocCardList />

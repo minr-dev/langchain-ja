@@ -1,18 +1,29 @@
-# Contextual compression
+# Contextual compression | 文脈に基づく圧縮
 
-One challenge with retrieval is that usually you don't know the specific queries your document storage system will face when you ingest data into the system. This means that the information most relevant to a query may be buried in a document with a lot of irrelevant text. Passing that full document through your application can lead to more expensive LLM calls and poorer responses.
+情報検索における一つの課題は、データをシステムに取り込む際に、どのような特定のクエリに直面するか通常はわからないということです。これは、クエリに最も関連する情報が、関連性のないテキストが多いドキュメントに埋もれてしまう可能性があることを意味しています。その完全なドキュメントをアプリケーションに通して処理すると、より高価なLLMの呼び出しと、質の低い応答につながる可能性があります。
 
-Contextual compression is meant to fix this. The idea is simple: instead of immediately returning retrieved documents as-is, you can compress them using the context of the given query, so that only the relevant information is returned. “Compressing” here refers to both compressing the contents of an individual document and filtering out documents wholesale.
+> One challenge with retrieval is that usually you don't know the specific queries your document storage system will face when you ingest data into the system. This means that the information most relevant to a query may be buried in a document with a lot of irrelevant text. Passing that full document through your application can lead to more expensive LLM calls and poorer responses.
 
-To use the Contextual Compression Retriever, you'll need:
-- a base retriever
-- a Document Compressor
+コンテキスト圧縮はこの問題を解決するために考案されました。このアイデアはシンプルです：取得したドキュメントをそのまま返すのではなく、与えられたクエリのコンテキストを使用してそれらを圧縮し、関連する情報のみが返されるようにするのです。「圧縮」とは、個々のドキュメントの内容を圧縮することに加えて、ドキュメントを全体的にフィルタリングすることも含みます。
 
-The Contextual Compression Retriever passes queries to the base retriever, takes the initial documents and passes them through the Document Compressor. The Document Compressor takes a list of documents and shortens it by reducing the contents of documents or dropping documents altogether.
+> Contextual compression is meant to fix this. The idea is simple: instead of immediately returning retrieved documents as-is, you can compress them using the context of the given query, so that only the relevant information is returned. “Compressing” here refers to both compressing the contents of an individual document and filtering out documents wholesale.
+
+Contextual Compression Retrieverを使用するには、以下が必要です：
+
+> To use the Contextual Compression Retriever, you'll need:
+
+* 基本的なレトリバー
+  > a base retriever
+* ドキュメント圧縮ツール
+  > a Document Compressor
+
+コンテキスト圧縮リトリーバーは、クエリをベースリトリーバーに渡し、初期ドキュメントを取得した後、それらをドキュメント圧縮器にかけます。ドキュメント圧縮器は、ドキュメントのリストを受け取り、ドキュメントの内容を削減するか、またはドキュメントを完全に除外することで、リストを短縮します。
+
+> The Contextual Compression Retriever passes queries to the base retriever, takes the initial documents and passes them through the Document Compressor. The Document Compressor takes a list of documents and shortens it by reducing the contents of documents or dropping documents altogether.
 
 ![](https://drive.google.com/uc?id=1CtNgWODXZudxAWSRiWgSGEoTNrUFT98v)
 
-## Get started
+## Get started | 始めましょう
 
 ```python
 # Helper function for printing docs
@@ -21,9 +32,11 @@ def pretty_print_docs(docs):
     print(f"\n{'-' * 100}\n".join([f"Document {i+1}:\n\n" + d.page_content for i, d in enumerate(docs)]))
 ```
 
-## Using a vanilla vector store retriever
-Let's start by initializing a simple vector store retriever and storing the 2023 State of the Union speech (in chunks). We can see that given an example question our retriever returns one or two relevant docs and a few irrelevant docs. And even the relevant docs have a lot of irrelevant information in them.
+## Using a vanilla vector store retriever | バニラベクターストアリトリーバーを使用する
 
+まず、シンプルなベクトルストアリトリーバーを初期化し、2023年の一般教書演説を（チャンクに分けて）保存しましょう。例として質問を出すと、リトリーバーは1つか2つの関連する文書といくつかの関連しない文書を返します。そして、関連する文書にも多くの関連しない情報が含まれていることがわかります。
+
+> Let's start by initializing a simple vector store retriever and storing the 2023 State of the Union speech (in chunks). We can see that given an example question our retriever returns one or two relevant docs and a few irrelevant docs. And even the relevant docs have a lot of irrelevant information in them.
 
 ```python
 from langchain.text_splitter import CharacterTextSplitter
@@ -102,9 +115,11 @@ pretty_print_docs(docs)
 
 </CodeOutputBlock>
 
-## Adding contextual compression with an `LLMChainExtractor`
-Now let's wrap our base retriever with a `ContextualCompressionRetriever`. We'll add an `LLMChainExtractor`, which will iterate over the initially returned documents and extract from each only the content that is relevant to the query.
+## Adding contextual compression with an `LLMChainExtractor` | `LLMChainExtractor`を使用して文脈圧縮を追加する
 
+それでは、基本的なリトリーバーを`ContextualCompressionRetriever`でラップしましょう。初めに返されたドキュメントを順に処理し、クエリに関連する内容のみを各ドキュメントから抽出する`LLMChainExtractor`を追加します。
+
+> Now let's wrap our base retriever with a `ContextualCompressionRetriever`. We'll add an `LLMChainExtractor`, which will iterate over the initially returned documents and extract from each only the content that is relevant to the query.
 
 ```python
 from langchain.llms import OpenAI
@@ -135,10 +150,13 @@ pretty_print_docs(compressed_docs)
 
 </CodeOutputBlock>
 
-## More built-in compressors: filters
-### `LLMChainFilter`
-The `LLMChainFilter` is slightly simpler but more robust compressor that uses an LLM chain to decide which of the initially retrieved documents to filter out and which ones to return, without manipulating the document contents.
+## More built-in compressors: filters | 内蔵されたコンプレッサーが増えました：フィルター
 
+### `LLMChainFilter` | `LLMChainFilter`
+
+`LLMChainFilter`は、取得したドキュメントの中からどれをフィルタリングアウトし、どれを返すかをLLMチェーンで決定する、少しシンプルながらもより堅牢なコンプレッサーです。このプロセスではドキュメントの内容は操作されません。
+
+> The `LLMChainFilter` is slightly simpler but more robust compressor that uses an LLM chain to decide which of the initially retrieved documents to filter out and which ones to return, without manipulating the document contents.
 
 ```python
 from langchain.retrievers.document_compressors import LLMChainFilter
@@ -166,10 +184,11 @@ pretty_print_docs(compressed_docs)
 
 </CodeOutputBlock>
 
-### `EmbeddingsFilter`
+### `EmbeddingsFilter` | `EmbeddingsFilter`
 
-Making an extra LLM call over each retrieved document is expensive and slow. The `EmbeddingsFilter` provides a cheaper and faster option by embedding the documents and query and only returning those documents which have sufficiently similar embeddings to the query.
+各取得ドキュメントに対して追加のLLMコールを行うことは、コストがかかる上に遅いです。`EmbeddingsFilter`は、ドキュメントとクエリを埋め込むことで、クエリに十分に類似した埋め込みを持つドキュメントのみを返し、より安価で速い選択肢を提供します。
 
+> Making an extra LLM call over each retrieved document is expensive and slow. The `EmbeddingsFilter` provides a cheaper and faster option by embedding the documents and query and only returning those documents which have sufficiently similar embeddings to the query.
 
 ```python
 from langchain.embeddings import OpenAIEmbeddings
@@ -227,11 +246,15 @@ pretty_print_docs(compressed_docs)
 
 </CodeOutputBlock>
 
-# Stringing compressors and document transformers together
-Using the `DocumentCompressorPipeline` we can also easily combine multiple compressors in sequence. Along with compressors we can add `BaseDocumentTransformer`s to our pipeline, which don't perform any contextual compression but simply perform some transformation on a set of documents. For example `TextSplitter`s can be used as document transformers to split documents into smaller pieces, and the `EmbeddingsRedundantFilter` can be used to filter out redundant documents based on embedding similarity between documents.
+# Stringing compressors and document transformers together | コンプレッサーとドキュメントトランスフォーマーを繋ぎ合わせる
 
-Below we create a compressor pipeline by first splitting our docs into smaller chunks, then removing redundant documents, and then filtering based on relevance to the query.
+`DocumentCompressorPipeline`を使用することで、複数のコンプレッサーを簡単に順に組み合わせることができます。コンプレッサーに加えて、文脈に基づいた圧縮は行わないものの、ドキュメントのセットに対して何らかの変換を行う`BaseDocumentTransformer`もパイプラインに追加できます。例えば、`TextSplitter`はドキュメントを小さな部分に分割するドキュメントトランスフォーマーとして使用でき、`EmbeddingsRedundantFilter`はドキュメント間の埋め込みの類似性に基づいて重複するドキュメントをフィルタリングするために使用できます。
 
+> Using the `DocumentCompressorPipeline` we can also easily combine multiple compressors in sequence. Along with compressors we can add `BaseDocumentTransformer`s to our pipeline, which don't perform any contextual compression but simply perform some transformation on a set of documents. For example `TextSplitter`s can be used as document transformers to split documents into smaller pieces, and the `EmbeddingsRedundantFilter` can be used to filter out redundant documents based on embedding similarity between documents.
+
+以下では、まずドキュメントを小さなチャンクに分割し、次に重複ドキュメントを削除し、その後クエリの関連性に基づいてフィルタリングすることで、圧縮パイプラインを作成します。
+
+> Below we create a compressor pipeline by first splitting our docs into smaller chunks, then removing redundant documents, and then filtering based on relevance to the query.
 
 ```python
 from langchain.document_transformers import EmbeddingsRedundantFilter
@@ -245,7 +268,6 @@ pipeline_compressor = DocumentCompressorPipeline(
     transformers=[splitter, redundant_filter, relevant_filter]
 )
 ```
-
 
 ```python
 compression_retriever = ContextualCompressionRetriever(base_compressor=pipeline_compressor, base_retriever=retriever)

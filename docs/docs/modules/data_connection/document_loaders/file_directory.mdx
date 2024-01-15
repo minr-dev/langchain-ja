@@ -1,25 +1,28 @@
-# File Directory
+# File Directory | ファイルディレクトリ
 
-This covers how to load all documents in a directory.
+これは、ディレクトリ内のすべてのドキュメントを読み込む方法を説明しています。
 
-Under the hood, by default this uses the [UnstructuredLoader](/docs/integrations/document_loaders/unstructured_file).
+> This covers how to load all documents in a directory.
+
+内部では、デフォルトで[UnstructuredLoader](/docs/integrations/document_loaders/unstructured_file)が使用されています。
+
+> Under the hood, by default this uses the [UnstructuredLoader](/docs/integrations/document_loaders/unstructured_file).
 
 ```python
 from langchain.document_loaders import DirectoryLoader
 ```
 
-We can use the `glob` parameter to control which files to load. Note that here it doesn't load the `.rst` file or the `.html` files.
+`glob`パラメータを使用して、どのファイルを読み込むかを制御できます。ここで、`.rst`ファイルや`.html`ファイルは読み込まれないことに注意してください。
 
+> We can use the `glob` parameter to control which files to load. Note that here it doesn't load the `.rst` file or the `.html` files.
 
 ```python
 loader = DirectoryLoader('../', glob="**/*.md")
 ```
 
-
 ```python
 docs = loader.load()
 ```
-
 
 ```python
 len(docs)
@@ -33,10 +36,11 @@ len(docs)
 
 </CodeOutputBlock>
 
-## Show a progress bar
+## Show a progress bar | 進捗バーを表示する
 
-By default a progress bar will not be shown. To show a progress bar, install the `tqdm` library (e.g. `pip install tqdm`), and set the `show_progress` parameter to `True`.
+デフォルトではプログレスバーは表示されません。プログレスバーを表示するには、`tqdm`ライブラリをインストール（例：`pip install tqdm`）し、`show_progress`パラメータを`True`に設定してください。
 
+> By default a progress bar will not be shown. To show a progress bar, install the `tqdm` library (e.g. `pip install tqdm`), and set the `show_progress` parameter to `True`.
 
 ```python
 loader = DirectoryLoader('../', glob="**/*.md", show_progress=True)
@@ -54,34 +58,34 @@ docs = loader.load()
 
 </CodeOutputBlock>
 
-## Use multithreading
+## Use multithreading | マルチスレッディングを使用する
 
-By default the loading happens in one thread. In order to utilize several threads set the `use_multithreading` flag to true.
+デフォルトでは、ローディングは1つのスレッドで行われます。複数のスレッドを利用するためには、`use_multithreading` フラグを true に設定してください。
 
+> By default the loading happens in one thread. In order to utilize several threads set the `use_multithreading` flag to true.
 
 ```python
 loader = DirectoryLoader('../', glob="**/*.md", use_multithreading=True)
 docs = loader.load()
 ```
 
-## Change loader class
-By default this uses the `UnstructuredLoader` class. However, you can change up the type of loader pretty easily.
+## Change loader class | ローダークラスを変更する
 
+デフォルトでは、`UnstructuredLoader` クラスが使用されます。しかし、ローダーの種類は非常に簡単に変更できます。
+
+> By default this uses the `UnstructuredLoader` class. However, you can change up the type of loader pretty easily.
 
 ```python
 from langchain.document_loaders import TextLoader
 ```
 
-
 ```python
 loader = DirectoryLoader('../', glob="**/*.md", loader_cls=TextLoader)
 ```
 
-
 ```python
 docs = loader.load()
 ```
-
 
 ```python
 len(docs)
@@ -95,23 +99,21 @@ len(docs)
 
 </CodeOutputBlock>
 
-If you need to load Python source code files, use the `PythonLoader`.
+Pythonのソースコードファイルを読み込む必要がある場合は、`PythonLoader`を使用してください。
 
+> If you need to load Python source code files, use the `PythonLoader`.
 
 ```python
 from langchain.document_loaders import PythonLoader
 ```
 
-
 ```python
 loader = DirectoryLoader('../../../../../', glob="**/*.py", loader_cls=PythonLoader)
 ```
 
-
 ```python
 docs = loader.load()
 ```
-
 
 ```python
 len(docs)
@@ -125,27 +127,28 @@ len(docs)
 
 </CodeOutputBlock>
 
-## Auto-detect file encodings with TextLoader
+## Auto-detect file encodings with TextLoader | TextLoaderを使用してファイルのエンコーディングを自動検出する
 
-In this example we will see some strategies that can be useful when loading a large list of arbitrary files from a directory using the `TextLoader` class.
+この例では、`TextLoader` クラスを使用してディレクトリから大量の任意のファイルを読み込む際に役立ついくつかの戦略を見ていきます。
 
-First to illustrate the problem, let's try to load multiple texts with arbitrary encodings.
+> In this example we will see some strategies that can be useful when loading a large list of arbitrary files from a directory using the `TextLoader` class.
 
+問題を説明するために、まずは任意のエンコーディングで複数のテキストを読み込むことを試みましょう。
+
+> First to illustrate the problem, let's try to load multiple texts with arbitrary encodings.
 
 ```python
 path = '../../../../../tests/integration_tests/examples'
 loader = DirectoryLoader(path, glob="**/*.txt", loader_cls=TextLoader)
 ```
 
-### A. Default Behavior
-
+### A. Default Behavior | A. デフォルトの動作
 
 ```python
 loader.load()
 ```
 
 <HTMLOutputBlock center>
-
 
 ```html
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800000; text-decoration-color: #800000">╭─────────────────────────────── </span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold">Traceback </span><span style="color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold">(most recent call last)</span><span style="color: #800000; text-decoration-color: #800000"> ────────────────────────────────╮</span>
@@ -213,17 +216,21 @@ loader.load()
 </pre>
 ```
 
-
 </HTMLOutputBlock>
 
-The file `example-non-utf8.txt` uses a different encoding, so the `load()` function fails with a helpful message indicating which file failed decoding.
+`example-non-utf8.txt` ファイルは異なるエンコーディングを使用しているため、`load()` 関数はデコードに失敗したファイルを示す役立つメッセージを伴って失敗します。
 
-With the default behavior of `TextLoader` any failure to load any of the documents will fail the whole loading process and no documents are loaded.
+> The file `example-non-utf8.txt` uses a different encoding, so the `load()` function fails with a helpful message indicating which file failed decoding.
 
-### B. Silent fail
+`TextLoader`のデフォルトの挙動では、いずれかのドキュメントの読み込みに失敗すると、全体の読み込みプロセスが失敗し、どのドキュメントも読み込まれなくなります。
 
-We can pass the parameter `silent_errors` to the `DirectoryLoader` to skip the files which could not be loaded and continue the load process.
+> With the default behavior of `TextLoader` any failure to load any of the documents will fail the whole loading process and no documents are loaded.
 
+### B. Silent fail | B. サイレントフェイル
+
+`DirectoryLoader`に`silent_errors`パラメータを渡すことで、読み込めなかったファイルをスキップして読み込み処理を続行することができます。
+
+> We can pass the parameter `silent_errors` to the `DirectoryLoader` to skip the files which could not be loaded and continue the load process.
 
 ```python
 loader = DirectoryLoader(path, glob="**/*.txt", loader_cls=TextLoader, silent_errors=True)
@@ -237,7 +244,6 @@ docs = loader.load()
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 doc_sources = [doc.metadata['source']  for doc in docs]
@@ -253,17 +259,17 @@ doc_sources
 
 </CodeOutputBlock>
 
-### C. Auto detect encodings
+### C. Auto detect encodings | C. エンコーディングの自動検出
 
-We can also ask `TextLoader` to auto detect the file encoding before failing, by passing the `autodetect_encoding` to the loader class.
+`TextLoader`に`autodetect_encoding`を渡すことで、失敗する前にファイルのエンコーディングを自動検出するよう依頼することもできます。
 
+> We can also ask `TextLoader` to auto detect the file encoding before failing, by passing the `autodetect_encoding` to the loader class.
 
 ```python
 text_loader_kwargs={'autodetect_encoding': True}
 loader = DirectoryLoader(path, glob="**/*.txt", loader_cls=TextLoader, loader_kwargs=text_loader_kwargs)
 docs = loader.load()
 ```
-
 
 ```python
 doc_sources = [doc.metadata['source']  for doc in docs]

@@ -1,3 +1,5 @@
-# Tags
+# Tags | タグ
 
-You can add tags to your callbacks by passing a `tags` argument to the `call()`/`run()`/`apply()` methods. This is useful for filtering your logs, e.g. if you want to log all requests made to a specific `LLMChain`, you can add a tag, and then filter your logs by that tag. You can pass tags to both constructor and request callbacks, see the examples above for details. These tags are then passed to the `tags` argument of the "start" callback methods, ie. `on_llm_start`, `on_chat_model_start`, `on_chain_start`, `on_tool_start`.
+`call()`/`run()`/`apply()`メソッドに`tags`引数を渡すことで、コールバックにタグを追加できます。これはログをフィルタリングする際に役立ちます。例えば、特定の`LLMChain`への全てのリクエストをログに記録したい場合、タグを追加してからそのタグでログをフィルタリングすることができます。タグはコンストラクタコールバックとリクエストコールバックの両方に渡せます。詳細は上記の例をご覧ください。これらのタグはその後、`on_llm_start`、`on_chat_model_start`、`on_chain_start`、`on_tool_start`などの「スタート」コールバックメソッドの`tags`引数に渡されます。
+
+> You can add tags to your callbacks by passing a `tags` argument to the `call()`/`run()`/`apply()` methods. This is useful for filtering your logs, e.g. if you want to log all requests made to a specific `LLMChain`, you can add a tag, and then filter your logs by that tag. You can pass tags to both constructor and request callbacks, see the examples above for details. These tags are then passed to the `tags` argument of the "start" callback methods, ie. `on_llm_start`, `on_chat_model_start`, `on_chain_start`, `on_tool_start`.

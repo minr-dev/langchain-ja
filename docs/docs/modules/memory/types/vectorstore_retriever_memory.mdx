@@ -1,10 +1,16 @@
-# Backed by a Vector Store
+# Backed by a Vector Store | ベクターストアによって支えられています
 
-`VectorStoreRetrieverMemory` stores memories in a vector store and queries the top-K most "salient" docs every time it is called.
+`VectorStoreRetrieverMemory`は、ベクトルストアに記憶を保存し、呼び出されるたびに最も「顕著な」ドキュメントのトップKを照会します。
 
-This differs from most of the other Memory classes in that it doesn't explicitly track the order of interactions.
+> `VectorStoreRetrieverMemory` stores memories in a vector store and queries the top-K most "salient" docs every time it is called.
 
-In this case, the "docs" are previous conversation snippets. This can be useful to refer to relevant pieces of information that the AI was told earlier in the conversation.
+これは、他のほとんどのMemoryクラスと異なり、インタラクションの順序を明示的に追跡しない点が特徴です。
+
+> This differs from most of the other Memory classes in that it doesn't explicitly track the order of interactions.
+
+この場合、「docs」とは以前の会話の断片を指します。これは、AIが会話の早い段階で伝えられた関連する情報を参照するのに役立ちます。
+
+> In this case, the "docs" are previous conversation snippets. This can be useful to refer to relevant pieces of information that the AI was told earlier in the conversation.
 
 ```python
 from datetime import datetime
@@ -15,10 +21,11 @@ from langchain.chains import ConversationChain
 from langchain.prompts import PromptTemplate
 ```
 
-### Initialize your vector store
+### Initialize your vector store | ベクトルストアを初期化します
 
-Depending on the store you choose, this step may look different. Consult the relevant vector store documentation for more details.
+選択したストアによって、このステップは異なる場合があります。詳細については、関連するベクターストアのドキュメントを参照してください。
 
+> Depending on the store you choose, this step may look different. Consult the relevant vector store documentation for more details.
 
 ```python
 import faiss
@@ -33,10 +40,11 @@ embedding_fn = OpenAIEmbeddings().embed_query
 vectorstore = FAISS(embedding_fn, index, InMemoryDocstore({}), {})
 ```
 
-### Create your `VectorStoreRetrieverMemory`
+### Create your `VectorStoreRetrieverMemory` | `VectorStoreRetrieverMemory`を作成してください
 
-The memory object is instantiated from any vector store retriever.
+メモリオブジェクトは、任意のベクトルストアリトリーバーからインスタンス化されます。
 
+> The memory object is instantiated from any vector store retriever.
 
 ```python
 # In actual usage, you would set `k` to be a higher value, but we use k=1 to show that
@@ -49,7 +57,6 @@ memory.save_context({"input": "My favorite food is pizza"}, {"output": "that's g
 memory.save_context({"input": "My favorite sport is soccer"}, {"output": "..."})
 memory.save_context({"input": "I don't the Celtics"}, {"output": "ok"}) #
 ```
-
 
 ```python
 # Notice the first result returned is the memory pertaining to tax help, which the language model deems more semantically relevant
@@ -66,9 +73,11 @@ print(memory.load_memory_variables({"prompt": "what sport should i watch?"})["hi
 
 </CodeOutputBlock>
 
-## Using in a chain
-Let's walk through an example, again setting `verbose=True` so we can see the prompt.
+## Using in a chain | チェーンで使用する際に
 
+例を挙げて説明しましょう。プロンプトが表示されるように、再度`verbose=True`を設定します。
+
+> Let's walk through an example, again setting `verbose=True` so we can see the prompt.
 
 ```python
 llm = OpenAI(temperature=0) # Can be any valid LLM
@@ -125,7 +134,6 @@ conversation_with_summary.predict(input="Hi, my name is Perry, what's up?")
 
 </CodeOutputBlock>
 
-
 ```python
 # Here, the basketball related content is surfaced
 conversation_with_summary.predict(input="what's my favorite sport?")
@@ -160,7 +168,6 @@ conversation_with_summary.predict(input="what's my favorite sport?")
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 # Even though the language model is stateless, since relevant memory is fetched, it can "reason" about the time.
@@ -197,7 +204,6 @@ conversation_with_summary.predict(input="Whats my favorite food")
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 # The memories from the conversation are automatically stored,

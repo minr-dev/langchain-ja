@@ -1,35 +1,52 @@
 ---
 sidebar_position: 2
 ---
-# Text embedding models
+
+# Text embedding models | テキスト埋め込みモデル
 
 :::info
-Head to [Integrations](/docs/integrations/text_embedding/) for documentation on built-in integrations with text embedding model providers.
+
+テキスト埋め込みモデルプロバイダーとの組み込みインテグレーションに関するドキュメントについては、[インテグレーション](/docs/integrations/text_embedding/)のセクションを参照してください。
+
+> Head to [Integrations](/docs/integrations/text_embedding/) for documentation on built-in integrations with text embedding model providers.
+
 :::
 
-The Embeddings class is a class designed for interfacing with text embedding models. There are lots of embedding model providers (OpenAI, Cohere, Hugging Face, etc) - this class is designed to provide a standard interface for all of them.
+Embeddingsクラスは、テキスト埋め込みモデルとのインターフェースを提供するために設計されたクラスです。多くの埋め込みモデルプロバイダー（OpenAI、Cohere、Hugging Faceなど）が存在しますが、このクラスはそれら全てに対して標準的なインターフェースを提供することを目的として設計されています。
 
-Embeddings create a vector representation of a piece of text. This is useful because it means we can think about text in the vector space, and do things like semantic search where we look for pieces of text that are most similar in the vector space.
+> The Embeddings class is a class designed for interfacing with text embedding models. There are lots of embedding model providers (OpenAI, Cohere, Hugging Face, etc) - this class is designed to provide a standard interface for all of them.
 
-The base Embeddings class in LangChain provides two methods: one for embedding documents and one for embedding a query. The former takes as input multiple texts, while the latter takes a single text. The reason for having these as two separate methods is that some embedding providers have different embedding methods for documents (to be searched over) vs queries (the search query itself).
+エンベディングはテキストの一部をベクトル表現に変換します。これは有用で、テキストをベクトル空間で考えることができ、ベクトル空間内で最も類似しているテキストを見つけ出すセマンティック検索のようなことを行うことが可能になります。
 
-## Get started
+> Embeddings create a vector representation of a piece of text. This is useful because it means we can think about text in the vector space, and do things like semantic search where we look for pieces of text that are most similar in the vector space.
 
-### Setup
+LangChainのEmbeddings基底クラスには、ドキュメントを埋め込むメソッドとクエリを埋め込むメソッドの2つがあります。前者は複数のテキストを入力として受け取り、後者は単一のテキストを受け取ります。これらを2つの別々のメソッドとして設けている理由は、一部の埋め込みプロバイダーが、検索対象となるドキュメントと検索クエリそれぞれに異なる埋め込み方法を持っているためです。
 
-To start we'll need to install the OpenAI Python package:
+> The base Embeddings class in LangChain provides two methods: one for embedding documents and one for embedding a query. The former takes as input multiple texts, while the latter takes a single text. The reason for having these as two separate methods is that some embedding providers have different embedding methods for documents (to be searched over) vs queries (the search query itself).
+
+## Get started | 始めましょう
+
+### Setup | セットアップ
+
+まず初めに、OpenAI Pythonパッケージをインストールする必要があります。
+
+> To start we'll need to install the OpenAI Python package:
 
 ```bash
 pip install openai
 ```
 
-Accessing the API requires an API key, which you can get by creating an account and heading [here](https://platform.openai.com/account/api-keys). Once we have a key we'll want to set it as an environment variable by running:
+APIにアクセスするためにはAPIキーが必要で、アカウントを作成し[こちら](https://platform.openai.com/account/api-keys)からキーを取得できます。キーを取得したら、それを環境変数として設定するために実行します：
+
+> Accessing the API requires an API key, which you can get by creating an account and heading [here](https://platform.openai.com/account/api-keys). Once we have a key we'll want to set it as an environment variable by running:
 
 ```bash
 export OPENAI_API_KEY="..."
 ```
 
-If you'd prefer not to set an environment variable you can pass the key in directly via the `openai_api_key` named parameter when initiating the OpenAI LLM class:
+環境変数を設定したくない場合は、OpenAI LLMクラスを初期化する際に、`openai_api_key`という名前のパラメータにキーを直接渡すことができます：
+
+> If you'd prefer not to set an environment variable you can pass the key in directly via the `openai_api_key` named parameter when initiating the OpenAI LLM class:
 
 ```python
 from langchain.embeddings import OpenAIEmbeddings
@@ -37,15 +54,19 @@ from langchain.embeddings import OpenAIEmbeddings
 embeddings_model = OpenAIEmbeddings(openai_api_key="...")
 ```
 
-Otherwise you can initialize without any params:
+それ以外の場合は、パラメータなしで初期化できます。
+
+> Otherwise you can initialize without any params:
+
 ```python
 from langchain.embeddings import OpenAIEmbeddings
 
 embeddings_model = OpenAIEmbeddings()
 ```
 
-### `embed_documents`
-#### Embed list of texts
+### `embed_documents` | `embed_documents`
+
+#### Embed list of texts | テキストのリストを埋め込む
 
 ```python
 embeddings = embeddings_model.embed_documents(
@@ -68,9 +89,13 @@ len(embeddings), len(embeddings[0])
 
 </CodeOutputBlock>
 
-### `embed_query`
-#### Embed single query
-Embed a single piece of text for the purpose of comparing to other embedded pieces of texts.
+### `embed_query` | `embed_query`
+
+#### Embed single query | 単一クエリを埋め込む
+
+他の埋め込まれたテキストと比較するために、一つのテキストを埋め込んでください。
+
+> Embed a single piece of text for the purpose of comparing to other embedded pieces of texts.
 
 ```python
 embedded_query = embeddings_model.embed_query("What was the name mentioned in the conversation?")

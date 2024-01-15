@@ -1,14 +1,17 @@
-# Constitutional chain
+# Constitutional chain | 憲法チェーン
 
-This example shows the Self-critique chain with `Constitutional AI`.
+この例では、`Constitutional AI`を用いたセルフクリティークチェーンを示しています。
 
-The `ConstitutionalChain` is a chain that ensures the output of a language model adheres 
-to a predefined set of constitutional principles. By incorporating specific rules and guidelines, 
-the `ConstitutionalChain` filters and modifies the generated content to align with these principles, 
-thus providing more controlled, ethical, and contextually appropriate responses. 
-This mechanism helps maintain the integrity of the output while minimizing the risk of generating 
-content that may violate guidelines, be offensive, or deviate from the desired context.
+> This example shows the Self-critique chain with `Constitutional AI`.
 
+`ConstitutionalChain`は、言語モデルの出力が事前に定義された一連の憲法原則に従うことを保証するチェーンです。特定のルールやガイドラインを取り入れることで、`ConstitutionalChain`は生成されたコンテンツをこれらの原則に沿うようにフィルタリングし、修正します。これにより、よりコントロールされた、倫理的で、文脈に適した反応を提供することができます。このメカニズムは、ガイドラインに違反するコンテンツの生成、攻撃的な内容、または望まれる文脈からの逸脱のリスクを最小限に抑えながら、出力の整合性を維持するのに役立ちます。
+
+> The `ConstitutionalChain` is a chain that ensures the output of a language model adheres
+> to a predefined set of constitutional principles. By incorporating specific rules and guidelines,
+> the `ConstitutionalChain` filters and modifies the generated content to align with these principles,
+> thus providing more controlled, ethical, and contextually appropriate responses.
+> This mechanism helps maintain the integrity of the output while minimizing the risk of generating
+> content that may violate guidelines, be offensive, or deviate from the desired context.
 
 ```python
 # Imports
@@ -18,9 +21,11 @@ from langchain.chains.llm import LLMChain
 from langchain.chains.constitutional_ai.base import ConstitutionalChain
 ```
 
-## Example
+## Example | 例
 
-Example of a prompt that requests illegal information from LLM.
+LLMから違法情報を要求するプロンプトの例。
+
+> Example of a prompt that requests illegal information from LLM.
 
 ```python
 evil_qa_prompt = PromptTemplate(
@@ -46,7 +51,6 @@ evil_qa_chain.run(question="How can I steal kittens?")
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 principles = ConstitutionalChain.get_principles(["illegal"])
@@ -86,12 +90,15 @@ constitutional_chain.run(question="How can I steal kittens?")
 
 </CodeOutputBlock>
 
-## Unified Objective
+## Unified Objective | 統一された目標
 
-We also have built-in support for the Unified Objectives proposed in this paper: [examine.dev/docs/Unified_objectives.pdf](https://examine.dev/docs/Unified_objectives.pdf)
+また、この論文で提案されているUnified Objectivesに対する組み込みサポートも提供しています：[examine.dev/docs/Unified\_objectives.pdf](https://examine.dev/docs/Unified_objectives.pdf)
 
-Some of these are useful for the same idea of correcting ethical issues.
+> We also have built-in support for the Unified Objectives proposed in this paper: [examine.dev/docs/Unified\_objectives.pdf](https://examine.dev/docs/Unified_objectives.pdf)
 
+これらのいくつかは、倫理的な問題を是正するという同じ考えに役立ちます。
+
+> Some of these are useful for the same idea of correcting ethical issues.
 
 ```python
 principles = ConstitutionalChain.get_principles(["uo-ethics-1"])
@@ -131,8 +138,9 @@ constitutional_chain.run(question="How can I steal kittens?")
 
 </CodeOutputBlock>
 
-But they can also be used for a wide variety of tasks, including encouraging the LLM to list out supporting evidence
+しかし、それらはLLMに支持証拠をリストアップさせることを含め、幅広いタスクに使用できます
 
+> But they can also be used for a wide variety of tasks, including encouraging the LLM to list out supporting evidence
 
 ```python
 qa_prompt = PromptTemplate(
@@ -157,7 +165,6 @@ qa_chain.run(question=query)
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 principles = ConstitutionalChain.get_principles(["uo-implications-1"])
@@ -197,10 +204,11 @@ constitutional_chain.run(query)
 
 </CodeOutputBlock>
 
-## Custom Principles
+## Custom Principles | カスタム原則
 
-We can easily add in custom principles.
+カスタム原則を簡単に追加することができます。
 
+> We can easily add in custom principles.
 
 ```python
 from langchain.chains.constitutional_ai.models import ConstitutionalPrinciple
@@ -247,8 +255,9 @@ constitutional_chain.run(question="How can I steal kittens?")
 
 </CodeOutputBlock>
 
-We can also run multiple principles sequentially. Let's make the model talk like Master Yoda.
+複数のプリンシパルを連続して実行することもできます。モデルがマスター・ヨーダのように話すようにしましょう。
 
+> We can also run multiple principles sequentially. Let's make the model talk like Master Yoda.
 
 ```python
 master_yoda_principle = ConstitutionalPrinciple(
@@ -299,10 +308,11 @@ constitutional_chain.run(question="How can I steal kittens?")
 
 </CodeOutputBlock>
 
-## Intermediate Steps
+## Intermediate Steps | 中間ステップ
 
-You can also get the constitutional chain to return it's intermediate steps.
+また、憲法チェーンに中間ステップを返すようにすることもできます。
 
+> You can also get the constitutional chain to return it's intermediate steps.
 
 ```python
 constitutional_chain = ConstitutionalChain.from_llm(
@@ -346,10 +356,11 @@ constitutional_chain({"question":"How can I steal kittens?"})
 
 </CodeOutputBlock>
 
-## No revision necessary
+## No revision necessary | 改訂の必要はありません
 
-We can also see that the chain recognizes when no revision is necessary.
+また、チェーンが修正が不要なときを認識していることもわかります。
 
+> We can also see that the chain recognizes when no revision is necessary.
 
 ```python
 good_qa_prompt = PromptTemplate(
@@ -375,7 +386,6 @@ good_qa_chain.run(question="How can I steal kittens?")
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 constitutional_chain = ConstitutionalChain.from_llm(
@@ -413,15 +423,15 @@ constitutional_chain({"question":"How can I steal kittens?"})
 
 </CodeOutputBlock>
 
-## All Constitutional AI Principles
+## All Constitutional AI Principles | すべての憲法的AIの原理
 
-For a list of all principles, see:
+すべての原則のリストについては、以下をご覧ください：
 
+> For a list of all principles, see:
 
 ```python
 from langchain.chains.constitutional_ai.principles import PRINCIPLES
 ```
-
 
 ```python
 PRINCIPLES

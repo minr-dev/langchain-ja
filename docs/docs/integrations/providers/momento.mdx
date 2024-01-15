@@ -1,30 +1,46 @@
-# Momento
+# Momento | モメント
 
-> [Momento Cache](https://docs.momentohq.com/) is the world's first truly serverless caching service, offering instant elasticity, scale-to-zero
-> capability, and blazing-fast performance.
+> [Momento Cache](https://docs.momentohq.com/)は、即時の弾力性、スケールトゥーゼロ機能、そして驚異的な高速パフォーマンスを提供する、世界初の真にサーバーレスなキャッシングサービスです。
 >
-> [Momento Vector Index](https://docs.momentohq.com/vector-index) stands out as the most productive, easiest-to-use, fully serverless vector index.
+> > [Momento Cache](https://docs.momentohq.com/) is the world's first truly serverless caching service, offering instant elasticity, scale-to-zero
+> > capability, and blazing-fast performance.
 >
-> For both services, simply grab the SDK, obtain an API key, input a few lines into your code, and you're set to go. Together, they provide a comprehensive solution for your LLM data needs.
+> [Momento Vector Index](https://docs.momentohq.com/vector-index)は、最も生産性が高く、使いやすく、完全にサーバーレスなベクターインデックスとして際立っています。
+>
+> > [Momento Vector Index](https://docs.momentohq.com/vector-index) stands out as the most productive, easiest-to-use, fully serverless vector index.
+>
+> どちらのサービスも、SDKを取得し、APIキーを入手し、コードに数行追加するだけで、すぐに使用開始できます。これらは合わせて、あなたのLLMデータニーズに対する包括的なソリューションを提供します。
+>
+> > For both services, simply grab the SDK, obtain an API key, input a few lines into your code, and you're set to go. Together, they provide a comprehensive solution for your LLM data needs.
 
-This page covers how to use the [Momento](https://gomomento.com) ecosystem within LangChain.
+このページでは、LangChain内で[Momento](https://gomomento.com)エコシステムを使用する方法について説明します。
 
-## Installation and Setup
+> This page covers how to use the [Momento](https://gomomento.com) ecosystem within LangChain.
 
-- Sign up for a free account [here](https://console.momentohq.com) to get an API key
-- Install the Momento Python SDK with `pip install momento`
+## Installation and Setup | インストールとセットアップ
 
-## Cache
+* 無料アカウントに[こちら](https://console.momentohq.com)からサインアップして、APIキーを取得してください
+  > Sign up for a free account [here](https://console.momentohq.com) to get an API key
+* `pip install momento`でMomento Python SDKをインストールしてください
+  > Install the Momento Python SDK with `pip install momento`
 
-Use Momento as a serverless, distributed, low-latency cache for LLM prompts and responses. The standard cache is the primary use case for Momento users in any environment.
+## Cache | キャッシュ
 
-To integrate Momento Cache into your application:
+Momentoをサーバーレスで分散された低遅延キャッシュとして、LLMのプロンプトとレスポンスに使用してください。標準キャッシュは、どのような環境においてもMomentoユーザーの主要な使用ケースです。
+
+> Use Momento as a serverless, distributed, low-latency cache for LLM prompts and responses. The standard cache is the primary use case for Momento users in any environment.
+
+Momento Cacheをアプリケーションに統合するには：
+
+> To integrate Momento Cache into your application:
 
 ```python
 from langchain.cache import MomentoCache
 ```
 
-Then, set it up with the following code:
+次に、以下のコードで設定してください：
+
+> Then, set it up with the following code:
 
 ```python
 from datetime import timedelta
@@ -44,16 +60,24 @@ cache_name = "langchain"
 set_llm_cache(MomentoCache(cache_client, cache_name))
 ```
 
-## Memory
+## Memory | メモリ
 
-Momento can be used as a distributed memory store for LLMs.
+Momentoは、LLMの分散メモリストアとして使用することができます。
 
-### Chat Message History Memory
+> Momento can be used as a distributed memory store for LLMs.
 
-See [this notebook](/docs/integrations/memory/momento_chat_message_history) for a walkthrough of how to use Momento as a memory store for chat message history.
+### Chat Message History Memory | チャットメッセージ履歴メモリ
 
-## Vector Store
+チャットメッセージ履歴をメモリーストアとしてMomentoを使用する手順については、[このノートブック](/docs/integrations/memory/momento_chat_message_history)をご覧ください。
 
-Momento Vector Index (MVI) can be used as a vector store.
+> See [this notebook](/docs/integrations/memory/momento_chat_message_history) for a walkthrough of how to use Momento as a memory store for chat message history.
 
-See [this notebook](/docs/integrations/vectorstores/momento_vector_index) for a walkthrough of how to use MVI as a vector store.
+## Vector Store | ベクターストア
+
+Momento Vector Index（MVI）は、ベクトルストアとして使用できます。
+
+> Momento Vector Index (MVI) can be used as a vector store.
+
+ベクターストアとしてMVIを使用する方法の手順については、[このノートブック](/docs/integrations/vectorstores/momento_vector_index)をご覧ください。
+
+> See [this notebook](/docs/integrations/vectorstores/momento_vector_index) for a walkthrough of how to use MVI as a vector store.

@@ -1,18 +1,24 @@
-# Datadog Logs
+# Datadog Logs | Datadog Logs
 
->[Datadog](https://www.datadoghq.com/) is a monitoring and analytics platform for cloud-scale applications.
+> [Datadog](https://www.datadoghq.com/)は、クラウドスケールのアプリケーション向けの監視および分析プラットフォームです。
+>
+> > [Datadog](https://www.datadoghq.com/) is a monitoring and analytics platform for cloud-scale applications.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install datadog_api_client
 ```
 
-We must initialize the loader with the Datadog API key and APP key, and we need to set up the query to extract the desired logs.
+DatadogのAPIキーとAPPキーでローダーを初期化する必要があり、望ましいログを抽出するクエリを設定する必要があります。
 
-## Document Loader
+> We must initialize the loader with the Datadog API key and APP key, and we need to set up the query to extract the desired logs.
 
-See a [usage example](/docs/integrations/document_loaders/datadog_logs).
+## Document Loader | ドキュメントローダー
+
+[使用例](/docs/integrations/document_loaders/datadog_logs)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/datadog_logs).
 
 ```python
 from langchain.document_loaders import DatadogLogsLoader

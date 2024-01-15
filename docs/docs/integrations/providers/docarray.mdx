@@ -1,30 +1,39 @@
-# DocArray
+# DocArray | DocArray
 
-> [DocArray](https://docarray.jina.ai/) is a library for nested, unstructured, multimodal data in transit, 
-> including text, image, audio, video, 3D mesh, etc. It allows deep-learning engineers to efficiently process, 
-> embed, search, recommend, store, and transfer multimodal data with a Pythonic API.
+> [DocArray](https://docarray.jina.ai/)は、テキスト、画像、オーディオ、ビデオ、3Dメッシュなど、転送中のネストされた非構造化マルチモーダルデータを扱うライブラリです。ディープラーニングエンジニアは、Python風のAPIを利用して、マルチモーダルデータを効率的に処理、埋め込み、検索、推薦、保存、そして転送することが可能になります。
+>
+> > [DocArray](https://docarray.jina.ai/) is a library for nested, unstructured, multimodal data in transit,
+> > including text, image, audio, video, 3D mesh, etc. It allows deep-learning engineers to efficiently process,
+> > embed, search, recommend, store, and transfer multimodal data with a Pythonic API.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+`docarray` Pythonパッケージをインストールする必要があります。
 
-We need to install `docarray` python package.
+> We need to install `docarray` python package.
 
 ```bash
 pip install docarray
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-LangChain provides an access to the `In-memory` and `HNSW` vector stores from the `DocArray` library.
+LangChainは、`DocArray`ライブラリから`In-memory`および`HNSW`ベクターストアへのアクセスを提供します。
 
-See a [usage example](/docs/integrations/vectorstores/docarray_hnsw).
+> LangChain provides an access to the `In-memory` and `HNSW` vector stores from the `DocArray` library.
+
+[使用例](/docs/integrations/vectorstores/docarray_hnsw)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/docarray_hnsw).
 
 ```python
 from langchain.vectorstores DocArrayHnswSearch
 ```
-See a [usage example](/docs/integrations/vectorstores/docarray_in_memory).
+
+[使用例](/docs/integrations/vectorstores/docarray_in_memory)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/docarray_in_memory).
 
 ```python
 from langchain.vectorstores DocArrayInMemorySearch
 ```
-

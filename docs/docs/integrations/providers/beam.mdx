@@ -1,30 +1,42 @@
-# Beam
+# Beam | ビーム
 
-This page covers how to use Beam within LangChain.
-It is broken into two parts: installation and setup, and then references to specific Beam wrappers.
+このページでは、LangChain内でBeamを使用する方法について説明しています。内容は、インストールとセットアップ、そして特定のBeamラッパーへの参照という2つの部分に分けられています。
 
-## Installation and Setup
+> This page covers how to use Beam within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific Beam wrappers.
 
-- [Create an account](https://www.beam.cloud/)
-- Install the Beam CLI with `curl https://raw.githubusercontent.com/slai-labs/get-beam/main/get-beam.sh -sSfL | sh`
-- Register API keys with `beam configure`
-- Set environment variables (`BEAM_CLIENT_ID`) and (`BEAM_CLIENT_SECRET`)
-- Install the Beam SDK `pip install beam-sdk`
+## Installation and Setup | インストールとセットアップ
 
-## Wrappers
+* [アカウントを作成する](https://www.beam.cloud/)
+  > [Create an account](https://www.beam.cloud/)
+* `curl https://raw.githubusercontent.com/slai-labs/get-beam/main/get-beam.sh -sSfL | sh` コマンドを使用してBeam CLIをインストールしてください。
+  > Install the Beam CLI with `curl https://raw.githubusercontent.com/slai-labs/get-beam/main/get-beam.sh -sSfL | sh`
+* `beam configure`でAPIキーを登録する
+  > Register API keys with `beam configure`
+* 環境変数 (`BEAM_CLIENT_ID`) と (`BEAM_CLIENT_SECRET`) を設定してください
+  > Set environment variables (`BEAM_CLIENT_ID`) and (`BEAM_CLIENT_SECRET`)
+* Beam SDKをインストールするには、`pip install beam-sdk`を実行してください。
+  > Install the Beam SDK `pip install beam-sdk`
 
-### LLM
+## Wrappers | ラッパー
 
-There exists a Beam LLM wrapper, which you can access with
+### LLM | LLM
+
+Beam LLMラッパーが存在し、次の方法でアクセスできます
+
+> There exists a Beam LLM wrapper, which you can access with
 
 ```python
 from langchain.llms.beam import Beam
 ```
 
-## Define your Beam app.
+## Define your Beam app. | Beamアプリを定義してください。
 
-This is the environment you’ll be developing against once you start the app.
-It's also used to define the maximum response length from the model.
+これはアプリを起動した後に開発を行う環境です。また、モデルからの最大応答長を定義するためにも使用されます。
+
+> This is the environment you’ll be developing against once you start the app.
+> It's also used to define the maximum response length from the model.
+
 ```python
 llm = Beam(model_name="gpt2",
            name="langchain-gpt2-test",
@@ -44,24 +56,30 @@ llm = Beam(model_name="gpt2",
            verbose=False)
 ```
 
-## Deploy your Beam app
+## Deploy your Beam app | Beamアプリをデプロイする
 
-Once defined, you can deploy your Beam app by calling your model's `_deploy()` method.
+定義したら、モデルの `_deploy()` メソッドを呼び出すことで、Beamアプリをデプロイできます。
+
+> Once defined, you can deploy your Beam app by calling your model's `_deploy()` method.
 
 ```python
 llm._deploy()
 ```
 
-## Call your Beam app
+## Call your Beam app | Beamアプリを呼び出す
 
-Once a beam model is deployed, it can be called by callying your model's `_call()` method.
-This returns the GPT2 text response to your prompt.
+ビームモデルがデプロイされた後、そのモデルの `_call()` メソッドを呼び出すことで、あなたのプロンプトに対するGPT-2のテキストレスポンスを取得できます。
+
+> Once a beam model is deployed, it can be called by callying your model's `_call()` method.
+> This returns the GPT2 text response to your prompt.
 
 ```python
 response = llm._call("Running machine learning on a remote GPU")
 ```
 
-An example script which deploys the model and calls it would be:
+モデルをデプロイし、それを呼び出すサンプルスクリプトは以下の通りです：
+
+> An example script which deploys the model and calls it would be:
 
 ```python
 from langchain.llms.beam import Beam

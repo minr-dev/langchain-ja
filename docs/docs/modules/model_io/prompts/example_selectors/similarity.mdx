@@ -1,6 +1,8 @@
-# Select by similarity
+# Select by similarity | 類似性による選択
 
-This object selects examples based on similarity to the inputs. It does this by finding the examples with the embeddings that have the greatest cosine similarity with the inputs.
+このオブジェクトは、入力との類似性に基づいて例を選択します。これは、入力と最もコサイン類似度が高い埋め込みを持つ例を見つけることで実現されます。
+
+> This object selects examples based on similarity to the inputs. It does this by finding the examples with the embeddings that have the greatest cosine similarity with the inputs.
 
 ```python
 from langchain.prompts.example_selector import SemanticSimilarityExampleSelector
@@ -22,7 +24,6 @@ examples = [
     {"input": "windy", "output": "calm"},
 ]
 ```
-
 
 ```python
 example_selector = SemanticSimilarityExampleSelector.from_examples(
@@ -54,7 +55,6 @@ similar_prompt = FewShotPromptTemplate(
 
 </CodeOutputBlock>
 
-
 ```python
 # Input is a feeling, so should select the happy/sad example
 print(similar_prompt.format(adjective="worried"))
@@ -74,7 +74,6 @@ print(similar_prompt.format(adjective="worried"))
 
 </CodeOutputBlock>
 
-
 ```python
 # Input is a measurement, so should select the tall/short example
 print(similar_prompt.format(adjective="large"))
@@ -93,7 +92,6 @@ print(similar_prompt.format(adjective="large"))
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 # You can add new examples to the SemanticSimilarityExampleSelector as well

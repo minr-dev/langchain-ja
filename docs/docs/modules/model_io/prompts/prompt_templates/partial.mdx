@@ -1,24 +1,31 @@
-# Partial prompt templates
+# Partial prompt templates | 部分的なプロンプトテンプレート
 
-Like other methods, it can make sense to "partial" a prompt template - e.g. pass in a subset of the required values, as to create a new prompt template which expects only the remaining subset of values.
+他の方法と同様に、プロンプトテンプレートを「部分的に」適用することは理にかなっています。例えば、必要な値の一部を渡すことで、残りの必要な値のみを期待する新しいプロンプトテンプレートを作成することができます。
 
-LangChain supports this in two ways:
-1. Partial formatting with string values.
-2. Partial formatting with functions that return string values.
+> Like other methods, it can make sense to "partial" a prompt template - e.g. pass in a subset of the required values, as to create a new prompt template which expects only the remaining subset of values.
 
-These two different ways support different use cases. In the examples below, we go over the motivations for both use cases as well as how to do it in LangChain.
+LangChainはこれを2つの方法でサポートしています。
 
-## Partial with strings
+> LangChain supports this in two ways:
 
-One common use case for wanting to partial a prompt template is if you get some of the variables before others. For example, suppose you have a prompt template that requires two variables, `foo` and `baz`. If you get the `foo` value early on in the chain, but the `baz` value later, it can be annoying to wait until you have both variables in the same place to pass them to the prompt template. Instead, you can partial the prompt template with the `foo` value, and then pass the partialed prompt template along and just use that. Below is an example of doing this:
+1. 文字列値を用いた部分的な書式設定。
+   > Partial formatting with string values.
+2. 関数が返す文字列の値を用いた部分的なフォーマット。
+   > Partial formatting with functions that return string values.
 
+これら2つの異なる方法は、それぞれ異なるユースケースをサポートしています。以下の例では、それぞれのユースケースの動機とLangChainでの実施方法について説明します。
 
+> These two different ways support different use cases. In the examples below, we go over the motivations for both use cases as well as how to do it in LangChain.
 
+## Partial with strings | 文字列を含む部分
+
+プロンプトテンプレートを部分的に適用したい一般的なケースは、変数を順不同で取得する場面です。例えば、`foo`と`baz`という二つの変数を必要とするプロンプトテンプレートがあるとします。チェーンの早い段階で`foo`の値を取得し、`baz`の値を後で取得する場合、両方の変数を同じ場所で受け取ってからプロンプトテンプレートに渡すまで待つのは面倒です。代わりに、`foo`の値でプロンプトテンプレートを部分的に適用し、その部分的に適用されたプロンプトテンプレートを先に進めて、それを使用することができます。以下にこの方法の例を示します：
+
+> One common use case for wanting to partial a prompt template is if you get some of the variables before others. For example, suppose you have a prompt template that requires two variables, `foo` and `baz`. If you get the `foo` value early on in the chain, but the `baz` value later, it can be annoying to wait until you have both variables in the same place to pass them to the prompt template. Instead, you can partial the prompt template with the `foo` value, and then pass the partialed prompt template along and just use that. Below is an example of doing this:
 
 ```python
 from langchain.prompts import PromptTemplate
 ```
-
 
 ```python
 prompt = PromptTemplate(template="{foo}{bar}", input_variables=["foo", "bar"])
@@ -34,8 +41,9 @@ print(partial_prompt.format(bar="baz"))
 
 </CodeOutputBlock>
 
-You can also just initialize the prompt with the partialed variables.
+また、部分的に設定された変数でプロンプトを初期化することもできます。
 
+> You can also just initialize the prompt with the partialed variables.
 
 ```python
 prompt = PromptTemplate(template="{foo}{bar}", input_variables=["bar"], partial_variables={"foo": "foo"})
@@ -50,10 +58,11 @@ print(prompt.format(bar="baz"))
 
 </CodeOutputBlock>
 
-## Partial with functions
+## Partial with functions | 関数の部分適用
 
-The other common use is to partial with a function. The use case for this is when you have a variable you know that you always want to fetch in a common way. A prime example of this is with date or time. Imagine you have a prompt which you always want to have the current date. You can't hard code it in the prompt, and passing it along with the other input variables is a bit annoying. In this case, it's very handy to be able to partial the prompt with a function that always returns the current date.
+もう一つの一般的な使用法は、関数に部分適用することです。この使用例は、常に共通の方法で取得したいと分かっている変数がある場合に適しています。この典型的な例は、日付や時間に関連しています。常に現在の日付を表示したいプロンプトがあると想像してください。プロンプトに現在の日付をハードコードすることはできませんし、他の入力変数と一緒に渡すのも少々面倒です。この場合、常に現在の日付を返す関数でプロンプトを部分適用できると非常に便利です。
 
+> The other common use is to partial with a function. The use case for this is when you have a variable you know that you always want to fetch in a common way. A prime example of this is with date or time. Imagine you have a prompt which you always want to have the current date. You can't hard code it in the prompt, and passing it along with the other input variables is a bit annoying. In this case, it's very handy to be able to partial the prompt with a function that always returns the current date.
 
 ```python
 from datetime import datetime
@@ -62,7 +71,6 @@ def _get_datetime():
     now = datetime.now()
     return now.strftime("%m/%d/%Y, %H:%M:%S")
 ```
-
 
 ```python
 prompt = PromptTemplate(
@@ -81,8 +89,9 @@ print(partial_prompt.format(adjective="funny"))
 
 </CodeOutputBlock>
 
-You can also just initialize the prompt with the partialed variables, which often makes more sense in this workflow.
+また、このワークフローにおいては、部分的に設定された変数を使ってプロンプトを初期化する方がしばしば理にかなっています。
 
+> You can also just initialize the prompt with the partialed variables, which often makes more sense in this workflow.
 
 ```python
 prompt = PromptTemplate(

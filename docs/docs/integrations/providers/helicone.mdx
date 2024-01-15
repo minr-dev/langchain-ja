@@ -1,26 +1,34 @@
-# Helicone
+# Helicone | Helicone
 
-This page covers how to use the [Helicone](https://helicone.ai) ecosystem within LangChain.
+このページでは、LangChain内で[Helicone](https://helicone.ai)エコシステムを使用する方法について説明します。
 
-## What is Helicone?
+> This page covers how to use the [Helicone](https://helicone.ai) ecosystem within LangChain.
 
-Helicone is an [open-source](https://github.com/Helicone/helicone) observability platform that proxies your OpenAI traffic and provides you key insights into your spend, latency and usage.
+## What is Helicone? | Heliconeとは何ですか？
+
+Heliconeは、あなたのOpenAIトラフィックをプロキシし、支出、レイテンシ、使用状況に関する重要な洞察を提供する[オープンソース](https://github.com/Helicone/helicone)の可観測性プラットフォームです。
+
+> Helicone is an [open-source](https://github.com/Helicone/helicone) observability platform that proxies your OpenAI traffic and provides you key insights into your spend, latency and usage.
 
 ![Helicone](/img/HeliconeDashboard.png)
 
-## Quick start
+## Quick start | クイックスタート
 
-With your LangChain environment you can just add the following parameter.
+LangChain環境を使用する際には、次のパラメータを追加するだけです。
+
+> With your LangChain environment you can just add the following parameter.
 
 ```bash
 export OPENAI_API_BASE="https://oai.hconeai.com/v1"
 ```
 
-Now head over to [helicone.ai](https://helicone.ai/onboarding?step=2) to create your account, and add your OpenAI API key within our dashboard to view your logs.
+次に、[helicone.ai](https://helicone.ai/onboarding?step=2) にアクセスしてアカウントを作成し、ダッシュボードにあなたのOpenAI APIキーを追加してログを閲覧してください。
+
+> Now head over to [helicone.ai](https://helicone.ai/onboarding?step=2) to create your account, and add your OpenAI API key within our dashboard to view your logs.
 
 ![Helicone](/img/HeliconeKeys.png)
 
-## How to enable Helicone caching
+## How to enable Helicone caching | Heliconeキャッシングを有効にする方法
 
 ```python
 from langchain.llms import OpenAI
@@ -32,9 +40,11 @@ text = "What is a helicone?"
 print(llm(text))
 ```
 
-[Helicone caching docs](https://docs.helicone.ai/advanced-usage/caching)
+[Helicone キャッシングのドキュメント](https://docs.helicone.ai/advanced-usage/caching)
 
-## How to use Helicone custom properties
+> [Helicone caching docs](https://docs.helicone.ai/advanced-usage/caching)
+
+## How to use Helicone custom properties | Heliconeカスタムプロパティの使用方法
 
 ```python
 from langchain.llms import OpenAI
@@ -50,4 +60,6 @@ text = "What is a helicone?"
 print(llm(text))
 ```
 
-[Helicone property docs](https://docs.helicone.ai/advanced-usage/custom-properties)
+[Helicone プロパティのドキュメント](https://docs.helicone.ai/advanced-usage/custom-properties)
+
+> [Helicone property docs](https://docs.helicone.ai/advanced-usage/custom-properties)

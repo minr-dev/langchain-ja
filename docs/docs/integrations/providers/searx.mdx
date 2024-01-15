@@ -1,43 +1,65 @@
-# SearxNG Search API
+# SearxNG Search API | SearxNG検索API
 
-This page covers how to use the SearxNG search API within LangChain.
-It is broken into two parts: installation and setup, and then references to the specific SearxNG API wrapper.
+このページでは、LangChain内でSearxNG検索APIを使用する方法について説明しています。内容は、インストールとセットアップ、そして特定のSearxNG APIラッパーに関する参照の2つの部分に分けられています。
 
-## Installation and Setup
+> This page covers how to use the SearxNG search API within LangChain.
+> It is broken into two parts: installation and setup, and then references to the specific SearxNG API wrapper.
 
-While it is possible to utilize the wrapper in conjunction with  [public searx
-instances](https://searx.space/) these instances frequently do not permit API
-access (see note on output format below) and have limitations on the frequency
-of requests. It is recommended to opt for a self-hosted instance instead.
+## Installation and Setup | インストールとセットアップ
 
-### Self Hosted Instance:
+公開されている[public searx instances](https://searx.space/)をラッパーと組み合わせて使用することは可能ですが、これらのインスタンスはしばしばAPIアクセスを許可していない（出力フォーマットに関する注記を以下参照）し、リクエストの頻度にも制限があります。そのため、自己ホスト型のインスタンスを選択することを推奨します。
 
-See [this page](https://searxng.github.io/searxng/admin/installation.html) for installation instructions.
+> While it is possible to utilize the wrapper in conjunction with  [public searx
+> instances](https://searx.space/) these instances frequently do not permit API
+> access (see note on output format below) and have limitations on the frequency
+> of requests. It is recommended to opt for a self-hosted instance instead.
 
-When you install SearxNG, the only active output format by default is the HTML format.
-You need to activate the `json` format to use the API. This can be done by adding the following line to the `settings.yml` file:
+### Self Hosted Instance: | セルフホステッドインスタンス:
+
+インストール手順については、[このページ](https://searxng.github.io/searxng/admin/installation.html)をご覧ください。
+
+> See [this page](https://searxng.github.io/searxng/admin/installation.html) for installation instructions.
+
+SearxNGをインストールすると、デフォルトでアクティブな出力フォーマットはHTMLフォーマットのみです。APIを使用するには、`json`フォーマットを有効にする必要があります。これは、`settings.yml`ファイルに次の行を追加することで行えます：
+
+> When you install SearxNG, the only active output format by default is the HTML format.
+> You need to activate the `json` format to use the API. This can be done by adding the following line to the `settings.yml` file:
+
 ```yaml
 search:
     formats:
         - html
         - json
 ```
-You can make sure that the API is working by issuing a curl request to the API endpoint:
 
-`curl -kLX GET --data-urlencode q='langchain' -d format=json http://localhost:8888`
+APIエンドポイントに対してcurlリクエストを発行することで、APIが正しく動作していることを確認できます：
 
-This should return a JSON object with the results.
+> You can make sure that the API is working by issuing a curl request to the API endpoint:
 
+`curl -kLX GET --data-urlencode q='langchain' -d format=json http://localhost:8888` コマンドは、'langchain'というクエリをURLエンコードして、JSON形式でデータを要求する際に使用されます。このコマンドは、ローカルホストの8888ポートに対してGETリクエストを送信します。
 
-## Wrappers
+> `curl -kLX GET --data-urlencode q='langchain' -d format=json http://localhost:8888`
 
-### Utility
+これにより、結果を含むJSONオブジェクトが返されるはずです。
 
-To use the wrapper we need to pass the host of the SearxNG instance to the wrapper with:
-    1. the named parameter `searx_host` when creating the instance.
-    2. exporting the environment variable `SEARXNG_HOST`.
+> This should return a JSON object with the results.
 
-You can use the wrapper to get results from a SearxNG instance. 
+## Wrappers | ラッパー
+
+### Utility | ユーティリティ
+
+ラッパーを使用するには、以下の方法でSearxNGインスタンスのホストをラッパーに渡す必要があります：
+
+1. インスタンスを作成する際に、名前付きパラメーター `searx_host` を使用する。
+2. 環境変数 `SEARXNG_HOST` をエクスポートする。
+
+> To use the wrapper we need to pass the host of the SearxNG instance to the wrapper with:
+> 1\. the named parameter `searx_host` when creating the instance.
+> 2\. exporting the environment variable `SEARXNG_HOST`.
+
+SearxNGインスタンスから結果を取得するために、ラッパーを使用できます。
+
+> You can use the wrapper to get results from a SearxNG instance.
 
 ```python
 from langchain.utilities import SearxSearchWrapper
@@ -45,11 +67,15 @@ s = SearxSearchWrapper(searx_host="http://localhost:8888")
 s.run("what is a large language model?")
 ```
 
-### Tool
+### Tool | ツール
 
-You can also load this wrapper as a Tool (to use with an Agent).
+このラッパーは、エージェントと一緒に使用するためのツールとしてもロードできます。
 
-You can do this with:
+> You can also load this wrapper as a Tool (to use with an Agent).
+
+これを行う方法は以下の通りです：
+
+> You can do this with:
 
 ```python
 from langchain.agents import load_tools
@@ -58,19 +84,26 @@ tools = load_tools(["searx-search"],
                     engines=["github"])
 ```
 
-Note that we could _optionally_ pass custom engines to use.
+オプションでカスタムエンジンを渡すことが*できる*ことに注意してください。
 
-If you want to obtain results with metadata as *json* you can use:
+> Note that we could *optionally* pass custom engines to use.
+
+メタデータを含む結果を*json*形式で取得したい場合は、以下の方法を使用できます：
+
+> If you want to obtain results with metadata as *json* you can use:
+
 ```python
 tools = load_tools(["searx-search-results-json"],
                     searx_host="http://localhost:8888",
                     num_results=5)
 ```
 
-#### Quickly creating tools
+#### Quickly creating tools | 迅速にツールを作成する
 
-This examples showcases a quick way to create multiple tools from the same
-wrapper.
+この例では、同じラッパーから複数のツールを素早く作成する方法を紹介しています。
+
+> This examples showcases a quick way to create multiple tools from the same
+> wrapper.
 
 ```python
 from langchain.tools.searx_search.tool import SearxSearchResults
@@ -87,4 +120,6 @@ arxiv_tool = SearxSearchResults(name="Arxiv", wrapper=wrapper,
                                 })
 ```
 
-For more information on tools, see [this page](/docs/modules/agents/tools/).
+ツールに関する詳細は、[このページ](/docs/modules/agents/tools/)をご覧ください。
+
+> For more information on tools, see [this page](/docs/modules/agents/tools/).

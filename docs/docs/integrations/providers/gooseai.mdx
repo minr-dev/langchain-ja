@@ -1,23 +1,32 @@
-# GooseAI
+# GooseAI | GooseAI
 
-This page covers how to use the GooseAI ecosystem within LangChain.
-It is broken into two parts: installation and setup, and then references to specific GooseAI wrappers.
+このページでは、LangChain内でGooseAIエコシステムを使用する方法について説明しています。内容は、インストールとセットアップ、そして特定のGooseAIラッパーへの参照という二つの部分に分けられています。
 
-## Installation and Setup
-- Install the Python SDK with `pip install openai`
-- Get your GooseAI api key from this link [here](https://goose.ai/).
-- Set the environment variable (`GOOSEAI_API_KEY`).
+> This page covers how to use the GooseAI ecosystem within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific GooseAI wrappers.
+
+## Installation and Setup | インストールとセットアップ
+
+* `pip install openai`でPython SDKをインストールしてください
+  > Install the Python SDK with `pip install openai`
+* このリンク[こちら](https://goose.ai/)からGooseAIのAPIキーを取得してください。
+  > Get your GooseAI api key from this link [here](https://goose.ai/).
+* 環境変数（`GOOSEAI_API_KEY`）を設定してください。
+  > Set the environment variable (`GOOSEAI_API_KEY`).
 
 ```python
 import os
 os.environ["GOOSEAI_API_KEY"] = "YOUR_API_KEY"
 ```
 
-## Wrappers
+## Wrappers | ラッパー
 
-### LLM
+### LLM | LLM
 
-There exists an GooseAI LLM wrapper, which you can access with: 
+GooseAI LLMのラッパーが存在し、以下の方法でアクセスできます：
+
+> There exists an GooseAI LLM wrapper, which you can access with:
+
 ```python
 from langchain.llms import GooseAI
 ```

@@ -1,10 +1,16 @@
-# Auto-fixing parser
+# Auto-fixing parser | 自動修正パーサー
 
-This output parser wraps another output parser, and in the event that the first one fails it calls out to another LLM to fix any errors.
+この出力パーサーは別の出力パーサーをラップしており、最初のパーサーが失敗した場合には、別のLLMを呼び出してエラーを修正します。
 
-But we can do other things besides throw errors. Specifically, we can pass the misformatted output, along with the formatted instructions, to the model and ask it to fix it.
+> This output parser wraps another output parser, and in the event that the first one fails it calls out to another LLM to fix any errors.
 
-For this example, we'll use the above Pydantic output parser. Here's what happens if we pass it a result that does not comply with the schema:
+しかし、エラーを投げる以外にもできることがあります。具体的には、フォーマットされていない出力とフォーマットの指示をモデルに渡し、それを修正してもらうことができます。
+
+> But we can do other things besides throw errors. Specifically, we can pass the misformatted output, along with the formatted instructions, to the model and ask it to fix it.
+
+この例では、上記のPydantic出力パーサーを使用します。スキーマに準拠していない結果を渡すとどうなるか見てみましょう：
+
+> For this example, we'll use the above Pydantic output parser. Here's what happens if we pass it a result that does not comply with the schema:
 
 ```python
 from langchain.chat_models import ChatOpenAI
@@ -12,7 +18,6 @@ from langchain.output_parsers import PydanticOutputParser
 from langchain_core.pydantic_v1 import BaseModel, Field
 from typing import List
 ```
-
 
 ```python
 class Actor(BaseModel):
@@ -24,11 +29,9 @@ actor_query = "Generate the filmography for a random actor."
 parser = PydanticOutputParser(pydantic_object=Actor)
 ```
 
-
 ```python
 misformatted = "{'name': 'Tom Hanks', 'film_names': ['Forrest Gump']}"
 ```
-
 
 ```python
 parser.parse(misformatted)
@@ -93,15 +96,15 @@ parser.parse(misformatted)
 
 </CodeOutputBlock>
 
-Now we can construct and use a `OutputFixingParser`. This output parser takes as an argument another output parser but also an LLM with which to try to correct any formatting mistakes.
+これで、`OutputFixingParser`を構築して使用することができます。この出力パーサーは、別の出力パーサーを引数として取るだけではなく、フォーマットの誤りを修正するために試みるLLMも必要です。
 
+> Now we can construct and use a `OutputFixingParser`. This output parser takes as an argument another output parser but also an LLM with which to try to correct any formatting mistakes.
 
 ```python
 from langchain.output_parsers import OutputFixingParser
 
 new_parser = OutputFixingParser.from_llm(parser=parser, llm=ChatOpenAI())
 ```
-
 
 ```python
 new_parser.parse(misformatted)

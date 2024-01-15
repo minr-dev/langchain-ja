@@ -1,25 +1,29 @@
-# ClickHouse
+# ClickHouse | ClickHouse
 
-> [ClickHouse](https://clickhouse.com/) is the fast and resource efficient open-source database for real-time 
-> apps and analytics with full SQL support and a wide range of functions to assist users in writing analytical queries. 
-> It has data structures and distance search functions (like `L2Distance`) as well as 
-> [approximate nearest neighbor search indexes](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/annindexes) 
-> That enables ClickHouse to be used as a high performance and scalable vector database to store and search vectors with SQL.
+> [ClickHouse](https://clickhouse.com/)は、リアルタイムアプリケーションや分析向けの高速でリソース効率の良いオープンソースデータベースです。完全なSQLサポートと、分析クエリを記述するための幅広い機能を提供しています。`L2Distance`のようなデータ構造や距離検索機能だけでなく、[近似最近傍探索インデックス](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/annindexes)も備えており、ClickHouseを高性能でスケーラブルなベクターデータベースとして使用し、SQLでベクターを保存・検索することが可能になります。
+>
+> > [ClickHouse](https://clickhouse.com/) is the fast and resource efficient open-source database for real-time
+> > apps and analytics with full SQL support and a wide range of functions to assist users in writing analytical queries.
+> > It has data structures and distance search functions (like `L2Distance`) as well as
+> > [approximate nearest neighbor search indexes](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/annindexes)
+> > That enables ClickHouse to be used as a high performance and scalable vector database to store and search vectors with SQL.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+`clickhouse-connect` Pythonパッケージをインストールする必要があります。
 
-We need to install `clickhouse-connect` python package.
+> We need to install `clickhouse-connect` python package.
 
 ```bash
 pip install clickhouse-connect
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/clickhouse).
+[使用例](/docs/integrations/vectorstores/clickhouse)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/clickhouse).
 
 ```python
 from langchain.vectorstores import Clickhouse, ClickhouseSettings
 ```
-

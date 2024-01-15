@@ -1,9 +1,16 @@
-# Recursively split by character
+# Recursively split by character | 文字ごとに再帰的に分割する
 
-This text splitter is the recommended one for generic text. It is parameterized by a list of characters. It tries to split on them in order until the chunks are small enough. The default list is `["\n\n", "\n", " ", ""]`. This has the effect of trying to keep all paragraphs (and then sentences, and then words) together as long as possible, as those would generically seem to be the strongest semantically related pieces of text.
+このテキストスプリッターは、一般的なテキストに対して推奨されるものです。文字のリストによってパラメータ化されており、チャンクが十分に小さくなるまで、そのリストに従って順に分割を試みます。デフォルトのリストは \`\[
 
-1. How the text is split: by list of characters.
-2. How the chunk size is measured: by number of characters.
+,
+, " ", ""]\` です。これにより、できるだけ長く段落（その後に文、そして単語）を一緒に保つことを試みる効果があります。なぜなら、これらは一般的に最も意味的に関連のあるテキストの部分と見なされるためです。
+
+> This text splitter is the recommended one for generic text. It is parameterized by a list of characters. It tries to split on them in order until the chunks are small enough. The default list is `["\n\n", "\n", " ", ""]`. This has the effect of trying to keep all paragraphs (and then sentences, and then words) together as long as possible, as those would generically seem to be the strongest semantically related pieces of text.
+
+1. テキストがどのように分割されるか：文字のリストによって。
+   > How the text is split: by list of characters.
+2. チャンクサイズの測定方法：文字数による。
+   > How the chunk size is measured: by number of characters.
 
 ```python
 # This is a long document we can split up.
@@ -11,11 +18,9 @@ with open('../../../state_of_the_union.txt') as f:
     state_of_the_union = f.read()
 ```
 
-
 ```python
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 ```
-
 
 ```python
 text_splitter = RecursiveCharacterTextSplitter(
@@ -26,7 +31,6 @@ text_splitter = RecursiveCharacterTextSplitter(
     is_separator_regex = False,
 )
 ```
-
 
 ```python
 texts = text_splitter.create_documents([state_of_the_union])
@@ -42,7 +46,6 @@ print(texts[1])
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 text_splitter.split_text(state_of_the_union)[:2]

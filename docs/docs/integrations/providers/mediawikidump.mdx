@@ -1,30 +1,39 @@
-# MediaWikiDump
+# MediaWikiDump | MediaWikiDump
 
->[MediaWiki XML Dumps](https://www.mediawiki.org/wiki/Manual:Importing_XML_dumps) contain the content of a wiki 
-> (wiki pages with all their revisions), without the site-related data. A XML dump does not create a full backup 
-> of the wiki database, the dump does not contain user accounts, images, edit logs, etc.
+> [MediaWiki XML Dumps](https://www.mediawiki.org/wiki/Manual:Importing_XML_dumps)は、サイトに関連するデータを除いたウィキの内容（全ての改訂を含むウィキページ）を含んでいます。XMLダンプはウィキデータベースの完全なバックアップを作成するものではなく、ユーザーアカウント、画像、編集履歴などは含まれていません。
+>
+> > [MediaWiki XML Dumps](https://www.mediawiki.org/wiki/Manual:Importing_XML_dumps) contain the content of a wiki
+> > (wiki pages with all their revisions), without the site-related data. A XML dump does not create a full backup
+> > of the wiki database, the dump does not contain user accounts, images, edit logs, etc.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+いくつかのPythonパッケージをインストールする必要があります。
 
-We need to install several python packages.
+> We need to install several python packages.
 
-The `mediawiki-utilities` supports XML schema 0.11 in unmerged branches.
+`mediawiki-utilities`は、未マージのブランチでXMLスキーマ0.11をサポートしています。
+
+> The `mediawiki-utilities` supports XML schema 0.11 in unmerged branches.
+
 ```bash
 pip install -qU git+https://github.com/mediawiki-utilities/python-mwtypes@updates_schema_0.11
 ```
 
-The `mediawiki-utilities mwxml` has a bug, fix PR pending.
+`mediawiki-utilities mwxml`にはバグがあり、修正のプルリクエストが保留中です。
+
+> The `mediawiki-utilities mwxml` has a bug, fix PR pending.
 
 ```bash
 pip install -qU git+https://github.com/gdedrouas/python-mwxml@xml_format_0.11
 pip install -qU mwparserfromhell
 ```
 
-## Document Loader
+## Document Loader | ドキュメントローダー
 
-See a [usage example](/docs/integrations/document_loaders/mediawikidump).
+[使用例](/docs/integrations/document_loaders/mediawikidump)をご覧ください。
 
+> See a [usage example](/docs/integrations/document_loaders/mediawikidump).
 
 ```python
 from langchain.document_loaders import MWDumpLoader

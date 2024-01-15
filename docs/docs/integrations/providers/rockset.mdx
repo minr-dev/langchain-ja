@@ -1,33 +1,45 @@
-# Rockset
+# Rockset | Rockset
 
->[Rockset](https://rockset.com/product/) is a real-time analytics database service for serving low latency, high concurrency analytical queries at scale. It builds a Converged Index™ on structured and semi-structured data with an efficient store for vector embeddings. Its support for running SQL on schemaless data makes it a perfect choice for running vector search with metadata filters. 
+> [Rockset](https://rockset.com/product/)は、大規模な低遅延、高並行性の分析クエリに対応するリアルタイム分析データベースサービスです。構造化されたデータと半構造化されたデータに対してConverged Index™を構築し、ベクター埋め込みのための効率的なストレージを提供します。スキーマレスデータにSQLを実行するサポートにより、メタデータフィルターを用いたベクター検索を行うのに最適な選択です。
+>
+> > [Rockset](https://rockset.com/product/) is a real-time analytics database service for serving low latency, high concurrency analytical queries at scale. It builds a Converged Index™ on structured and semi-structured data with an efficient store for vector embeddings. Its support for running SQL on schemaless data makes it a perfect choice for running vector search with metadata filters.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-Make sure you have Rockset account and go to the web console to get the API key. Details can be found on [the website](https://rockset.com/docs/rest-api/).
+Rocksetアカウントをお持ちであることを確認し、APIキーを取得するためにウェブコンソールにアクセスしてください。詳細は[ウェブサイト](https://rockset.com/docs/rest-api/)で確認できます。
+
+> Make sure you have Rockset account and go to the web console to get the API key. Details can be found on [the website](https://rockset.com/docs/rest-api/).
 
 ```bash
 pip install rockset
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/rockset).
+[使用例](/docs/integrations/vectorstores/rockset)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/rockset).
 
 ```python
 from langchain.vectorstores import Rockset 
 ```
 
-## Document Loader
+## Document Loader | ドキュメントローダー
 
-See a [usage example](/docs/integrations/document_loaders/rockset).
+[使用例](/docs/integrations/document_loaders/rockset)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/rockset).
+
 ```python
 from langchain.document_loaders import RocksetLoader
 ```
 
-## Chat Message History
+## Chat Message History | チャットメッセージ履歴
 
-See a [usage example](/docs/integrations/memory/rockset_chat_message_history).
+[使用例](/docs/integrations/memory/rockset_chat_message_history)をご覧ください。
+
+> See a [usage example](/docs/integrations/memory/rockset_chat_message_history).
+
 ```python
 from langchain.memory.chat_message_histories import RocksetChatMessageHistory
 ```

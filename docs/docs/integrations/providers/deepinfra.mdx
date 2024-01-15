@@ -1,35 +1,48 @@
-# DeepInfra
+# DeepInfra | DeepInfra
 
-This page covers how to use the DeepInfra ecosystem within LangChain.
-It is broken into two parts: installation and setup, and then references to specific DeepInfra wrappers.
+このページでは、LangChain内でDeepInfraエコシステムを使用する方法について説明しています。内容はインストールとセットアップ、そして特定のDeepInfraラッパーへの参照という2つの部分に分かれています。
 
-## Installation and Setup
-- Get your DeepInfra api key from this link [here](https://deepinfra.com/).
-- Get an DeepInfra api key and set it as an environment variable (`DEEPINFRA_API_TOKEN`)
+> This page covers how to use the DeepInfra ecosystem within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific DeepInfra wrappers.
 
-## Available Models
+## Installation and Setup | インストールとセットアップ
 
-DeepInfra provides a range of Open Source LLMs ready for deployment.
-You can list supported models for
-[text-generation](https://deepinfra.com/models?type=text-generation) and
-[embeddings](https://deepinfra.com/models?type=embeddings).
-google/flan\* models can be viewed [here](https://deepinfra.com/models?type=text2text-generation).
+* このリンク[こちら](https://deepinfra.com/)からDeepInfraのAPIキーを取得してください。
+  > Get your DeepInfra api key from this link [here](https://deepinfra.com/).
+* DeepInfraのAPIキーを取得し、環境変数（`DEEPINFRA_API_TOKEN`）として設定してください。
+  > Get an DeepInfra api key and set it as an environment variable (`DEEPINFRA_API_TOKEN`)
 
-You can view a [list of request and response parameters](https://deepinfra.com/meta-llama/Llama-2-70b-chat-hf/api).
+## Available Models | 利用可能なモデル
 
-## Wrappers
+DeepInfraは、デプロイの準備が整ったさまざまなオープンソースのLLMを提供しています。[テキスト生成](https://deepinfra.com/models?type=text-generation)と[埋め込み](https://deepinfra.com/models?type=embeddings)用のサポートされているモデルをリストできます。google/flan\* モデルは[こちら](https://deepinfra.com/models?type=text2text-generation)で確認できます。
 
-### LLM
+> DeepInfra provides a range of Open Source LLMs ready for deployment.
+> You can list supported models for
+> [text-generation](https://deepinfra.com/models?type=text-generation) and
+> [embeddings](https://deepinfra.com/models?type=embeddings).
+> google/flan\* models can be viewed [here](https://deepinfra.com/models?type=text2text-generation).
 
-There exists an DeepInfra LLM wrapper, which you can access with
+[リクエストとレスポンスのパラメーターのリスト](https://deepinfra.com/meta-llama/Llama-2-70b-chat-hf/api)を閲覧することができます。
+
+> You can view a [list of request and response parameters](https://deepinfra.com/meta-llama/Llama-2-70b-chat-hf/api).
+
+## Wrappers | ラッパー
+
+### LLM | LLM
+
+DeepInfra LLMラッパーが存在し、次の方法でアクセスできます
+
+> There exists an DeepInfra LLM wrapper, which you can access with
 
 ```python
 from langchain.llms import DeepInfra
 ```
 
-### Embeddings
+### Embeddings | 埋め込み
 
-There is also an DeepInfra Embeddings wrapper, you can access with
+DeepInfra Embeddingsのラッパーもあり、それにアクセスできます
+
+> There is also an DeepInfra Embeddings wrapper, you can access with
 
 ```python
 from langchain.embeddings import DeepInfraEmbeddings

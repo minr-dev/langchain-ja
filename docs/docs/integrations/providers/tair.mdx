@@ -1,22 +1,32 @@
-# Tair
+# Tair | Tair
 
-This page covers how to use the Tair ecosystem within LangChain.
+このページでは、LangChain内でTairエコシステムを使用する方法について説明しています。
 
-## Installation and Setup
+> This page covers how to use the Tair ecosystem within LangChain.
 
-Install Tair Python SDK with `pip install tair`.
+## Installation and Setup | インストールとセットアップ
 
-## Wrappers
+`pip install tair`を使用してTair Python SDKをインストールしてください。
 
-### VectorStore
+> Install Tair Python SDK with `pip install tair`.
 
-There exists a wrapper around TairVector, allowing you to use it as a vectorstore,
-whether for semantic search or example selection.
+## Wrappers | ラッパー
 
-To import this vectorstore:
+### VectorStore | VectorStore
+
+TairVectorの周りにはラッパーが存在し、それをベクトルストアとして、セマンティック検索や例示選択に使用することができます。
+
+> There exists a wrapper around TairVector, allowing you to use it as a vectorstore,
+> whether for semantic search or example selection.
+
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
 
 ```python
 from langchain.vectorstores import Tair
 ```
 
-For a more detailed walkthrough of the Tair wrapper, see [this notebook](/docs/integrations/vectorstores/tair)
+Tairラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/tair)をご覧ください。
+
+> For a more detailed walkthrough of the Tair wrapper, see [this notebook](/docs/integrations/vectorstores/tair)

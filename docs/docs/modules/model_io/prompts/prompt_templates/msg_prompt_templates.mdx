@@ -1,9 +1,12 @@
-# Types of `MessagePromptTemplate`
+# Types of `MessagePromptTemplate` | `MessagePromptTemplate`のタイプ
 
-LangChain provides different types of `MessagePromptTemplate`. The most commonly used are `AIMessagePromptTemplate`, `SystemMessagePromptTemplate` and `HumanMessagePromptTemplate`, which create an AI message, system message and human message respectively.
+LangChainは、様々なタイプの`MessagePromptTemplate`を提供しています。最も一般的に使用されるのは`AIMessagePromptTemplate`、`SystemMessagePromptTemplate`、そして`HumanMessagePromptTemplate`で、それぞれAIのメッセージ、システムのメッセージ、人間のメッセージを生成します。
 
-However, in cases where the chat model supports taking chat message with arbitrary role, you can use `ChatMessagePromptTemplate`, which allows user to specify the role name.
+> LangChain provides different types of `MessagePromptTemplate`. The most commonly used are `AIMessagePromptTemplate`, `SystemMessagePromptTemplate` and `HumanMessagePromptTemplate`, which create an AI message, system message and human message respectively.
 
+しかし、チャットモデルが任意の役割を持つチャットメッセージを取り扱うことをサポートしている場合、ユーザーが役割名を指定できる`ChatMessagePromptTemplate`を使用できます。
+
+> However, in cases where the chat model supports taking chat message with arbitrary role, you can use `ChatMessagePromptTemplate`, which allows user to specify the role name.
 
 ```python
 from langchain.prompts import ChatMessagePromptTemplate
@@ -22,8 +25,9 @@ chat_message_prompt.format(subject="force")
 
 </CodeOutputBlock>
 
-LangChain also provides `MessagesPlaceholder`, which gives you full control of what messages to be rendered during formatting. This can be useful when you are uncertain of what role you should be using for your message prompt templates or when you wish to insert a list of messages during formatting.
+LangChainは`MessagesPlaceholder`も提供しており、フォーマット中にどのメッセージをレンダリングするかを完全に制御することができます。これは、メッセージプロンプトテンプレートでどの役割を使用すべきかが不確かな場合や、フォーマット中にメッセージリストを挿入したい場合に有用です。
 
+> LangChain also provides `MessagesPlaceholder`, which gives you full control of what messages to be rendered during formatting. This can be useful when you are uncertain of what role you should be using for your message prompt templates or when you wish to insert a list of messages during formatting.
 
 ```python
 from langchain.prompts import MessagesPlaceholder
@@ -35,7 +39,6 @@ human_message_template = HumanMessagePromptTemplate.from_template(human_prompt)
 
 chat_prompt = ChatPromptTemplate.from_messages([MessagesPlaceholder(variable_name="conversation"), human_message_template])
 ```
-
 
 ```python
 from langchain_core.messages import HumanMessage, AIMessage

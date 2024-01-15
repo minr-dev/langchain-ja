@@ -1,21 +1,27 @@
-# Astra DB
+# Astra DB | Astra DB
 
-This page lists the integrations available with [Astra DB](https://docs.datastax.com/en/astra/home/astra.html) and [Apache Cassandra®](https://cassandra.apache.org/).
+このページには、[Astra DB](https://docs.datastax.com/en/astra/home/astra.html)と[Apache Cassandra®](https://cassandra.apache.org/)との利用可能な統合が記載されています。
 
-### Setup
+> This page lists the integrations available with [Astra DB](https://docs.datastax.com/en/astra/home/astra.html) and [Apache Cassandra®](https://cassandra.apache.org/).
 
-Install the following Python package:
+### Setup | セットアップ
+
+以下のPythonパッケージをインストールしてください：
+
+> Install the following Python package:
 
 ```bash
 pip install "astrapy>=0.5.3"
 ```
 
-## Astra DB
+## Astra DB | Astra DB
 
-> DataStax [Astra DB](https://docs.datastax.com/en/astra/home/astra.html) is a serverless vector-capable database built on Cassandra and made conveniently available
-> through an easy-to-use JSON API.
+> DataStax [Astra DB](https://docs.datastax.com/en/astra/home/astra.html)は、Cassandraに基づいて構築され、使いやすいJSON APIを通じて便利に利用できるサーバーレスでベクター処理に対応したデータベースです。
+>
+> > DataStax [Astra DB](https://docs.datastax.com/en/astra/home/astra.html) is a serverless vector-capable database built on Cassandra and made conveniently available
+> > through an easy-to-use JSON API.
 
-### Vector Store
+### Vector Store | ベクターストア
 
 ```python
 from langchain.vectorstores import AstraDB
@@ -27,9 +33,11 @@ vector_store = AstraDB(
 )
 ```
 
-Learn more in the [example notebook](/docs/integrations/vectorstores/astradb).
+[example notebook](/docs/integrations/vectorstores/astradb)でさらに詳しく学べます。
 
-### LLM Cache
+> Learn more in the [example notebook](/docs/integrations/vectorstores/astradb).
+
+### LLM Cache | LLMキャッシュ
 
 ```python
 from langchain.globals import set_llm_cache
@@ -40,10 +48,11 @@ set_llm_cache(AstraDBCache(
 ))
 ```
 
-Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the Astra DB section).
+[example notebook](/docs/integrations/llms/llm_caching)（Astra DBセクションまでスクロールしてください）でさらに詳しく学ぶことができます。
 
+> Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the Astra DB section).
 
-### Semantic LLM Cache
+### Semantic LLM Cache | セマンティックLLMキャッシュ
 
 ```python
 from langchain.globals import set_llm_cache
@@ -55,9 +64,11 @@ set_llm_cache(AstraDBSemanticCache(
 ))
 ```
 
-Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the appropriate section).
+[例のノートブック](/docs/integrations/llms/llm_caching)で詳しく学ぶことができます（該当するセクションまでスクロールしてください）。
 
-### Chat message history
+> Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the appropriate section).
+
+### Chat message history | チャットメッセージ履歴
 
 ```python
 from langchain.memory import AstraDBChatMessageHistory
@@ -68,19 +79,24 @@ message_history = AstraDBChatMessageHistory(
 )
 ```
 
-Learn more in the [example notebook](/docs/integrations/memory/astradb_chat_message_history).
+[例のノートブック](/docs/integrations/memory/astradb_chat_message_history)で詳しく学ぶことができます。
 
+> Learn more in the [example notebook](/docs/integrations/memory/astradb_chat_message_history).
 
-## Apache Cassandra and Astra DB through CQL
+## Apache Cassandra and Astra DB through CQL | CQLを通じたApache CassandraとAstra DB
 
-> [Cassandra](https://cassandra.apache.org/) is a NoSQL, row-oriented, highly scalable and highly available database.
-> Starting with version 5.0, the database ships with [vector search capabilities](https://cassandra.apache.org/doc/trunk/cassandra/vector-search/overview.html).
-> DataStax [Astra DB through CQL](https://docs.datastax.com/en/astra-serverless/docs/vector-search/quickstart.html) is a managed serverless database built on Cassandra, offering the same interface and strengths.
+> [Cassandra](https://cassandra.apache.org/)は、NoSQLで行指向のデータベースであり、高いスケーラビリティと高可用性を備えています。バージョン5.0から、データベースには[ベクター検索機能](https://cassandra.apache.org/doc/trunk/cassandra/vector-search/overview.html)が搭載されています。DataStax [Astra DB through CQL](https://docs.datastax.com/en/astra-serverless/docs/vector-search/quickstart.html)は、Cassandraをベースにしたマネージドサーバレスデータベースで、同じインターフェースと強みを提供しています。
+>
+> > [Cassandra](https://cassandra.apache.org/) is a NoSQL, row-oriented, highly scalable and highly available database.
+> > Starting with version 5.0, the database ships with [vector search capabilities](https://cassandra.apache.org/doc/trunk/cassandra/vector-search/overview.html).
+> > DataStax [Astra DB through CQL](https://docs.datastax.com/en/astra-serverless/docs/vector-search/quickstart.html) is a managed serverless database built on Cassandra, offering the same interface and strengths.
 
-These databases use the CQL protocol (Cassandra Query Language).
-Hence, a different set of connectors, outlined below, shall be used.
+これらのデータベースはCQLプロトコル（Cassandra Query Language）を使用しています。したがって、以下で概説されている異なるセットのコネクタを使用しなければなりません。
 
-### Vector Store
+> These databases use the CQL protocol (Cassandra Query Language).
+> Hence, a different set of connectors, outlined below, shall be used.
+
+### Vector Store | ベクターストア
 
 ```python
 from langchain.vectorstores import Cassandra
@@ -90,30 +106,33 @@ vector_store = Cassandra(
 )
 ```
 
-Learn more in the [example notebook](/docs/integrations/vectorstores/astradb) (scroll down to the CQL-specific section).
+[例のノートブック](/docs/integrations/vectorstores/astradb)で詳しく学ぶことができます（CQLに特化したセクションまでスクロールしてください）。
 
+> Learn more in the [example notebook](/docs/integrations/vectorstores/astradb) (scroll down to the CQL-specific section).
 
-### Memory
+### Memory | メモリ
 
 ```python
 from langchain.memory import CassandraChatMessageHistory
 message_history = CassandraChatMessageHistory(session_id="my-session")
 ```
 
-Learn more in the [example notebook](/docs/integrations/memory/cassandra_chat_message_history).
+[example notebook](/docs/integrations/memory/cassandra_chat_message_history)でさらに詳しく学ぶことができます。
 
+> Learn more in the [example notebook](/docs/integrations/memory/cassandra_chat_message_history).
 
-### LLM Cache
+### LLM Cache | LLMキャッシュ
 
 ```python
 from langchain.cache import CassandraCache
 langchain.llm_cache = CassandraCache()
 ```
 
-Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the Cassandra section).
+[例のノートブック](/docs/integrations/llms/llm_caching)でさらに詳しく学ぶことができます（Cassandraセクションまでスクロールしてください）。
 
+> Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the Cassandra section).
 
-### Semantic LLM Cache
+### Semantic LLM Cache | セマンティックLLMキャッシュ
 
 ```python
 from langchain.cache import CassandraSemanticCache
@@ -123,4 +142,6 @@ cassSemanticCache = CassandraSemanticCache(
 )
 ```
 
-Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the appropriate section).
+[例のノートブック](/docs/integrations/llms/llm_caching)でさらに詳しく学ぶことができます（適切なセクションまでスクロールしてください）。
+
+> Learn more in the [example notebook](/docs/integrations/llms/llm_caching) (scroll to the appropriate section).

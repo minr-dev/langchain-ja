@@ -1,115 +1,172 @@
-# Deployment
+# Deployment | デプロイメント
 
-In today's fast-paced technological landscape, the use of Large Language Models (LLMs) is rapidly expanding. As a result, it is crucial for developers to understand how to effectively deploy these models in production environments. LLM interfaces typically fall into two categories:
+現代の急速に変化する技術環境において、大規模言語モデル（LLM）の利用は急激に広がっています。そのため、開発者はこれらのモデルを本番環境で効率的にデプロイする方法を理解することが極めて重要です。LLMのインターフェースは典型的には以下の2つのカテゴリーに分類されます：
 
-- **Case 1: Utilizing External LLM Providers (OpenAI, Anthropic, etc.)**
-    In this scenario, most of the computational burden is handled by the LLM providers, while LangChain simplifies the implementation of business logic around these services. This approach includes features such as prompt templating, chat message generation, caching, vector embedding database creation, preprocessing, etc.
+> In today's fast-paced technological landscape, the use of Large Language Models (LLMs) is rapidly expanding. As a result, it is crucial for developers to understand how to effectively deploy these models in production environments. LLM interfaces typically fall into two categories:
 
-- **Case 2: Self-hosted Open-Source Models**
-    Alternatively, developers can opt to use smaller, yet comparably capable, self-hosted open-source LLM models. This approach can significantly decrease costs, latency, and privacy concerns associated with transferring data to external LLM providers.
+* **ケース1: 外部LLMプロバイダーの利用 (OpenAI, Anthropicなど)**
+  このシナリオでは、計算負荷の大部分をLLMプロバイダーが処理し、LangChainはこれらのサービスに関連するビジネスロジックの実装を簡素化します。このアプローチには、プロンプトのテンプレート化、チャットメッセージの生成、キャッシング、ベクター埋め込みデータベースの作成、前処理などの機能が含まれます。
+  > **Case 1: Utilizing External LLM Providers (OpenAI, Anthropic, etc.)**
+  > In this scenario, most of the computational burden is handled by the LLM providers, while LangChain simplifies the implementation of business logic around these services. This approach includes features such as prompt templating, chat message generation, caching, vector embedding database creation, preprocessing, etc.
 
-Regardless of the framework that forms the backbone of your product, deploying LLM applications comes with its own set of challenges. It's vital to understand the trade-offs and key considerations when evaluating serving frameworks.
+* **ケース2: 自己ホスト型オープンソースモデル**
+  代わりに、開発者は小規模でありながらも比較的に同等の能力を持つ自己ホスト型のオープンソースLLMモデルを選択することができます。この方法は、外部LLMプロバイダーへのデータ転送に伴うコスト、待ち時間（レイテンシ）、およびプライバシーに関する懸念を大幅に減少させることが可能です。
+  > **Case 2: Self-hosted Open-Source Models**
+  > Alternatively, developers can opt to use smaller, yet comparably capable, self-hosted open-source LLM models. This approach can significantly decrease costs, latency, and privacy concerns associated with transferring data to external LLM providers.
 
-## Outline
+製品の基盤となるフレームワークに関わらず、LLMアプリケーションのデプロイにはそれ自体の一連の課題が伴います。サービングフレームワークを評価する際には、トレードオフや主要な考慮事項を理解することが極めて重要です。
 
-This guide aims to provide a comprehensive overview of the requirements for deploying LLMs in a production setting, focusing on:
+> Regardless of the framework that forms the backbone of your product, deploying LLM applications comes with its own set of challenges. It's vital to understand the trade-offs and key considerations when evaluating serving frameworks.
 
-- **Designing a Robust LLM Application Service**
-- **Maintaining Cost-Efficiency**
-- **Ensuring Rapid Iteration**
+## Outline | 概要
 
-Understanding these components is crucial when assessing serving systems. LangChain integrates with several open-source projects designed to tackle these issues, providing a robust framework for productionizing your LLM applications. Some notable frameworks include:
+このガイドは、実運用環境でLLMをデプロイするための要件を総合的に概観することを目的としており、特に以下の点に焦点を当てています：
 
-- [Ray Serve](/docs/ecosystem/integrations/ray_serve)
-- [BentoML](https://github.com/bentoml/BentoML)
-- [OpenLLM](/docs/ecosystem/integrations/openllm)
-- [Modal](/docs/ecosystem/integrations/modal)
-- [Jina](/docs/ecosystem/integrations/jina#deployment)
+> This guide aims to provide a comprehensive overview of the requirements for deploying LLMs in a production setting, focusing on:
 
-These links will provide further information on each ecosystem, assisting you in finding the best fit for your LLM deployment needs.
+* 堅牢なLLMアプリケーションサービスの設計
+  > **Designing a Robust LLM Application Service**
+* コスト効率を維持する
+  > **Maintaining Cost-Efficiency**
+* 迅速なイテレーションを保証する
+  > **Ensuring Rapid Iteration**
 
-## Designing a Robust LLM Application Service
+これらのコンポーネントを理解することは、サービングシステムを評価する上で極めて重要です。LangChainは、これらの課題に取り組むために設計された複数のオープンソースプロジェクトと統合し、LLMアプリケーションを本番環境で運用するための堅牢なフレームワークを提供します。注目すべきフレームワークには以下のものがあります：
 
-When deploying an LLM service in production, it's imperative to provide a seamless user experience free from outages. Achieving 24/7 service availability involves creating and maintaining several sub-systems surrounding your application.
+> Understanding these components is crucial when assessing serving systems. LangChain integrates with several open-source projects designed to tackle these issues, providing a robust framework for productionizing your LLM applications. Some notable frameworks include:
 
-### Monitoring
+* [Ray Serve](/docs/ecosystem/integrations/ray_serve)
+  > [Ray Serve](/docs/ecosystem/integrations/ray_serve)
+* [BentoML](https://github.com/bentoml/BentoML)
+  > [BentoML](https://github.com/bentoml/BentoML)
+* [OpenLLM](/docs/ecosystem/integrations/openllm)
+  > [OpenLLM](/docs/ecosystem/integrations/openllm)
+* [Modal](/docs/ecosystem/integrations/modal)
+  > [Modal](/docs/ecosystem/integrations/modal)
+* [Jina](/docs/ecosystem/integrations/jina#deployment)
 
-Monitoring forms an integral part of any system running in a production environment. In the context of LLMs, it is essential to monitor both performance and quality metrics.
+  Jinaフレームワークに関する詳細情報や、LLMの展開に最適なソリューションを見つけるための支援は、上記のリンクから得られます。
+  > [Jina](/docs/ecosystem/integrations/jina#deployment)
 
-**Performance Metrics:** These metrics provide insights into the efficiency and capacity of your model. Here are some key examples:
+これらのリンクを通じて、各エコシステムに関するさらに詳しい情報が提供され、あなたのLLMデプロイメントの要件に最適な選択を見つけるための支援が得られます。
 
-- Query per second (QPS): This measures the number of queries your model processes in a second, offering insights into its utilization.
-- Latency: This metric quantifies the delay from when your client sends a request to when they receive a response.
-- Tokens Per Second (TPS): This represents the number of tokens your model can generate in a second.
+> These links will provide further information on each ecosystem, assisting you in finding the best fit for your LLM deployment needs.
 
-**Quality Metrics:** These metrics are typically customized according to the business use-case. For instance, how does the output of your system compare to a baseline, such as a previous version? Although these metrics can be calculated offline, you need to log the necessary data to use them later.
+## Designing a Robust LLM Application Service | 堅牢なLLMアプリケーションサービスの設計
 
-### Fault tolerance
+LLMサービスを本番環境に展開する際、中断なくシームレスなユーザーエクスペリエンスを提供することが極めて重要です。24時間365日のサービスを継続的に提供するためには、アプリケーションを支える複数のサブシステムの構築と維持が必要です。
 
-Your application may encounter errors such as exceptions in your model inference or business logic code, causing failures and disrupting traffic. Other potential issues could arise from the machine running your application, such as unexpected hardware breakdowns or loss of spot-instances during high-demand periods. One way to mitigate these risks is by increasing redundancy through replica scaling and implementing recovery mechanisms for failed replicas. However, model replicas aren't the only potential points of failure. It's essential to build resilience against various failures that could occur at any point in your stack.
+> When deploying an LLM service in production, it's imperative to provide a seamless user experience free from outages. Achieving 24/7 service availability involves creating and maintaining several sub-systems surrounding your application.
 
+### Monitoring | モニタリング
 
-### Zero down time upgrade
+モニタリングは、本番環境で運用されるあらゆるシステムにとって不可欠な要素です。LLMの文脈においては、パフォーマンス指標と品質指標の両方を監視することが極めて重要です。
 
-System upgrades are often necessary but can result in service disruptions if not handled correctly. One way to prevent downtime during upgrades is by implementing a smooth transition process from the old version to the new one. Ideally, the new version of your LLM service is deployed, and traffic gradually shifts from the old to the new version, maintaining a constant QPS throughout the process.
+> Monitoring forms an integral part of any system running in a production environment. In the context of LLMs, it is essential to monitor both performance and quality metrics.
 
+パフォーマンス指標：これらの指標は、モデルの効率と能力に関する洞察を提供します。以下に主な例を示します：
 
-### Load balancing
+> **Performance Metrics:** These metrics provide insights into the efficiency and capacity of your model. Here are some key examples:
 
-Load balancing, in simple terms, is a technique to distribute work evenly across multiple computers, servers, or other resources to optimize the utilization of the system, maximize throughput, minimize response time, and avoid overload of any single resource. Think of it as a traffic officer directing cars (requests) to different roads (servers) so that no single road becomes too congested.
+* クエリ毎秒（QPS）：これは、モデルが1秒間に処理するクエリの数を測定し、その利用状況に関する洞察を提供します。
+  > Query per second (QPS): This measures the number of queries your model processes in a second, offering insights into its utilization.
+* レイテンシー：この指標は、クライアントがリクエストを送信してから応答を受け取るまでの時間遅延を測定します。
+  > Latency: This metric quantifies the delay from when your client sends a request to when they receive a response.
+* トークン毎秒（TPS）：これは、モデルが1秒間に生成可能なトークンの数を表します。
+  > Tokens Per Second (TPS): This represents the number of tokens your model can generate in a second.
 
-There are several strategies for load balancing. For example, one common method is the *Round Robin* strategy, where each request is sent to the next server in line, cycling back to the first when all servers have received a request. This works well when all servers are equally capable. However, if some servers are more powerful than others, you might use a *Weighted Round Robin* or *Least Connections* strategy, where more requests are sent to the more powerful servers, or to those currently handling the fewest active requests. Let's imagine you're running a LLM chain. If your application becomes popular, you could have hundreds or even thousands of users asking questions at the same time. If one server gets too busy (high load), the load balancer would direct new requests to another server that is less busy. This way, all your users get a timely response and the system remains stable.
+品質指標：これらの指標は通常、ビジネスのユースケースに合わせてカスタマイズされます。例えば、システムの出力が基準値、例えば以前のバージョンと比較してどのようなものか？これらの指標はオフラインで計算可能ですが、後で利用するためには必要なデータをログとして記録しておく必要があります。
 
+> **Quality Metrics:** These metrics are typically customized according to the business use-case. For instance, how does the output of your system compare to a baseline, such as a previous version? Although these metrics can be calculated offline, you need to log the necessary data to use them later.
 
+### Fault tolerance | 耐障害性
 
-## Maintaining Cost-Efficiency and Scalability
+アプリケーションは、モデルの推論処理やビジネスロジックコードにおける例外などのエラーに直面し、障害を引き起こしてトラフィックが中断することがあります。さらに、アプリケーションを実行しているマシンに起因する予期せぬハードウェアの故障や、需要の高い時期にスポットインスタンスが失われるなどの問題が生じる可能性があります。これらのリスクを軽減する方法の一つとして、レプリカのスケーリングによる冗長性の増加と、失敗したレプリカの復旧メカニズムの実装があります。しかし、モデルのレプリカだけが障害の潜在的なポイントではないため、スタックの任意の箇所で発生する可能性のあるさまざまな障害に対して、回復力を構築することが極めて重要です。
 
-Deploying LLM services can be costly, especially when you're handling a large volume of user interactions. Charges by LLM providers are usually based on tokens used, making a chat system inference on these models potentially expensive. However, several strategies can help manage these costs without compromising the quality of the service.
+> Your application may encounter errors such as exceptions in your model inference or business logic code, causing failures and disrupting traffic. Other potential issues could arise from the machine running your application, such as unexpected hardware breakdowns or loss of spot-instances during high-demand periods. One way to mitigate these risks is by increasing redundancy through replica scaling and implementing recovery mechanisms for failed replicas. However, model replicas aren't the only potential points of failure. It's essential to build resilience against various failures that could occur at any point in your stack.
 
+### Zero down time upgrade | ゼロダウンタイムでのアップグレード
 
-### Self-hosting models
+システムのアップグレードはしばしば必要とされますが、適切に管理されない場合にはサービスの中断を招く可能性があります。アップグレード時のダウンタイムを防ぐ方法の一つとして、古いバージョンから新しいバージョンへスムーズに移行するプロセスを実装することが挙げられます。理想的には、新しいバージョンのLLMサービスがデプロイされ、トラフィックが徐々に古いバージョンから新しいバージョンへと移行し、その過程でQPSを一定に保つことが望まれます。
 
-Several smaller and open-source LLMs are emerging to tackle the issue of reliance on LLM providers. Self-hosting allows you to maintain similar quality to LLM provider models while managing costs. The challenge lies in building a reliable, high-performing LLM serving system on your own machines. 
+> System upgrades are often necessary but can result in service disruptions if not handled correctly. One way to prevent downtime during upgrades is by implementing a smooth transition process from the old version to the new one. Ideally, the new version of your LLM service is deployed, and traffic gradually shifts from the old to the new version, maintaining a constant QPS throughout the process.
 
-### Resource Management and Auto-Scaling
+### Load balancing | 負荷分散
 
-Computational logic within your application requires precise resource allocation. For instance, if part of your traffic is served by an OpenAI endpoint and another part by a self-hosted model, it's crucial to allocate suitable resources for each. Auto-scaling—adjusting resource allocation based on traffic—can significantly impact the cost of running your application. This strategy requires a balance between cost and responsiveness, ensuring neither resource over-provisioning nor compromised application responsiveness.
+ロードバランシングとは、簡単に言うと、複数のコンピュータ、サーバー、またはその他のリソース間で作業を均等に分散させる技術であり、システムの利用効率を最適化し、スループットを最大化し、応答時間を最小化し、どの単一リソースにも過負荷がかからないようにします。これを交通整理をする警察官が車（リクエスト）を異なる道（サーバー）へと誘導し、どの道も過度に混雑しないようにすることに例えることができます。
 
-### Utilizing Spot Instances
+> Load balancing, in simple terms, is a technique to distribute work evenly across multiple computers, servers, or other resources to optimize the utilization of the system, maximize throughput, minimize response time, and avoid overload of any single resource. Think of it as a traffic officer directing cars (requests) to different roads (servers) so that no single road becomes too congested.
 
-On platforms like AWS, spot instances offer substantial cost savings, typically priced at about a third of on-demand instances. The trade-off is a higher crash rate, necessitating a robust fault-tolerance mechanism for effective use.
+ロードバランシングにはいくつかの戦略があります。たとえば、よく用いられる「ラウンドロビン」戦略では、各リクエストが順に次のサーバーへと送られ、全サーバーが一度リクエストを受け取ると、最初のサーバーに戻ります。これは全てのサーバーが同等の性能を有している場合に適しています。しかし、サーバー間で性能に差がある場合は、「ウェイト付きラウンドロビン」や「最少接続数」戦略を採用することがあります。これらの戦略では、より高性能なサーバーへ多くのリクエストを割り振ったり、現在アクティブなリクエストが最も少ないサーバーに割り振ることができます。LLMチェーンを運営していると想像してみましょう。アプリケーションが人気を博すと、同時に何百ものユーザーが質問をすることがあります。一つのサーバーが過負荷（高負荷）になると、ロードバランサーは新規のリクエストを比較的空いている別のサーバーに振り分けます。この方法により、全ユーザーにタイムリーなレスポンスを提供し、システムの安定性を保つことができます。
 
-### Independent Scaling
+> There are several strategies for load balancing. For example, one common method is the *Round Robin* strategy, where each request is sent to the next server in line, cycling back to the first when all servers have received a request. This works well when all servers are equally capable. However, if some servers are more powerful than others, you might use a *Weighted Round Robin* or *Least Connections* strategy, where more requests are sent to the more powerful servers, or to those currently handling the fewest active requests. Let's imagine you're running a LLM chain. If your application becomes popular, you could have hundreds or even thousands of users asking questions at the same time. If one server gets too busy (high load), the load balancer would direct new requests to another server that is less busy. This way, all your users get a timely response and the system remains stable.
 
-When self-hosting your models, you should consider independent scaling. For example, if you have two translation models, one fine-tuned for French and another for Spanish, incoming requests might necessitate different scaling requirements for each.
+## Maintaining Cost-Efficiency and Scalability | コスト効率とスケーラビリティの維持
 
-### Batching requests
+LLMサービスを導入することは、特に大量のユーザーとのやり取りを処理する場合、コストが高くなることがあります。LLMプロバイダーによる料金は通常、使用されるトークンの数に基づいているため、これらのモデルを用いたチャットシステムの推論は、潜在的にコストがかさむ可能性があります。しかし、サービスの品質を損ねることなく、これらのコストを管理するいくつかの戦略が存在します。
 
-In the context of Large Language Models, batching requests can enhance efficiency by better utilizing your GPU resources. GPUs are inherently parallel processors, designed to handle multiple tasks simultaneously. If you send individual requests to the model, the GPU might not be fully utilized as it's only working on a single task at a time. On the other hand, by batching requests together, you're allowing the GPU to work on multiple tasks at once, maximizing its utilization and improving inference speed. This not only leads to cost savings but can also improve the overall latency of your LLM service.
+> Deploying LLM services can be costly, especially when you're handling a large volume of user interactions. Charges by LLM providers are usually based on tokens used, making a chat system inference on these models potentially expensive. However, several strategies can help manage these costs without compromising the quality of the service.
 
+### Self-hosting models | 自己ホスティング型モデル
 
-In summary, managing costs while scaling your LLM services requires a strategic approach. Utilizing self-hosting models, managing resources effectively, employing auto-scaling, using spot instances, independently scaling models, and batching requests are key strategies to consider. Open-source libraries such as Ray Serve and BentoML are designed to deal with these complexities. 
+いくつかの小規模でオープンソースのLLMが、LLMプロバイダーへの依存を解決するために出現しています。自己ホスティングを行うことで、コストを抑えつつLLMプロバイダーのモデルと同様の品質を維持することが可能です。課題は、自分のマシン上で信頼性が高く、高性能なLLMサービングシステムを自ら構築することです。
 
+> Several smaller and open-source LLMs are emerging to tackle the issue of reliance on LLM providers. Self-hosting allows you to maintain similar quality to LLM provider models while managing costs. The challenge lies in building a reliable, high-performing LLM serving system on your own machines.
 
+### Resource Management and Auto-Scaling | リソース管理とオートスケーリング
 
-## Ensuring Rapid Iteration
+アプリケーション内の計算ロジックには、精密なリソース配分が求められます。例えば、トラフィックの一部がOpenAIのエンドポイントで処理され、別の部分が自己ホスト型モデルで処理される場合、それぞれに適したリソースを割り当てることが極めて重要です。オートスケーリングは、トラフィック量に基づいてリソース配分を調整することで、アプリケーションの運用コストに大きく影響します。この戦略は、コストと応答性の間のバランスを要求し、リソースの過剰供給やアプリケーションの応答性の低下を防ぐことを確実にします。
 
-The LLM landscape is evolving at an unprecedented pace, with new libraries and model architectures being introduced constantly. Consequently, it's crucial to avoid tying yourself to a solution specific to one particular framework. This is especially relevant in serving, where changes to your infrastructure can be time-consuming, expensive, and risky. Strive for infrastructure that is not locked into any specific machine learning library or framework, but instead offers a general-purpose, scalable serving layer. Here are some aspects where flexibility plays a key role:
+> Computational logic within your application requires precise resource allocation. For instance, if part of your traffic is served by an OpenAI endpoint and another part by a self-hosted model, it's crucial to allocate suitable resources for each. Auto-scaling—adjusting resource allocation based on traffic—can significantly impact the cost of running your application. This strategy requires a balance between cost and responsiveness, ensuring neither resource over-provisioning nor compromised application responsiveness.
 
-### Model composition
+### Utilizing Spot Instances | スポットインスタンスの利用
 
-Deploying systems like LangChain demands the ability to piece together different models and connect them via logic. Take the example of building a natural language input SQL query engine. Querying an LLM and obtaining the SQL command is only part of the system. You need to extract metadata from the connected database, construct a prompt for the LLM, run the SQL query on an engine, collect and feed back the response to the LLM as the query runs, and present the results to the user. This demonstrates the need to seamlessly integrate various complex components built in Python into a dynamic chain of logical blocks that can be served together.
+AWSのようなプラットフォームでは、スポットインスタンスを利用することで、オンデマンドインスタンスの約3分の1の価格でかなりのコスト削減が見込めます。ただし、スポットインスタンスはより高いクラッシュ率を持つため、効果的な使用のためには堅牢な耐障害性メカニズムが必要になります。
 
-## Cloud providers
+> On platforms like AWS, spot instances offer substantial cost savings, typically priced at about a third of on-demand instances. The trade-off is a higher crash rate, necessitating a robust fault-tolerance mechanism for effective use.
 
-Many hosted solutions are restricted to a single cloud provider, which can limit your options in today's multi-cloud world. Depending on where your other infrastructure components are built, you might prefer to stick with your chosen cloud provider.
+### Independent Scaling | 独立スケーリング
 
+モデルを自己ホスティングする際、独立したスケーリングを考慮することが重要です。たとえば、フランス語用に微調整された翻訳モデルとスペイン語用に微調整された別の翻訳モデルを持っている場合、それぞれのモデルに対するリクエストの増加に応じて異なるスケーリングが必要になる可能性があります。
 
-## Infrastructure as Code (IaC)
+> When self-hosting your models, you should consider independent scaling. For example, if you have two translation models, one fine-tuned for French and another for Spanish, incoming requests might necessitate different scaling requirements for each.
 
-Rapid iteration also involves the ability to recreate your infrastructure quickly and reliably. This is where Infrastructure as Code (IaC) tools like Terraform, CloudFormation, or Kubernetes YAML files come into play. They allow you to define your infrastructure in code files, which can be version controlled and quickly deployed, enabling faster and more reliable iterations.
+### Batching requests | リクエストのバッチング
 
+大規模言語モデルのコンテキストにおいて、リクエストをバッチ処理することでGPUリソースの利用効率を高めることができます。GPUは本来、複数のタスクを並行して処理するために設計された並列プロセッサです。モデルに個別のリクエストを送ると、GPUは一度に1つのタスクしか処理しないため、フルに活用されないことがあります。しかし、リクエストをまとめてバッチ処理することで、GPUに同時に複数のタスクを処理させることができ、その利用率を最大化し、推論速度を改善します。これはコスト削減に繋がるだけでなく、LLMサービスの全体的なレイテンシーを改善することにも寄与します。
 
-## CI/CD
+> In the context of Large Language Models, batching requests can enhance efficiency by better utilizing your GPU resources. GPUs are inherently parallel processors, designed to handle multiple tasks simultaneously. If you send individual requests to the model, the GPU might not be fully utilized as it's only working on a single task at a time. On the other hand, by batching requests together, you're allowing the GPU to work on multiple tasks at once, maximizing its utilization and improving inference speed. This not only leads to cost savings but can also improve the overall latency of your LLM service.
 
-In a fast-paced environment, implementing CI/CD pipelines can significantly speed up the iteration process. They help automate the testing and deployment of your LLM applications, reducing the risk of errors and enabling faster feedback and iteration.
+要約すると、LLMサービスを拡大しながらコストを管理するには戦略的な取り組みが必要です。自己ホスティングモデルを活用し、リソースを効果的に管理し、オートスケーリングを行い、スポットインスタンスを使用し、モデルを独立してスケーリングし、リクエストをバッチ処理することは、重要な戦略として考慮すべきです。Ray ServeやBentoMLのようなオープンソースライブラリは、これらの複雑さを扱うために設計されています。
+
+> In summary, managing costs while scaling your LLM services requires a strategic approach. Utilizing self-hosting models, managing resources effectively, employing auto-scaling, using spot instances, independently scaling models, and batching requests are key strategies to consider. Open-source libraries such as Ray Serve and BentoML are designed to deal with these complexities.
+
+## Ensuring Rapid Iteration | 迅速なイテレーションを実現するために
+
+LLM（Large Language Models）の領域は前例のない速さで進化しており、絶えず新しいライブラリやモデルアーキテクチャが導入されています。そのため、一つの特定のフレームワークに固執するソリューションを避けることが極めて重要です。これは、インフラの変更が時間とコストを要し、リスクを伴うサービングの分野で特に当てはまります。特定の機械学習ライブラリやフレームワークに依存しない、汎用的でスケーラブルなサービング層を提供するインフラを目指してください。柔軟性が重要な役割を果たすいくつかの側面をここで紹介します：
+
+> The LLM landscape is evolving at an unprecedented pace, with new libraries and model architectures being introduced constantly. Consequently, it's crucial to avoid tying yourself to a solution specific to one particular framework. This is especially relevant in serving, where changes to your infrastructure can be time-consuming, expensive, and risky. Strive for infrastructure that is not locked into any specific machine learning library or framework, but instead offers a general-purpose, scalable serving layer. Here are some aspects where flexibility plays a key role:
+
+### Model composition | モデル構成
+
+LangChainのようなシステムをデプロイするには、異なるモデルを組み合わせて論理的に連携させる能力が必要です。例として、自然言語入力SQLクエリエンジンの構築を挙げてみましょう。LLMにクエリを投げてSQLコマンドを得るのはシステムの一部分にすぎません。接続されたデータベースからメタデータを抽出し、LLMに提示するプロンプトを構築し、エンジン上でSQLクエリを実行し、クエリ実行中に得られたレスポンスを収集してLLMにフィードバックし、そして最終的に結果をユーザーに表示する必要があります。これは、Pythonで構築されたさまざまな複雑なコンポーネントをシームレスに統合し、一緒にサービスとして提供できる動的な論理ブロックのチェーンを構築する必要性を示しています。
+
+> Deploying systems like LangChain demands the ability to piece together different models and connect them via logic. Take the example of building a natural language input SQL query engine. Querying an LLM and obtaining the SQL command is only part of the system. You need to extract metadata from the connected database, construct a prompt for the LLM, run the SQL query on an engine, collect and feed back the response to the LLM as the query runs, and present the results to the user. This demonstrates the need to seamlessly integrate various complex components built in Python into a dynamic chain of logical blocks that can be served together.
+
+## Cloud providers | クラウドプロバイダー
+
+多くのホスト型ソリューションは、単一のクラウドプロバイダーに依存しており、今日のマルチクラウドの世界では選択肢を制約する可能性があります。他のインフラストラクチャコンポーネントがどこに構築されているかに応じて、選択したクラウドプロバイダーに固執することを好むかもしれません。
+
+> Many hosted solutions are restricted to a single cloud provider, which can limit your options in today's multi-cloud world. Depending on where your other infrastructure components are built, you might prefer to stick with your chosen cloud provider.
+
+## Infrastructure as Code (IaC) | インフラストラクチャー・アズ・コード（IaC）
+
+迅速なイテレーションには、インフラストラクチャを素早くかつ確実に再構築する能力が不可欠です。この点で、Terraform、CloudFormation、KubernetesのYAMLファイルといったインフラストラクチャ・アズ・コード（IaC）ツールが重要な役割を果たします。これらのツールにより、インフラストラクチャをコードファイルで定義し、バージョン管理を行いながら迅速にデプロイできるため、より速く、より信頼性の高いイテレーションが可能になります。
+
+> Rapid iteration also involves the ability to recreate your infrastructure quickly and reliably. This is where Infrastructure as Code (IaC) tools like Terraform, CloudFormation, or Kubernetes YAML files come into play. They allow you to define your infrastructure in code files, which can be version controlled and quickly deployed, enabling faster and more reliable iterations.
+
+## CI/CD | CI/CD
+
+変化の激しい環境において、CI/CDパイプラインを導入することは、イテレーションプロセスを大幅に加速することができます。これらは、LLMアプリケーションのテストとデプロイメントを自動化し、エラーのリスクを減少させ、より速いフィードバックとイテレーションを実現します。
+
+> In a fast-paced environment, implementing CI/CD pipelines can significantly speed up the iteration process. They help automate the testing and deployment of your LLM applications, reducing the risk of errors and enabling faster feedback and iteration.

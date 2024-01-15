@@ -1,55 +1,68 @@
-# Ollama
+# Ollama | オラマ
 
->[Ollama](https://ollama.ai/) is a python library. It allows you to run open-source large language models, 
-> such as LLaMA2, locally.
+> [Ollama](https://ollama.ai/)はPythonライブラリです。これにより、LLaMA2のようなオープンソースの大規模言語モデルをローカルで実行することができます。
 >
->`Ollama` bundles model weights, configuration, and data into a single package, defined by a Modelfile. 
->It optimizes setup and configuration details, including GPU usage.
->For a complete list of supported models and model variants, see the [Ollama model library](https://ollama.ai/library).
+> > [Ollama](https://ollama.ai/) is a python library. It allows you to run open-source large language models,
+> > such as LLaMA2, locally.
+>
+> `Ollama`は、モデルの重み、設定、データをModelfileによって定義された単一のパッケージにまとめます。GPUの使用を含むセットアップと設定の詳細を最適化します。サポートされているモデルとそのバリアントの完全なリストについては、[Ollamaモデルライブラリ](https://ollama.ai/library)をご覧ください。
+>
+> > `Ollama` bundles model weights, configuration, and data into a single package, defined by a Modelfile.
+> > It optimizes setup and configuration details, including GPU usage.
+> > For a complete list of supported models and model variants, see the [Ollama model library](https://ollama.ai/library).
 
-See [this guide](https://python.langchain.com/docs/guides/local_llms#quickstart) for more details 
-on how to use `Ollama` with LangChain.
+`Ollama`をLangChainで使用する方法の詳細については、[このガイド](https://python.langchain.com/docs/guides/local_llms#quickstart)をご覧ください。
 
-## Installation and Setup
+> See [this guide](https://python.langchain.com/docs/guides/local_llms#quickstart) for more details
+> on how to use `Ollama` with LangChain.
 
-Follow [these instructions](https://github.com/jmorganca/ollama?tab=readme-ov-file#ollama)
-to set up and run a local Ollama instance.
-To use, you should set up the environment variables `ANYSCALE_API_BASE` and
-`ANYSCALE_API_KEY`.
+## Installation and Setup | インストールとセットアップ
 
+[これらの指示](https://github.com/jmorganca/ollama?tab=readme-ov-file#ollama)に従って、ローカルのOllamaインスタンスを設定し、実行してください。使用するためには、環境変数`ANYSCALE_API_BASE`と`ANYSCALE_API_KEY`を設定する必要があります。
 
-## LLM
+> Follow [these instructions](https://github.com/jmorganca/ollama?tab=readme-ov-file#ollama)
+> to set up and run a local Ollama instance.
+> To use, you should set up the environment variables `ANYSCALE_API_BASE` and
+> `ANYSCALE_API_KEY`.
+
+## LLM | LLM
 
 ```python
 from langchain.llms import Ollama
 ```
 
-See the notebook example [here](/docs/integrations/llms/ollama).
+ノートブックの例は[こちら](/docs/integrations/llms/ollama)でご覧いただけます。
 
-## Chat Models
+> See the notebook example [here](/docs/integrations/llms/ollama).
 
-### Chat Ollama
+## Chat Models | チャットモデル
+
+### Chat Ollama | Chat Ollama
 
 ```python
 from langchain.chat_models import ChatOllama
 ```
 
-See the notebook example [here](/docs/integrations/chat/ollama).
+ノートブックの例は[こちら](/docs/integrations/chat/ollama)をご覧ください。
 
-### Ollama functions
+> See the notebook example [here](/docs/integrations/chat/ollama).
+
+### Ollama functions | Ollamaの機能
 
 ```python
 from langchain_experimental.llms.ollama_functions import OllamaFunctions
 ```
 
-See the notebook example [here](/docs/integrations/chat/ollama_functions).
+ノートブックの例は[こちら](/docs/integrations/chat/ollama_functions)をご覧ください。
 
-## Embedding models
+> See the notebook example [here](/docs/integrations/chat/ollama_functions).
+
+## Embedding models | 埋め込みモデル
 
 ```python
 from langchain.embeddings import OllamaEmbeddings
 ```
 
-See the notebook example [here](/docs/integrations/text_embedding/ollama).
+ノートブックの例は[こちら](/docs/integrations/text_embedding/ollama)でご覧いただけます。
 
-
+> See the notebook example [here](/docs/integrations/text_embedding/ollama).

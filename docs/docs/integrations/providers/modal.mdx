@@ -1,19 +1,28 @@
-# Modal
+# Modal | モーダル
 
-This page covers how to use the Modal ecosystem to run LangChain custom LLMs.
-It is broken into two parts: 
+このページでは、LangChainカスタムLLMを実行するためのModalエコシステムの使用方法について説明しています。
+二つのパートに分けて説明します：
 
-1. Modal installation and web endpoint deployment
-2. Using deployed web endpoint with `LLM` wrapper class.
+> This page covers how to use the Modal ecosystem to run LangChain custom LLMs.
+> It is broken into two parts:
 
-## Installation and Setup
+1. モーダルのインストールとウェブエンドポイントのデプロイメント
+   > Modal installation and web endpoint deployment
+2. `LLM` ラッパークラスを使用してデプロイされたウェブエンドポイントを利用する。
+   > Using deployed web endpoint with `LLM` wrapper class.
 
-- Install with `pip install modal`
-- Run `modal token new`
+## Installation and Setup | インストールとセットアップ
 
-## Define your Modal Functions and Webhooks
+* `pip install modal`でインストールしてください
+  > Install with `pip install modal`
+* `modal token new`を実行してください
+  > Run `modal token new`
 
-You must include a prompt. There is a rigid response structure:
+## Define your Modal Functions and Webhooks | モーダル関数とWebhooksを定義しましょう
+
+プロンプトを含める必要があります。厳格なレスポンス構造があります：
+
+> You must include a prompt. There is a rigid response structure:
 
 ```python
 class Item(BaseModel):
@@ -25,7 +34,9 @@ def get_text(item: Item):
     return {"prompt": run_gpt2.call(item.prompt)}
 ```
 
-The following is an example with the GPT2 model:
+以下はGPT2モデルを使用した例です：
+
+> The following is an example with the GPT2 model:
 
 ```python
 from pydantic import BaseModel
@@ -71,14 +82,18 @@ def get_text(item: Item):
     return {"prompt": run_gpt2.call(item.prompt)}
 ```
 
-### Deploy the web endpoint
+### Deploy the web endpoint | ウェブエンドポイントをデプロイする
 
-Deploy the web endpoint to Modal cloud with the [`modal deploy`](https://modal.com/docs/reference/cli/deploy) CLI command.
-Your web endpoint will acquire a persistent URL under the `modal.run` domain.
+`modal deploy` CLIコマンドを使用して、ウェブエンドポイントをModalクラウドにデプロイします。ウェブエンドポイントは、`modal.run`ドメイン下に永続的なURLを取得します。
 
-## LLM wrapper around Modal web endpoint
+> Deploy the web endpoint to Modal cloud with the [`modal deploy`](https://modal.com/docs/reference/cli/deploy) CLI command.
+> Your web endpoint will acquire a persistent URL under the `modal.run` domain.
 
-The  `Modal` LLM wrapper class which will accept your deployed web endpoint's URL.
+## LLM wrapper around Modal web endpoint | ModalウェブエンドポイントのためのLLMラッパー
+
+`Modal` LLMラッパークラスは、デプロイされたウェブエンドポイントのURLを受け入れます。
+
+> The  `Modal` LLM wrapper class which will accept your deployed web endpoint's URL.
 
 ```python
 from langchain.llms import Modal
@@ -92,4 +107,3 @@ question = "What NFL team won the Super Bowl in the year Justin Beiber was born?
 
 llm_chain.run(question)
 ```
-

@@ -1,20 +1,24 @@
-# Conversation Summary
-Now let's take a look at using a slightly more complex type of memory - `ConversationSummaryMemory`. This type of memory creates a summary of the conversation over time. This can be useful for condensing information from the conversation over time.
-Conversation summary memory summarizes the conversation as it happens and stores the current summary in memory. This memory can then be used to inject the summary of the conversation so far into a prompt/chain. This memory is most useful for longer conversations, where keeping the past message history in the prompt verbatim would take up too many tokens.
+# Conversation Summary | 会話の要約
 
-Let's first explore the basic functionality of this type of memory.
+次に、少し複雑なタイプのメモリーである `ConversationSummaryMemory` の使用方法について見ていきましょう。このタイプのメモリーは、時間をかけて会話の要約を作成する機能を持っています。これは、時間をかけて会話から情報を凝縮する際に役立ちます。
+会話要約メモリーは、会話が進行するにつれてその要約を作成し、現在の要約をメモリーに保存します。このメモリーは、これまでの会話の要約をプロンプトやチェーンに挿入するために使用できます。このメモリーは、過去のメッセージ履歴をそのままプロンプトに保持するとトークンを多く消費してしまう長い会話に特に役立ちます。
+
+> Now let's take a look at using a slightly more complex type of memory - `ConversationSummaryMemory`. This type of memory creates a summary of the conversation over time. This can be useful for condensing information from the conversation over time.
+> Conversation summary memory summarizes the conversation as it happens and stores the current summary in memory. This memory can then be used to inject the summary of the conversation so far into a prompt/chain. This memory is most useful for longer conversations, where keeping the past message history in the prompt verbatim would take up too many tokens.
+
+まずは、このタイプのメモリの基本的な機能を探ってみましょう。
+
+> Let's first explore the basic functionality of this type of memory.
 
 ```python
 from langchain.memory import ConversationSummaryMemory, ChatMessageHistory
 from langchain.llms import OpenAI
 ```
 
-
 ```python
 memory = ConversationSummaryMemory(llm=OpenAI(temperature=0))
 memory.save_context({"input": "hi"}, {"output": "whats up"})
 ```
-
 
 ```python
 memory.load_memory_variables({})
@@ -28,14 +32,14 @@ memory.load_memory_variables({})
 
 </CodeOutputBlock>
 
-We can also get the history as a list of messages (this is useful if you are using this with a chat model).
+また、メッセージの履歴をリストとして取得することもできます（これはチャットモデルを使用している場合に便利です）。
 
+> We can also get the history as a list of messages (this is useful if you are using this with a chat model).
 
 ```python
 memory = ConversationSummaryMemory(llm=OpenAI(temperature=0), return_messages=True)
 memory.save_context({"input": "hi"}, {"output": "whats up"})
 ```
-
 
 ```python
 memory.load_memory_variables({})
@@ -49,8 +53,9 @@ memory.load_memory_variables({})
 
 </CodeOutputBlock>
 
-We can also utilize the `predict_new_summary` method directly.
+`predict_new_summary`メソッドも直接利用することができます。
 
+> We can also utilize the `predict_new_summary` method directly.
 
 ```python
 messages = memory.chat_memory.messages
@@ -66,17 +71,17 @@ memory.predict_new_summary(messages, previous_summary)
 
 </CodeOutputBlock>
 
-## Initializing with messages/existing summary
+## Initializing with messages/existing summary | メッセージまたは既存の要約による初期化
 
-If you have messages outside this class, you can easily initialize the class with `ChatMessageHistory`. During loading, a summary will be calculated.
+このクラスの外部にメッセージがある場合、`ChatMessageHistory`を使ってクラスを簡単に初期化できます。読み込み中に、要約が計算されます。
 
+> If you have messages outside this class, you can easily initialize the class with `ChatMessageHistory`. During loading, a summary will be calculated.
 
 ```python
 history = ChatMessageHistory()
 history.add_user_message("hi")
 history.add_ai_message("hi there!")
 ```
-
 
 ```python
 memory = ConversationSummaryMemory.from_messages(
@@ -85,7 +90,6 @@ memory = ConversationSummaryMemory.from_messages(
     return_messages=True
 )
 ```
-
 
 ```python
 memory.buffer
@@ -99,7 +103,9 @@ memory.buffer
 
 </CodeOutputBlock>
 
-Optionally you can speed up initialization using a previously generated summary, and avoid regenerating the summary by just initializing directly.
+オプションとして、以前に生成された要約を使用して初期化を高速化することができ、直接初期化することにより要約の再生成を回避することが可能です。
+
+> Optionally you can speed up initialization using a previously generated summary, and avoid regenerating the summary by just initializing directly.
 
 ```python
 memory = ConversationSummaryMemory(
@@ -110,9 +116,11 @@ memory = ConversationSummaryMemory(
 )
 ```
 
-## Using in a chain
-Let's walk through an example of using this in a chain, again setting `verbose=True` so we can see the prompt.
+## Using in a chain | チェーンでの使用
 
+この機能をチェーンで使用する例を見ていきましょう。プロンプトが表示されるように、再度`verbose=True`を設定します。
+
+> Let's walk through an example of using this in a chain, again setting `verbose=True` so we can see the prompt.
 
 ```python
 from langchain.llms import OpenAI
@@ -151,7 +159,6 @@ conversation_with_summary.predict(input="Hi, what's up?")
 
 </CodeOutputBlock>
 
-
 ```python
 conversation_with_summary.predict(input="Tell me more about it!")
 ```
@@ -181,7 +188,6 @@ conversation_with_summary.predict(input="Tell me more about it!")
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 conversation_with_summary.predict(input="Very cool -- what is the scope of the project?")

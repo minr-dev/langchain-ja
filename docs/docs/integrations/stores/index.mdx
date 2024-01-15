@@ -3,27 +3,39 @@ sidebar_position: 1
 sidebar_class_name: hidden
 ---
 
-# Stores
+# Stores | 店舗
 
-In many different applications, having some sort of key-value storage is helpful. 
-In this section, we will look at a few different ways to store key-value pairs
-using implementations of the `ByteStore` interface.
+多くの異なるアプリケーションにおいて、キーと値の形式でのストレージが役立つことがあります。このセクションでは、`ByteStore` インターフェースの実装を用いてキーと値のペアを保存するいくつかの異なる方法について見ていきます。
 
-## Features (natively supported)
+> In many different applications, having some sort of key-value storage is helpful.
+> In this section, we will look at a few different ways to store key-value pairs
+> using implementations of the `ByteStore` interface.
 
-All `ByteStore`s support the following functions, which are used for modifying
-**m**ultiple key-value pairs at once:
+## Features (natively supported) | ネイティブサポートされる機能
 
-- `mget(key: Sequence[str]) -> List[Optional[bytes]]`: get the contents of multiple keys, returning `None` if the key does not exist
-- `mset(key_value_pairs: Sequence[Tuple[str, bytes]]) -> None`: set the contents of multiple keys
-- `mdelete(key: Sequence[str]) -> None`: delete multiple keys
-- `yield_keys(prefix: Optional[str] = None) -> Iterator[str]`: yield all keys in the store, optionally filtering by a prefix
+すべての `ByteStore` は、複数のキー値ペアを一度に変更するために使用される以下の関数をサポートしています：
 
-## How to pick one
+> All `ByteStore`s support the following functions, which are used for modifying
+> **m**ultiple key-value pairs at once:
 
-`ByteStore`s are designed to be interchangeable. By default, most dependent integrations
-use the `InMemoryByteStore`, which is a simple in-memory key-value store.
+* `mget(key: Sequence[str]) -> List[Optional[bytes]]`: 複数のキーの内容を取得し、キーが存在しない場合は`None`を返します
+  > `mget(key: Sequence[str]) -> List[Optional[bytes]]`: get the contents of multiple keys, returning `None` if the key does not exist
+* `mset(key_value_pairs: Sequence[Tuple[str, bytes]]) -> None`: 複数のキーの内容を設定します
+  > `mset(key_value_pairs: Sequence[Tuple[str, bytes]]) -> None`: set the contents of multiple keys
+* `mdelete(key: Sequence[str]) -> None`: 複数のキーを削除します
+  > `mdelete(key: Sequence[str]) -> None`: delete multiple keys
+* `yield_keys(prefix: Optional[str] = None) -> Iterator[str]`: ストア内の全てのキーをyieldし、プレフィックスによるフィルタリングをオプションで行うことができます
+  > `yield_keys(prefix: Optional[str] = None) -> Iterator[str]`: yield all keys in the store, optionally filtering by a prefix
 
-However, if you start having other requirements, like massive scalability or persistence,
-you can swap out the `ByteStore` implementation with one of the other ones documented
-in this section.
+## How to pick one | 一つを選ぶ方法
+
+`ByteStore`は互換性があり、交換可能に設計されています。デフォルトで、ほとんどの依存する統合は、シンプルなインメモリキーバリューストアである`InMemoryByteStore`を使用しています。
+
+> `ByteStore`s are designed to be interchangeable. By default, most dependent integrations
+> use the `InMemoryByteStore`, which is a simple in-memory key-value store.
+
+しかし、大規模なスケーラビリティや永続性など、他の要件が必要になった場合は、このセクションで文書化されている他の`ByteStore`実装に切り替えることができます。
+
+> However, if you start having other requirements, like massive scalability or persistence,
+> you can swap out the `ByteStore` implementation with one of the other ones documented
+> in this section.

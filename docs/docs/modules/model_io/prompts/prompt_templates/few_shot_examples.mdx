@@ -1,17 +1,22 @@
-# Few-shot prompt templates
+# Few-shot prompt templates | 少数のサンプルで機能するプロンプトテンプレート
 
-In this tutorial, we'll learn how to create a prompt template that uses few-shot examples. A few-shot prompt template can be constructed from either a set of examples, or from an Example Selector object.
+このチュートリアルでは、少数の例を用いたプロンプトテンプレートの作成方法を学びます。少数の例を用いたプロンプトテンプレートは、いくつかの例またはExample Selectorオブジェクトを使用して構築できます。
 
-### Use Case
+> In this tutorial, we'll learn how to create a prompt template that uses few-shot examples. A few-shot prompt template can be constructed from either a set of examples, or from an Example Selector object.
 
-In this tutorial, we'll configure few-shot examples for self-ask with search.
+### Use Case | ユースケース
 
+このチュートリアルでは、検索を用いたセルフアスクのための数ショットの例を設定します。
 
-## Using an example set
+> In this tutorial, we'll configure few-shot examples for self-ask with search.
 
-### Create the example set
+## Using an example set | 例を用いて
 
-To get started, create a list of few-shot examples. Each example should be a dictionary with the keys being the input variables and the values being the values for those input variables.
+### Create the example set | 例示セットを作成する
+
+始めるには、いくつかの数ショットの例をリストとして作成してください。各例は辞書であり、キーは入力変数を表し、値はそれら入力変数の値である必要があります。
+
+> To get started, create a list of few-shot examples. Each example should be a dictionary with the keys being the input variables and the values being the values for those input variables.
 
 ```python
 from langchain.prompts.few_shot import FewShotPromptTemplate
@@ -73,10 +78,11 @@ So the final answer is: No
 ]
 ```
 
-### Create a formatter for the few-shot examples
+### Create a formatter for the few-shot examples | 数ショットの例のためのフォーマッタを作成する
 
-Configure a formatter that will format the few-shot examples into a string. This formatter should be a `PromptTemplate` object.
+数ショットの例を文字列にフォーマットするためのフォーマッターを設定してください。このフォーマッターは`PromptTemplate`オブジェクトである必要があります。
 
+> Configure a formatter that will format the few-shot examples into a string. This formatter should be a `PromptTemplate` object.
 
 ```python
 example_prompt = PromptTemplate(input_variables=["question", "answer"], template="Question: {question}\n{answer}")
@@ -100,10 +106,11 @@ print(example_prompt.format(**examples[0]))
 
 </CodeOutputBlock>
 
-### Feed examples and formatter to `FewShotPromptTemplate`
+### Feed examples and formatter to `FewShotPromptTemplate` | `FewShotPromptTemplate`に例とフォーマッタを供給する
 
-Finally, create a `FewShotPromptTemplate` object. This object takes in the few-shot examples and the formatter for the few-shot examples.
+最後に、`FewShotPromptTemplate` オブジェクトを作成します。このオブジェクトは、数ショットの例と数ショットの例のフォーマッターを受け取ります。
 
+> Finally, create a `FewShotPromptTemplate` object. This object takes in the few-shot examples and the formatter for the few-shot examples.
 
 ```python
 prompt = FewShotPromptTemplate(
@@ -168,15 +175,17 @@ print(prompt.format(input="Who was the father of Mary Ball Washington?"))
 
 </CodeOutputBlock>
 
-## Using an example selector
+## Using an example selector | 例を用いたセレクタの使用
 
-### Feed examples into `ExampleSelector`
+### Feed examples into `ExampleSelector` | `ExampleSelector`に例を入力してください
 
-We will reuse the example set and the formatter from the previous section. However, instead of feeding the examples directly into the `FewShotPromptTemplate` object, we will feed them into an `ExampleSelector` object.
+前のセクションで使用した例とフォーマッターを再利用します。ただし、例を`FewShotPromptTemplate`オブジェクトに直接供給するのではなく、`ExampleSelector`オブジェクトに供給します。
 
+> We will reuse the example set and the formatter from the previous section. However, instead of feeding the examples directly into the `FewShotPromptTemplate` object, we will feed them into an `ExampleSelector` object.
 
-In this tutorial, we will use the `SemanticSimilarityExampleSelector` class. This class selects few-shot examples based on their similarity to the input. It uses an embedding model to compute the similarity between the input and the few-shot examples, as well as a vector store to perform the nearest neighbor search.
+このチュートリアルでは、`SemanticSimilarityExampleSelector` クラスを使用します。このクラスは、入力との類似性に基づいてフューショットの例を選択します。類似性を計算するために埋め込みモデルを使用し、最も近い近傍点を探すためにベクトルストアを利用します。
 
+> In this tutorial, we will use the `SemanticSimilarityExampleSelector` class. This class selects few-shot examples based on their similarity to the input. It uses an embedding model to compute the similarity between the input and the few-shot examples, as well as a vector store to perform the nearest neighbor search.
 
 ```python
 from langchain.prompts.example_selector import SemanticSimilarityExampleSelector
@@ -226,10 +235,11 @@ for example in selected_examples:
 
 </CodeOutputBlock>
 
-### Feed example selector into `FewShotPromptTemplate`
+### Feed example selector into `FewShotPromptTemplate` | `FewShotPromptTemplate` に例示セレクタを入力してください
 
-Finally, create a `FewShotPromptTemplate` object. This object takes in the example selector and the formatter for the few-shot examples.
+最後に、`FewShotPromptTemplate` オブジェクトを作成します。このオブジェクトは、少数の例を選択するセレクタと、それらの例をフォーマットするフォーマッタを受け取ります。
 
+> Finally, create a `FewShotPromptTemplate` object. This object takes in the example selector and the formatter for the few-shot examples.
 
 ```python
 prompt = FewShotPromptTemplate(

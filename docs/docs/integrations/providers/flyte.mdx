@@ -1,25 +1,39 @@
-# Flyte
+# Flyte | Flyte
 
-> [Flyte](https://github.com/flyteorg/flyte) is an open-source orchestrator that facilitates building production-grade data and ML pipelines.
-> It is built for scalability and reproducibility, leveraging Kubernetes as its underlying platform.
+> [Flyte](https://github.com/flyteorg/flyte)は、本番環境向けのデータおよびMLパイプラインを構築するためのオープンソースのオーケストレーターです。スケーラビリティと再現性に優れており、基盤プラットフォームとしてKubernetesを活用しています。
+>
+> > [Flyte](https://github.com/flyteorg/flyte) is an open-source orchestrator that facilitates building production-grade data and ML pipelines.
+> > It is built for scalability and reproducibility, leveraging Kubernetes as its underlying platform.
 
-The purpose of this notebook is to demonstrate the integration of a `FlyteCallback` into your Flyte task, enabling you to effectively monitor and track your LangChain experiments.
+このノートブックの目的は、`FlyteCallback`をあなたのFlyteタスクに統合することで、LangChainの実験を効果的に監視し追跡する方法を示すことです。
 
-## Installation & Setup
+> The purpose of this notebook is to demonstrate the integration of a `FlyteCallback` into your Flyte task, enabling you to effectively monitor and track your LangChain experiments.
 
-- Install the Flytekit library by running the command `pip install flytekit`.
-- Install the Flytekit-Envd plugin by running the command `pip install flytekitplugins-envd`.
-- Install LangChain by running the command `pip install langchain`.
-- Install [Docker](https://docs.docker.com/engine/install/) on your system.
+## Installation & Setup | インストールとセットアップ
 
-## Flyte Tasks
+* `pip install flytekit` コマンドを実行して、Flytekitライブラリをインストールしてください。
+  > Install the Flytekit library by running the command `pip install flytekit`.
+* `pip install flytekitplugins-envd` コマンドを実行して、Flytekit-Envd プラグインをインストールしてください。
+  > Install the Flytekit-Envd plugin by running the command `pip install flytekitplugins-envd`.
+* `pip install langchain` コマンドを実行してLangChainをインストールしてください。
+  > Install LangChain by running the command `pip install langchain`.
+* システムに[Docker](https://docs.docker.com/engine/install/)をインストールしてください。
+  > Install [Docker](https://docs.docker.com/engine/install/) on your system.
 
-A Flyte [task](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/flyte_basics/task.html) serves as the foundational building block of Flyte.
-To execute LangChain experiments, you need to write Flyte tasks that define the specific steps and operations involved.
+## Flyte Tasks | Flyte タスク
 
-NOTE: The [getting started guide](https://docs.flyte.org/projects/cookbook/en/latest/index.html) offers detailed, step-by-step instructions on installing Flyte locally and running your initial Flyte pipeline.
+Flyteの[タスク](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/flyte_basics/task.html)は、Flyteの基礎的な構成要素です。LangChainの実験を実行するには、関連する特定のステップやオペレーションを定義するFlyteタスクを記述する必要があります。
 
-First, import the necessary dependencies to support your LangChain experiments.
+> A Flyte [task](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/flyte_basics/task.html) serves as the foundational building block of Flyte.
+> To execute LangChain experiments, you need to write Flyte tasks that define the specific steps and operations involved.
+
+注意: [入門ガイド](https://docs.flyte.org/projects/cookbook/en/latest/index.html)には、Flyteをローカル環境にインストールし、最初のFlyteパイプラインを実行するための詳細な手順が記載されています。
+
+> NOTE: The [getting started guide](https://docs.flyte.org/projects/cookbook/en/latest/index.html) offers detailed, step-by-step instructions on installing Flyte locally and running your initial Flyte pipeline.
+
+まず、LangChainの実験をサポートするために必要な依存関係をインポートしてください。
+
+> First, import the necessary dependencies to support your LangChain experiments.
 
 ```python
 import os
@@ -33,7 +47,9 @@ from langchain.prompts import PromptTemplate
 from langchain.schema import HumanMessage
 ```
 
-Set up the necessary environment variables to utilize the OpenAI API and Serp API:
+OpenAI APIとSerp APIを利用するために必要な環境変数を設定します：
+
+> Set up the necessary environment variables to utilize the OpenAI API and Serp API:
 
 ```python
 # Set OpenAI API key
@@ -43,13 +59,19 @@ os.environ["OPENAI_API_KEY"] = "<your_openai_api_key>"
 os.environ["SERPAPI_API_KEY"] = "<your_serp_api_key>"
 ```
 
-Replace `<your_openai_api_key>` and `<your_serp_api_key>` with your respective API keys obtained from OpenAI and Serp API.
+`<your_openai_api_key>`と`<your_serp_api_key>`を、OpenAIとSerp APIから取得したそれぞれのAPIキーに置き換えてください。
 
-To guarantee reproducibility of your pipelines, Flyte tasks are containerized.
-Each Flyte task must be associated with an image, which can either be shared across the entire Flyte [workflow](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/flyte_basics/basic_workflow.html) or provided separately for each task.
+> Replace `<your_openai_api_key>` and `<your_serp_api_key>` with your respective API keys obtained from OpenAI and Serp API.
 
-To streamline the process of supplying the required dependencies for each Flyte task, you can initialize an [`ImageSpec`](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/image_spec/image_spec.html) object.
-This approach automatically triggers a Docker build, alleviating the need for users to manually create a Docker image.
+パイプラインの再現性を保証するために、Flyteタスクはコンテナ化されています。各Flyteタスクはイメージと関連付けられていなければならず、これはFlyte [ワークフロー](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/flyte_basics/basic_workflow.html)全体で共有されるか、または各タスクごとに個別に提供されることが可能です。
+
+> To guarantee reproducibility of your pipelines, Flyte tasks are containerized.
+> Each Flyte task must be associated with an image, which can either be shared across the entire Flyte [workflow](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/flyte_basics/basic_workflow.html) or provided separately for each task.
+
+各Flyteタスクに必要な依存関係を供給するプロセスを効率化するために、[`ImageSpec`](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/image_spec/image_spec.html)オブジェクトを初期化することができます。このアプローチにより自動的にDockerビルドがトリガーされ、ユーザーが手動でDockerイメージを作成する必要が軽減されます。
+
+> To streamline the process of supplying the required dependencies for each Flyte task, you can initialize an [`ImageSpec`](https://docs.flyte.org/projects/cookbook/en/latest/auto/core/image_spec/image_spec.html) object.
+> This approach automatically triggers a Docker build, alleviating the need for users to manually create a Docker image.
 
 ```python
 custom_image = ImageSpec(
@@ -66,14 +88,20 @@ custom_image = ImageSpec(
 )
 ```
 
-You have the flexibility to push the Docker image to a registry of your preference.
-[Docker Hub](https://hub.docker.com/) or [GitHub Container Registry (GHCR)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) is a convenient option to begin with.
+Dockerイメージをお好みのレジストリにプッシュする柔軟性があります。始めるには、[Docker Hub](https://hub.docker.com/) や [GitHub Container Registry (GHCR)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) が便利なオプションです。
 
-Once you have selected a registry, you can proceed to create Flyte tasks that log the LangChain metrics to Flyte Deck.
+> You have the flexibility to push the Docker image to a registry of your preference.
+> [Docker Hub](https://hub.docker.com/) or [GitHub Container Registry (GHCR)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) is a convenient option to begin with.
 
-The following examples demonstrate tasks related to OpenAI LLM, chains and agent with tools:
+レジストリを選択したら、LangChainメトリクスをFlyte Deckにログとして記録するFlyteタスクの作成に進むことができます。
 
-### LLM
+> Once you have selected a registry, you can proceed to create Flyte tasks that log the LangChain metrics to Flyte Deck.
+
+以下の例は、OpenAI LLM、チェーン、およびツールを使用したエージェントに関連するタスクを示しています：
+
+> The following examples demonstrate tasks related to OpenAI LLM, chains and agent with tools:
+
+### LLM | LLM
 
 ```python
 @task(disable_deck=False, container_image=custom_image)
@@ -86,7 +114,7 @@ def langchain_llm() -> str:
     return llm([HumanMessage(content="Tell me a joke")]).content
 ```
 
-### Chain
+### Chain | チェーン
 
 ```python
 @task(disable_deck=False, container_image=custom_image)
@@ -111,7 +139,7 @@ Playwright: This is a synopsis for the above play:"""
     return synopsis_chain.apply(test_prompts)
 ```
 
-### Agent
+### Agent | エージェント
 
 ```python
 @task(disable_deck=False, container_image=custom_image)
@@ -136,18 +164,26 @@ def langchain_agent() -> str:
     )
 ```
 
-These tasks serve as a starting point for running your LangChain experiments within Flyte.
+これらのタスクは、Flyte内でLangChainの実験を始めるための出発点となります。
 
-## Execute the Flyte Tasks on Kubernetes
+> These tasks serve as a starting point for running your LangChain experiments within Flyte.
 
-To execute the Flyte tasks on the configured Flyte backend, use the following command:
+## Execute the Flyte Tasks on Kubernetes | Kubernetes上でFlyteタスクを実行する
+
+設定されたFlyteバックエンドでFlyteタスクを実行するには、以下のコマンドを使用してください：
+
+> To execute the Flyte tasks on the configured Flyte backend, use the following command:
 
 ```bash
 pyflyte run --image <your-image> langchain_flyte.py langchain_llm
 ```
 
-This command will initiate the execution of the `langchain_llm` task on the Flyte backend. You can trigger the remaining two tasks in a similar manner.
+このコマンドは、Flyteバックエンド上での`langchain_llm`タスクの実行を開始します。残りの2つのタスクも同様の方法でトリガーできます。
 
-The metrics will be displayed on the Flyte UI as follows:
+> This command will initiate the execution of the `langchain_llm` task on the Flyte backend. You can trigger the remaining two tasks in a similar manner.
+
+メトリクスは、以下のようにFlyte UIに表示されます：
+
+> The metrics will be displayed on the Flyte UI as follows:
 
 ![LangChain LLM](https://ik.imagekit.io/c8zl7irwkdda/Screenshot_2023-06-20_at_1.23.29_PM_MZYeG0dKa.png?updatedAt=1687247642993)

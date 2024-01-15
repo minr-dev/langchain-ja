@@ -1,24 +1,31 @@
-# MongoDB Atlas
+# MongoDB Atlas | MongoDB Atlas
 
->[MongoDB Atlas](https://www.mongodb.com/docs/atlas/) is a fully-managed cloud
-> database available in AWS, Azure, and GCP.  It now has support for native 
-> Vector Search on the MongoDB document data.
+> [MongoDB Atlas](https://www.mongodb.com/docs/atlas/)は、AWS、Azure、GCPで利用可能な完全管理型のクラウドデータベースです。MongoDBのドキュメントデータに対して、ネイティブのベクター検索をサポートするようになりました。
+>
+> > [MongoDB Atlas](https://www.mongodb.com/docs/atlas/) is a fully-managed cloud
+> > database available in AWS, Azure, and GCP.  It now has support for native
+> > Vector Search on the MongoDB document data.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-See [detail configuration instructions](/docs/integrations/vectorstores/mongodb_atlas).
+[詳細な設定手順](/docs/integrations/vectorstores/mongodb_atlas)をご覧ください。
 
-We need to install `pymongo` python package.
+> See [detail configuration instructions](/docs/integrations/vectorstores/mongodb_atlas).
+
+`pymongo` Pythonパッケージをインストールする必要があります。
+
+> We need to install `pymongo` python package.
 
 ```bash
 pip install pymongo
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/mongodb_atlas).
+[使用例](/docs/integrations/vectorstores/mongodb_atlas)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/mongodb_atlas).
 
 ```python
 from langchain.vectorstores import MongoDBAtlasVectorSearch
 ```
-

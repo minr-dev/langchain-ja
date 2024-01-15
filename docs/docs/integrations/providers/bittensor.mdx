@@ -1,23 +1,30 @@
-# NIBittensor
+# NIBittensor | NIBittensor
 
-This page covers how to use the BittensorLLM inference runtime within LangChain.
-It is broken into two parts: installation and setup, and then examples of NIBittensorLLM usage.
+このページでは、LangChain内でBittensorLLM推論ランタイムを使用する方法について説明しています。それはインストールとセットアップ、そしてNIBittensorLLMの使用例という2つのパートに分かれています。
 
-## Installation and Setup
+> This page covers how to use the BittensorLLM inference runtime within LangChain.
+> It is broken into two parts: installation and setup, and then examples of NIBittensorLLM usage.
 
-- Install the Python package with `pip install langchain`
+## Installation and Setup | インストールとセットアップ
 
-## Wrappers
+* `pip install langchain`でPythonパッケージをインストールしてください
+  > Install the Python package with `pip install langchain`
 
-### LLM
+## Wrappers | ラッパー
 
-There exists a NIBittensor LLM wrapper, which you can access with:
+### LLM | LLM
+
+NIBittensor LLMラッパーが存在し、以下の方法でアクセスできます：
+
+> There exists a NIBittensor LLM wrapper, which you can access with:
 
 ```python
 from langchain.llms import NIBittensorLLM
 ```
 
-It provides a unified interface for all models:
+すべてのモデルに対して統一されたインターフェースを提供します：
+
+> It provides a unified interface for all models:
 
 ```python
 llm = NIBittensorLLM(system_prompt="Your task is to provide concise and accurate response based on user prompt")
@@ -25,7 +32,9 @@ llm = NIBittensorLLM(system_prompt="Your task is to provide concise and accurate
 print(llm('Write a fibonacci function in python with golder ratio'))
 ```
 
-Multiple responses from top miners can be accessible using the `top_responses` parameter:
+トップマイナーからの複数のレスポンスは、`top_responses`パラメータを使用してアクセスできます：
+
+> Multiple responses from top miners can be accessible using the `top_responses` parameter:
 
 ```python
 multi_response_llm = NIBittensorLLM(top_responses=10)
@@ -34,4 +43,3 @@ json_multi_resp = json.loads(multi_resp)
 
 print(json_multi_resp)
 ```
-

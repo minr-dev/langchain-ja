@@ -1,8 +1,12 @@
-# Example selectors
+# Example selectors | 例示セレクタ
 
-If you have a large number of examples, you may need to select which ones to include in the prompt. The Example Selector is the class responsible for doing so.
+多くの例がある場合、プロンプトに含める例を選択する必要があるかもしれません。その選択を担当するクラスがExample Selectorです。
 
-The base interface is defined as below:
+> If you have a large number of examples, you may need to select which ones to include in the prompt. The Example Selector is the class responsible for doing so.
+
+基本インターフェースは以下の通り定義されています：
+
+> The base interface is defined as below:
 
 ```python
 class BaseExampleSelector(ABC):
@@ -13,4 +17,6 @@ class BaseExampleSelector(ABC):
         """Select which examples to use based on the inputs."""
 ```
 
-The only method it needs to define is a ``select_examples`` method. This takes in the input variables and then returns a list of examples. It is up to each specific implementation as to how those examples are selected.
+定義する必要があるのは、`select_examples`メソッドのみです。これは入力変数を受け取り、例のリストを返します。これらの例がどのように選ばれるかは、各具体的な実装によって異なります。
+
+> The only method it needs to define is a `select_examples` method. This takes in the input variables and then returns a list of examples. It is up to each specific implementation as to how those examples are selected.

@@ -1,16 +1,22 @@
-# Aleph Alpha
+# Aleph Alpha | アレフ・アルファ
 
->[Aleph Alpha](https://docs.aleph-alpha.com/) was founded in 2019 with the mission to research and build the foundational technology for an era of strong AI. The team of international scientists, engineers, and innovators researches, develops, and deploys transformative AI like large language and multimodal models and runs the fastest European commercial AI cluster.
+> [Aleph Alpha](https://docs.aleph-alpha.com/)は、強力なAIの時代の基盤技術を研究し構築することを使命として2019年に設立されました。国際的な科学者、エンジニア、イノベーターのチームは、大規模な言語モデルやマルチモーダルモデルのような変革的なAIを研究、開発、展開し、ヨーロッパで最も高速な商用AIクラスターを運用しています。
+>
+> > [Aleph Alpha](https://docs.aleph-alpha.com/) was founded in 2019 with the mission to research and build the foundational technology for an era of strong AI. The team of international scientists, engineers, and innovators researches, develops, and deploys transformative AI like large language and multimodal models and runs the fastest European commercial AI cluster.
 
->[The Luminous series](https://docs.aleph-alpha.com/docs/introduction/luminous/) is a family of large language models.
+> [Luminousシリーズ](https://docs.aleph-alpha.com/docs/introduction/luminous/)は、大規模な言語モデルのファミリーです。
+>
+> > [The Luminous series](https://docs.aleph-alpha.com/docs/introduction/luminous/) is a family of large language models.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
 ```bash
 pip install aleph-alpha-client
 ```
 
-You have to create a new token. Please, see [instructions](https://docs.aleph-alpha.com/docs/account/#create-a-new-token).
+新しいトークンを作成する必要があります。詳細は[こちらの手順](https://docs.aleph-alpha.com/docs/account/#create-a-new-token)をご覧ください。
+
+> You have to create a new token. Please, see [instructions](https://docs.aleph-alpha.com/docs/account/#create-a-new-token).
 
 ```python
 from getpass import getpass
@@ -18,18 +24,21 @@ from getpass import getpass
 ALEPH_ALPHA_API_KEY = getpass()
 ```
 
+## LLM | LLM
 
-## LLM
+[使用例](/docs/integrations/llms/aleph_alpha)をご覧ください。
 
-See a [usage example](/docs/integrations/llms/aleph_alpha).
+> See a [usage example](/docs/integrations/llms/aleph_alpha).
 
 ```python
 from langchain.llms import AlephAlpha
 ```
 
-## Text Embedding Models
+## Text Embedding Models | テキスト埋め込みモデル
 
-See a [usage example](/docs/integrations/text_embedding/aleph_alpha).
+[使用例](/docs/integrations/text_embedding/aleph_alpha)をご覧ください。
+
+> See a [usage example](/docs/integrations/text_embedding/aleph_alpha).
 
 ```python
 from langchain.embeddings import AlephAlphaSymmetricSemanticEmbedding, AlephAlphaAsymmetricSemanticEmbedding

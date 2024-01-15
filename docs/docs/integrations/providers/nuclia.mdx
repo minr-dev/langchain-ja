@@ -1,26 +1,36 @@
-# Nuclia
+# Nuclia | Nuclia
 
->[Nuclia](https://nuclia.com) automatically indexes your unstructured data from any internal
-> and external source, providing optimized search results and generative answers. 
-> It can handle video and audio transcription, image content extraction, and document parsing.
+> [Nuclia](https://nuclia.com)は、内部および外部のあらゆるソースから非構造化データを自動的にインデックス化し、最適化された検索結果と生成的な回答を提供します。ビデオやオーディオの書き起こし、画像コンテンツの抽出、文書のパースを処理することができます。
+>
+> > [Nuclia](https://nuclia.com) automatically indexes your unstructured data from any internal
+> > and external source, providing optimized search results and generative answers.
+> > It can handle video and audio transcription, image content extraction, and document parsing.
 
->`Nuclia Understanding API` document transformer splits text into paragraphs and sentences, 
-> identifies entities, provides a summary of the text and generates embeddings for all the sentences.
+> `Nuclia Understanding API`のドキュメントトランスフォーマーは、テキストを段落や文に分割し、エンティティを識別し、テキストの要約を提供し、すべての文に対して埋め込みを生成します。
+>
+> > `Nuclia Understanding API` document transformer splits text into paragraphs and sentences,
+> > identifies entities, provides a summary of the text and generates embeddings for all the sentences.
 
+## Installation and Setup | インストールとセットアップ
 
-## Installation and Setup
+`Nuclia Understanding API`を使用するためには、`nucliadb-protos`パッケージをインストールする必要があります。
 
-We need to install the `nucliadb-protos` package to use the `Nuclia Understanding API`.
+> We need to install the `nucliadb-protos` package to use the `Nuclia Understanding API`.
+
 ```bash
 pip install nucliadb-protos
 ```
 
-To use the `Nuclia Understanding API`, we need to have a `Nuclia account`. 
-We can create one for free at [https://nuclia.cloud](https://nuclia.cloud), 
-and then [create a NUA key](https://docs.nuclia.dev/docs/docs/using/understanding/intro).
+`Nuclia Understanding API`を使用するには、`Nucliaアカウント`が必要です。<https://nuclia.cloud>で無料でアカウントを作成し、その後[NUAキーを作成する](https://docs.nuclia.dev/docs/docs/using/understanding/intro)ことができます。
 
-To use the Nuclia document transformer, we need to instantiate a `NucliaUnderstandingAPI`
-tool with `enable_ml` set to `True`:
+> To use the `Nuclia Understanding API`, we need to have a `Nuclia account`.
+> We can create one for free at <https://nuclia.cloud>,
+> and then [create a NUA key](https://docs.nuclia.dev/docs/docs/using/understanding/intro).
+
+Nucliaドキュメントトランスフォーマーを使用するには、`enable_ml`を`True`に設定した`NucliaUnderstandingAPI`ツールをインスタンス化する必要があります：
+
+> To use the Nuclia document transformer, we need to instantiate a `NucliaUnderstandingAPI`
+> tool with `enable_ml` set to `True`:
 
 ```python
 from langchain.tools.nuclia import NucliaUnderstandingAPI
@@ -28,9 +38,11 @@ from langchain.tools.nuclia import NucliaUnderstandingAPI
 nua = NucliaUnderstandingAPI(enable_ml=True)
 ```
 
-## Document Transformer
+## Document Transformer | ドキュメントトランスフォーマー
 
-See a [usage example](/docs/integrations/document_transformers/nuclia_transformer).
+[使用例](/docs/integrations/document_transformers/nuclia_transformer)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_transformers/nuclia_transformer).
 
 ```python
 from langchain.document_transformers.nuclia_text_transform import NucliaTextTransformer

@@ -1,17 +1,23 @@
-# Diffbot
+# Diffbot | Diffbot
 
->[Diffbot](https://docs.diffbot.com/docs) is a service to read web pages. Unlike traditional web scraping tools, 
-> `Diffbot` doesn't require any rules to read the content on a page.
->It starts with computer vision, which classifies a page into one of 20 possible types. Content is then interpreted by a machine learning model trained to identify the key attributes on a page based on its type.
->The result is a website transformed into clean-structured data (like JSON or CSV), ready for your application.
+> Diffbotはウェブページを読み取るサービスです。従来のウェブスクレイピングツールとは異なり、Diffbotはページ上のコンテンツを読み取るためのルールを必要としません。まずコンピュータビジョンを用いて、ページを20種類の可能性のあるタイプのうちの1つに分類します。その後、ページのタイプに基づいてページ上の重要な属性を識別するために訓練された機械学習モデルによってコンテンツが解釈されます。その結果、ウェブサイトはあなたのアプリケーションで直ちに使用できるように、クリーンで構造化されたデータ（JSONやCSVなど）に変換されます。
+>
+> > [Diffbot](https://docs.diffbot.com/docs) is a service to read web pages. Unlike traditional web scraping tools,
+> > `Diffbot` doesn't require any rules to read the content on a page.
+> > It starts with computer vision, which classifies a page into one of 20 possible types. Content is then interpreted by a machine learning model trained to identify the key attributes on a page based on its type.
+> > The result is a website transformed into clean-structured data (like JSON or CSV), ready for your application.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-Read [instructions](https://docs.diffbot.com/reference/authentication) how to get the Diffbot API Token.
+Diffbot APIトークンの取得方法については、[こちらの説明](https://docs.diffbot.com/reference/authentication)をお読みください。
 
-## Document Loader
+> Read [instructions](https://docs.diffbot.com/reference/authentication) how to get the Diffbot API Token.
 
-See a [usage example](/docs/integrations/document_loaders/diffbot).
+## Document Loader | ドキュメントローダー
+
+[使用例](/docs/integrations/document_loaders/diffbot)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/diffbot).
 
 ```python
 from langchain.document_loaders import DiffbotLoader

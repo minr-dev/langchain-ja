@@ -1,13 +1,19 @@
-# DataForSEO
+# DataForSEO | DataForSEO
 
->[DataForSeo](https://dataforseo.com/) provides comprehensive SEO and digital marketing data solutions via API.
+> [DataForSeo](https://dataforseo.com/)は、APIを通じて包括的なSEOおよびデジタルマーケティングのデータソリューションを提供しています。
+>
+> > [DataForSeo](https://dataforseo.com/) provides comprehensive SEO and digital marketing data solutions via API.
 
-This page provides instructions on how to use the DataForSEO search APIs within LangChain.
+このページでは、LangChain内でDataForSEO検索APIを使用する方法について説明しています。
 
-## Installation and Setup
+> This page provides instructions on how to use the DataForSEO search APIs within LangChain.
 
-Get a [DataForSEO API Access login and password](https://app.dataforseo.com/register), and set them as environment variables 
-(`DATAFORSEO_LOGIN` and `DATAFORSEO_PASSWORD` respectively).
+## Installation and Setup | インストールとセットアップ
+
+[DataForSEO API Accessのログインとパスワードを取得し](https://app.dataforseo.com/register)、それらを環境変数（`DATAFORSEO_LOGIN`と`DATAFORSEO_PASSWORD`）として設定してください。
+
+> Get a [DataForSEO API Access login and password](https://app.dataforseo.com/register), and set them as environment variables
+> (`DATAFORSEO_LOGIN` and `DATAFORSEO_PASSWORD` respectively).
 
 ```python
 import os
@@ -16,27 +22,32 @@ os.environ["DATAFORSEO_LOGIN"] = "your_login"
 os.environ["DATAFORSEO_PASSWORD"] = "your_password"
 ```
 
+## Utility | ユーティリティ
 
-## Utility
+DataForSEOユーティリティはAPIをラップします。このユーティリティをインポートするには、以下のように使用してください：
 
-The DataForSEO utility wraps the API. To import this utility, use:
+> The DataForSEO utility wraps the API. To import this utility, use:
 
 ```python
 from langchain.utilities.dataforseo_api_search import DataForSeoAPIWrapper
 ```
 
-For a detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/dataforseo).
+このラッパーの詳細な使い方については、[このノートブック](/docs/integrations/tools/dataforseo)をご覧ください。
 
-## Tool
+> For a detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/dataforseo).
 
-You can also load this wrapper as a Tool to use with an Agent:
+## Tool | ツール
+
+このラッパーは、エージェントと一緒に使用するツールとしても読み込むことができます。
+
+> You can also load this wrapper as a Tool to use with an Agent:
 
 ```python
 from langchain.agents import load_tools
 tools = load_tools(["dataforseo-api-search"])
 ```
 
-## Example usage
+## Example usage | 使用例
 
 ```python
 dataforseo = DataForSeoAPIWrapper(api_login="your_login", api_password="your_password")

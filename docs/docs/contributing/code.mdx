@@ -1,108 +1,175 @@
 ---
 sidebar_position: 1
 ---
-# Contribute Code
 
-To contribute to this project, please follow the ["fork and pull request"](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) workflow.
-Please do not try to push directly to this repo unless you are a maintainer.
+# Contribute Code | コードの貢献
 
-Please follow the checked-in pull request template when opening pull requests. Note related issues and tag relevant
-maintainers.
+このプロジェクトへの貢献を希望される場合は、['フォークとプルリクエスト'](https://docs.github.com/en/get-started/quickstart/contributing-to-projects)のワークフローに従ってください。メンテナーではない限り、このリポジトリに直接プッシュすることはしないでください。
 
-Pull requests cannot land without passing the formatting, linting, and testing checks first. See [Testing](#testing) and
-[Formatting and Linting](#formatting-and-linting) for how to run these checks locally.
+> To contribute to this project, please follow the ["fork and pull request"](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) workflow.
+> Please do not try to push directly to this repo unless you are a maintainer.
 
-It's essential that we maintain great documentation and testing. If you:
-- Fix a bug
-  - Add a relevant unit or integration test when possible. These live in `tests/unit_tests` and `tests/integration_tests`.
-- Make an improvement
-  - Update any affected example notebooks and documentation. These live in `docs`.
-  - Update unit and integration tests when relevant.
-- Add a feature
-  - Add a demo notebook in `docs/docs/`.
-  - Add unit and integration tests.
+プルリクエストを開く際には、チェック済みのプルリクエストテンプレートに従ってください。関連するイシューに注意を払い、関連するメンテナーにタグを付けてください。
 
-We are a small, progress-oriented team. If there's something you'd like to add or change, opening a pull request is the
-best way to get our attention.
+> Please follow the checked-in pull request template when opening pull requests. Note related issues and tag relevant
+> maintainers.
 
-## 🚀 Quick Start
+プルリクエストは、フォーマット、リント、テストの各チェックを先に通過しなければ承認されません。これらのチェックをローカルで実行する方法については、[テスト](#testing)と[フォーマットとリント](#formatting-and-linting)をご覧ください。
 
-This quick start guide explains how to run the repository locally.
-For a [development container](https://containers.dev/), see the [.devcontainer folder](https://github.com/langchain-ai/langchain/tree/master/.devcontainer).
+> Pull requests cannot land without passing the formatting, linting, and testing checks first. See [Testing](#testing) and
+> [Formatting and Linting](#formatting-and-linting) for how to run these checks locally.
 
-### Dependency Management: Poetry and other env/dependency managers
+優れたドキュメントとテストを維持することは不可欠です。以下の作業を行う場合：
 
-This project utilizes [Poetry](https://python-poetry.org/) v1.6.1+ as a dependency manager.
+> It's essential that we maintain great documentation and testing. If you:
 
-❗Note: *Before installing Poetry*, if you use `Conda`, create and activate a new Conda env (e.g. `conda create -n langchain python=3.9`)
+* バグを修正する場合
 
-Install Poetry: **[documentation on how to install it](https://python-poetry.org/docs/#installation)**.
+  バグを修正する際には、可能な限り関連するユニットテストや統合テストを追加してください。これらのテストは `tests/unit_tests` および `tests/integration_tests` ディレクトリに配置されています。
+  > Fix a bug
+  * 可能な場合は、関連するユニットテストや統合テストを追加してください。これらは `tests/unit_tests` および `tests/integration_tests` ディレクトリに配置されています。
+    > Add a relevant unit or integration test when possible. These live in `tests/unit_tests` and `tests/integration_tests`.
+* 改善を行う場合
+  * 影響を受ける例示ノートブックやドキュメントを更新してください。これらは `docs` ディレクトリ内にあります。
+  * 関連する場合は、ユニットテストや統合テストも適宜更新してください。
+  > Make an improvement
+  * 影響を受けるサンプルノートブックやドキュメンテーションを更新してください。これらは `docs` ディレクトリ内にあります。
+    > Update any affected example notebooks and documentation. These live in `docs`.
+  * 関連性がある場合には、単体テストと統合テストを更新してください。
+    > Update unit and integration tests when relevant.
+* 機能を追加する際には
+  * `docs/docs/` ディレクトリにデモ用のノートブックを追加してください。
+  * 関連する単体テストおよび統合テストを追加してください。
+  > Add a feature
+  * `docs/docs/`ディレクトリにデモ用ノートブックを追加してください。
+    > Add a demo notebook in `docs/docs/`.
+  * ユニットテストとインテグレーションテストを追加してください。
+    > Add unit and integration tests.
 
-❗Note: If you use `Conda` or `Pyenv` as your environment/package manager, after installing Poetry,
-tell Poetry to use the virtualenv python environment (`poetry config virtualenvs.prefer-active-python true`)
+私たちは小規模で進歩を重視するチームです。何か追加や変更をしたいことがあれば、プルリクエストを開くことが私たちの注目を集める最良の方法です。
 
-### Different packages
+> We are a small, progress-oriented team. If there's something you'd like to add or change, opening a pull request is the
+> best way to get our attention.
 
-This repository contains multiple packages:
-- `langchain-core`: Base interfaces for key abstractions as well as logic for combining them in chains (LangChain Expression Language).
-- `langchain-community`: Third-party integrations of various components.
-- `langchain`: Chains, agents, and retrieval logic that makes up the cognitive architecture of your applications.
-- `langchain-experimental`: Components and chains that are experimental, either in the sense that the techniques are novel and still being tested, or they require giving the LLM more access than would be possible in most production systems.
-- Partner integrations: Partner packages in `libs/partners` that are independently version controlled.
+## 🚀 Quick Start | 🚀 クイックスタート
 
-Each of these has its own development environment. Docs are run from the top-level makefile, but development
-is split across separate test & release flows.
+このクイックスタートガイドでは、リポジトリをローカル環境で実行する方法を説明しています。
+開発用コンテナに関しては、[.devcontainer フォルダ](https://github.com/langchain-ai/langchain/tree/master/.devcontainer)を参照してください。
 
-For this quickstart, start with langchain-community:
+> This quick start guide explains how to run the repository locally.
+> For a [development container](https://containers.dev/), see the [.devcontainer folder](https://github.com/langchain-ai/langchain/tree/master/.devcontainer).
+
+### Dependency Management: Poetry and other env/dependency managers | 依存関係の管理：Poetry及びその他の環境/依存関係マネージャー
+
+このプロジェクトは、依存関係管理ツールとして[Poetry](https://python-poetry.org/) v1.6.1以上を利用しています。
+
+> This project utilizes [Poetry](https://python-poetry.org/) v1.6.1+ as a dependency manager.
+
+❗注意: *Poetryをインストールする前に*、`Conda`を使用しているなら、新しいConda環境を作成し、それをアクティブにしてください（例：`conda create -n langchain python=3.9`）
+
+> ❗Note: *Before installing Poetry*, if you use `Conda`, create and activate a new Conda env (e.g. `conda create -n langchain python=3.9`)
+
+Poetryのインストール: **[インストール方法のドキュメント](https://python-poetry.org/docs/#installation)**。
+
+> Install Poetry: **[documentation on how to install it](https://python-poetry.org/docs/#installation)**.
+
+❗注意: `Conda`や`Pyenv`を環境/パッケージマネージャーとして使用している場合、Poetryをインストールした後に、PoetryにvirtualenvのPython環境を使用するよう指示してください（コマンドは`poetry config virtualenvs.prefer-active-python true`です）。
+
+> ❗Note: If you use `Conda` or `Pyenv` as your environment/package manager, after installing Poetry,
+> tell Poetry to use the virtualenv python environment (`poetry config virtualenvs.prefer-active-python true`)
+
+### Different packages | 異なるパッケージ
+
+このリポジトリには複数のパッケージが含まれています：
+
+> This repository contains multiple packages:
+
+* `langchain-core`: 主要な抽象概念のための基本インターフェースおよび、それらをチェーン内で組み合わせるロジック（LangChain Expression Language）。
+  > `langchain-core`: Base interfaces for key abstractions as well as logic for combining them in chains (LangChain Expression Language).
+* `langchain-community`: 様々なコンポーネントのサードパーティ統合。
+  > `langchain-community`: Third-party integrations of various components.
+* `langchain`：アプリケーションの認知アーキテクチャを形成するチェーン、エージェント、および検索ロジック。
+  > `langchain`: Chains, agents, and retrieval logic that makes up the cognitive architecture of your applications.
+* `langchain-experimental`: 実験的なコンポーネントやチェーンで、技術が革新的でまだテスト段階にあるもの、または大半の本番システムで許可される以上にLLMへのアクセスを必要とするものです。
+  > `langchain-experimental`: Components and chains that are experimental, either in the sense that the techniques are novel and still being tested, or they require giving the LLM more access than would be possible in most production systems.
+* パートナー統合：`libs/partners`ディレクトリにあるパートナーパッケージは、それぞれ独立してバージョン管理されています。
+  > Partner integrations: Partner packages in `libs/partners` that are independently version controlled.
+
+それぞれのパッケージには専用の開発環境があります。ドキュメントは最上位のmakefileから実行される一方で、開発作業は個別のテストフローとリリースフローに分割されています。
+
+> Each of these has its own development environment. Docs are run from the top-level makefile, but development
+> is split across separate test & release flows.
+
+このクイックスタートガイドでは、langchain-communityから始めてください。
+
+> For this quickstart, start with langchain-community:
 
 ```bash
 cd libs/community
 ```
 
-### Local Development Dependencies
+### Local Development Dependencies | ローカル開発の依存関係
 
-Install langchain-community development requirements (for running langchain, running examples, linting, formatting, tests, and coverage):
+langchain-communityの開発に必要な要件をインストールしてください（langchainの実行、サンプルの実行、リント、フォーマット、テスト、カバレッジの測定のために）：
+
+> Install langchain-community development requirements (for running langchain, running examples, linting, formatting, tests, and coverage):
 
 ```bash
 poetry install --with lint,typing,test,test_integration
 ```
 
-Then verify dependency installation:
+その後、依存関係が正しくインストールされたかを確認してください：
+
+> Then verify dependency installation:
 
 ```bash
 make test
 ```
 
-If during installation you receive a `WheelFileValidationError` for `debugpy`, please make sure you are running
-Poetry v1.6.1+. This bug was present in older versions of Poetry (e.g. 1.4.1) and has been resolved in newer releases.
-If you are still seeing this bug on v1.6.1, you may also try disabling "modern installation"
-(`poetry config installer.modern-installation false`) and re-installing requirements.
-See [this `debugpy` issue](https://github.com/microsoft/debugpy/issues/1246) for more details.
+インストール中に`debugpy`の`WheelFileValidationError`が発生した場合、Poetry v1.6.1以上が実行されていることを確認してください。このバグは以前のPoetryバージョン（例えば1.4.1など）に存在し、新しいリリースで解決されました。もしPoetry v1.6.1でこのバグがまだ見られる場合は、「モダンインストール」を無効にしてみてください（`poetry config installer.modern-installation false`と設定し）、その後で必要なパッケージを再インストールしてみてください。詳細は[この`debugpy`の問題](https://github.com/microsoft/debugpy/issues/1246)を参照してください。
 
-### Testing
+> If during installation you receive a `WheelFileValidationError` for `debugpy`, please make sure you are running
+> Poetry v1.6.1+. This bug was present in older versions of Poetry (e.g. 1.4.1) and has been resolved in newer releases.
+> If you are still seeing this bug on v1.6.1, you may also try disabling "modern installation"
+> (`poetry config installer.modern-installation false`) and re-installing requirements.
+> See [this `debugpy` issue](https://github.com/microsoft/debugpy/issues/1246) for more details.
 
-_In `langchain`, `langchain-community`, and `langchain-experimental`, some test dependencies are optional; see section about optional dependencies_.
+### Testing | テスト
 
-Unit tests cover modular logic that does not require calls to outside APIs.
-If you add new logic, please add a unit test.
+`langchain`、`langchain-community`、`langchain-experimental`のいずれかで、一部のテスト依存関係はオプションであり、オプションの依存関係に関するセクションを参照してください。
 
-To run unit tests:
+> *In `langchain`, `langchain-community`, and `langchain-experimental`, some test dependencies are optional; see section about optional dependencies*.
+
+ユニットテストは、外部APIの呼び出しが不要なモジュラーなロジックを対象としています。新しいロジックを追加した場合は、それに対応するユニットテストを追加してください。
+
+> Unit tests cover modular logic that does not require calls to outside APIs.
+> If you add new logic, please add a unit test.
+
+ユニットテストを実行するには：
+
+> To run unit tests:
 
 ```bash
 make test
 ```
 
-To run unit tests in Docker:
+Docker内でユニットテストを実行するには：
+
+> To run unit tests in Docker:
 
 ```bash
 make docker_tests
 ```
 
-There are also [integration tests and code-coverage](./testing) available.
+統合テストとコードカバレッジについては、[こちら](./testing)でご利用いただけます。
 
-### Only develop langchain_core or langchain_experimental
+> There are also [integration tests and code-coverage](./testing) available.
 
-If you are only developing `langchain_core` or `langchain_experimental`, you can simply install the dependencies for the respective projects and run tests:
+### Only develop langchain\_core or langchain\_experimental | langchain\_coreまたはlangchain\_experimentalの開発のみを行う場合
+
+`langchain_core`または`langchain_experimental`のみの開発を行っている場合、それぞれのプロジェクトの依存関係をインストールし、テストを実行することができます。
+
+> If you are only developing `langchain_core` or `langchain_experimental`, you can simply install the dependencies for the respective projects and run tests:
 
 ```bash
 cd libs/core
@@ -110,7 +177,9 @@ poetry install --with test
 make test
 ```
 
-Or:
+または：
+
+> Or:
 
 ```bash
 cd libs/experimental
@@ -118,80 +187,112 @@ poetry install --with test
 make test
 ```
 
-### Formatting and Linting
+### Formatting and Linting | コードフォーマットとリント
 
-Run these locally before submitting a PR; the CI system will check also.
+プルリクエストを送信する前に、これらの手順をローカル環境で実行してください。CIシステムも同様にチェックを行います。
 
-#### Code Formatting
+> Run these locally before submitting a PR; the CI system will check also.
 
-Formatting for this project is done via [ruff](https://docs.astral.sh/ruff/rules/).
+#### Code Formatting | コードのフォーマット
 
-To run formatting for docs, cookbook and templates:
+このプロジェクトのコードフォーマットは、[ruff](https://docs.astral.sh/ruff/rules/)を用いて行われます。
+
+> Formatting for this project is done via [ruff](https://docs.astral.sh/ruff/rules/).
+
+ドキュメント、クックブック、テンプレートのフォーマットを行うには：
+
+> To run formatting for docs, cookbook and templates:
 
 ```bash
 make format
 ```
 
-To run formatting for a library, run the same command from the relevant library directory:
+ライブラリのフォーマットを適用するには、関連するライブラリディレクトリから同じコマンドを実行してください：
+
+> To run formatting for a library, run the same command from the relevant library directory:
 
 ```bash
 cd libs/{LIBRARY}
 make format
 ```
 
-Additionally, you can run the formatter only on the files that have been modified in your current branch as compared to the master branch using the format_diff command:
+さらに、format\_diffコマンドを使用して、マスターブランチと比較した際に現在のブランチで変更されたファイルのみにフォーマッタを適用することができます。
+
+> Additionally, you can run the formatter only on the files that have been modified in your current branch as compared to the master branch using the format\_diff command:
 
 ```bash
 make format_diff
 ```
 
-This is especially useful when you have made changes to a subset of the project and want to ensure your changes are properly formatted without affecting the rest of the codebase.
+これは、プロジェクトの一部に変更を加えた際に特に有用です。変更が適切にフォーマットされていることを確認しつつ、コードベースの他の部分に影響を与えないようにするために役立ちます。
 
-#### Linting
+> This is especially useful when you have made changes to a subset of the project and want to ensure your changes are properly formatted without affecting the rest of the codebase.
 
-Linting for this project is done via a combination of [ruff](https://docs.astral.sh/ruff/rules/) and [mypy](http://mypy-lang.org/).
+#### Linting | リント
 
-To run linting for docs, cookbook and templates:
+このプロジェクトのリンティングは、[ruff](https://docs.astral.sh/ruff/rules/)と[mypy](http://mypy-lang.org/)の組み合わせによって行われます。
+
+> Linting for this project is done via a combination of [ruff](https://docs.astral.sh/ruff/rules/) and [mypy](http://mypy-lang.org/).
+
+ドキュメント、クックブック、テンプレートのリント処理を実行するには：
+
+> To run linting for docs, cookbook and templates:
 
 ```bash
 make lint
 ```
 
-To run linting for a library, run the same command from the relevant library directory:
+ライブラリのリント処理を実行するには、該当するライブラリディレクトリで同じコマンドを実行してください：
+
+> To run linting for a library, run the same command from the relevant library directory:
 
 ```bash
 cd libs/{LIBRARY}
 make lint
 ```
 
-In addition, you can run the linter only on the files that have been modified in your current branch as compared to the master branch using the lint_diff command:
+さらに、lint\_diff コマンドを使用して、マスターブランチと比較した際に現在のブランチで変更されたファイルのみにリンターを適用することができます。
+
+> In addition, you can run the linter only on the files that have been modified in your current branch as compared to the master branch using the lint\_diff command:
 
 ```bash
 make lint_diff
 ```
 
-This can be very helpful when you've made changes to only certain parts of the project and want to ensure your changes meet the linting standards without having to check the entire codebase.
+プロジェクトの特定の部分にのみ変更を加えた場合、全コードベースをチェックすることなく、その変更がリンティング基準を満たしているかを確認するのに、この方法は非常に有効です。
 
-We recognize linting can be annoying - if you do not want to do it, please contact a project maintainer, and they can help you with it. We do not want this to be a blocker for good code getting contributed.
+> This can be very helpful when you've made changes to only certain parts of the project and want to ensure your changes meet the linting standards without having to check the entire codebase.
 
-#### Spellcheck
+リンティングが面倒な作業であることは承知しています。もしそれを行いたくない場合は、プロジェクトのメンテナーにご連絡いただければ、彼らがお手伝いします。良質なコードの貢献がリンティングの手間によって阻まれることがないようにしたいと考えています。
 
-Spellchecking for this project is done via [codespell](https://github.com/codespell-project/codespell).
-Note that `codespell` finds common typos, so it could have false-positive (correctly spelled but rarely used) and false-negatives (not finding misspelled) words.
+> We recognize linting can be annoying - if you do not want to do it, please contact a project maintainer, and they can help you with it. We do not want this to be a blocker for good code getting contributed.
 
-To check spelling for this project:
+#### Spellcheck | スペルチェック
+
+このプロジェクトのスペルチェックは[codespell](https://github.com/codespell-project/codespell)によって行われます。`codespell`は一般的なタイプミスを検出しますが、正しくスペルされていてもあまり使われない単語に対して誤ってエラーを報告する偽陽性（false-positive）や、誤字を見逃す偽陰性（false-negatives）の両方が発生する可能性があることに注意してください。
+
+> Spellchecking for this project is done via [codespell](https://github.com/codespell-project/codespell).
+> Note that `codespell` finds common typos, so it could have false-positive (correctly spelled but rarely used) and false-negatives (not finding misspelled) words.
+
+このプロジェクトのスペルチェックを行うには：
+
+> To check spelling for this project:
 
 ```bash
 make spell_check
 ```
 
-To fix spelling in place:
+スペルミスをその場で修正するためには：
+
+> To fix spelling in place:
 
 ```bash
 make spell_fix
 ```
 
-If codespell is incorrectly flagging a word, you can skip spellcheck for that word by adding it to the codespell config in the `pyproject.toml` file.
+もしcodespellが誤って単語を指摘した場合、`pyproject.toml`ファイル内のcodespell設定にその単語を追加することで、スペルチェックからその単語を除外することができます。
+
+> If codespell is incorrectly flagging a word, you can skip spellcheck for that word by adding it to the codespell config in the `pyproject.toml` file.
 
 ```python
 [tool.codespell]
@@ -200,51 +301,80 @@ If codespell is incorrectly flagging a word, you can skip spellcheck for that wo
 ignore-words-list = 'momento,collison,ned,foor,reworkd,parth,whats,aapply,mysogyny,unsecure'
 ```
 
-## Working with Optional Dependencies
+## Working with Optional Dependencies | オプショナル依存関係の取り扱い
 
-`langchain`, `langchain-community`, and `langchain-experimental` rely on optional dependencies to keep these packages lightweight.
+`langchain`、`langchain-community`、および`langchain-experimental`は、これらのパッケージを軽量に保つためにオプショナルな依存関係を利用しています。
 
-`langchain-core` and partner packages **do not use** optional dependencies in this way.
+> `langchain`, `langchain-community`, and `langchain-experimental` rely on optional dependencies to keep these packages lightweight.
 
-You only need to add a new dependency if a **unit test** relies on the package.
-If your package is only required for **integration tests**, then you can skip these
-steps and leave all pyproject.toml and poetry.lock files alone.
+`langchain-core`および関連パッケージは、このような方法ではオプショナルな依存関係を**使用しません**。
 
-If you're adding a new dependency to Langchain, assume that it will be an optional dependency, and
-that most users won't have it installed.
+> `langchain-core` and partner packages **do not use** optional dependencies in this way.
 
-Users who do not have the dependency installed should be able to **import** your code without
-any side effects (no warnings, no errors, no exceptions).
+新しい依存関係を追加する必要があるのは、**ユニットテスト**がそのパッケージを必要としている場合だけです。もし、あなたのパッケージが**統合テスト**専用であれば、これらの手順を省略し、pyproject.tomlファイルやpoetry.lockファイルを触らずにそのままにしておいても問題ありません。
 
-To introduce the dependency to the pyproject.toml file correctly, please do the following:
+> You only need to add a new dependency if a **unit test** relies on the package.
+> If your package is only required for **integration tests**, then you can skip these
+> steps and leave all pyproject.toml and poetry.lock files alone.
 
-1. Add the dependency to the main group as an optional dependency
-  ```bash
-  poetry add --optional [package_name]
-  ```
-2. Open pyproject.toml and add the dependency to the `extended_testing` extra
-3. Relock the poetry file to update the extra.
-  ```bash
-  poetry lock --no-update
-  ```
-4. Add a unit test that the very least attempts to import the new code. Ideally, the unit
-test makes use of lightweight fixtures to test the logic of the code.
-5. Please use the `@pytest.mark.requires(package_name)` decorator for any tests that require the dependency.
+Langchainに新しい依存関係を追加する場合、それをオプショナルな依存関係として扱い、大多数のユーザーがインストールしていないという前提で作業してください。
 
-## Adding a Jupyter Notebook
+> If you're adding a new dependency to Langchain, assume that it will be an optional dependency, and
+> that most users won't have it installed.
 
-If you are adding a Jupyter Notebook example, you'll want to install the optional `dev` dependencies.
+依存関係がインストールされていないユーザーでも、副作用（警告、エラー、例外なし）なしにコードを**インポート**できるようにする必要があります。
 
-To install dev dependencies:
+> Users who do not have the dependency installed should be able to **import** your code without
+> any side effects (no warnings, no errors, no exceptions).
+
+pyproject.tomlファイルに依存関係を正しく導入するためには、次の手順に従ってください：
+
+> To introduce the dependency to the pyproject.toml file correctly, please do the following:
+
+1. 依存関係をメイングループにオプションの依存関係として追加してください
+   > Add the dependency to the main group as an optional dependency
+
+```bash
+poetry add --optional [package_name]
+```
+
+2. pyproject.tomlを開き、`extended_testing`エクストラに依存関係を追加してください
+   > Open pyproject.toml and add the dependency to the `extended_testing` extra
+3. poetryファイルを再ロックして、追加された依存関係を更新してください。
+   > Relock the poetry file to update the extra.
+
+```bash
+poetry lock --no-update
+```
+
+4. 少なくとも新しいコードをインポートしようと試みるユニットテストを追加してください。理想的には、ユニットテストは軽量なフィクスチャを用いてコードの論理をテストすることが望まれます。
+   > Add a unit test that the very least attempts to import the new code. Ideally, the unit
+   > test makes use of lightweight fixtures to test the logic of the code.
+5. 依存関係を必要とするテストには、`@pytest.mark.requires(package_name)` デコレータを使用してください。
+   > Please use the `@pytest.mark.requires(package_name)` decorator for any tests that require the dependency.
+
+## Adding a Jupyter Notebook | Jupyterノートブックの追加
+
+Jupyter Notebookの例を追加する場合、オプショナルな`dev`依存関係をインストールすることが推奨されます。
+
+> If you are adding a Jupyter Notebook example, you'll want to install the optional `dev` dependencies.
+
+開発用依存関係をインストールするには：
+
+> To install dev dependencies:
 
 ```bash
 poetry install --with dev
 ```
 
-Launch a notebook:
+ノートブックを起動します：
+
+> Launch a notebook:
 
 ```bash
 poetry run jupyter notebook
 ```
 
-When you run `poetry install`, the `langchain` package is installed as editable in the virtualenv, so your new logic can be imported into the notebook.
+`poetry install`を実行すると、`langchain`パッケージはvirtualenv内で編集可能な状態でインストールされ、新たに追加したロジックをノートブックに取り込むことができます。
+
+> When you run `poetry install`, the `langchain` package is installed as editable in the virtualenv, so your new logic can be imported into the notebook.

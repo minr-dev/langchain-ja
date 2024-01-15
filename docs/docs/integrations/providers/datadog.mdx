@@ -1,19 +1,32 @@
-# Datadog Tracing
+# Datadog Tracing | Datadog Tracing
 
->[ddtrace](https://github.com/DataDog/dd-trace-py) is a Datadog application performance monitoring (APM) library which provides an integration to monitor your LangChain application.
+> [ddtrace](https://github.com/DataDog/dd-trace-py)はDatadogのアプリケーションパフォーマンスモニタリング（APM）ライブラリで、LangChainアプリケーションの監視を行うための統合機能を提供します。
+>
+> > [ddtrace](https://github.com/DataDog/dd-trace-py) is a Datadog application performance monitoring (APM) library which provides an integration to monitor your LangChain application.
 
-Key features of the ddtrace integration for LangChain:
-- Traces: Capture LangChain requests, parameters, prompt-completions, and help visualize LangChain operations.
-- Metrics: Capture LangChain request latency, errors, and token/cost usage (for OpenAI LLMs and chat models).
-- Logs: Store prompt completion data for each LangChain operation.
-- Dashboard: Combine metrics, logs, and trace data into a single plane to monitor LangChain requests.
-- Monitors: Provide alerts in response to spikes in LangChain request latency or error rate.
+LangChainのddtrace統合の主な機能：
 
-Note: The ddtrace LangChain integration currently provides tracing for LLMs, chat models, Text Embedding Models, Chains, and Vectorstores.
+> Key features of the ddtrace integration for LangChain:
 
-## Installation and Setup
+* トレース：LangChainのリクエスト、パラメータ、プロンプト補完を記録し、LangChainの動作を視覚化するのに役立ちます。
+  > Traces: Capture LangChain requests, parameters, prompt-completions, and help visualize LangChain operations.
+* メトリクス：LangChainのリクエスト遅延、エラー、およびトークン/コスト使用量（OpenAIのLLMおよびチャットモデル向け）をキャプチャします。
+  > Metrics: Capture LangChain request latency, errors, and token/cost usage (for OpenAI LLMs and chat models).
+* ログ：各LangChain操作ごとにプロンプト完了データを保存します。
+  > Logs: Store prompt completion data for each LangChain operation.
+* ダッシュボード：メトリクス、ログ、トレースデータを単一の画面に統合して、LangChainのリクエストを監視します。
+  > Dashboard: Combine metrics, logs, and trace data into a single plane to monitor LangChain requests.
+* モニター：LangChainのリクエスト遅延やエラー率の急増に対してアラートを発する。
+  > Monitors: Provide alerts in response to spikes in LangChain request latency or error rate.
 
-1. Enable APM and StatsD in your Datadog Agent, along with a Datadog API key. For example, in Docker:
+注意：ddtrace LangChain統合は現在、LLMs、チャットモデル、テキスト埋め込みモデル、チェーン、およびベクターストアのトレーシングを提供しています。
+
+> Note: The ddtrace LangChain integration currently provides tracing for LLMs, chat models, Text Embedding Models, Chains, and Vectorstores.
+
+## Installation and Setup | インストールとセットアップ
+
+1. Datadog AgentでAPMとStatsDを有効にし、Datadog APIキーも設定してください。例えば、Dockerでの設定は以下の通りです：
+   > Enable APM and StatsD in your Datadog Agent, along with a Datadog API key. For example, in Docker:
 
 ```
 docker run -d --cgroupns host \
@@ -29,24 +42,31 @@ docker run -d --cgroupns host \
               gcr.io/datadoghq/agent:latest
 ```
 
-2. Install the Datadog APM Python library.
+2. Datadog APM Pythonライブラリをインストールしてください。
+   > Install the Datadog APM Python library.
 
 ```
 pip install ddtrace>=1.17
 ```
 
-
-3. The LangChain integration can be enabled automatically when you prefix your LangChain Python application command with `ddtrace-run`:
+3. LangChainの統合は、LangChain Pythonアプリケーションコマンドの前に`ddtrace-run`を付けることで自動的に有効化できます：
+   > The LangChain integration can be enabled automatically when you prefix your LangChain Python application command with `ddtrace-run`:
 
 ```
 DD_SERVICE="my-service" DD_ENV="staging" DD_API_KEY=<DATADOG_API_KEY> ddtrace-run python <your-app>.py
 ```
 
-**Note**: If the Agent is using a non-default hostname or port, be sure to also set `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT`, or `DD_DOGSTATSD_PORT`.
+**注意**: エージェントがデフォルト以外のホスト名やポートを使用している場合は、`DD_AGENT_HOST`、`DD_TRACE_AGENT_PORT`、または `DD_DOGSTATSD_PORT` も設定してください。
 
-Additionally, the LangChain integration can be enabled programmatically by adding `patch_all()` or `patch(langchain=True)` before the first import of `langchain` in your application.
+> **Note**: If the Agent is using a non-default hostname or port, be sure to also set `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT`, or `DD_DOGSTATSD_PORT`.
 
-Note that using `ddtrace-run` or `patch_all()` will also enable the `requests` and `aiohttp` integrations which trace HTTP requests to LLM providers, as well as the `openai` integration which traces requests to the OpenAI library.
+さらに、LangChainの統合は、アプリケーションで`langchain`を最初にインポートする前に`patch_all()`または`patch(langchain=True)`を追加することにより、プログラム的に有効化することができます。
+
+> Additionally, the LangChain integration can be enabled programmatically by adding `patch_all()` or `patch(langchain=True)` before the first import of `langchain` in your application.
+
+`ddtrace-run`や`patch_all()`を使用すると、LLMプロバイダーへのHTTPリクエストをトレースする`requests`と`aiohttp`の統合だけでなく、OpenAIライブラリへのリクエストをトレースする`openai`統合も有効になることに注意してください。
+
+> Note that using `ddtrace-run` or `patch_all()` will also enable the `requests` and `aiohttp` integrations which trace HTTP requests to LLM providers, as well as the `openai` integration which traces requests to the OpenAI library.
 
 ```python
 from ddtrace import config, patch
@@ -66,23 +86,32 @@ patch(langchain=True)
 # patch(langchain=True, openai=True)patch_all
 ```
 
-See the [APM Python library documentation][https://ddtrace.readthedocs.io/en/stable/installation_quickstart.html] for more advanced usage.
+より高度な使用方法については、[APM Pythonライブラリのドキュメント](https://ddtrace.readthedocs.io/en/stable/installation_quickstart.html)をご覧ください。
 
+> See the \[APM Python library documentation]\[https://ddtrace.readthedocs.io/en/stable/installation\_quickstart.html] for more advanced usage.
 
-## Configuration
+## Configuration | 設定
 
-See the [APM Python library documentation][https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain] for all the available configuration options.
+利用可能なすべての設定オプションについては、[APM Pythonライブラリのドキュメント](https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain)をご覧ください。
 
+> See the \[APM Python library documentation]\[https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain] for all the available configuration options.
 
-### Log Prompt & Completion Sampling
+### Log Prompt & Completion Sampling | ログプロンプトと完了サンプリング
 
-To enable log prompt and completion sampling, set the `DD_LANGCHAIN_LOGS_ENABLED=1` environment variable. By default, 10% of traced requests will emit logs containing the prompts and completions.
+ログプロンプトとコンプリーションサンプリングを有効にするには、`DD_LANGCHAIN_LOGS_ENABLED=1` 環境変数を設定してください。デフォルトでは、トレースされたリクエストの10%からプロンプトとコンプリーションを含むログが出力されます。
 
-To adjust the log sample rate, see the [APM library documentation][https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain].
+> To enable log prompt and completion sampling, set the `DD_LANGCHAIN_LOGS_ENABLED=1` environment variable. By default, 10% of traced requests will emit logs containing the prompts and completions.
 
-**Note**: Logs submission requires `DD_API_KEY` to be specified when running `ddtrace-run`.
+ログサンプルレートを調整するには、[APMライブラリのドキュメント](https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain)を参照してください。
 
+> To adjust the log sample rate, see the \[APM library documentation]\[https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain].
 
-## Troubleshooting
+**注意**: ログの送信には、`ddtrace-run`を実行する際に`DD_API_KEY`を指定する必要があります。
 
-Need help? Create an issue on [ddtrace](https://github.com/DataDog/dd-trace-py) or contact [Datadog support][https://docs.datadoghq.com/help/].
+> **Note**: Logs submission requires `DD_API_KEY` to be specified when running `ddtrace-run`.
+
+## Troubleshooting | トラブルシューティング
+
+助けが必要ですか？[ddtrace](https://github.com/DataDog/dd-trace-py)でイシューを作成するか、[Datadogサポート](https://docs.datadoghq.com/help/)に連絡してください。
+
+> Need help? Create an issue on [ddtrace](https://github.com/DataDog/dd-trace-py) or contact \[Datadog support]\[https://docs.datadoghq.com/help/].

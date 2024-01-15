@@ -1,20 +1,31 @@
 ---
 sidebar_position: 2
 ---
-# Tools
+
+# Tools | ツール
 
 :::info
-For documentation on built-in tool integrations, visit [Integrations](/docs/integrations/tools/).
+
+組み込みツールの統合に関するドキュメントは、[インテグレーション](/docs/integrations/tools/)をご覧ください。
+
+> For documentation on built-in tool integrations, visit [Integrations](/docs/integrations/tools/).
+
 :::
 
-Tools are interfaces that an agent can use to interact with the world.
+ツールは、エージェントが世界と対話するために使用できるインターフェースです。
 
-## Getting Started
+> Tools are interfaces that an agent can use to interact with the world.
 
-Tools are functions that agents can use to interact with the world.
-These tools can be generic utilities (e.g. search), other chains, or even other agents.
+## Getting Started | はじめに
 
-Currently, tools can be loaded using the following snippet:
+ツールはエージェントが世界と対話するために使用できる機能です。これらのツールには、汎用ユーティリティ（例えば検索）、他のチェーン、または他のエージェントも含まれます。
+
+> Tools are functions that agents can use to interact with the world.
+> These tools can be generic utilities (e.g. search), other chains, or even other agents.
+
+現在、以下のスニペットを使用してツールをロードすることができます：
+
+> Currently, tools can be loaded using the following snippet:
 
 ```python
 from langchain.agents import load_tools
@@ -22,8 +33,10 @@ tool_names = [...]
 tools = load_tools(tool_names)
 ```
 
-Some tools (e.g. chains, agents) may require a base LLM to use to initialize them.
-In that case, you can pass in an LLM as well:
+一部のツール（例えばチェーンやエージェントなど）は、それらを初期化するために基本的なLLMを使用する必要があるかもしれません。その場合、LLMを以下のように渡すこともできます：
+
+> Some tools (e.g. chains, agents) may require a base LLM to use to initialize them.
+> In that case, you can pass in an LLM as well:
 
 ```python
 from langchain.agents import load_tools

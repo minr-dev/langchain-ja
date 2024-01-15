@@ -1,12 +1,16 @@
-# Postgres Embedding
+# Postgres Embedding | Postgres の埋め込み
 
-> [pg_embedding](https://github.com/neondatabase/pg_embedding) is an open-source package for
-> vector similarity search using `Postgres` and the `Hierarchical Navigable Small Worlds`
-> algorithm for approximate nearest neighbor search.
+> [pg\_embedding](https://github.com/neondatabase/pg_embedding)は、`Postgres`と`Hierarchical Navigable Small Worlds`アルゴリズムを使用してベクトル類似性検索を行うためのオープンソースパッケージです。このアルゴリズムは、近似最近傍探索に利用されます。
+>
+> > [pg\_embedding](https://github.com/neondatabase/pg_embedding) is an open-source package for
+> > vector similarity search using `Postgres` and the `Hierarchical Navigable Small Worlds`
+> > algorithm for approximate nearest neighbor search.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-We need to install several python packages.
+いくつかのPythonパッケージをインストールする必要があります。
+
+> We need to install several python packages.
 
 ```bash
 pip install openai
@@ -14,11 +18,12 @@ pip install psycopg2-binary
 pip install tiktoken
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/pgembedding).
+[使用例](/docs/integrations/vectorstores/pgembedding)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/pgembedding).
 
 ```python
 from langchain.vectorstores import PGEmbedding
 ```
-

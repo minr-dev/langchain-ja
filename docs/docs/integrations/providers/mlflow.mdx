@@ -1,24 +1,32 @@
-# MLflow Deployments for LLMs
+# MLflow Deployments for LLMs | LLM向けのMLflowデプロイメント
 
->[The MLflow Deployments for LLMs](https://www.mlflow.org/docs/latest/llms/deployments/index.html) is a powerful tool designed to streamline the usage and management of various large
-> language model (LLM) providers, such as OpenAI and Anthropic, within an organization. It offers a high-level interface
-> that simplifies the interaction with these services by providing a unified endpoint to handle specific LLM related requests.
+> [MLflow Deployments for LLMs](https://www.mlflow.org/docs/latest/llms/deployments/index.html)は、OpenAIやAnthropicなどのさまざまな大規模言語モデル（LLM）プロバイダーの使用と管理を組織内で効率化するために設計された強力なツールです。これは、特定のLLM関連のリクエストを処理する統一されたエンドポイントを提供することにより、これらのサービスとのインタラクションを簡素化する高レベルのインターフェースを提供します。
+>
+> > [The MLflow Deployments for LLMs](https://www.mlflow.org/docs/latest/llms/deployments/index.html) is a powerful tool designed to streamline the usage and management of various large
+> > language model (LLM) providers, such as OpenAI and Anthropic, within an organization. It offers a high-level interface
+> > that simplifies the interaction with these services by providing a unified endpoint to handle specific LLM related requests.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-Install `mlflow` with MLflow Deployments dependencies:
+`mlflow`とMLflow Deploymentsの依存関係をインストールします：
+
+> Install `mlflow` with MLflow Deployments dependencies:
 
 ```sh
 pip install 'mlflow[genai]'
 ```
 
-Set the OpenAI API key as an environment variable:
+OpenAI APIキーを環境変数として設定してください：
+
+> Set the OpenAI API key as an environment variable:
 
 ```sh
 export OPENAI_API_KEY=...
 ```
 
-Create a configuration file:
+設定ファイルを作成する：
+
+> Create a configuration file:
 
 ```yaml
 endpoints:
@@ -39,21 +47,27 @@ endpoints:
         openai_api_key: $OPENAI_API_KEY
 ```
 
-Start the deployments server:
+デプロイメントサーバーを起動する：
+
+> Start the deployments server:
 
 ```sh
 mlflow deployments start-server --config-path /path/to/config.yaml
 ```
 
-## Example provided by `MLflow`
+## Example provided by `MLflow` | `MLflow`によって提供された例
 
->The `mlflow.langchain` module provides an API for logging and loading `LangChain` models.
-> This module exports multivariate LangChain models in the langchain flavor and univariate LangChain
-> models in the pyfunc flavor.
+> `mlflow.langchain` モジュールは、`LangChain` モデルのログ記録と読み込みのためのAPIを提供します。このモジュールは、多変量のLangChainモデルをlangchainフレーバーで、単変量のLangChainモデルをpyfuncフレーバーでエクスポートします。
+>
+> > The `mlflow.langchain` module provides an API for logging and loading `LangChain` models.
+> > This module exports multivariate LangChain models in the langchain flavor and univariate LangChain
+> > models in the pyfunc flavor.
 
-See the [API documentation and examples](https://www.mlflow.org/docs/latest/python_api/mlflow.langchain) for more information.
+詳細については、[APIドキュメントと例](https://www.mlflow.org/docs/latest/python_api/mlflow.langchain)をご覧ください。
 
-## Completions Example
+> See the [API documentation and examples](https://www.mlflow.org/docs/latest/python_api/mlflow.langchain) for more information.
+
+## Completions Example | Completionsの例
 
 ```python
 import mlflow
@@ -82,7 +96,7 @@ model = mlflow.pyfunc.load_model(model_info.model_uri)
 print(model.predict([{"adjective": "funny"}]))
 ```
 
-## Embeddings Example
+## Embeddings Example | 埋め込みの例
 
 ```python
 from langchain.embeddings import MlflowEmbeddings
@@ -96,7 +110,7 @@ print(embeddings.embed_query("hello"))
 print(embeddings.embed_documents(["hello"]))
 ```
 
-## Chat Example
+## Chat Example | チャットの例
 
 ```python
 from langchain.chat_models import ChatMlflow

@@ -1,58 +1,84 @@
-# Neo4j
+# Neo4j | Neo4j
 
-This page covers how to use the Neo4j ecosystem within LangChain.
+このページでは、LangChain内でNeo4jエコシステムを使用する方法について説明します。
 
-What is Neo4j?
+> This page covers how to use the Neo4j ecosystem within LangChain.
 
-**Neo4j in a nutshell:**
+Neo4jとは何ですか？
 
-- Neo4j is an open-source database management system that specializes in graph database technology.
-- Neo4j allows you to represent and store data in nodes and edges, making it ideal for handling connected data and relationships.
-- Neo4j provides a Cypher Query Language, making it easy to interact with and query your graph data.
-- With Neo4j, you can achieve high-performance graph traversals and queries, suitable for production-level systems.
-- Get started quickly with Neo4j by visiting [their website](https://neo4j.com/).
+> What is Neo4j?
 
-## Installation and Setup
+**Neo4jの概要:**
 
-- Install the Python SDK with `pip install neo4j`
+> **Neo4j in a nutshell:**
 
-## Wrappers
+* Neo4jは、グラフデータベース技術を専門とするオープンソースのデータベース管理システムです。
+  > Neo4j is an open-source database management system that specializes in graph database technology.
+* Neo4jは、データをノードとエッジで表現し保存することができ、接続されたデータや関係性を扱うのに理想的です。
+  > Neo4j allows you to represent and store data in nodes and edges, making it ideal for handling connected data and relationships.
+* Neo4jはCypherクエリ言語を提供しており、グラフデータの操作やクエリを簡単に行うことができます。
+  > Neo4j provides a Cypher Query Language, making it easy to interact with and query your graph data.
+* Neo4jを使用すると、本番環境のシステムに適した高性能なグラフの走査とクエリを実現できます。
+  > With Neo4j, you can achieve high-performance graph traversals and queries, suitable for production-level systems.
+* Neo4jをすぐに始めるには、[Neo4jのウェブサイト](https://neo4j.com/)を訪問してください。
+  > Get started quickly with Neo4j by visiting [their website](https://neo4j.com/).
 
-### VectorStore
+## Installation and Setup | インストールとセットアップ
 
-There exists a wrapper around Neo4j vector index, allowing you to use it as a vectorstore,
-whether for semantic search or example selection.
+* `pip install neo4j`を使用してPython SDKをインストールしてください
+  > Install the Python SDK with `pip install neo4j`
 
-To import this vectorstore:
+## Wrappers | ラッパー
+
+### VectorStore | VectorStore
+
+Neo4jベクターインデックスを簡単に使用できるようにするラッパーがあり、それによってベクターストアとして利用することができます。これはセマンティック検索や例示選択にも適用可能です。
+
+> There exists a wrapper around Neo4j vector index, allowing you to use it as a vectorstore,
+> whether for semantic search or example selection.
+
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
 
 ```python
 from langchain.vectorstores import Neo4jVector
 ```
 
-For a more detailed walkthrough of the Neo4j vector index wrapper, see [documentation](/docs/integrations/vectorstores/neo4jvector)
+Neo4jベクターインデックスラッパーのより詳細なウォークスルーについては、[ドキュメント](/docs/integrations/vectorstores/neo4jvector)をご覧ください。
 
-### GraphCypherQAChain
+> For a more detailed walkthrough of the Neo4j vector index wrapper, see [documentation](/docs/integrations/vectorstores/neo4jvector)
 
-There exists a wrapper around Neo4j graph database that allows you to generate Cypher statements based on the user input
-and use them to retrieve relevant information from the database.
+### GraphCypherQAChain | GraphCypherQAChain
+
+Neo4jグラフデータベースを操作するためのラッパーが存在し、ユーザーの入力に基づいてCypherステートメントを生成し、データベースから関連情報を取得するために使用することができます。
+
+> There exists a wrapper around Neo4j graph database that allows you to generate Cypher statements based on the user input
+> and use them to retrieve relevant information from the database.
 
 ```python
 from langchain.graphs import Neo4jGraph
 from langchain.chains import GraphCypherQAChain
 ```
 
-For a more detailed walkthrough of Cypher generating chain, see [documentation](/docs/use_cases/graph/graph_cypher_qa)
+Cypher生成チェーンのより詳細なウォークスルーについては、[ドキュメント](/docs/use_cases/graph/graph_cypher_qa)をご覧ください。
 
-### Constructing a knowledge graph from text
+> For a more detailed walkthrough of Cypher generating chain, see [documentation](/docs/use_cases/graph/graph_cypher_qa)
 
-Text data often contain rich relationships and insights that can be useful for various analytics, recommendation engines, or knowledge management applications.
-Diffbot's NLP API allows for the extraction of entities, relationships, and semantic meaning from unstructured text data.
-By coupling Diffbot's NLP API with Neo4j, a graph database, you can create powerful, dynamic graph structures based on the information extracted from text.
-These graph structures are fully queryable and can be integrated into various applications.
+### Constructing a knowledge graph from text | テキストから知識グラフを構築する
+
+テキストデータには、さまざまな分析、レコメンデーションエンジン、またはナレッジマネジメントアプリケーションに役立つ豊富な関係性や洞察がしばしば含まれています。DiffbotのNLP APIを使用すると、非構造化テキストデータからエンティティ、関係性、およびセマンティックな意味を抽出することができます。DiffbotのNLP APIとNeo4j（グラフデータベース）を組み合わせることで、テキストから抽出された情報に基づいた強力で動的なグラフ構造を作成することができます。これらのグラフ構造は完全にクエリ可能であり、さまざまなアプリケーションに統合することができます。
+
+> Text data often contain rich relationships and insights that can be useful for various analytics, recommendation engines, or knowledge management applications.
+> Diffbot's NLP API allows for the extraction of entities, relationships, and semantic meaning from unstructured text data.
+> By coupling Diffbot's NLP API with Neo4j, a graph database, you can create powerful, dynamic graph structures based on the information extracted from text.
+> These graph structures are fully queryable and can be integrated into various applications.
 
 ```python
 from langchain.graphs import Neo4jGraph
 from langchain_experimental.graph_transformers.diffbot import DiffbotGraphTransformer
 ```
 
-For a more detailed walkthrough generating graphs from text, see [documentation](/docs/use_cases/graph/diffbot_graphtransformer)
+テキストからグラフを生成する詳細な手順については、[ドキュメント](/docs/use_cases/graph/diffbot_graphtransformer)をご覧ください。
+
+> For a more detailed walkthrough generating graphs from text, see [documentation](/docs/use_cases/graph/diffbot_graphtransformer)

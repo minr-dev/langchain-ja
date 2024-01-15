@@ -1,46 +1,61 @@
-# Apify
+# Apify | Apify
 
-This page covers how to use [Apify](https://apify.com) within LangChain.
+このページでは、LangChain内で[Apify](https://apify.com)を使用する方法について説明します。
 
-## Overview
+> This page covers how to use [Apify](https://apify.com) within LangChain.
 
-Apify is a cloud platform for web scraping and data extraction,
-which provides an [ecosystem](https://apify.com/store) of more than a thousand
-ready-made apps called *Actors* for various scraping, crawling, and extraction use cases.
+## Overview | 概要
+
+Apifyはウェブスクレイピングとデータ抽出のためのクラウドプラットフォームで、スクレイピング、クローリング、抽出の様々なユースケースに対応する*Actors*と呼ばれる千を超える既製アプリの[エコシステム](https://apify.com/store)を提供しています。
+
+> Apify is a cloud platform for web scraping and data extraction,
+> which provides an [ecosystem](https://apify.com/store) of more than a thousand
+> ready-made apps called *Actors* for various scraping, crawling, and extraction use cases.
 
 [![Apify Actors](/img/ApifyActors.png)](https://apify.com/store)
 
-This integration enables you run Actors on the Apify platform and load their results into LangChain to feed your vector
-indexes with documents and data from the web, e.g. to generate answers from websites with documentation,
-blogs, or knowledge bases.
+> [![Apify Actors](/img/ApifyActors.png)](https://apify.com/store)
 
+この統合により、Apifyプラットフォーム上でActorsを実行し、その結果をLangChainに読み込むことができます。これにより、例えばドキュメンテーション、ブログ、ナレッジベースなどのウェブサイトからの回答を生成するために、ベクターインデックスにドキュメントやデータを供給することができます。
 
-## Installation and Setup
+> This integration enables you run Actors on the Apify platform and load their results into LangChain to feed your vector
+> indexes with documents and data from the web, e.g. to generate answers from websites with documentation,
+> blogs, or knowledge bases.
 
-- Install the Apify API client for Python with `pip install apify-client`
-- Get your [Apify API token](https://console.apify.com/account/integrations) and either set it as
-  an environment variable (`APIFY_API_TOKEN`) or pass it to the `ApifyWrapper` as `apify_api_token` in the constructor.
+## Installation and Setup | インストールとセットアップ
 
+* `pip install apify-client`でPython用のApify APIクライアントをインストールしてください
+  > Install the Apify API client for Python with `pip install apify-client`
+* [Apify APIトークン](https://console.apify.com/account/integrations)を取得し、環境変数（`APIFY_API_TOKEN`）として設定するか、コンストラクタ内で`ApifyWrapper`に`apify_api_token`として渡してください。
+  > Get your [Apify API token](https://console.apify.com/account/integrations) and either set it as
+  > an environment variable (`APIFY_API_TOKEN`) or pass it to the `ApifyWrapper` as `apify_api_token` in the constructor.
 
-## Wrappers
+## Wrappers | ラッパー
 
-### Utility
+### Utility | ユーティリティ
 
-You can use the `ApifyWrapper` to run Actors on the Apify platform.
+`ApifyWrapper`を使用して、Apifyプラットフォーム上でアクターを実行することができます。
+
+> You can use the `ApifyWrapper` to run Actors on the Apify platform.
 
 ```python
 from langchain.utilities import ApifyWrapper
 ```
 
-For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/apify).
+このラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/tools/apify)をご覧ください。
 
+> For a more detailed walkthrough of this wrapper, see [this notebook](/docs/integrations/tools/apify).
 
-### Loader
+### Loader | ローダー
 
-You can also use our `ApifyDatasetLoader` to get data from Apify dataset.
+また、`ApifyDatasetLoader`を使用してApifyデータセットからデータを取得することもできます。
+
+> You can also use our `ApifyDatasetLoader` to get data from Apify dataset.
 
 ```python
 from langchain.document_loaders import ApifyDatasetLoader
 ```
 
-For a more detailed walkthrough of this loader, see [this notebook](/docs/integrations/document_loaders/apify_dataset).
+このローダーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/document_loaders/apify_dataset)をご覧ください。
+
+> For a more detailed walkthrough of this loader, see [this notebook](/docs/integrations/document_loaders/apify_dataset).

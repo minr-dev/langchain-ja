@@ -1,40 +1,62 @@
-# Banana
+# Banana | バナナ
 
-Banana provided serverless GPU inference for AI models, including a CI/CD build pipeline and a simple Python framework (Potassium) to server your models.
+Bananaは、CI/CDビルドパイプラインと、モデルを提供するためのシンプルなPythonフレームワーク（Potassium）を含む、AIモデル向けのサーバーレスGPU推論を提供しています。
 
-This page covers how to use the [Banana](https://www.banana.dev) ecosystem within LangChain.
+> Banana provided serverless GPU inference for AI models, including a CI/CD build pipeline and a simple Python framework (Potassium) to server your models.
 
-It is broken into two parts: 
-* installation and setup, 
-* and then references to specific Banana wrappers.
+このページでは、LangChain内で[Banana](https://www.banana.dev)エコシステムを使用する方法について説明します。
 
-## Installation and Setup
+> This page covers how to use the [Banana](https://www.banana.dev) ecosystem within LangChain.
 
-- Install with `pip install banana-dev`
-- Get an Banana api key from the [Banana.dev dashboard](https://app.banana.dev) and set it as an environment variable (`BANANA_API_KEY`)
-- Get your model's key and url slug from the model's details page
+それは二つの部分に分けられています：
 
-## Define your Banana Template
+> It is broken into two parts:
 
-You'll need to set up a Github repo for your Banana app. You can get started in 5 minutes using [this guide](https://docs.banana.dev/banana-docs/).
+* インストールとセットアップ
+  > installation and setup,
+* そして、特定のBananaラッパーへの言及。
+  > and then references to specific Banana wrappers.
 
-Alternatively, for a ready-to-go LLM example, you can check out Banana's [CodeLlama-7B-Instruct-GPTQ](https://github.com/bananaml/demo-codellama-7b-instruct-gptq) GitHub repository. Just fork it and deploy it within Banana.
+## Installation and Setup | インストールとセットアップ
 
-Other starter repos are available [here](https://github.com/orgs/bananaml/repositories?q=demo-&type=all&language=&sort=).
+* `pip install banana-dev`でインストールしてください
+  > Install with `pip install banana-dev`
+* [Banana.devダッシュボード](https://app.banana.dev)からBanana APIキーを取得し、環境変数(`BANANA_API_KEY`)として設定してください。
+  > Get an Banana api key from the [Banana.dev dashboard](https://app.banana.dev) and set it as an environment variable (`BANANA_API_KEY`)
+* モデルの詳細ページからモデルのキーとURLスラッグを取得してください
+  > Get your model's key and url slug from the model's details page
 
-## Build the Banana app
+## Define your Banana Template | バナナテンプレートを定義する
 
-To use Banana apps within Langchain, they must include the `outputs` key 
-in the returned json, and the value must be a string.
+Bananaアプリ用のGithubリポジトリを設定する必要があります。[このガイド](https://docs.banana.dev/banana-docs/)を使えば、たった5分で始められます。
+
+> You'll need to set up a Github repo for your Banana app. You can get started in 5 minutes using [this guide](https://docs.banana.dev/banana-docs/).
+
+また、すぐに使えるLLMの例をお探しであれば、Bananaの[CodeLlama-7B-Instruct-GPTQ](https://github.com/bananaml/demo-codellama-7b-instruct-gptq) GitHubリポジトリをご覧ください。それをフォークしてBanana内でデプロイするだけです。
+
+> Alternatively, for a ready-to-go LLM example, you can check out Banana's [CodeLlama-7B-Instruct-GPTQ](https://github.com/bananaml/demo-codellama-7b-instruct-gptq) GitHub repository. Just fork it and deploy it within Banana.
+
+その他のスターターリポジトリは[こちら](https://github.com/orgs/bananaml/repositories?q=demo-\&type=all\&language=\&sort=)で利用可能です。
+
+> Other starter repos are available [here](https://github.com/orgs/bananaml/repositories?q=demo-\&type=all\&language=\&sort=).
+
+## Build the Banana app | バナナアプリを構築する
+
+Langchain内でBananaアプリを使用するには、返されるjsonに`outputs`キーを含める必要があり、その値は文字列でなければなりません。
+
+> To use Banana apps within Langchain, they must include the `outputs` key
+> in the returned json, and the value must be a string.
 
 ```python
 # Return the results as a dictionary
 result = {'outputs': result}
 ```
 
-An example inference function would be:
+一例としての推論関数は以下の通りです：
 
-```python
+> An example inference function would be:
+
+````python
 @app.handler("/")
 def handler(context: dict, request: Request) -> Response:
     """Handle a request to generate code from a prompt."""
@@ -51,21 +73,27 @@ def handler(context: dict, request: Request) -> Response:
     output = model.generate(inputs=input_ids, temperature=temperature, max_new_tokens=max_new_tokens)
     result = tokenizer.decode(output[0])
     return Response(json={"outputs": result}, status=200)
-```
+````
 
-This example is from the `app.py` file in [CodeLlama-7B-Instruct-GPTQ](https://github.com/bananaml/demo-codellama-7b-instruct-gptq).
+この例は、[CodeLlama-7B-Instruct-GPTQ](https://github.com/bananaml/demo-codellama-7b-instruct-gptq)の`app.py`ファイルからのものです。
 
-## Wrappers
+> This example is from the `app.py` file in [CodeLlama-7B-Instruct-GPTQ](https://github.com/bananaml/demo-codellama-7b-instruct-gptq).
 
-### LLM
+## Wrappers | ラッパー
 
-Within Langchain, there exists a Banana LLM wrapper, which you can access with
+### LLM | LLM
+
+Langchain内にはBanana LLMラッパーが存在し、次の方法でアクセスできます
+
+> Within Langchain, there exists a Banana LLM wrapper, which you can access with
 
 ```python
 from langchain.llms import Banana
 ```
 
-You need to provide a model key and model url slug, which you can get from the model's details page in the [Banana.dev dashboard](https://app.banana.dev).
+モデルキーとモデルURLスラッグを提供する必要があります。これらは[Banana.devダッシュボード](https://app.banana.dev)のモデルの詳細ページから取得できます。
+
+> You need to provide a model key and model url slug, which you can get from the model's details page in the [Banana.dev dashboard](https://app.banana.dev).
 
 ```python
 llm = Banana(model_key="YOUR_MODEL_KEY", model_url_slug="YOUR_MODEL_URL_SLUG")

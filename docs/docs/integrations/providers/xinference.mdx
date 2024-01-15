@@ -1,79 +1,103 @@
-# Xorbits Inference (Xinference)
+# Xorbits Inference (Xinference) | Xorbits 推論 (Xinference)
 
-This page demonstrates how to use [Xinference](https://github.com/xorbitsai/inference)
-with LangChain.
+このページでは、LangChainを使用して[Xinference](https://github.com/xorbitsai/inference)を使う方法を示しています。
 
-`Xinference` is a powerful and versatile library designed to serve LLMs, 
-speech recognition models, and multimodal models, even on your laptop. 
-With Xorbits Inference, you can effortlessly deploy and serve your or 
-state-of-the-art built-in models using just a single command.
+> This page demonstrates how to use [Xinference](https://github.com/xorbitsai/inference)
+> with LangChain.
 
-## Installation and Setup
+`Xinference`は、LLMs、音声認識モデル、そしてマルチモーダルモデルを、あなたのラップトップ上でも提供するために設計された強力で多用途なライブラリです。Xorbits Inferenceを使用すると、たった一つのコマンドで、あなたのモデルや最先端の組み込みモデルを簡単にデプロイして提供することができます。
 
-Xinference can be installed via pip from PyPI: 
+> `Xinference` is a powerful and versatile library designed to serve LLMs,
+> speech recognition models, and multimodal models, even on your laptop.
+> With Xorbits Inference, you can effortlessly deploy and serve your or
+> state-of-the-art built-in models using just a single command.
+
+## Installation and Setup | インストールとセットアップ
+
+Xinferenceは、PyPIからpipを使用してインストールすることができます：
+
+> Xinference can be installed via pip from PyPI:
 
 ```bash
 pip install "xinference[all]"
 ```
 
-## LLM
+## LLM | LLM
 
-Xinference supports various models compatible with GGML, including chatglm, baichuan, whisper, 
-vicuna, and orca. To view the builtin models, run the command:
+Xinferenceは、chatglm、baichuan、whisper、vicuna、orcaなど、GGMLと互換性のあるさまざまなモデルをサポートしています。組み込みモデルを表示するには、次のコマンドを実行してください：
+
+> Xinference supports various models compatible with GGML, including chatglm, baichuan, whisper,
+> vicuna, and orca. To view the builtin models, run the command:
 
 ```bash
 xinference list --all
 ```
 
+### Wrapper for Xinference | Xinference用のラッパー
 
-### Wrapper for Xinference
+以下のコマンドを実行することで、ローカルインスタンスのXinferenceを起動できます：
 
-You can start a local instance of Xinference by running:
+> You can start a local instance of Xinference by running:
 
 ```bash
 xinference
 ```
 
-You can also deploy Xinference in a distributed cluster. To do so, first start an Xinference supervisor
-on the server you want to run it:
+Xinferenceを分散クラスターでデプロイすることもできます。それを行うには、まず実行したいサーバーでXinferenceスーパーバイザーを起動します：
+
+> You can also deploy Xinference in a distributed cluster. To do so, first start an Xinference supervisor
+> on the server you want to run it:
 
 ```bash
 xinference-supervisor -H "${supervisor_host}"
 ```
 
+次に、実行したい各サーバー上でXinferenceワーカーを起動してください：
 
-Then, start the Xinference workers on each of the other servers where you want to run them on:
+> Then, start the Xinference workers on each of the other servers where you want to run them on:
 
 ```bash
 xinference-worker -e "http://${supervisor_host}:9997"
 ```
 
-You can also start a local instance of Xinference by running:
+また、以下を実行することで、Xinferenceのローカルインスタンスを起動することもできます：
+
+> You can also start a local instance of Xinference by running:
 
 ```bash
 xinference
 ```
 
-Once Xinference is running, an endpoint will be accessible for model management via CLI or 
-Xinference client. 
+Xinferenceが実行されると、CLIまたはXinferenceクライアントを介してモデル管理のためのエンドポイントにアクセスできるようになります。
 
-For local deployment, the endpoint will be http://localhost:9997. 
+> Once Xinference is running, an endpoint will be accessible for model management via CLI or
+> Xinference client.
 
+ローカルデプロイメントの場合、エンドポイントは http://localhost:9997 になります。
 
-For cluster deployment, the endpoint will be http://${supervisor_host}:9997.
+> For local deployment, the endpoint will be http://localhost:9997.
 
+クラスター展開の場合、エンドポイントは http://${supervisor\_host}:9997 になります。
 
-Then, you need to launch a model. You can specify the model names and other attributes 
-including model_size_in_billions and quantization. You can use command line interface (CLI) to 
-do it. For example, 
+> For cluster deployment, the endpoint will be http://${supervisor\_host}:9997.
+
+次に、モデルを起動する必要があります。モデル名やその他の属性を指定でき、その中には model\_size\_in\_billions や quantization が含まれます。これを行うには、コマンドラインインターフェース（CLI）を使用することができます。例えば、
+
+> Then, you need to launch a model. You can specify the model names and other attributes
+> including model\_size\_in\_billions and quantization. You can use command line interface (CLI) to
+> do it. For example,
 
 ```bash
 xinference launch -n orca -s 3 -q q4_0
 ```
 
-A model uid will be returned.
+モデルUIDが返されます。
 
-Example usage:
+> A model uid will be returned.
+
+使用例：
+
+> Example usage:
 
 ```python
 from langchain.llms import Xinference
@@ -90,13 +114,17 @@ llm(
 
 ```
 
-### Usage
+### Usage | 使用方法
 
-For more information and detailed examples, refer to the
-[example for xinference LLMs](/docs/integrations/llms/xinference)
+より詳しい情報と詳細な例については、[xinference LLMsの例](/docs/integrations/llms/xinference)を参照してください。
 
-### Embeddings
+> For more information and detailed examples, refer to the
+> [example for xinference LLMs](/docs/integrations/llms/xinference)
 
-Xinference also supports embedding queries and documents. See
-[example for xinference embeddings](/docs/integrations/text_embedding/xinference) 
-for a more detailed demo.
+### Embeddings | 埋め込み
+
+Xinferenceはクエリとドキュメントの埋め込みもサポートしています。より詳細なデモについては、[xinferenceの埋め込みの例](/docs/integrations/text_embedding/xinference)をご覧ください。
+
+> Xinference also supports embedding queries and documents. See
+> [example for xinference embeddings](/docs/integrations/text_embedding/xinference)
+> for a more detailed demo.

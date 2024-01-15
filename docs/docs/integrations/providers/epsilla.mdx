@@ -1,23 +1,32 @@
-# Epsilla
+# Epsilla | エプシラ
 
-This page covers how to use [Epsilla](https://github.com/epsilla-cloud/vectordb) within LangChain.
-It is broken into two parts: installation and setup, and then references to specific Epsilla wrappers.
+このページでは、LangChain内で[Epsilla](https://github.com/epsilla-cloud/vectordb)を使用する方法について説明します。内容は、インストールとセットアップ、そして特定のEpsillaラッパーへの参照という2つの部分に分けられています。
 
-## Installation and Setup
+> This page covers how to use [Epsilla](https://github.com/epsilla-cloud/vectordb) within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific Epsilla wrappers.
 
-- Install the Python SDK with `pip/pip3 install pyepsilla`
+## Installation and Setup | インストールとセットアップ
 
-## Wrappers
+* `pip/pip3 install pyepsilla`を使用してPython SDKをインストールしてください。
+  > Install the Python SDK with `pip/pip3 install pyepsilla`
 
-### VectorStore
+## Wrappers | ラッパー
 
-There exists a wrapper around Epsilla vector databases, allowing you to use it as a vectorstore,
-whether for semantic search or example selection.
+### VectorStore | VectorStore
 
-To import this vectorstore:
+Epsillaベクトルデータベースには、それをベクトルストアとして使用できるようにするラッパーが存在します。これは、意味検索や例の選択に利用することが可能です。
+
+> There exists a wrapper around Epsilla vector databases, allowing you to use it as a vectorstore,
+> whether for semantic search or example selection.
+
+このベクトルストアをインポートするには：
+
+> To import this vectorstore:
 
 ```python
 from langchain.vectorstores import Epsilla
 ```
 
-For a more detailed walkthrough of the Epsilla wrapper, see [this notebook](/docs/integrations/vectorstores/epsilla)
+Epsillaラッパーのより詳細なウォークスルーについては、[このノートブック](/docs/integrations/vectorstores/epsilla)をご覧ください。
+
+> For a more detailed walkthrough of the Epsilla wrapper, see [this notebook](/docs/integrations/vectorstores/epsilla)

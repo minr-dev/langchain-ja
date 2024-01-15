@@ -1,33 +1,45 @@
-# Minimax
+# Minimax | ミニマックス
 
->[Minimax](https://api.minimax.chat) is a Chinese startup that provides natural language processing models
-> for companies and individuals.
+> [Minimax](https://api.minimax.chat)は、企業や個人向けに自然言語処理モデルを提供する中国のスタートアップ企業です。
+>
+> > [Minimax](https://api.minimax.chat) is a Chinese startup that provides natural language processing models
+> > for companies and individuals.
 
-## Installation and Setup
-Get a [Minimax api key](https://api.minimax.chat/user-center/basic-information/interface-key) and set it as an environment variable (`MINIMAX_API_KEY`)
-Get a [Minimax group id](https://api.minimax.chat/user-center/basic-information) and set it as an environment variable (`MINIMAX_GROUP_ID`)
+## Installation and Setup | インストールとセットアップ
 
+[Minimax api key](https://api.minimax.chat/user-center/basic-information/interface-key)を取得し、環境変数(`MINIMAX_API_KEY`)に設定してください。次に、[Minimax group id](https://api.minimax.chat/user-center/basic-information)を取得し、環境変数(`MINIMAX_GROUP_ID`)に設定してください。
 
-## LLM
+> Get a [Minimax api key](https://api.minimax.chat/user-center/basic-information/interface-key) and set it as an environment variable (`MINIMAX_API_KEY`)
+> Get a [Minimax group id](https://api.minimax.chat/user-center/basic-information) and set it as an environment variable (`MINIMAX_GROUP_ID`)
 
-There exists a Minimax LLM wrapper, which you can access with
-See a [usage example](/docs/modules/model_io/llms/integrations/minimax).
+## LLM | LLM
+
+Minimax LLMラッパーが存在し、以下のリンクを使用してアクセスできます。
+[使用例を見る](/docs/modules/model_io/llms/integrations/minimax)。
+
+> There exists a Minimax LLM wrapper, which you can access with
+> See a [usage example](/docs/modules/model_io/llms/integrations/minimax).
 
 ```python
 from langchain.llms import Minimax
 ```
 
-## Chat Models
+## Chat Models | チャットモデル
 
-See a [usage example](/docs/modules/model_io/chat/integrations/minimax)
+[使用例](/docs/modules/model_io/chat/integrations/minimax)をご覧ください。
+
+> See a [usage example](/docs/modules/model_io/chat/integrations/minimax)
 
 ```python
 from langchain.chat_models import MiniMaxChat
 ```
 
-## Text Embedding Model
+## Text Embedding Model | テキスト埋め込みモデル
 
-There exists a Minimax Embedding model, which you can access with
+Minimax Embedding モデルが存在し、次の方法でアクセスできます
+
+> There exists a Minimax Embedding model, which you can access with
+
 ```python
 from langchain.embeddings import MiniMaxEmbeddings
 ```

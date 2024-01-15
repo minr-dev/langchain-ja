@@ -1,22 +1,31 @@
-# Hologres
+# Hologres | Hologres
 
->[Hologres](https://www.alibabacloud.com/help/en/hologres/latest/introduction) is a unified real-time data warehousing service developed by Alibaba Cloud. You can use Hologres to write, update, process, and analyze large amounts of data in real time. 
->`Hologres` supports standard `SQL` syntax, is compatible with `PostgreSQL`, and supports most PostgreSQL functions. Hologres supports online analytical processing (OLAP) and ad hoc analysis for up to petabytes of data, and provides high-concurrency and low-latency online data services. 
+> [Hologres](https://www.alibabacloud.com/help/en/hologres/latest/introduction)は、Alibaba Cloudによって開発された統合リアルタイムデータウェアハウスサービスです。Hologresを使用すると、大量のデータをリアルタイムで書き込み、更新、処理、分析することができます。
+> `Hologres`は標準の`SQL`構文に対応しており、`PostgreSQL`との互換性があり、PostgreSQLのほとんどの機能をサポートしています。Hologresは、ペタバイト級のデータに対するオンライン分析処理（OLAP）とアドホック分析をサポートし、高い同時実行性と低遅延のオンラインデータサービスを提供します。
+>
+> > [Hologres](https://www.alibabacloud.com/help/en/hologres/latest/introduction) is a unified real-time data warehousing service developed by Alibaba Cloud. You can use Hologres to write, update, process, and analyze large amounts of data in real time.
+> > `Hologres` supports standard `SQL` syntax, is compatible with `PostgreSQL`, and supports most PostgreSQL functions. Hologres supports online analytical processing (OLAP) and ad hoc analysis for up to petabytes of data, and provides high-concurrency and low-latency online data services.
 
->`Hologres` provides **vector database** functionality by adopting [Proxima](https://www.alibabacloud.com/help/en/hologres/latest/vector-processing).
->`Proxima` is a high-performance software library developed by `Alibaba DAMO Academy`. It allows you to search for the nearest neighbors of vectors. Proxima provides higher stability and performance than similar open-source software such as Faiss. Proxima allows you to search for similar text or image embeddings with high throughput and low latency. Hologres is deeply integrated with Proxima to provide a high-performance vector search service.
+> `Hologres`は、[Proxima](https://www.alibabacloud.com/help/en/hologres/latest/vector-processing)を採用することで**ベクターデータベース**機能を提供します。`Proxima`は`Alibaba DAMO Academy`によって開発された高性能ソフトウェアライブラリで、ベクトルの最も近い隣人を探索することができます。Proximaは、Faissなどの類似のオープンソースソフトウェアに比べて、より高い安定性とパフォーマンスを提供します。Proximaを使用すると、高いスループットと低レイテンシーで、類似のテキストや画像の埋め込みを検索できます。HologresはProximaと深く統合されており、高性能なベクター検索サービスを提供します。
+>
+> > `Hologres` provides **vector database** functionality by adopting [Proxima](https://www.alibabacloud.com/help/en/hologres/latest/vector-processing).
+> > `Proxima` is a high-performance software library developed by `Alibaba DAMO Academy`. It allows you to search for the nearest neighbors of vectors. Proxima provides higher stability and performance than similar open-source software such as Faiss. Proxima allows you to search for similar text or image embeddings with high throughput and low latency. Hologres is deeply integrated with Proxima to provide a high-performance vector search service.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-Click [here](https://www.alibabacloud.com/zh/product/hologres) to fast deploy a Hologres cloud instance.
+Hologresクラウドインスタンスを迅速にデプロイするには、[こちら](https://www.alibabacloud.com/zh/product/hologres)をクリックしてください。
+
+> Click [here](https://www.alibabacloud.com/zh/product/hologres) to fast deploy a Hologres cloud instance.
 
 ```bash
 pip install hologres-vector
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/hologres).
+[使用例](/docs/integrations/vectorstores/hologres)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/hologres).
 
 ```python
 from langchain.vectorstores import Hologres

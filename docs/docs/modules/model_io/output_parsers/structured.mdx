@@ -1,6 +1,8 @@
-# Structured output parser
+# Structured output parser | 構造化出力パーサー
 
-This output parser can be used when you want to return multiple fields. While the Pydantic/JSON parser is more powerful, we initially experimented with data structures having text fields only.
+この出力パーサーは、複数のフィールドを返したいときに使用できます。Pydantic/JSONパーサーはより強力ですが、当初はテキストフィールドのみを持つデータ構造を用いて実験を行いました。
+
+> This output parser can be used when you want to return multiple fields. While the Pydantic/JSON parser is more powerful, we initially experimented with data structures having text fields only.
 
 ```python
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
@@ -9,8 +11,9 @@ from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 ```
 
-Here we define the response schema we want to receive.
+ここでは、受け取りたいレスポンスのスキーマを定義します。
 
+> Here we define the response schema we want to receive.
 
 ```python
 response_schemas = [
@@ -20,8 +23,9 @@ response_schemas = [
 output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
 ```
 
-We now get a string that contains instructions for how the response should be formatted, and we then insert that into our prompt.
+これで、レスポンスがどのようにフォーマットされるべきかの指示を含んだ文字列を取得し、それを私たちのプロンプトに挿入します。
 
+> We now get a string that contains instructions for how the response should be formatted, and we then insert that into our prompt.
 
 ```python
 format_instructions = output_parser.get_format_instructions()
@@ -32,19 +36,18 @@ prompt = PromptTemplate(
 )
 ```
 
-We can now use this to format a prompt to send to the language model, and then parse the returned result.
+これを使用して言語モデルに送信するプロンプトをフォーマットし、返された結果を解析することができます。
 
+> We can now use this to format a prompt to send to the language model, and then parse the returned result.
 
 ```python
 model = OpenAI(temperature=0)
 ```
 
-
 ```python
 _input = prompt.format_prompt(question="what's the capital of france?")
 output = model(_input.to_string())
 ```
-
 
 ```python
 output_parser.parse(output)
@@ -59,13 +62,13 @@ output_parser.parse(output)
 
 </CodeOutputBlock>
 
-And here's an example of using this in a chat model
+これはチャットモデルで使用する一例です
 
+> And here's an example of using this in a chat model
 
 ```python
 chat_model = ChatOpenAI(temperature=0)
 ```
-
 
 ```python
 prompt = ChatPromptTemplate(
@@ -77,12 +80,10 @@ prompt = ChatPromptTemplate(
 )
 ```
 
-
 ```python
 _input = prompt.format_prompt(question="what's the capital of france?")
 output = chat_model(_input.to_messages())
 ```
-
 
 ```python
 output_parser.parse(output.content)

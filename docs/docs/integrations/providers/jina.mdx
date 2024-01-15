@@ -1,12 +1,19 @@
-# Jina
+# Jina | Jina
 
-This page covers how to use the Jina Embeddings within LangChain.
-It is broken into two parts: installation and setup, and then references to specific Jina wrappers.
+このページでは、LangChain内でJina Embeddingsを使用する方法について説明しています。
+それはインストールとセットアップ、そして特定のJinaラッパーに関する参照の二つの部分に分けられています。
 
-## Installation and Setup
-- Get a Jina AI API token from [here](https://jina.ai/embeddings/) and set it as an environment variable (`JINA_API_TOKEN`)
+> This page covers how to use the Jina Embeddings within LangChain.
+> It is broken into two parts: installation and setup, and then references to specific Jina wrappers.
 
-There exists a Jina Embeddings wrapper, which you can access with 
+## Installation and Setup | インストールとセットアップ
+
+* [こちら](https://jina.ai/embeddings/)からJina AIのAPIトークンを取得し、環境変数(`JINA_API_TOKEN`)として設定してください。
+  > Get a Jina AI API token from [here](https://jina.ai/embeddings/) and set it as an environment variable (`JINA_API_TOKEN`)
+
+Jina Embeddingsラッパーが存在し、次の方法でアクセスできます
+
+> There exists a Jina Embeddings wrapper, which you can access with
 
 ```python
 from langchain.embeddings import JinaEmbeddings
@@ -15,6 +22,10 @@ from langchain.embeddings import JinaEmbeddings
 embeddings = JinaEmbeddings(jina_api_key='jina_**', model_name='jina-embeddings-v2-base-en')
 ```
 
-You can check the list of available models from [here](https://jina.ai/embeddings/)
+利用可能なモデルのリストは[こちら](https://jina.ai/embeddings/)から確認できます。
 
-For a more detailed walkthrough of this, see [this notebook](/docs/integrations/text_embedding/jina)
+> You can check the list of available models from [here](https://jina.ai/embeddings/)
+
+これについてのより詳細なウォークスルーは、[このノートブック](/docs/integrations/text_embedding/jina)をご覧ください。
+
+> For a more detailed walkthrough of this, see [this notebook](/docs/integrations/text_embedding/jina)

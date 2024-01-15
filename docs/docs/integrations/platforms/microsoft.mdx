@@ -1,19 +1,28 @@
-# Microsoft
+# Microsoft | マイクロソフト
 
-All functionality related to `Microsoft Azure` and other `Microsoft` products.
+`Microsoft Azure`やその他の`Microsoft`製品に関連するすべての機能。
 
-## Chat Models
-### Azure OpenAI
+> All functionality related to `Microsoft Azure` and other `Microsoft` products.
 
->[Microsoft Azure](https://en.wikipedia.org/wiki/Microsoft_Azure), often referred to as `Azure` is a cloud computing platform run by `Microsoft`, which offers access, management, and development of applications and services through global data centers. It provides a range of capabilities, including software as a service (SaaS), platform as a service (PaaS), and infrastructure as a service (IaaS). `Microsoft Azure` supports many programming languages, tools, and frameworks, including Microsoft-specific and third-party software and systems.
+## Chat Models | チャットモデル
 
->[Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/) is an `Azure` service with powerful language models from `OpenAI` including the `GPT-3`, `Codex` and `Embeddings model` series for content generation, summarization, semantic search, and natural language to code translation.
+### Azure OpenAI | Azure OpenAI
+
+> [Microsoft Azure](https://en.wikipedia.org/wiki/Microsoft_Azure)は、`Azure`としてよく知られており、`Microsoft`が運営するクラウドコンピューティングプラットフォームです。世界中のデータセンターを通じてアプリケーションやサービスのアクセス、管理、開発を提供しています。ソフトウェアとしてのサービス（SaaS）、プラットフォームとしてのサービス（PaaS）、インフラストラクチャとしてのサービス（IaaS）など、幅広い機能を提供しています。`Microsoft Azure`は、Microsoft固有のものだけでなく、サードパーティのソフトウェアやシステムを含む、多くのプログラミング言語、ツール、フレームワークをサポートしています。
+>
+> > [Microsoft Azure](https://en.wikipedia.org/wiki/Microsoft_Azure), often referred to as `Azure` is a cloud computing platform run by `Microsoft`, which offers access, management, and development of applications and services through global data centers. It provides a range of capabilities, including software as a service (SaaS), platform as a service (PaaS), and infrastructure as a service (IaaS). `Microsoft Azure` supports many programming languages, tools, and frameworks, including Microsoft-specific and third-party software and systems.
+
+> [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)は、コンテンツ生成、要約、セマンティック検索、自然言語からコードへの翻訳を行うための`OpenAI`の強力な言語モデルである`GPT-3`、`Codex`、`Embeddings model`シリーズを含む`Azure`のサービスです。
+>
+> > [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/) is an `Azure` service with powerful language models from `OpenAI` including the `GPT-3`, `Codex` and `Embeddings model` series for content generation, summarization, semantic search, and natural language to code translation.
 
 ```bash
 pip install openai tiktoken
 ```
 
-Set the environment variables to get access to the `Azure OpenAI` service.
+`Azure OpenAI` サービスにアクセスするために環境変数を設定してください。
+
+> Set the environment variables to get access to the `Azure OpenAI` service.
 
 ```python
 import os
@@ -22,279 +31,375 @@ os.environ["AZURE_OPENAI_ENDPOINT"] = "https://<your-endpoint.openai.azure.com/"
 os.environ["AZURE_OPENAI_API_KEY"] = "your AzureOpenAI key"
 ```
 
-See a [usage example](/docs/integrations/chat/azure_chat_openai)
+[使用例](/docs/integrations/chat/azure_chat_openai)をご覧ください
 
+> See a [usage example](/docs/integrations/chat/azure_chat_openai)
 
 ```python
 from langchain.chat_models import AzureChatOpenAI
 ```
 
-## Text Embedding Models
-### Azure OpenAI
+## Text Embedding Models | テキスト埋め込みモデル
 
-See a [usage example](/docs/integrations/text_embedding/azureopenai)
+### Azure OpenAI | Azure OpenAI
+
+[使用例](/docs/integrations/text_embedding/azureopenai)をご覧ください。
+
+> See a [usage example](/docs/integrations/text_embedding/azureopenai)
 
 ```python
 from langchain.embeddings import AzureOpenAIEmbeddings
 ```
 
-## LLMs
-### Azure OpenAI
+## LLMs | LLMs
 
-See a [usage example](/docs/integrations/llms/azure_openai_example).
+### Azure OpenAI | Azure OpenAI
+
+[使用例](/docs/integrations/llms/azure_openai_example)をご覧ください。
+
+> See a [usage example](/docs/integrations/llms/azure_openai_example).
 
 ```python
 from langchain.llms import AzureOpenAI
 ```
 
-## Document loaders
+## Document loaders | ドキュメントローダー
 
-### Azure Blob Storage
+### Azure Blob Storage | Azure Blob Storage
 
->[Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) is Microsoft's object storage solution for the cloud. Blob Storage is optimized for storing massive amounts of unstructured data. Unstructured data is data that doesn't adhere to a particular data model or definition, such as text or binary data.
+> [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)は、クラウド用のMicrosoftのオブジェクトストレージソリューションです。Blob Storageは、大量の非構造化データの保存に最適化されています。非構造化データとは、特定のデータモデルや定義に従わないデータで、テキストやバイナリデータなどが含まれます。
+>
+> > [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) is Microsoft's object storage solution for the cloud. Blob Storage is optimized for storing massive amounts of unstructured data. Unstructured data is data that doesn't adhere to a particular data model or definition, such as text or binary data.
 
->[Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction) offers fully managed
-> file shares in the cloud that are accessible via the industry standard Server Message Block (`SMB`) protocol,
-> Network File System (`NFS`) protocol, and `Azure Files REST API`. `Azure Files` are based on the `Azure Blob Storage`.
+> [Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction)は、業界標準のServer Message Block（`SMB`）プロトコル、Network File System（`NFS`）プロトコル、および`Azure Files REST API`を介してアクセス可能な、クラウド内で完全に管理されたファイル共有を提供します。`Azure Files`は`Azure Blob Storage`を基盤としています。
+>
+> > [Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction) offers fully managed
+> > file shares in the cloud that are accessible via the industry standard Server Message Block (`SMB`) protocol,
+> > Network File System (`NFS`) protocol, and `Azure Files REST API`. `Azure Files` are based on the `Azure Blob Storage`.
 
-`Azure Blob Storage` is designed for:
-- Serving images or documents directly to a browser.
-- Storing files for distributed access.
-- Streaming video and audio.
-- Writing to log files.
-- Storing data for backup and restore, disaster recovery, and archiving.
-- Storing data for analysis by an on-premises or Azure-hosted service.
+`Azure Blob Storage`は以下の目的で設計されています：
+
+> `Azure Blob Storage` is designed for:
+
+* 画像やドキュメントを直接ブラウザに提供する。
+  > Serving images or documents directly to a browser.
+* 分散アクセスのためのファイル保存。
+  > Storing files for distributed access.
+* ストリーミングビデオとオーディオ。
+  > Streaming video and audio.
+* ログファイルへの書き込み。
+  > Writing to log files.
+* バックアップとリストア、災害復旧、およびアーカイブのためのデータ保存。
+  > Storing data for backup and restore, disaster recovery, and archiving.
+* オンプレミスまたはAzureでホストされるサービスによる分析のためのデータ保存。
+  > Storing data for analysis by an on-premises or Azure-hosted service.
 
 ```bash
 pip install azure-storage-blob
 ```
 
-See a [usage example for the Azure Blob Storage](/docs/integrations/document_loaders/azure_blob_storage_container).
+[Azure Blob Storageの使用例](/docs/integrations/document_loaders/azure_blob_storage_container)をご覧ください。
+
+> See a [usage example for the Azure Blob Storage](/docs/integrations/document_loaders/azure_blob_storage_container).
 
 ```python
 from langchain.document_loaders import AzureBlobStorageContainerLoader
 ```
 
-See a [usage example for the Azure Files](/docs/integrations/document_loaders/azure_blob_storage_file).
+[Azure Filesの使用例](/docs/integrations/document_loaders/azure_blob_storage_file)をご覧ください。
+
+> See a [usage example for the Azure Files](/docs/integrations/document_loaders/azure_blob_storage_file).
 
 ```python
 from langchain.document_loaders import AzureBlobStorageFileLoader
 ```
 
+### Microsoft OneDrive | Microsoft OneDrive
 
-### Microsoft OneDrive
+> [Microsoft OneDrive](https://en.wikipedia.org/wiki/OneDrive)（旧称 `SkyDrive`）は、Microsoftが運営するファイルホスティングサービスです。
+>
+> > [Microsoft OneDrive](https://en.wikipedia.org/wiki/OneDrive) (formerly `SkyDrive`) is a file-hosting service operated by Microsoft.
 
->[Microsoft OneDrive](https://en.wikipedia.org/wiki/OneDrive) (formerly `SkyDrive`) is a file-hosting service operated by Microsoft.
+まず、Pythonパッケージをインストールする必要があります。
 
-First, you need to install a python package.
+> First, you need to install a python package.
 
 ```bash
 pip install o365
 ```
 
-See a [usage example](/docs/integrations/document_loaders/microsoft_onedrive).
+[使用例](/docs/integrations/document_loaders/microsoft_onedrive)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/microsoft_onedrive).
 
 ```python
 from langchain.document_loaders import OneDriveLoader
 ```
 
+### Microsoft Word | マイクロソフト ワード
 
-### Microsoft Word
+> [Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/word)は、Microsoftによって開発されたワードプロセッサです。
+>
+> > [Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/word) is a word processor developed by Microsoft.
 
->[Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/word) is a word processor developed by Microsoft.
+[使用例](/docs/integrations/document_loaders/microsoft_word)をご覧ください。
 
-See a [usage example](/docs/integrations/document_loaders/microsoft_word).
+> See a [usage example](/docs/integrations/document_loaders/microsoft_word).
 
 ```python
 from langchain.document_loaders import UnstructuredWordDocumentLoader
 ```
 
+### Microsoft Excel | Microsoft Excel
 
-### Microsoft Excel
+> [Microsoft Excel](https://en.wikipedia.org/wiki/Microsoft_Excel)は、Windows、macOS、Android、iOS、iPadOS用にMicrosoftが開発したスプレッドシートエディタです。計算機能、グラフ作成ツール、ピボットテーブル、Visual Basic for Applications（VBA）というマクロプログラミング言語を搭載しています。Excelは、Microsoft 365スイートソフトウェアの一部です。
+>
+> > [Microsoft Excel](https://en.wikipedia.org/wiki/Microsoft_Excel) is a spreadsheet editor developed by
+> > Microsoft for Windows, macOS, Android, iOS and iPadOS.
+> > It features calculation or computation capabilities, graphing tools, pivot tables, and a macro programming
+> > language called Visual Basic for Applications (VBA). Excel forms part of the Microsoft 365 suite of software.
 
->[Microsoft Excel](https://en.wikipedia.org/wiki/Microsoft_Excel) is a spreadsheet editor developed by 
-> Microsoft for Windows, macOS, Android, iOS and iPadOS. 
-> It features calculation or computation capabilities, graphing tools, pivot tables, and a macro programming 
-> language called Visual Basic for Applications (VBA). Excel forms part of the Microsoft 365 suite of software.
+`UnstructuredExcelLoader`は、`Microsoft Excel`ファイルを読み込むために使用されます。このローダーは`.xlsx`ファイルと`.xls`ファイルの両方に対応しています。ページの内容はExcelファイルの生のテキストになります。ローダーを`"elements"`モードで使用する場合、ExcelファイルのHTML表現がドキュメントメタデータ内の`text_as_html`キーにて利用可能になります。
 
-The `UnstructuredExcelLoader` is used to load `Microsoft Excel` files. The loader works with both `.xlsx` and `.xls` files. 
-The page content will be the raw text of the Excel file. If you use the loader in `"elements"` mode, an HTML 
-representation of the Excel file will be available in the document metadata under the `text_as_html` key.
+> The `UnstructuredExcelLoader` is used to load `Microsoft Excel` files. The loader works with both `.xlsx` and `.xls` files.
+> The page content will be the raw text of the Excel file. If you use the loader in `"elements"` mode, an HTML
+> representation of the Excel file will be available in the document metadata under the `text_as_html` key.
 
-See a [usage example](/docs/integrations/document_loaders/excel).
+[使用例](/docs/integrations/document_loaders/excel)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/excel).
 
 ```python
 from langchain.document_loaders import UnstructuredExcelLoader
 ```
 
+### Microsoft SharePoint | Microsoft SharePoint
 
-### Microsoft SharePoint
+> [Microsoft SharePoint](https://en.wikipedia.org/wiki/SharePoint)は、ワークフローアプリケーション、"リスト"データベース、その他のウェブパーツやセキュリティ機能を利用して、ビジネスチームが共同で作業することを支援する、Microsoftによって開発されたウェブサイトベースのコラボレーションシステムです。
+>
+> > [Microsoft SharePoint](https://en.wikipedia.org/wiki/SharePoint) is a website-based collaboration system
+> > that uses workflow applications, “list” databases, and other web parts and security features to
+> > empower business teams to work together developed by Microsoft.
 
->[Microsoft SharePoint](https://en.wikipedia.org/wiki/SharePoint) is a website-based collaboration system 
-> that uses workflow applications, “list” databases, and other web parts and security features to 
-> empower business teams to work together developed by Microsoft.
+[使用例](/docs/integrations/document_loaders/microsoft_sharepoint)をご覧ください。
 
-See a [usage example](/docs/integrations/document_loaders/microsoft_sharepoint).
+> See a [usage example](/docs/integrations/document_loaders/microsoft_sharepoint).
 
 ```python
 from langchain.document_loaders.sharepoint import SharePointLoader
 ```
 
+### Microsoft PowerPoint | Microsoft PowerPoint
 
-### Microsoft PowerPoint
+> [Microsoft PowerPoint](https://ja.wikipedia.org/wiki/Microsoft_PowerPoint)は、マイクロソフトが提供するプレゼンテーションプログラムです。
+>
+> > [Microsoft PowerPoint](https://en.wikipedia.org/wiki/Microsoft_PowerPoint) is a presentation program by Microsoft.
 
->[Microsoft PowerPoint](https://en.wikipedia.org/wiki/Microsoft_PowerPoint) is a presentation program by Microsoft.
+[使用例](/docs/integrations/document_loaders/microsoft_powerpoint)をご覧ください。
 
-See a [usage example](/docs/integrations/document_loaders/microsoft_powerpoint).
+> See a [usage example](/docs/integrations/document_loaders/microsoft_powerpoint).
 
 ```python
 from langchain.document_loaders import UnstructuredPowerPointLoader
 ```
 
-### Microsoft OneNote
+### Microsoft OneNote | Microsoft OneNote
 
-First, let's install dependencies:
+まず、依存関係をインストールしましょう：
+
+> First, let's install dependencies:
 
 ```bash
 pip install bs4 msal
 ```
 
-See a [usage example](/docs/integrations/document_loaders/onenote).
+[使用例](/docs/integrations/document_loaders/onenote)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/onenote).
 
 ```python
 from langchain.document_loaders.onenote import OneNoteLoader
 ```
 
+## Vector stores | ベクターのストア
 
-## Vector stores
+### Azure Cosmos DB | Azure Cosmos DB
 
-### Azure Cosmos DB
+> [Azure Cosmos DB for MongoDB vCore](https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/vcore/)は、完全なネイティブMongoDBサポートを備えたデータベースを簡単に作成できます。MongoDBの経験を活かし、お気に入りのMongoDBドライバー、SDK、およびツールを引き続き使用するためには、アプリケーションをMongoDB vCoreアカウントの接続文字列のAPIにポイントしてください。Azure Cosmos DB for MongoDB vCoreでベクター検索を使用すると、Azure Cosmos DBに保存されているデータとAIベースのアプリケーションをシームレスに統合できます。
+>
+> > [Azure Cosmos DB for MongoDB vCore](https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/vcore/) makes it easy to create a database with full native MongoDB support.
+> > You can apply your MongoDB experience and continue to use your favorite MongoDB drivers, SDKs, and tools by pointing your application to the API for MongoDB vCore account's connection string.
+> > Use vector search in Azure Cosmos DB for MongoDB vCore to seamlessly integrate your AI-based applications with your data that's stored in Azure Cosmos DB.
 
->[Azure Cosmos DB for MongoDB vCore](https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/vcore/) makes it easy to create a database with full native MongoDB support.
-> You can apply your MongoDB experience and continue to use your favorite MongoDB drivers, SDKs, and tools by pointing your application to the API for MongoDB vCore account's connection string.
-> Use vector search in Azure Cosmos DB for MongoDB vCore to seamlessly integrate your AI-based applications with your data that's stored in Azure Cosmos DB.
+#### Installation and Setup | インストールとセットアップ
 
-#### Installation and Setup
+[詳細な設定手順](/docs/integrations/vectorstores/azure_cosmos_db)をご覧ください。
 
-See [detail configuration instructions](/docs/integrations/vectorstores/azure_cosmos_db).
+> See [detail configuration instructions](/docs/integrations/vectorstores/azure_cosmos_db).
 
-We need to install `pymongo` python package.
+`pymongo` Pythonパッケージをインストールする必要があります。
+
+> We need to install `pymongo` python package.
 
 ```bash
 pip install pymongo
 ```
 
-#### Deploy Azure Cosmos DB on Microsoft Azure
+#### Deploy Azure Cosmos DB on Microsoft Azure | Microsoft Azure上にAzure Cosmos DBをデプロイする
 
-Azure Cosmos DB for MongoDB vCore provides developers with a fully managed MongoDB-compatible database service for building modern applications with a familiar architecture.
+Azure Cosmos DB for MongoDB vCoreは、開発者が馴染みのあるアーキテクチャを使用してモダンなアプリケーションを構築できるように、完全に管理されたMongoDB互換のデータベースサービスを提供します。
 
-With Cosmos DB for MongoDB vCore, developers can enjoy the benefits of native Azure integrations, low total cost of ownership (TCO), and the familiar vCore architecture when migrating existing applications or building new ones.
+> Azure Cosmos DB for MongoDB vCore provides developers with a fully managed MongoDB-compatible database service for building modern applications with a familiar architecture.
 
-[Sign Up](https://azure.microsoft.com/en-us/free/) for free to get started today.
+Cosmos DB for MongoDB vCoreを使用すると、開発者は既存のアプリケーションを移行する際や新しいアプリケーションを構築する際に、ネイティブAzure統合の利点、低い総所有コスト（TCO）、そして馴染みのあるvCoreアーキテクチャの恩恵を受けることができます。
 
-See a [usage example](/docs/integrations/vectorstores/azure_cosmos_db).
+> With Cosmos DB for MongoDB vCore, developers can enjoy the benefits of native Azure integrations, low total cost of ownership (TCO), and the familiar vCore architecture when migrating existing applications or building new ones.
+
+今すぐ[無料でサインアップ](https://azure.microsoft.com/en-us/free/)して、始めましょう。
+
+> [Sign Up](https://azure.microsoft.com/en-us/free/) for free to get started today.
+
+[使用例](/docs/integrations/vectorstores/azure_cosmos_db)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/azure_cosmos_db).
 
 ```python
 from langchain.vectorstores import AzureCosmosDBVectorSearch
 ```
 
-## Retrievers
-### Azure Cognitive Search
+## Retrievers | レトリーバー
 
->[Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) (formerly known as `Azure Search`) is a cloud search service that gives developers infrastructure, APIs, and tools for building a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.
+### Azure Cognitive Search | Azure Cognitive Search
 
->Search is foundational to any app that surfaces text to users, where common scenarios include catalog or document search, online retail apps, or data exploration over proprietary content. When you create a search service, you'll work with the following capabilities:
->- A search engine for full text search over a search index containing user-owned content
->- Rich indexing, with lexical analysis and optional AI enrichment for content extraction and transformation
->- Rich query syntax for text search, fuzzy search, autocomplete, geo-search and more
->- Programmability through REST APIs and client libraries in Azure SDKs
->- Azure integration at the data layer, machine learning layer, and AI (Cognitive Services)
+> [Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)（旧称 `Azure Search`）は、ウェブ、モバイル、エンタープライズアプリケーションにおいて、プライベートで異種混在するコンテンツに対して豊かな検索体験を提供するためのインフラ、API、およびツールを開発者に提供するクラウド検索サービスです。
+>
+> > [Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) (formerly known as `Azure Search`) is a cloud search service that gives developers infrastructure, APIs, and tools for building a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.
 
-See [set up instructions](https://learn.microsoft.com/en-us/azure/search/search-create-service-portal).
+> 検索は、カタログやドキュメント検索、オンライン小売アプリ、または独自コンテンツのデータ探索など、ユーザーにテキストを提供するあらゆるアプリにとって基本的な機能です。検索サービスを作成する際には、以下の機能を扱います：
+>
+> > Search is foundational to any app that surfaces text to users, where common scenarios include catalog or document search, online retail apps, or data exploration over proprietary content. When you create a search service, you'll work with the following capabilities:
+>
+> * ユーザー所有のコンテンツを含む検索インデックス上で全文検索を行うための検索エンジン
+>   > A search engine for full text search over a search index containing user-owned content
+> * 豊富なインデクシング機能を備え、レキシカル分析と、コンテンツの抽出や変換を行うためのオプショナルなAIエンリッチメントが可能です
+>   > Rich indexing, with lexical analysis and optional AI enrichment for content extraction and transformation
+> * テキスト検索、ファジー検索、オートコンプリート、地理検索などに対応した豊富なクエリ構文
+>   > Rich query syntax for text search, fuzzy search, autocomplete, geo-search and more
+> * Azure SDKのクライアントライブラリとREST APIを通じたプログラム可能性
+>   > Programmability through REST APIs and client libraries in Azure SDKs
+> * データ層、機械学習層、およびAI（Cognitive Services）におけるAzureの統合
+>   > Azure integration at the data layer, machine learning layer, and AI (Cognitive Services)
 
-See a [usage example](/docs/integrations/retrievers/azure_cognitive_search).
+[セットアップ手順](https://learn.microsoft.com/en-us/azure/search/search-create-service-portal)をご覧ください。
+
+> See [set up instructions](https://learn.microsoft.com/en-us/azure/search/search-create-service-portal).
+
+[使用例](/docs/integrations/retrievers/azure_cognitive_search)をご覧ください。
+
+> See a [usage example](/docs/integrations/retrievers/azure_cognitive_search).
 
 ```python
 from langchain.retrievers import AzureCognitiveSearchRetriever
 ```
 
-## Utilities
+## Utilities | ユーティリティ
 
-### Bing Search API
+### Bing Search API | Bing 検索 API
 
->[Microsoft Bing](https://www.bing.com/), commonly referred to as `Bing` or `Bing Search`, 
-> is a web search engine owned and operated by `Microsoft`.
+> [Microsoft Bing](https://www.bing.com/)は、一般的に`Bing`または`Bing Search`として知られており、`Microsoft`が所有し運営しているウェブ検索エンジンです。
+>
+> > [Microsoft Bing](https://www.bing.com/), commonly referred to as `Bing` or `Bing Search`,
+> > is a web search engine owned and operated by `Microsoft`.
 
-See a [usage example](/docs/integrations/tools/bing_search).
+[使用例](/docs/integrations/tools/bing_search)をご覧ください。
+
+> See a [usage example](/docs/integrations/tools/bing_search).
 
 ```python
 from langchain.utilities import BingSearchAPIWrapper
 ```
 
-## Toolkits
+## Toolkits | ツールキット
 
-### Azure Cognitive Services
+### Azure Cognitive Services | Azure Cognitive Services
 
-We need to install several python packages.
+いくつかのPythonパッケージをインストールする必要があります。
+
+> We need to install several python packages.
 
 ```bash
 pip install azure-ai-formrecognizer azure-cognitiveservices-speech azure-ai-vision
 ```
 
-See a [usage example](/docs/integrations/toolkits/azure_cognitive_services).
+[使用例](/docs/integrations/toolkits/azure_cognitive_services)をご覧ください。
+
+> See a [usage example](/docs/integrations/toolkits/azure_cognitive_services).
 
 ```python
 from langchain.agents.agent_toolkits import O365Toolkit
 ```
-### Microsoft Office 365 email and calendar
 
-We need to install `O365` python package.
+### Microsoft Office 365 email and calendar | Microsoft Office 365のメールとカレンダー
+
+`O365` Pythonパッケージをインストールする必要があります。
+
+> We need to install `O365` python package.
 
 ```bash
 pip install O365
 ```
 
+[使用例](/docs/integrations/toolkits/office365)をご覧ください。
 
-See a [usage example](/docs/integrations/toolkits/office365).
+> See a [usage example](/docs/integrations/toolkits/office365).
 
 ```python
 from langchain.agents.agent_toolkits import O365Toolkit
 ```
 
-### Microsoft Azure PowerBI
+### Microsoft Azure PowerBI | Microsoft Azure PowerBI
 
-We need to install `azure-identity` python package.
+`azure-identity` Pythonパッケージをインストールする必要があります。
+
+> We need to install `azure-identity` python package.
 
 ```bash
 pip install azure-identity
 ```
 
-See a [usage example](/docs/integrations/toolkits/powerbi).
+[使用例](/docs/integrations/toolkits/powerbi)をご覧ください。
+
+> See a [usage example](/docs/integrations/toolkits/powerbi).
 
 ```python
 from langchain.agents.agent_toolkits import PowerBIToolkit
 from langchain.utilities.powerbi import PowerBIDataset
 ```
 
-## More
+## More | さらに
 
-### Microsoft Presidio
+### Microsoft Presidio | Microsoft Presidio
 
->[Presidio](https://microsoft.github.io/presidio/) (Origin from Latin praesidium ‘protection, garrison’) 
-> helps to ensure sensitive data is properly managed and governed. It provides fast identification and 
-> anonymization modules for private entities in text and images such as credit card numbers, names, 
-> locations, social security numbers, bitcoin wallets, US phone numbers, financial data and more.
+> [Presidio](https://microsoft.github.io/presidio/)（ラテン語のpraesidium「保護、駐屯地」からの由来）は、機密データが適切に管理・統制されることを支援します。クレジットカード番号、名前、場所、社会保障番号、ビットコインウォレット、アメリカの電話番号、財務データなど、テキストや画像に含まれるプライベートなエンティティの迅速な識別と匿名化モジュールを提供します。
+>
+> > [Presidio](https://microsoft.github.io/presidio/) (Origin from Latin praesidium ‘protection, garrison’)
+> > helps to ensure sensitive data is properly managed and governed. It provides fast identification and
+> > anonymization modules for private entities in text and images such as credit card numbers, names,
+> > locations, social security numbers, bitcoin wallets, US phone numbers, financial data and more.
 
-First, you need to install several python packages and download a `SpaCy` model.
+まず、いくつかのPythonパッケージをインストールし、`SpaCy`モデルをダウンロードする必要があります。
+
+> First, you need to install several python packages and download a `SpaCy` model.
 
 ```bash
 pip install langchain-experimental openai presidio-analyzer presidio-anonymizer spacy Faker
 python -m spacy download en_core_web_lg
 ```
 
-See [usage examples](/docs/guides/privacy/presidio_data_anonymization/).
+[使用例](/docs/guides/privacy/presidio_data_anonymization/)をご覧ください。
+
+> See [usage examples](/docs/guides/privacy/presidio_data_anonymization/).
 
 ```python
 from langchain_experimental.data_anonymizer import PresidioAnonymizer, PresidioReversibleAnonymizer
 ```
-

@@ -1,28 +1,48 @@
-# Airbyte
+# Airbyte | Airbyte
 
->[Airbyte](https://github.com/airbytehq/airbyte) is a data integration platform for ELT pipelines from APIs, 
-> databases & files to warehouses & lakes. It has the largest catalog of ELT connectors to data warehouses and databases.
+> [Airbyte](https://github.com/airbytehq/airbyte)は、API、データベース、ファイルからデータウェアハウスやデータレイクへのELTパイプラインのためのデータ統合プラットフォームです。データウェアハウスとデータベースへのELTコネクタのカタログが最も豊富です。
+>
+> > [Airbyte](https://github.com/airbytehq/airbyte) is a data integration platform for ELT pipelines from APIs,
+> > databases & files to warehouses & lakes. It has the largest catalog of ELT connectors to data warehouses and databases.
 
-## Installation and Setup
+## Installation and Setup | インストールとセットアップ
 
-This instruction shows how to load any source from `Airbyte` into a local `JSON` file that can be read in as a document.
+この説明では、`Airbyte`から任意のソースをローカルの`JSON`ファイルに読み込む方法を示しており、そのファイルはドキュメントとして読み込むことができます。
 
-**Prerequisites:**
-Have `docker desktop` installed.
+> This instruction shows how to load any source from `Airbyte` into a local `JSON` file that can be read in as a document.
 
-**Steps:**
-1. Clone Airbyte from GitHub - `git clone https://github.com/airbytehq/airbyte.git`.
-2. Switch into Airbyte directory - `cd airbyte`.
-3. Start Airbyte - `docker compose up`.
-4. In your browser, just visit http://localhost:8000. You will be asked for a username and password. By default, that's username `airbyte` and password `password`.
-5. Setup any source you wish.
-6. Set destination as Local JSON, with specified destination path - lets say `/json_data`. Set up a manual sync.
-7. Run the connection.
-8. To see what files are created, navigate to: `file:///tmp/airbyte_local/`.
+**前提条件:**
+`docker desktop`がインストールされていること。
 
-## Document Loader
+> **Prerequisites:**
+> Have `docker desktop` installed.
 
-See a [usage example](/docs/integrations/document_loaders/airbyte_json).
+**手順:**
+
+> **Steps:**
+
+1. GitHubからAirbyteをクローンする - `git clone https://github.com/airbytehq/airbyte.git`。
+   > Clone Airbyte from GitHub - `git clone https://github.com/airbytehq/airbyte.git`.
+2. Airbyteのディレクトリに移動する - `cd airbyte`。
+   > Switch into Airbyte directory - `cd airbyte`.
+3. Airbyteを起動 - `docker compose up`。
+   > Start Airbyte - `docker compose up`.
+4. ブラウザで http://localhost:8000 にアクセスしてください。ユーザー名とパスワードを求められることでしょう。デフォルトでは、ユーザー名は `airbyte`、パスワードは `password` です。
+   > In your browser, just visit http://localhost:8000. You will be asked for a username and password. By default, that's username `airbyte` and password `password`.
+5. お好きなソースを設定してください。
+   > Setup any source you wish.
+6. 出力先をローカルのJSONとして指定し、出力先のパスを `/json_data` と設定しましょう。手動同期をセットアップしてください。
+   > Set destination as Local JSON, with specified destination path - lets say `/json_data`. Set up a manual sync.
+7. 接続を実行してください。
+   > Run the connection.
+8. 作成されたファイルを確認するには、次の場所に移動してください：`file:///tmp/airbyte_local/`。
+   > To see what files are created, navigate to: `file:///tmp/airbyte_local/`.
+
+## Document Loader | ドキュメントローダー
+
+[使用例](/docs/integrations/document_loaders/airbyte_json)をご覧ください。
+
+> See a [usage example](/docs/integrations/document_loaders/airbyte_json).
 
 ```python
 from langchain.document_loaders import AirbyteJSONLoader

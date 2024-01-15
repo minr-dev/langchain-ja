@@ -1,29 +1,44 @@
-# Cohere
+# Cohere | Cohere
 
->[Cohere](https://cohere.ai/about) is a Canadian startup that provides natural language processing models
-> that help companies improve human-machine interactions.
+> [Cohere](https://cohere.ai/about)は、企業が人間と機械の対話を改善するのを助ける自然言語処理モデルを提供するカナダのスタートアップです。
+>
+> > [Cohere](https://cohere.ai/about) is a Canadian startup that provides natural language processing models
+> > that help companies improve human-machine interactions.
 
-## Installation and Setup
-- Install the Python SDK :
+## Installation and Setup | インストールとセットアップ
+
+* Python SDK のインストール：
+  > Install the Python SDK :
+
 ```bash
 pip install cohere
 ```
 
-Get a [Cohere api key](https://dashboard.cohere.ai/) and set it as an environment variable (`COHERE_API_KEY`)
+[CohereのAPIキー](https://dashboard.cohere.ai/)を取得し、環境変数(`COHERE_API_KEY`)として設定してください。
 
-## Cohere langchain integrations
+> Get a [Cohere api key](https://dashboard.cohere.ai/) and set it as an environment variable (`COHERE_API_KEY`)
 
-|API|description|Endpoint docs|Import|Example usage|
+## Cohere langchain integrations | Cohere langchain 統合
+
+|API|説明|エンドポイントのドキュメント|インポート|使用例|
 |---|---|---|---|---|
-|Chat|Build chat bots|[chat](https://docs.cohere.com/reference/chat)|`from langchain.chat_models import ChatCohere`|[cohere.ipynb](/docs/docs/integrations/chat/cohere.ipynb)|
-|LLM|Generate text|[generate](https://docs.cohere.com/reference/generate)|`from langchain.llms import Cohere`|[cohere.ipynb](/docs/docs/integrations/llms/cohere.ipynb)|
-|RAG Retriever|Connect to external data sources|[chat + rag](https://docs.cohere.com/reference/chat)|`from langchain.retrievers import CohereRagRetriever`|[cohere.ipynb](/docs/docs/integrations/retrievers/cohere.ipynb)|
-|Text Embedding|Embed strings to vectors|[embed](https://docs.cohere.com/reference/embed)|`from langchain.embeddings import CohereEmbeddings`|[cohere.ipynb](/docs/docs/integrations/text_embedding/cohere.ipynb)|
-|Rerank Retriever|Rank strings based on relevance|[rerank](https://docs.cohere.com/reference/rerank)|`from langchain.retrievers.document_compressors import CohereRerank`|[cohere.ipynb](/docs/docs/integrations/retrievers/cohere-reranker.ipynb)|
+|Chat|チャットボットを構築|[chat](https://docs.cohere.com/reference/chat)|`from langchain.chat_models import ChatCohere`|[cohere.ipynb](/docs/docs/integrations/chat/cohere.ipynb)|
+|LLM|テキスト生成|[generate](https://docs.cohere.com/reference/generate)|`from langchain.llms import Cohere`|[cohere.ipynb](/docs/docs/integrations/llms/cohere.ipynb)|
+|RAG Retriever|外部データソースへの接続|[chat + rag](https://docs.cohere.com/reference/chat)|`from langchain.retrievers import CohereRagRetriever`|[cohere.ipynb](/docs/docs/integrations/retrievers/cohere.ipynb)|
+|Text Embedding|文字列をベクトルに埋め込む|[embed](https://docs.cohere.com/reference/embed)|`from langchain.embeddings import CohereEmbeddings`|[cohere.ipynb](/docs/docs/integrations/text_embedding/cohere.ipynb)|
+|Rerank Retriever|関連性に基づいて文字列をランク付け|[rerank](https://docs.cohere.com/reference/rerank)|`from langchain.retrievers.document_compressors import CohereRerank`|[cohere.ipynb](/docs/docs/integrations/retrievers/cohere-reranker.ipynb)|
 
-## Quick copy examples
+> |API|description|Endpoint docs|Import|Example usage|
+> |---|---|---|---|---|
+> |Chat|Build chat bots|[chat](https://docs.cohere.com/reference/chat)|`from langchain.chat_models import ChatCohere`|[cohere.ipynb](/docs/docs/integrations/chat/cohere.ipynb)|
+> |LLM|Generate text|[generate](https://docs.cohere.com/reference/generate)|`from langchain.llms import Cohere`|[cohere.ipynb](/docs/docs/integrations/llms/cohere.ipynb)|
+> |RAG Retriever|Connect to external data sources|[chat + rag](https://docs.cohere.com/reference/chat)|`from langchain.retrievers import CohereRagRetriever`|[cohere.ipynb](/docs/docs/integrations/retrievers/cohere.ipynb)|
+> |Text Embedding|Embed strings to vectors|[embed](https://docs.cohere.com/reference/embed)|`from langchain.embeddings import CohereEmbeddings`|[cohere.ipynb](/docs/docs/integrations/text_embedding/cohere.ipynb)|
+> |Rerank Retriever|Rank strings based on relevance|[rerank](https://docs.cohere.com/reference/rerank)|`from langchain.retrievers.document_compressors import CohereRerank`|[cohere.ipynb](/docs/docs/integrations/retrievers/cohere-reranker.ipynb)|
 
-### Chat
+## Quick copy examples | クイックコピー例
+
+### Chat | チャット
 
 ```python
 from langchain.chat_models import ChatCohere
@@ -33,8 +48,7 @@ messages = [HumanMessage(content="knock knock")]
 print(chat(messages))
 ```
 
-### LLM
-
+### LLM | LLM
 
 ```python
 from langchain.llms import Cohere
@@ -43,8 +57,7 @@ llm = Cohere(model="command")
 print(llm.invoke("Come up with a pet name"))
 ```
 
-
-### RAG Retriever
+### RAG Retriever | RAGリトリーバー
 
 ```python
 from langchain.chat_models import ChatCohere
@@ -55,7 +68,7 @@ rag = CohereRagRetriever(llm=ChatCohere())
 print(rag.get_relevant_documents("What is cohere ai?"))
 ```
 
-### Text Embedding
+### Text Embedding | テキスト埋め込み
 
 ```python
 from langchain.chat_models import ChatCohere

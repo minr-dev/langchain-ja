@@ -1,25 +1,33 @@
-# USearch
->[USearch](https://unum-cloud.github.io/usearch/) is a Smaller & Faster Single-File Vector Search Engine.
+# USearch | USearch
 
->`USearch's` base functionality is identical to `FAISS`, and the interface should look 
-> familiar if you have ever investigated Approximate Nearest Neighbors search. 
-> `USearch` and `FAISS` both employ `HNSW` algorithm, but they differ significantly 
-> in their design principles. `USearch` is compact and broadly compatible with FAISS without 
-> sacrificing performance, with a primary focus on user-defined metrics and fewer dependencies.
-> 
-## Installation and Setup
+> [USearch](https://unum-cloud.github.io/usearch/)は、小さくて高速なシングルファイルベクター検索エンジンです。
+>
+> > [USearch](https://unum-cloud.github.io/usearch/) is a Smaller & Faster Single-File Vector Search Engine.
 
-We need to install `usearch` python package.
+> `USearch`の基本機能は`FAISS`と同一であり、もし近似最近傍探索を調査したことがあるなら、インターフェースは見慣れたものに感じるでしょう。`USearch`と`FAISS`はどちらも`HNSW`アルゴリズムを使用していますが、設計原則において大きく異なります。`USearch`は、性能を犠牲にすることなく、ユーザー定義のメトリクスに主眼を置き、依存関係が少ないことを特徴としており、FAISSと広範囲に互換性があるコンパクトな設計となっています。
+>
+> > `USearch's` base functionality is identical to `FAISS`, and the interface should look
+> > familiar if you have ever investigated Approximate Nearest Neighbors search.
+> > `USearch` and `FAISS` both employ `HNSW` algorithm, but they differ significantly
+> > in their design principles. `USearch` is compact and broadly compatible with FAISS without
+> > sacrificing performance, with a primary focus on user-defined metrics and fewer dependencies.
+
+## Installation and Setup | インストールとセットアップ
+
+`usearch` Pythonパッケージをインストールする必要があります。
+
+> We need to install `usearch` python package.
 
 ```bash
 pip install usearch
 ```
 
-## Vector Store
+## Vector Store | ベクターストア
 
-See a [usage example](/docs/integrations/vectorstores/usearch).
+[使用例](/docs/integrations/vectorstores/usearch)をご覧ください。
+
+> See a [usage example](/docs/integrations/vectorstores/usearch).
 
 ```python
 from langchain.vectorstores import USearch
 ```
-

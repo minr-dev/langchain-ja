@@ -1,15 +1,18 @@
-# Entity
+# Entity | エンティティ
 
-Entity memory remembers given facts about specific entities in a conversation. It extracts information on entities (using an LLM) and builds up its knowledge about that entity over time (also using an LLM).
+エンティティメモリは、会話において特定のエンティティに関して与えられた事実を記憶します。それはエンティティに関する情報を抽出するためにLLM（大規模言語モデル）を使用し、時間をかけてそのエンティティに関する知識を蓄積していきます（このプロセスにもLLMを使用します）。
 
-Let's first walk through using this functionality.
+> Entity memory remembers given facts about specific entities in a conversation. It extracts information on entities (using an LLM) and builds up its knowledge about that entity over time (also using an LLM).
+
+まずは、この機能の使用方法を順を追って説明しましょう。
+
+> Let's first walk through using this functionality.
 
 ```python
 from langchain.llms import OpenAI
 from langchain.memory import ConversationEntityMemory
 llm = OpenAI(temperature=0)
 ```
-
 
 ```python
 memory = ConversationEntityMemory(llm=llm)
@@ -20,7 +23,6 @@ memory.save_context(
     {"output": " That sounds like a great project! What kind of project are they working on?"}
 )
 ```
-
 
 ```python
 memory.load_memory_variables({"input": 'who is Sam'})
@@ -35,7 +37,6 @@ memory.load_memory_variables({"input": 'who is Sam'})
 
 </CodeOutputBlock>
 
-
 ```python
 memory = ConversationEntityMemory(llm=llm, return_messages=True)
 _input = {"input": "Deven & Sam are working on a hackathon project"}
@@ -45,7 +46,6 @@ memory.save_context(
     {"output": " That sounds like a great project! What kind of project are they working on?"}
 )
 ```
-
 
 ```python
 memory.load_memory_variables({"input": 'who is Sam'})
@@ -61,9 +61,11 @@ memory.load_memory_variables({"input": 'who is Sam'})
 
 </CodeOutputBlock>
 
-## Using in a chain
-Let's now use it in a chain!
+## Using in a chain | チェーンでの使用
 
+それでは、チェーンで使ってみましょう！
+
+> Let's now use it in a chain!
 
 ```python
 from langchain.chains import ConversationChain
@@ -73,7 +75,6 @@ from pydantic import BaseModel
 from typing import List, Dict, Any
 ```
 
-
 ```python
 conversation = ConversationChain(
     llm=llm,
@@ -82,7 +83,6 @@ conversation = ConversationChain(
     memory=ConversationEntityMemory(llm=llm)
 )
 ```
-
 
 ```python
 conversation.predict(input="Deven & Sam are working on a hackathon project")
@@ -123,7 +123,6 @@ conversation.predict(input="Deven & Sam are working on a hackathon project")
 
 </CodeOutputBlock>
 
-
 ```python
 conversation.memory.entity_store.store
 ```
@@ -136,7 +135,6 @@ conversation.memory.entity_store.store
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 conversation.predict(input="They are trying to add more complex memory structures to Langchain")
@@ -177,7 +175,6 @@ conversation.predict(input="They are trying to add more complex memory structure
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 conversation.predict(input="They are adding in a key-value store for entities mentioned so far in the conversation.")
@@ -220,7 +217,6 @@ conversation.predict(input="They are adding in a key-value store for entities me
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 conversation.predict(input="What do you know about Deven & Sam?")
@@ -266,9 +262,11 @@ conversation.predict(input="What do you know about Deven & Sam?")
 
 </CodeOutputBlock>
 
-## Inspecting the memory store
-We can also inspect the memory store directly. In the following examples, we look at it directly, and then go through some examples of adding information and watch how it changes.
+## Inspecting the memory store | メモリストアの検査
 
+また、メモリストアを直接検査することもできます。以下の例では、直接それを見てから、情報を追加するいくつかの例を通じて、それがどのように変化するかを観察します。
+
+> We can also inspect the memory store directly. In the following examples, we look at it directly, and then go through some examples of adding information and watch how it changes.
 
 ```python
 from pprint import pprint
@@ -298,7 +296,6 @@ pprint(conversation.memory.entity_store.store)
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 conversation.predict(input="Sam is the founder of a company called Daimon.")
@@ -345,7 +342,6 @@ conversation.predict(input="Sam is the founder of a company called Daimon.")
 
 </CodeOutputBlock>
 
-
 ```python
 from pprint import pprint
 pprint(conversation.memory.entity_store.store)
@@ -376,7 +372,6 @@ pprint(conversation.memory.entity_store.store)
 ```
 
 </CodeOutputBlock>
-
 
 ```python
 conversation.predict(input="What do you know about Sam?")

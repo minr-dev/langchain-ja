@@ -1,18 +1,26 @@
-# Metal
+# Metal | メタル
 
-This page covers how to use [Metal](https://getmetal.io) within LangChain.
+このページでは、LangChain内で[Metal](https://getmetal.io)を使用する方法について説明します。
 
-## What is Metal?
+> This page covers how to use [Metal](https://getmetal.io) within LangChain.
 
-Metal is a  managed retrieval & memory platform built for production. Easily index your data into `Metal` and run semantic search and retrieval on it.
+## What is Metal? | Metalとは何ですか？
+
+Metalは、本番環境用に構築された管理型の検索・記憶プラットフォームです。あなたのデータを`Metal`に簡単にインデックス化して、意味的な検索と取得を行うことができます。
+
+> Metal is a  managed retrieval & memory platform built for production. Easily index your data into `Metal` and run semantic search and retrieval on it.
 
 ![Metal](/img/MetalDash.png)
 
-## Quick start
+## Quick start | クイックスタート
 
-Get started by [creating a Metal account](https://app.getmetal.io/signup).
+[Metalアカウントを作成](https://app.getmetal.io/signup)して始めましょう。
 
-Then, you can easily take advantage of the `MetalRetriever` class to start retrieving your data for semantic search, prompting context, etc. This class takes a `Metal` instance and a dictionary of parameters to pass to the Metal API.
+> Get started by [creating a Metal account](https://app.getmetal.io/signup).
+
+その後、`MetalRetriever` クラスを利用して、意味検索やプロンプトの文脈などのデータを簡単に取得できます。このクラスは `Metal` インスタンスと、Metal APIに渡すパラメータの辞書を受け取ります。
+
+> Then, you can easily take advantage of the `MetalRetriever` class to start retrieving your data for semantic search, prompting context, etc. This class takes a `Metal` instance and a dictionary of parameters to pass to the Metal API.
 
 ```python
 from langchain.retrievers import MetalRetriever

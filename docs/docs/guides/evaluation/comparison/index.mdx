@@ -1,28 +1,42 @@
 ---
 sidebar_position: 3 
 ---
-# Comparison Evaluators
 
-Comparison evaluators in LangChain help measure two different chains or LLM outputs. These evaluators are helpful for comparative analyses, such as A/B testing between two language models, or comparing different versions of the same model. They can also be useful for things like generating preference scores for ai-assisted reinforcement learning.
+# Comparison Evaluators | 比較評価器
 
-These evaluators inherit from the `PairwiseStringEvaluator` class, providing a comparison interface for two strings - typically, the outputs from two different prompts or models, or two versions of the same model. In essence, a comparison evaluator performs an evaluation on a pair of strings and returns a dictionary containing the evaluation score and other relevant details.
+LangChainの比較評価器は、異なるチェーンやLLMの出力を測定するのに役立ちます。これらの評価器は、2つの言語モデル間でのA/Bテストや、同一モデルの異なるバージョン同士の比較分析に有効です。また、AI支援強化学習での好みのスコアを生成する際などにも利用できます。
 
-To create a custom comparison evaluator, inherit from the `PairwiseStringEvaluator` class and overwrite the `_evaluate_string_pairs` method. If you require asynchronous evaluation, also overwrite the `_aevaluate_string_pairs` method.
+> Comparison evaluators in LangChain help measure two different chains or LLM outputs. These evaluators are helpful for comparative analyses, such as A/B testing between two language models, or comparing different versions of the same model. They can also be useful for things like generating preference scores for ai-assisted reinforcement learning.
 
-Here's a summary of the key methods and properties of a comparison evaluator:
+これらの評価器は`PairwiseStringEvaluator`クラスを継承し、2つの文字列に対する比較インターフェースを提供します。これは通常、2つの異なるプロンプトやモデルの出力、あるいは同一モデルの異なるバージョンの出力を指します。本質的に、比較評価器は一組の文字列に対する評価を実施し、評価スコアとその他の関連する詳細情報を含む辞書を返します。
 
-- `evaluate_string_pairs`: Evaluate the output string pairs. This function should be overwritten when creating custom evaluators.
-- `aevaluate_string_pairs`: Asynchronously evaluate the output string pairs. This function should be overwritten for asynchronous evaluation.
-- `requires_input`: This property indicates whether this evaluator requires an input string.
-- `requires_reference`: This property specifies whether this evaluator requires a reference label.
+> These evaluators inherit from the `PairwiseStringEvaluator` class, providing a comparison interface for two strings - typically, the outputs from two different prompts or models, or two versions of the same model. In essence, a comparison evaluator performs an evaluation on a pair of strings and returns a dictionary containing the evaluation score and other relevant details.
+
+カスタム比較評価器を作成するためには、`PairwiseStringEvaluator` クラスを継承し、`_evaluate_string_pairs` メソッドを上書きします。非同期評価を必要とする場合は、`_aevaluate_string_pairs` メソッドも上書きしてください。
+
+> To create a custom comparison evaluator, inherit from the `PairwiseStringEvaluator` class and overwrite the `_evaluate_string_pairs` method. If you require asynchronous evaluation, also overwrite the `_aevaluate_string_pairs` method.
+
+比較評価器の主要なメソッドと属性の要約は以下の通りです：
+
+> Here's a summary of the key methods and properties of a comparison evaluator:
+
+* `evaluate_string_pairs`: 出力された文字列ペアを評価します。この関数は、カスタム評価器を作成する際に上書きされるべきです。
+  > `evaluate_string_pairs`: Evaluate the output string pairs. This function should be overwritten when creating custom evaluators.
+* `aevaluate_string_pairs`: 出力された文字列ペアを非同期に評価します。この関数は、非同期評価の際に上書きされるべきです。
+  > `aevaluate_string_pairs`: Asynchronously evaluate the output string pairs. This function should be overwritten for asynchronous evaluation.
+* `requires_input`: このプロパティは、評価器が入力文字列を必要とするかどうかを示します。
+  > `requires_input`: This property indicates whether this evaluator requires an input string.
+* `requires_reference`: このプロパティは、評価器が参照ラベルを必要とするかどうかを指定します。
+  > `requires_reference`: This property specifies whether this evaluator requires a reference label.
 
 :::note LangSmith Support
-The [run_on_dataset](https://api.python.langchain.com/en/latest/api_reference.html#module-langchain.smith) evaluation method is designed to evaluate only a single model at a time, and thus, doesn't support these evaluators.
+The [run\_on\_dataset](https://api.python.langchain.com/en/latest/api_reference.html#module-langchain.smith) evaluation method is designed to evaluate only a single model at a time, and thus, doesn't support these evaluators.
 :::
 
-Detailed information about creating custom evaluators and the available built-in comparison evaluators is provided in the following sections.
+カスタム評価器の作成方法と、利用可能な組み込み比較評価器に関する詳細情報は、以下のセクションで提供されています。
+
+> Detailed information about creating custom evaluators and the available built-in comparison evaluators is provided in the following sections.
 
 import DocCardList from "@theme/DocCardList";
 
 <DocCardList />
-
