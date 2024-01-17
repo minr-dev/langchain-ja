@@ -1,14 +1,16 @@
 #!/bin/bash
 
-yum -y update
-yum install gcc bzip2-devel libffi-devel zlib-devel wget tar gzip -y
-amazon-linux-extras install python3.8 -y
+# yum -y update
+# yum install gcc bzip2-devel libffi-devel zlib-devel wget tar gzip -y
+# amazon-linux-extras install python3.8 -y
 
-# install quarto
-wget -q https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.tar.gz
-tar -xzf quarto-1.3.450-linux-amd64.tar.gz
-export PATH=$PATH:$(pwd)/quarto-1.3.450/bin/
+# # install quarto
+# wget -q https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.tar.gz
+# tar -xzf quarto-1.3.450-linux-amd64.tar.gz
+# export PATH=$PATH:$(pwd)/quarto-1.3.450/bin/
 
+shopt -s expand_aliases globstar nullglob
+alias python3.8='python'
 
 python3.8 -m venv .venv
 source .venv/bin/activate
@@ -20,4 +22,12 @@ cp ../templates/docs/INDEX.md docs/templates/index.md
 python3.8 scripts/copy_templates.py
 cp ../cookbook/README.md src/pages/cookbook.mdx
 wget -q https://raw.githubusercontent.com/langchain-ai/langserve/main/README.md -O docs/langserve.md
+
 quarto render docs/
+
+# docsフォルダ内の *ipynb を nbconvert で *md に変換する
+# for file in docs/**/*.ipynb; do
+#     echo "Converting \"$file\""
+#     #jupyter nbconvert --to markdown "$file"
+# done
+

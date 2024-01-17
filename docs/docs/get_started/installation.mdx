@@ -1,16 +1,14 @@
 # Installation | インストール
 
-## Official release | 公式リリース
+## Official release | 正式リリース
 
 LangChainをインストールするためには、次のコマンドを実行してください：
 
 > To install LangChain run:
 
-'@theme/Tabs'からTabsをインポートし、'@theme/TabItem'からTabItemをインポートし、'@theme/CodeBlock'からCodeBlockをインポートします。
-
-> import Tabs from '@theme/Tabs';
-> import TabItem from '@theme/TabItem';
-> import CodeBlock from "@theme/CodeBlock";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from "@theme/CodeBlock";
 
 <Tabs>
   <TabItem value="pip" label="Pip" default>
@@ -21,15 +19,15 @@ LangChainをインストールするためには、次のコマンドを実行�
   </TabItem>
 </Tabs>
 
-これにより、LangChainの最低限の要件がインストールされます。LangChainの大きな価値は、さまざまなモデルプロバイダーやデータストアなどと統合したときに発揮されます。デフォルトでは、そのために必要な依存関係はインストールされていません。特定の統合に必要な依存関係は、個別にインストールする必要があります。
+これにより、LangChainの最低限の要件がインストールされます。LangChainの価値は、さまざまなモデルプロバイダーやデータストアなどと統合したときに最大限に発揮されます。デフォルトでは、そのための依存関係はインストールされていません。特定の統合機能に必要な依存関係は、個別にインストールする必要があります。
 
 > This will install the bare minimum requirements of LangChain.
 > A lot of the value of LangChain comes when integrating it with various model providers, datastores, etc.
 > By default, the dependencies needed to do that are NOT installed. You will need to install the dependencies for specific integrations separately.
 
-## From source | ソースからのインストール
+## From source | ソースコードからのインストール
 
-ソースからインストールしたい場合は、リポジトリをクローンし、ディレクトリが `PATH/TO/REPO/langchain/libs/langchain` になっていることを確認してから以下を実行してください：
+ソースからインストールしたい場合は、リポジトリをクローンし、ディレクトリが `PATH/TO/REPO/langchain/libs/langchain` になっていることを確認してから、以下のコマンドを実行してください：
 
 > If you want to install from source, you can do so by cloning the repo and be sure that the directory is `PATH/TO/REPO/langchain/libs/langchain` running:
 
@@ -39,7 +37,7 @@ pip install -e .
 
 ## LangChain community | LangChain コミュニティ
 
-`langchain-community` パッケージには、サードパーティ製の統合機能が含まれています。このパッケージは `langchain` によって自動的にインストールされますが、別途単独での使用も可能です。インストールするには以下のコマンドを実行します：
+`langchain-community` パッケージには、サードパーティ製の統合機能が含まれています。このパッケージは `langchain` によって自動的にインストールされますが、独立して使用することも可能です。インストールするには以下のコマンドを実行してください：
 
 > The `langchain-community` package contains third-party integrations. It is automatically installed by `langchain`, but can also be used separately. Install with:
 
@@ -49,7 +47,7 @@ pip install langchain-community
 
 ## LangChain core | LangChain コア
 
-`langchain-core`パッケージには、LangChainエコシステム全体で使用される基本的な抽象概念とLangChain Expression Languageが含まれています。このパッケージは`langchain`によって自動的にインストールされますが、単独でも使用可能です。インストールするには以下のコマンドを実行してください：
+`langchain-core`パッケージには、LangChainエコシステム全体で使用される基本的な抽象概念とLangChain Expression Languageが含まれています。このパッケージは`langchain`によって自動的にインストールされますが、独立して使用することも可能です。インストールするには以下のコマンドを使用します：
 
 > The `langchain-core` package contains base abstractions that the rest of the LangChain ecosystem uses, along with the LangChain Expression Language. It is automatically installed by `langchain`, but can also be used separately. Install with:
 
@@ -59,7 +57,8 @@ pip install langchain-core
 
 ## LangChain experimental | LangChain 実験版
 
-`langchain-experimental`パッケージは、研究や実験的な用途に向けた実験的なLangChainコードを含んでいます。インストールするには以下のコマンドを使用します：
+`langchain-experimental`パッケージは、研究や実験的な使用を目的とした実験的なLangChainコードを含んでいます。
+インストールするには、次のコマンドを実行してください：
 
 > The `langchain-experimental` package holds experimental LangChain code, intended for research and experimental uses.
 > Install with:
@@ -68,9 +67,9 @@ pip install langchain-core
 pip install langchain-experimental
 ```
 
-## LangServe | LangServeについて
+## LangServe | LangServe
 
-LangServeは開発者がLangChainの実行可能ファイルやチェーンをREST APIとして展開するのを支援します。LangServeはLangChain CLIによって自動的にインストールされますが、LangChain CLIを使用しない場合は、次のコマンドでインストールしてください：
+LangServeは開発者がLangChainの実行可能ファイルやチェーンをREST APIとして展開するのを支援します。LangServeはLangChain CLIによって自動的にインストールされます。LangChain CLIを使用しない場合は、以下のコマンドでインストールしてください：
 
 > LangServe helps developers deploy LangChain runnables and chains as a REST API.
 > LangServe is automatically installed by LangChain CLI.
@@ -80,13 +79,14 @@ LangServeは開発者がLangChainの実行可能ファイルやチェーンをRE
 pip install "langserve[all]"
 ```
 
-クライアントとサーバーの依存関係の両方に対しては、`pip install "langserve[all]"` を使用します。また、クライアントコードのみには `pip install "langserve[client]"` を、サーバーコードのみには `pip install "langserve[server]"` を使用してください。
+クライアントとサーバーの依存関係の両方に対しては、`pip install "langserve[all]"` を使用します。または、クライアントコードのみには `pip install "langserve[client]"` を、サーバーコードのみには `pip install "langserve[server]"` を使用してください。
 
 > for both client and server dependencies. Or `pip install "langserve[client]"` for client code, and `pip install "langserve[server]"` for server code.
 
 ## LangChain CLI | LangChain CLI
 
-LangChain CLIは、LangChainのテンプレートやその他のLangServeプロジェクトに取り組む際に役立ちます。以下のコマンドでインストールしてください：
+LangChain CLIは、LangChainテンプレートやその他のLangServeプロジェクトに取り組む際に役立ちます。
+インストールするには、次のコマンドを実行します：
 
 > The LangChain CLI is useful for working with LangChain templates and other LangServe projects.
 > Install with:
@@ -97,7 +97,8 @@ pip install langchain-cli
 
 ## LangSmith SDK | LangSmith SDK
 
-LangSmith SDKはLangChainによって自動的にインストールされます。LangChainを使用していない場合は、次のコマンドでインストールしてください：
+LangSmith SDKはLangChainによって自動的にインストールされます。
+LangChainを使用しない場合、以下のコマンドでインストールしてください：
 
 > The LangSmith SDK is automatically installed by LangChain.
 > If not using LangChain, install with:
